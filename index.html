@@ -1018,39 +1018,162 @@
     .faq-table tr.ft-fail td{color:var(--accent-rose);font-weight:700;}
     .faq-table td.ft-grade{font-weight:700;color:var(--primary);}
 
-    footer.site{
-      border-top:1px solid rgba(203,213,225,0.8);padding:48px 0 28px;margin-top:40px;
-      overflow-x:hidden;max-width:100vw;
+    /* ===== FOOTER (Redesigned — Pure CSS, no Tailwind) ===== */
+    footer.site {
+      width: 100%;
+      border-top: 1px solid rgba(203, 213, 225, 0.8);
+      padding: 40px 0 28px;
+      margin-top: 40px;
+      background: #F4F6FA;
+      color: #0F172A;
+      overflow-x: hidden;
+      max-width: 100vw;
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
     }
-    [data-theme="dark"] footer.site{
-      border-top-color:rgba(255,255,255,0.1);
+    [data-theme="dark"] footer.site {
+      border-top-color: rgba(255, 255, 255, 0.1);
+      background: #090D14;
+      color: #F8FAFC;
     }
-    .footer-grid{display:grid;grid-template-columns:1fr;gap:30px;padding-bottom:28px;max-width:100%;}
-    .foot-brand{text-align:center;}
-    .foot-brand p{font-size:13px;color:#64748B;line-height:1.7;margin:12px 0 0;max-width:340px;margin-left:auto;margin-right:auto;}
-    [data-theme="dark"] .foot-brand p{color:#94A3B8;}
-    .foot-links-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;text-align:center;max-width:100%;}
-    .foot-col-title{font-family:var(--mono);font-size:10.5px;font-weight:700;color:#64748B;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;white-space:nowrap;}
-    [data-theme="dark"] .foot-col-title{color:#94A3B8;}
-    .foot-col{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0;}
-    .foot-col a{font-size:13px;font-weight:600;color:#64748B;transition:color .18s;overflow-wrap:break-word;word-break:break-word;}
-    .foot-col a:hover{color:#0F172A;}
-    [data-theme="dark"] .foot-col a{color:#94A3B8;}
-    [data-theme="dark"] .foot-col a:hover{color:#FFFFFF;}
-    .foot-copy{
-      font-family:var(--mono);font-size:11px;color:#94A3B8;text-align:center;
-      border-top:1px solid rgba(226,232,240,0.8);padding-top:20px;line-height:1.6;
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding-bottom: 24px;
+      max-width: 1152px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 16px;
+      padding-right: 16px;
     }
-    [data-theme="dark"] .foot-copy{
-      border-top-color:rgba(255,255,255,0.08);color:#64748B;
+    @media (min-width: 640px) {
+      .footer-grid { padding-left: 32px; padding-right: 32px; }
     }
-    @media (max-width:359px){ .foot-links-row{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;} .foot-col-title{font-size:9.5px;} .foot-col a{font-size:12px;} }
-    @media (min-width:768px){
-      .footer-grid{grid-template-columns:2fr 3fr;align-items:start;gap:30px;}
-      .foot-brand{text-align:left;}
-      .foot-brand p{margin-left:0;margin-right:0;}
-      .foot-links-row{gap:24px;text-align:left;}
-      .foot-col{align-items:flex-start;}
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 5fr 7fr;
+        align-items: start;
+        gap: 32px;
+      }
+    }
+    .foot-brand { text-align: center; }
+    @media (min-width: 768px) {
+      .foot-brand { text-align: left; }
+    }
+    .foot-brand-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-family: var(--disp);
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: -0.025em;
+      color: #0F172A;
+    }
+    [data-theme="dark"] .foot-brand-logo { color: #FFFFFF; }
+    .foot-logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #0F172A;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    [data-theme="dark"] .foot-logo-dot { background: #FFFFFF; }
+    .foot-logo-red { color: #DC2626 !important; }
+    [data-theme="dark"] .foot-logo-red { color: #EF4444 !important; }
+    .foot-brand p {
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.625;
+      margin: 12px auto 0;
+      max-width: 340px;
+      font-weight: 500;
+    }
+    @media (min-width: 768px) {
+      .foot-brand p { margin-left: 0; margin-right: 0; }
+    }
+    [data-theme="dark"] .foot-brand p { color: #94A3B8; }
+    .foot-links-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      text-align: center;
+      max-width: 100%;
+      font-family: var(--mono);
+    }
+    @media (min-width: 768px) {
+      .foot-links-row { gap: 24px; text-align: left; }
+    }
+    .foot-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    @media (min-width: 768px) {
+      .foot-col { align-items: flex-start; }
+    }
+    .foot-col-title {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: #94A3B8;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+      white-space: nowrap;
+    }
+    @media (min-width: 768px) {
+      .foot-col-title { font-size: 10.5px; }
+    }
+    [data-theme="dark"] .foot-col-title { color: #64748B; }
+    .foot-col a {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: #475569;
+      text-decoration: none;
+      transition: color 0.15s ease;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    @media (min-width: 768px) {
+      .foot-col a { font-size: 13px; }
+    }
+    .foot-col a:hover { color: #0F172A; }
+    [data-theme="dark"] .foot-col a { color: #94A3B8; }
+    [data-theme="dark"] .foot-col a:hover { color: #FFFFFF; }
+    .foot-copy-wrap {
+      max-width: 1152px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 16px;
+      padding-right: 16px;
+      border-top: 1px solid rgba(203, 213, 225, 0.8);
+      padding-top: 16px;
+      text-align: center;
+    }
+    @media (min-width: 640px) {
+      .foot-copy-wrap { padding-left: 32px; padding-right: 32px; }
+    }
+    [data-theme="dark"] .foot-copy-wrap { border-top-color: rgba(255, 255, 255, 0.1); }
+    .foot-copy {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      color: #64748B;
+      text-align: center;
+      line-height: 1.625;
+      border-top: none;
+      padding-top: 0;
+    }
+    [data-theme="dark"] .foot-copy { color: #64748B; }
+    @media (max-width: 359px) {
+      .foot-links-row { gap: 6px; }
+      .foot-col-title { font-size: 9px; }
+      .foot-col a { font-size: 11px; }
     }
 
     #view-grading{padding-top:32px;}
@@ -2040,7 +2163,6 @@
       font-family: var(--mono);
       font-size: 11px;
       font-weight: 700;
-      text-transform: uppercase;
       letter-spacing: 0.12em;
       color: #64748B;
     }
@@ -2873,9 +2995,9 @@
     [data-theme="dark"] .legal-link{color:#FFFFFF;}
     [data-theme="dark"] .legal-link:hover{color:#F1F5F9;}
 
-  </style>
-<style>
-    /* Restored Contact Icon Box & Title for Light/Dark mode */
+  
+
+    /* ===== Contact Info Icon Box & Title (Build 22) ===== */
     .contact-info-icon-box {
       width: 44px;
       height: 44px;
@@ -2910,222 +3032,177 @@
     [data-theme="dark"] .contact-info-title {
       color: #FFFFFF !important;
     }
-</style>
-<style>
-    /* ==========================================================================
-       REDESIGNED FOOTER (MATCHING USER COMPONENT & BRAND ALIGNMENT)
-       ========================================================================== */
-    footer.site {
-      width: 100%;
-      border-top: 1px solid rgba(203, 213, 225, 0.8);
-      padding: 40px 0 28px;
-      margin-top: 40px;
-      background: #F4F6FA;
-      color: #0F172A;
-      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-      overflow-x: hidden;
-      max-width: 100vw;
-    }
-    [data-theme="dark"] footer.site,
-    html.dark footer.site {
-      border-top-color: rgba(255, 255, 255, 0.1);
-      background: #090D14;
-      color: #F8FAFC;
-    }
-    .footer-grid {
+
+
+    /* ===== CRITERIA GRID (Grading Scale & Class Determination) ===== */
+    .criteria-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 32px;
-      padding-bottom: 24px;
-      max-width: 1152px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 16px;
-      padding-right: 16px;
-    }
-    @media (min-width: 640px) {
-      .footer-grid {
-        padding-left: 32px;
-        padding-right: 32px;
-      }
+      gap: 20px;
+      align-items: start;
+      margin-top: 28px;
     }
     @media (min-width: 768px) {
-      .footer-grid {
-        grid-template-columns: 5fr 7fr;
-        align-items: start;
-        gap: 32px;
-      }
+      .criteria-grid { grid-template-columns: 1.35fr 1fr; }
     }
-    .foot-brand {
-      text-align: center;
-    }
-    @media (min-width: 768px) {
-      .foot-brand {
-        text-align: left;
-      }
-    }
-    .foot-brand-logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      font-family: var(--disp);
-      font-weight: 700;
-      font-size: 24px;
-      letter-spacing: -0.025em;
-      color: #0F172A;
-    }
-    [data-theme="dark"] .foot-brand-logo,
-    html.dark .foot-brand-logo {
-      color: #FFFFFF;
-    }
-    .foot-logo-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #0F172A;
-      display: inline-block;
-      flex-shrink: 0;
-    }
-    [data-theme="dark"] .foot-logo-dot,
-    html.dark .foot-logo-dot {
-      background: #FFFFFF;
-    }
-    .foot-logo-red {
-      color: #DC2626 !important;
-    }
-    [data-theme="dark"] .foot-logo-red,
-    html.dark .foot-logo-red {
-      color: #EF4444 !important;
-    }
-    .foot-brand p {
-      font-size: 12px;
-      color: #475569;
-      line-height: 1.625;
-      margin: 12px auto 0;
-      max-width: 340px;
-      font-weight: 500;
-    }
-    @media (min-width: 640px) {
-      .foot-brand p {
-        font-size: 13px;
-      }
-    }
-    @media (min-width: 768px) {
-      .foot-brand p {
-        margin-left: 0;
-        margin-right: 0;
-      }
-    }
-    [data-theme="dark"] .foot-brand p,
-    html.dark .foot-brand p {
-      color: #94A3B8;
-    }
-    .foot-links-row {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      text-align: center;
-      max-width: 100%;
-      font-family: var(--mono);
-    }
-    @media (min-width: 768px) {
-      .foot-links-row {
-        gap: 24px;
-        text-align: left;
-      }
-    }
-    .foot-col {
+    .criteria-card {
+      position: relative;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      border-radius: 26px;
+      border: 1px solid rgba(203, 213, 225, 0.9);
+      background: #FFFFFF;
+      padding: 26px 24px;
+      box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.08);
+      transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.25, 1), box-shadow 0.32s cubic-bezier(0.2, 0.8, 0.25, 1), border-color 0.32s ease;
+      will-change: transform;
+    }
+    .criteria-card:hover {
+      transform: translateY(-4px);
+      border-color: #94A3B8;
+      box-shadow: 0 16px 32px -6px rgba(15, 23, 42, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.05);
+    }
+    [data-theme="dark"] .criteria-card {
+      background: #0F1626;
+      border-color: rgba(30, 41, 59, 0.9);
+      box-shadow: 0 14px 35px -5px rgba(0, 0, 0, 0.45);
+    }
+    [data-theme="dark"] .criteria-card:hover {
+      border-color: #475569;
+      box-shadow: 0 18px 36px -6px rgba(0, 0, 0, 0.6), 0 4px 12px -2px rgba(0, 0, 0, 0.35);
+    }
+    .criteria-wm {
+      pointer-events: none;
+      position: absolute;
+      bottom: -10px;
+      right: -8px;
+      font-family: var(--mono);
+      font-size: 68px;
+      font-weight: 900;
+      color: rgba(15, 23, 42, 0.03);
+      line-height: 1;
+      user-select: none;
+    }
+    [data-theme="dark"] .criteria-wm { color: rgba(255, 255, 255, 0.03); }
+    .criteria-header {
+      position: relative;
+      z-index: 10;
+      display: flex;
       align-items: center;
-      gap: 10px;
-      min-width: 0;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
     }
-    @media (min-width: 768px) {
-      .foot-col {
-        align-items: flex-start;
-      }
-    }
-    .foot-col-title {
-      font-family: var(--mono);
-      font-size: 10px;
-      font-weight: 700;
-      color: #94A3B8;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 2px;
-      white-space: nowrap;
-    }
-    @media (min-width: 768px) {
-      .foot-col-title {
-        font-size: 10.5px;
-      }
-    }
-    [data-theme="dark"] .foot-col-title,
-    html.dark .foot-col-title {
-      color: #64748B;
-    }
-    .foot-col a {
-      font-family: var(--mono);
-      font-size: 12px;
-      font-weight: 500;
-      color: #475569;
-      text-decoration: none;
-      transition: color 0.15s ease;
-      overflow-wrap: break-word;
-      word-break: break-word;
-    }
-    @media (min-width: 768px) {
-      .foot-col a {
-        font-size: 13px;
-      }
-    }
-    .foot-col a:hover {
-      color: #0F172A;
-    }
-    [data-theme="dark"] .foot-col a,
-    html.dark .foot-col a {
-      color: #94A3B8;
-    }
-    [data-theme="dark"] .foot-col a:hover,
-    html.dark .foot-col a:hover {
-      color: #FFFFFF;
-    }
-    .foot-copy-wrap {
-      max-width: 1152px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 16px;
-      padding-right: 16px;
-      border-top: 1px solid rgba(203, 213, 225, 0.8);
-      padding-top: 16px;
-      text-align: center;
-    }
-    @media (min-width: 640px) {
-      .foot-copy-wrap {
-        padding-left: 32px;
-        padding-right: 32px;
-      }
-    }
-    [data-theme="dark"] .foot-copy-wrap,
-    html.dark .foot-copy-wrap {
-      border-top-color: rgba(255, 255, 255, 0.1);
-    }
-    .foot-copy {
+    [data-theme="dark"] .criteria-header { border-bottom-color: rgba(255, 255, 255, 0.08); }
+    .criteria-eyebrow {
+      display: block;
       font-family: var(--mono);
       font-size: 10.5px;
-      color: #64748B;
-      text-align: center;
-      line-height: 1.625;
-      border-top: none;
-      padding-top: 0;
-    }
-    [data-theme="dark"] .foot-copy,
-    html.dark .foot-copy {
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       color: #64748B;
     }
+    [data-theme="dark"] .criteria-eyebrow { color: #94A3B8; }
+    .criteria-title {
+      font-family: var(--disp);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #0F172A;
+      margin: 2px 0 0;
+      line-height: 1.2;
+    }
+    [data-theme="dark"] .criteria-title { color: #FFFFFF; }
+    .criteria-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 3.5px 10px;
+      border-radius: 10px;
+      background: #F1F5F9;
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: #334155;
+    }
+    [data-theme="dark"] .criteria-pill {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: #CBD5E1;
+    }
+    .criteria-table-wrap {
+      position: relative;
+      z-index: 10;
+      overflow-x: auto;
+      width: 100%;
+    }
+    .criteria-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .criteria-table th {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #64748B;
+      padding: 8px 6px;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    }
+    [data-theme="dark"] .criteria-table th { color: #94A3B8; border-bottom-color: rgba(255, 255, 255, 0.08); }
+    .criteria-table td {
+      padding: 10px 6px;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      transition: background 0.15s ease;
+    }
+    [data-theme="dark"] .criteria-table td {
+      border-bottom-color: rgba(255, 255, 255, 0.04);
+      color: #CBD5E1;
+    }
+    .criteria-table tr:hover td { background: rgba(241, 245, 249, 0.7); }
+    [data-theme="dark"] .criteria-table tr:hover td { background: rgba(255, 255, 255, 0.03); }
+    .criteria-table tr:last-child td { border-bottom: none; }
+    .criteria-notice-card {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(248, 250, 252, 0.8);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+    }
+    [data-theme="dark"] .criteria-notice-card {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    .criteria-notice-card svg { width: 16px; height: 16px; color: #64748B; flex-shrink: 0; margin-top: 2px; }
+    [data-theme="dark"] .criteria-notice-card svg { color: #94A3B8; }
+    .criteria-notice-card p {
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.6;
+      color: #475569;
+      margin: 0;
+    }
+    [data-theme="dark"] .criteria-notice-card p { color: #CBD5E1; }
+
 </style>
+
+
 </head>
 <body>
 
@@ -3572,7 +3649,7 @@
               </svg>
             </div>
             <h2 class="contact-info-title">Let's talk</h2>
-            <p style="font-size:13px;font-weight:600;line-height:1.65;color:#64748B;margin:0;">
+            <p style="font-size:13px;font-weight:600;line-height:1.65;color:var(--muted);margin:0;">
               Half-baked idea at 1am? Found a typo that's bugging you? Skip the formalities — say it like you'd say it to a friend, messy and all.
             </p>
             <a href="mailto:hello@gradzz.app" class="contact-email-btn">
@@ -3742,7 +3819,7 @@
             <span class="legal-pulse-dot"></span>
             Zero Server Storage
           </div>
-          <p class="legal-card-p" style="color:#0F172A;font-weight:700;">
+          <p class="legal-card-p" style="font-weight:700;">
             Gradzz doesn’t ask for an account, an email, or a password — so there’s nothing to leak in the first place. The grades you enter are saved only in your own browser’s session storage, on your own device, for as long as that browser tab stays open.
           </p>
           <p class="legal-card-p">
@@ -3855,8 +3932,7 @@
       <div class="legal-card">
         <span class="legal-card-wm">LEGAL</span>
         <div class="legal-card-content">
-          <p class="legal-card-p" style="color:#0F172A;font-weight:700;">
-            Gradzz is an independent educational initiative built by students, for students. It is not affiliated with, endorsed by, or officially connected to National University Bangladesh in any way.
+          <p class="legal-card-p" style="font-weight:700;">Gradzz is an independent educational initiative built by students, for students. It is not affiliated with, endorsed by, or officially connected to National University Bangladesh in any way.
           </p>
           <p class="legal-card-p">
             By accessing or using this site, you agree to the conditions outlined below. If you do not agree with them, please refrain from using Gradzz.
@@ -4157,7 +4233,7 @@
     <!-- 2. Form Body -->
     <div style="position:relative;z-index:10;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
-        <span style="font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#334155;">
+        <span style="font-family:var(--mono);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text);">
           Student Information
         </span>
       </div>
@@ -4249,66 +4325,37 @@
 
 <div id="grdSheetHost" style="position:fixed; left:-10000px; top:0; z-index:-1;"></div>
 
-<!-- ================= FOOTER (ORIGINAL TEXT & ALIGNMENT PRESERVED) ================= -->
-  <footer class="w-full border-t border-slate-300/80 dark:border-white/10 pt-10 pb-7 bg-[#F4F6FA] dark:bg-[#090D14] text-slate-900 dark:text-slate-100 transition-colors site">
-    
-    <!-- Top Grid: Brand & Link Columns -->
-    <div class="max-w-6xl mx-auto px-4 sm:px-8 grid grid-cols-1 md:grid-cols-12 gap-8 pb-6 footer-grid">
-      
-      <!-- Brand Block: Centered on Mobile, Left-aligned on Desktop -->
-      <div class="md:col-span-5 text-center md:text-left foot-brand">
-        <!-- Logo with Permanent Red "zz" -->
-        <div class="inline-flex items-center gap-2 cursor-pointer font-disp font-bold text-2xl tracking-tight text-slate-900 dark:text-white foot-brand-logo" onclick="showView('home')">
-          <span class="w-2.5 h-2.5 rounded-full bg-slate-900 dark:bg-white foot-logo-dot"></span>
-          <span>Grad<span class="text-red-600 dark:text-red-500 font-bold foot-logo-red">zz</span></span><span><span class="text-slate-500">.</span><span class="text-slate-400">.</span></span>
-        </div>
-        <p class="text-xs sm:text-[13px] text-slate-600 dark:text-slate-400 leading-relaxed mt-3 max-w-[340px] mx-auto md:mx-0 font-medium">
-          Grade-weighted. Auto-saved. The CGPA calculator National University students actually deserved.
-        </p>
+<footer class="site">
+  <div class="footer-grid">
+    <div class="foot-brand">
+      <div class="foot-brand-logo" onclick="showView('home')">
+        <span class="foot-logo-dot"></span>
+        <span>Grad<span class="foot-logo-red">zz</span></span><span><span style="color:#94A3B8;">.</span><span style="color:#CBD5E1;">.</span></span>
       </div>
-
-      <!-- Links Row: 3 Columns, Centered on Mobile, Left-aligned on Desktop -->
-      <div class="md:col-span-7 grid grid-cols-3 gap-2.5 md:gap-6 text-center md:text-left font-mono foot-links-row">
-        
-        <!-- Product -->
-        <div class="flex flex-col items-center md:items-start gap-2.5 min-w-0 foot-col">
-          <div class="text-[10px] md:text-[10.5px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-0.5 whitespace-nowrap foot-col-title">
-            Product
-          </div>
-          <a href="#" onclick="goSection('departments');return false;" class="text-xs md:text-[13px] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Programs</a>
-          <a href="#" onclick="showView('faq');return false;" class="text-xs md:text-[13px] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">FAQ</a>
-        </div>
-
-        <!-- Company -->
-        <div class="flex flex-col items-center md:items-start gap-2.5 min-w-0 foot-col">
-          <div class="text-[10px] md:text-[10.5px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-0.5 whitespace-nowrap foot-col-title">
-            Company
-          </div>
-          <a href="#" onclick="showView('about');return false;" class="text-xs md:text-[13px] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">About</a>
-          <a href="#" onclick="showView('contact');return false;" class="text-xs md:text-[13px] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Contact</a>
-        </div>
-
-        <!-- Legal -->
-        <div class="flex flex-col items-center md:items-start gap-2.5 min-w-0 foot-col">
-          <div class="text-[10px] md:text-[10.5px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-0.5 whitespace-nowrap foot-col-title">
-            Legal
-          </div>
-          <a href="#" onclick="showView('privacy');return false;" class="text-xs md:text-[13px] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Privacy</a>
-          <a href="#" onclick="showView('terms');return false;" class="text-xs md:text-[13px] text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Terms</a>
-        </div>
-
-      </div>
-
+      <p>Grade-weighted. Auto-saved. The CGPA calculator National University students actually deserved.</p>
     </div>
-
-    <!-- Copyright Line: Strictly Centered Across the Whole Width -->
-    <div class="max-w-6xl mx-auto px-4 sm:px-8 border-t border-slate-300/80 dark:border-white/10 pt-4 text-center foot-copy-wrap">
-      <div class="font-mono text-[10.5px] text-slate-500 dark:text-slate-500 leading-relaxed foot-copy">
-        © <span id="footYear">2026</span> Grad<span class="text-red-600 dark:text-red-500 font-bold foot-logo-red">zz</span> · An independent student project · not affiliated with National University Bangladesh
+    <div class="foot-links-row">
+      <div class="foot-col">
+        <div class="foot-col-title">Product</div>
+        <a href="#" onclick="goSection('departments');return false;">Programs</a>
+        <a href="#" onclick="showView('faq');return false;">FAQ</a>
+      </div>
+      <div class="foot-col">
+        <div class="foot-col-title">Company</div>
+        <a href="#" onclick="showView('about');return false;">About</a>
+        <a href="#" onclick="showView('contact');return false;">Contact</a>
+      </div>
+      <div class="foot-col">
+        <div class="foot-col-title">Legal</div>
+        <a href="#" onclick="showView('privacy');return false;">Privacy</a>
+        <a href="#" onclick="showView('terms');return false;">Terms</a>
       </div>
     </div>
-
-  </footer>
+  </div>
+  <div class="foot-copy-wrap">
+    <div class="foot-copy">&copy; <span id="footYear">2026</span> Grad<span class="foot-logo-red">zz</span> &middot; An independent student project &middot; not affiliated with National University Bangladesh</div>
+  </div>
+</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -4793,8 +4840,8 @@
   const YEAR_LABELS = {1:'First Year', 2:'Second Year', 3:'Third Year', 4:'Fourth Year'};
 
   function faqCgpaFormulaHtml(){
-    return `<div style="padding:16px;margin:8px 0;border-radius:16px;background:rgba(248,250,252,0.9);border:1px solid rgba(203,213,225,0.9);text-align:center;font-family:var(--mono);">
-        <div style="font-size:15px;font-weight:700;color:#0F172A;">
+    return `<div style="padding:16px;margin:8px 0;border-radius:16px;background:var(--card);border:1px solid var(--border);text-align:center;font-family:var(--mono);">
+        <div style="font-size:15px;font-weight:700;color:var(--text);">
           CGPA = <span style="display:inline-flex;flex-direction:column;vertical-align:middle;margin:0 4px;"><span style="border-bottom:1px solid #94A3B8;padding:0 4px 2px;">Σ (Grade Point × Credit)</span><span style="padding-top:2px;">Σ Credit</span></span>
         </div>
       </div>
@@ -4805,14 +4852,14 @@
     const half = Math.ceil(GRADES.length / 2);
     const cols = [GRADES.slice(0, half), GRADES.slice(half)];
     const tables = cols.map(list => {
-      const rows = list.map(g => `<tr style="border-bottom:1px solid rgba(203,213,225,0.5);">
-        <td style="padding:9px 14px;font-weight:800;${g.g === 'F' ? 'color:#E11D48;' : 'color:#0F172A;'}">${g.g}</td>
+      const rows = list.map(g => `<tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:9px 14px;font-weight:800;${g.g === 'F' ? 'color:#E11D48;' : 'color:var(--text);'}">${g.g}</td>
         <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;">${g.pt.toFixed(2)}</td>
         <td style="padding:9px 14px;font-family:var(--mono);color:#64748B;text-align:right;">${g.range}</td>
       </tr>`).join('');
-      return `<div class="faq-table" style="flex:1;min-width:0;border-radius:16px;border:1px solid rgba(203,213,225,0.9);overflow:hidden;background:rgba(248,250,252,0.6);">
+      return `<div class="faq-table" style="flex:1;min-width:0;border-radius:16px;border:1px solid var(--border);overflow:hidden;background:var(--card);">
         <table style="width:100%;text-align:left;font-size:12.5px;border-collapse:collapse;">
-          <thead style="background:#F1F5F9;font-family:var(--mono);font-weight:700;font-size:10.5px;color:#64748B;text-transform:uppercase;">
+          <thead style="background:rgba(241,245,249,0.5);font-family:var(--mono);font-weight:700;font-size:10.5px;color:var(--muted);text-transform:uppercase;">
             <tr><th style="padding:8px 14px;">Grade</th><th style="padding:8px 14px;">Point</th><th style="padding:8px 14px;text-align:right;">Marks</th></tr>
           </thead>
           <tbody>${rows}</tbody>
