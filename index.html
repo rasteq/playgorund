@@ -785,8 +785,8 @@
     /* ============================================================
        REDESIGNED DEPARTMENT CARDS
     ============================================================ */
-    .dept-card-grid{display:grid;grid-template-columns:1fr;gap:16px;}
-    @media (min-width:600px){.dept-card-grid{grid-template-columns:repeat(2,1fr);gap:18px;}}
+    .dept-card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+    @media (min-width:600px){.dept-card-grid{gap:16px;}}
     @media (min-width:960px){.dept-card-grid{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}}
 
     .dept-card{
@@ -828,9 +828,9 @@
     .dept-card.soon .dc-watermark{color:rgba(15,23,42,0.02);}
     [data-theme="dark"] .dept-card.soon .dc-watermark{color:rgba(255,255,255,0.02);}
 
-    .dc-top{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;width:100%;}
+    .dc-top{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;width:100%;flex-wrap:nowrap;gap:6px;}
     .dc-code{
-      font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:0.05em;color:#334155;
+      font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:0.05em;color:#334155;white-space:nowrap;
     }
     [data-theme="dark"] .dc-code{color:#CBD5E1;}
     .dept-card.soon .dc-code{color:#64748B;}
@@ -838,8 +838,8 @@
 
     .dc-badge{
       display:inline-flex;align-items:center;border-radius:12px;background:#F1F5F9;
-      padding:4px 12px;font-family:var(--mono);font-size:11px;font-weight:700;
-      color:#1E293B;border:1px solid rgba(226,232,240,0.9);box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);
+      padding:3px 8px;font-family:var(--mono);font-size:11px;font-weight:700;
+      color:#1E293B;border:1px solid rgba(226,232,240,0.9);box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);white-space:nowrap;
     }
     [data-theme="dark"] .dc-badge{
       background:rgba(255,255,255,0.06);color:#E2E8F0;border-color:rgba(255,255,255,0.1);
@@ -869,6 +869,15 @@
     [data-theme="dark"] .dc-bn{color:#CBD5E1;}
     .dept-card.soon .dc-bn{color:#64748B;}
     [data-theme="dark"] .dept-card.soon .dc-bn{color:#64748B;}
+    @media (max-width:479px) {
+      .dept-card { padding: 16px 14px; border-radius: 20px; }
+      .dc-code { font-size: 10px; letter-spacing: 0.03em; }
+      .dc-badge { font-size: 9.5px; padding: 2.5px 7px; border-radius: 10px; }
+      .dc-body { margin-top: 14px; }
+      .dc-title { font-size: 14px !important; }
+      .dc-bn { font-size: 11px !important; }
+      .dc-watermark { font-size: 40px; }
+    }
 
     .dl-header{margin-bottom:28px;}
     .dl-header-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px;}
@@ -1907,12 +1916,11 @@
       position: relative;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       overflow: hidden;
       border-radius: 26px;
       border: 1px solid rgba(203, 213, 225, 0.9);
       background: #FFFFFF;
-      padding: 28px 24px;
+      padding: 24px 22px;
       box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.08);
       transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.25, 1),
                   box-shadow 0.32s cubic-bezier(0.2, 0.8, 0.25, 1),
@@ -1922,7 +1930,6 @@
       text-align: left;
       text-decoration: none;
       color: inherit;
-      min-height: 195px;
     }
     .support-card:hover {
       transform: translateY(-4px);
@@ -3521,12 +3528,6 @@
             <h2 class="support-card-title">Email us</h2>
             <p class="support-card-desc">Found a bug, a wrong subject, or an incorrect credit value? Send it over and we'll fix it immediately.</p>
           </div>
-          <div class="support-card-footer">
-            <span class="support-card-link">
-              <span>hello@gradzz.app</span>
-              <span class="support-card-arrow">→</span>
-            </span>
-          </div>
         </a>
 
         <!-- 2. Suggest a program -->
@@ -3540,12 +3541,6 @@
             <h2 class="support-card-title">Suggest a program</h2>
             <p class="support-card-desc">Studying something that isn't listed yet, like Political Science or Sociology? Let us know and we'll prioritize it.</p>
           </div>
-          <div class="support-card-footer">
-            <span class="support-card-link sans">
-              <span>Suggest program</span>
-              <span class="support-card-arrow">→</span>
-            </span>
-          </div>
         </div>
 
         <!-- 3. Report an issue -->
@@ -3558,12 +3553,6 @@
           <div class="support-card-body">
             <h2 class="support-card-title">Report an issue</h2>
             <p class="support-card-desc">Something look off in the grade table or GPA calculation? Tell us your department and batch year, and we'll investigate.</p>
-          </div>
-          <div class="support-card-footer">
-            <span class="support-card-link sans">
-              <span>Report problem</span>
-              <span class="support-card-arrow">→</span>
-            </span>
           </div>
         </div>
       </div>
@@ -3585,12 +3574,6 @@
             <h2 class="support-card-title">Response time</h2>
             <p class="support-card-desc">We're students too, so replies usually land within 2–3 days — and much faster for anything urgent affecting your results.</p>
           </div>
-          <div class="support-card-footer">
-            <span class="support-card-badge">
-              <span class="support-card-dot"></span>
-              2–3 Business Days
-            </span>
-          </div>
         </div>
 
         <!-- 5. Request a feature -->
@@ -3604,12 +3587,6 @@
             <h2 class="support-card-title">Request a feature</h2>
             <p class="support-card-desc">Want a target CGPA calculator, a new department added, or something else entirely? Tell us what would make results day easier.</p>
           </div>
-          <div class="support-card-footer">
-            <span class="support-card-link sans">
-              <span>Submit idea</span>
-              <span class="support-card-arrow">→</span>
-            </span>
-          </div>
         </div>
 
         <!-- 6. Check the FAQ first -->
@@ -3622,12 +3599,6 @@
           <div class="support-card-body">
             <h2 class="support-card-title">Check the FAQ first</h2>
             <p class="support-card-desc">Have questions about credit weights, formulas, or how session storage keeps your grades private? We probably answered it.</p>
-          </div>
-          <div class="support-card-footer">
-            <span class="support-card-link sans">
-              <span>View FAQ</span>
-              <span class="support-card-arrow">→</span>
-            </span>
           </div>
         </a>
       </div>
@@ -4021,7 +3992,7 @@
         <h2 class="prog-heading" id="deptListTitle">
           <span id="deptListTitleText">Bachelor Degree Honours Program</span>
         </h2>
-        <span class="prog-pill ac-2024" id="deptListPill"><i class="pill-dot"></i>2024–2025 Session</span>
+        <span class="prog-pill ac-2024" id="deptListPill"><i class="pill-dot"></i>2024–25 Session</span>
       </div>
       <div class="dl-underline"></div>
       <p class="dept-sub">
@@ -4149,7 +4120,7 @@
 
     <div class="dept-header-wrap">
       <div class="dept-eyebrow">
-        <span class="dept-session-badge" id="gradingDeptSession">2024–2025</span>
+        <span class="dept-session-badge" id="gradingDeptSession">2024–25</span>
         <span class="dept-track-text" id="gradingDeptTrack">Bachelor Degree Honours</span>
       </div>
       <div class="dept-title-row">
@@ -4702,15 +4673,15 @@
   };
 
   const PROGRAMS = [
-    {key:'2024', title:'Honours', displayTitle:'Honours Program', code:'HON', tag:'2024–2025 Syllabus', desc:'Explore Honours programs and course structures using the updated syllabus.', active:true},
-    {key:'2013', title:'Honours', displayTitle:'Honours Program', code:'HON', tag:'2013–2014 Syllabus', desc:'Explore Honours programs and course structures using the old syllabus.', active:true},
-    {key:'pass2024', title:'Degree Pass', displayTitle:'Degree Pass Program', code:'DEG', tag:'2024–2025 Syllabus', desc:'Explore Degree Pass programs and course structures using the updated syllabus.', active:true},
-    {key:'pass2013', title:'Degree Pass', displayTitle:'Degree Pass Program', code:'DEG', tag:'2013–2014 Syllabus', desc:'Explore Degree Pass programs and course structures using the old syllabus.', active:true},
-    {key:'masters2024', title:'Masters', displayTitle:'Masters Program', code:'MAS', tag:'2024–2025 Syllabus', desc:'Explore Masters programs and calculate your CGPA using the updated syllabus.', active:false},
-    {key:'masters2013', title:'Masters', displayTitle:'Masters Program', code:'MAS', tag:'2013–2014 Syllabus', desc:'Explore Masters programs and course structures using the current syllabus.', active:true},
-    {key:'incampus2013', title:'In-Campus Masters', displayTitle:'In-Campus Masters', code:'ICM', tag:'2013–2014 Syllabus', desc:'Explore In-Campus Masters programs and course structures using the current syllabus.', active:true},
-    {key:'prelim2024', title:'Preliminary to Masters', displayTitle:'Preliminary to Masters', code:'PRE', tag:'2024–2025 Syllabus', desc:'Explore Preliminary to Masters programs and calculate your CGPA using the updated syllabus.', active:false},
-    {key:'prelim2013', title:'Preliminary to Masters', displayTitle:'Preliminary to Masters', code:'PRE', tag:'2013–2014 Syllabus', desc:'Explore Preliminary to Masters programs and course structures using the current syllabus.', active:true},
+    {key:'2024', title:'Honours', displayTitle:'Honours Program', code:'HON', tag:'2024–25 Syllabus', desc:'Explore Honours programs and course structures using the updated syllabus.', active:true},
+    {key:'2013', title:'Honours', displayTitle:'Honours Program', code:'HON', tag:'2013–14 Syllabus', desc:'Explore Honours programs and course structures using the old syllabus.', active:true},
+    {key:'pass2024', title:'Degree Pass', displayTitle:'Degree Pass Program', code:'DEG', tag:'2024–25 Syllabus', desc:'Explore Degree Pass programs and course structures using the updated syllabus.', active:true},
+    {key:'pass2013', title:'Degree Pass', displayTitle:'Degree Pass Program', code:'DEG', tag:'2013–14 Syllabus', desc:'Explore Degree Pass programs and course structures using the old syllabus.', active:true},
+    {key:'masters2024', title:'Masters', displayTitle:'Masters Program', code:'MAS', tag:'2024–25 Syllabus', desc:'Explore Masters programs and calculate your CGPA using the updated syllabus.', active:false},
+    {key:'masters2013', title:'Masters', displayTitle:'Masters Program', code:'MAS', tag:'2013–14 Syllabus', desc:'Explore Masters programs and course structures using the current syllabus.', active:true},
+    {key:'incampus2013', title:'In-Campus Masters', displayTitle:'In-Campus Masters', code:'ICM', tag:'2013–14 Syllabus', desc:'Explore In-Campus Masters programs and course structures using the current syllabus.', active:true},
+    {key:'prelim2024', title:'Preliminary to Masters', displayTitle:'Preliminary to Masters', code:'PRE', tag:'2024–25 Syllabus', desc:'Explore Preliminary to Masters programs and calculate your CGPA using the updated syllabus.', active:false},
+    {key:'prelim2013', title:'Preliminary to Masters', displayTitle:'Preliminary to Masters', code:'PRE', tag:'2013–14 Syllabus', desc:'Explore Preliminary to Masters programs and course structures using the current syllabus.', active:true},
   ];
 
   const PROGRAM_YEARS = {
@@ -4749,7 +4720,7 @@
     const sessEl = document.getElementById('gradingDeptSession');
     const trackEl = document.getElementById('gradingDeptTrack');
     if(titleEl) titleEl.textContent = `Department of ${deptName}`;
-    if(sessEl) sessEl.textContent = prog ? (SESSION_SHORT[prog.key] || '2024–2025') : '2024–2025';
+    if(sessEl) sessEl.textContent = prog ? (SESSION_SHORT[prog.key] || '2024–25') : '2024–25';
     if(trackEl) trackEl.textContent = prog ? getProgramTrackText(prog.key) : 'Bachelor Degree Honours';
   }
 
@@ -4919,8 +4890,8 @@
       </div>`).join('');
   }
 
-  const SESSION_LABELS = {'2024':'2024–2025 Session','2013':'2013–2014 Session','pass2024':'2024–2025 Session','pass2013':'2013–2014 Session','masters2024':'2024–2025 Session','masters2013':'2013–2014 Session','incampus2013':'2013–2014 Session','prelim2024':'2024–2025 Session','prelim2013':'2013–2014 Session'};
-  const SESSION_SHORT = {'2024':'2024–2025','2013':'2013–2014','pass2024':'2024–2025','pass2013':'2013–2014','masters2024':'2024–2025','masters2013':'2013–2014','incampus2013':'2013–2014','prelim2024':'2024–2025','prelim2013':'2013–2014'};
+  const SESSION_LABELS = {'2024':'2024–25 Session','2013':'2013–14 Session','pass2024':'2024–25 Session','pass2013':'2013–14 Session','masters2024':'2024–25 Session','masters2013':'2013–14 Session','incampus2013':'2013–14 Session','prelim2024':'2024–25 Session','prelim2013':'2013–14 Session'};
+  const SESSION_SHORT = {'2024':'2024–25','2013':'2013–14','pass2024':'2024–25','pass2013':'2013–14','masters2024':'2024–25','masters2013':'2013–14','incampus2013':'2013–14','prelim2024':'2024–25','prelim2013':'2013–14'};
   function glassPillClassFor(key){
     if(key.includes('2024')||key.includes('2013')) return 'ac-2024';
     return 'ac-pass';
@@ -5026,11 +4997,11 @@
   }
 
   const PROGRAM_GROUPS = {
-    honours: [{key:'2024', label:'2024–2025'}, {key:'2013', label:'2013–2014'}],
-    pass: [{key:'pass2024', label:'2024–2025'}, {key:'pass2013', label:'2013–2014'}],
-    masters: [{key:'masters2013', label:'2013–2014'}],
-    incampus: [{key:'incampus2013', label:'2013–2014'}],
-    prelim: [{key:'prelim2013', label:'2013–2014'}],
+    honours: [{key:'2024', label:'2024–25'}, {key:'2013', label:'2013–14'}],
+    pass: [{key:'pass2024', label:'2024–25'}, {key:'pass2013', label:'2013–14'}],
+    masters: [{key:'masters2013', label:'2013–14'}],
+    incampus: [{key:'incampus2013', label:'2013–14'}],
+    prelim: [{key:'prelim2013', label:'2013–14'}],
   };
   function qsProgramChange(){
     const prog = document.getElementById('qsProgram').value;
