@@ -237,9 +237,9 @@
     }
     .btn-grad:hover{background:#000000;transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.18);}
     [data-theme="dark"] .btn-grad{
-      background:#FFFFFF;color:#0F172A;box-shadow:0 4px 14px rgba(0,0,0,0.4);
+      background:#CBD5E1;color:#0F172A;box-shadow:0 4px 14px rgba(0,0,0,0.4);
     }
-    [data-theme="dark"] .btn-grad:hover{background:#F1F5F9;}
+    [data-theme="dark"] .btn-grad:hover{background:#FFFFFF;}
 
     .btn-ghost{
       background:#FFFFFF;color:#0F172A;border:1px solid rgba(203,213,225,0.9);
@@ -964,10 +964,13 @@
     @media (prefers-reduced-motion:reduce){.prog-pill,.pill-dot,.sub-spark{animation:none !important;}}
 
     .modal-overlay{
-      position:fixed;inset:0;z-index:200;background:var(--overlay-bg);
-      backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-      display:flex;align-items:center;justify-content:center;padding:20px;
-      opacity:0;pointer-events:none;transition:.2s ease;
+      position:fixed;inset:0;z-index:1000;background:rgba(15,23,42,0.45);
+      backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+      display:flex;align-items:flex-start;justify-content:center;padding:24px 16px;
+      overflow-y:auto;overscroll-behavior:contain;
+      -webkit-overflow-scrolling:touch;touch-action:pan-y;
+      opacity:0;pointer-events:none;transition:opacity .22s ease;
+      scrollbar-width:none;-ms-overflow-style:none;
     }
     .modal-overlay.open{opacity:1;pointer-events:auto;}
     .modal-card{
@@ -1245,7 +1248,7 @@
       position:relative;overflow:hidden;border-radius:28px;
       border:1px solid rgba(203,213,225,0.9);background:#FFFFFF;
       padding:28px 24px;box-shadow:0 12px 30px -5px rgba(0,0,0,0.08);
-      margin-bottom:38px;
+      margin-bottom:45px;
     }
     @media (min-width:640px){.result-panel{padding:32px;}}
     [data-theme="dark"] .result-panel{
@@ -1321,9 +1324,9 @@
     .rp-export:hover{background:#000000;transform:translateY(-1px);}
     .rp-export:active{transform:scale(0.98);}
     [data-theme="dark"] .rp-export{
-      background:#FFFFFF;color:#0F172A;box-shadow:0 4px 14px rgba(0,0,0,0.4);
+      background:#CBD5E1;color:#0F172A;box-shadow:0 4px 14px rgba(0,0,0,0.4);
     }
-    [data-theme="dark"] .rp-export:hover{background:#F1F5F9;}
+    [data-theme="dark"] .rp-export:hover{background:#FFFFFF;}
     .rp-export-icon{font-size:13px;line-height:1;display:inline-flex;}
 
     @media (max-width:767px){
@@ -1340,12 +1343,12 @@
        DEPARTMENT VIEW HEADER & SEGMENTED YEAR PILLS
     ============================================================ */
     
-    @media (max-width: 640px) {
-      .result-panel{margin-bottom:28px;padding:22px 18px;}
-      .dept-header-wrap{margin-bottom:26px;}
-      .subject-card{margin-bottom:28px;}
+    .dept-header-wrap{margin-bottom:15px;}
+    @media (max-width: 767px) {
+      .result-panel{margin-bottom:45px;padding:22px 18px;}
+      .dept-header-wrap{margin-bottom:15px !important;}
+      .subject-card{margin-bottom:22px;}
     }
-    .dept-header-wrap{margin-bottom:34px;}
     .dept-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap;}
     .dept-session-badge{
       display:inline-flex;align-items:center;justify-content:center;
@@ -1366,7 +1369,7 @@
     }
 
     .dept-title-row{
-      display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+      display:flex;align-items:center;justify-content:space-between;gap:25px;flex-wrap:wrap;
     }
     .dept-title{
       font-family:var(--sans);font-size:27px;font-weight:800;letter-spacing:-0.02em;
@@ -1375,19 +1378,19 @@
     [data-theme="dark"] .dept-title{color:#FFFFFF;}
 
     /* Segmented Capsule Pill Container */
-    .year-pills{
-      display:inline-flex;align-items:center;gap:2px;
-      padding:3.5px 4px;border-radius:9999px;
+        .year-pills{
+      display:inline-flex;align-items:center;gap:3px;
+      padding:4px 5px;border-radius:9999px;
       background:#E2E8F0;border:1px solid rgba(203,213,225,0.7);
     }
     [data-theme="dark"] .year-pills{
       background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.08);
     }
-    .year-pill{
+        .year-pill{
       display:inline-flex;align-items:center;justify-content:center;
       border:none;background:transparent;outline:none;
       font-family:var(--sans);font-size:12px;font-weight:600;color:#64748B;
-      padding:5px 14px;border-radius:9999px;cursor:pointer;
+      padding:6.5px 15px;border-radius:9999px;cursor:pointer;
       transition:background .15s ease, color .15s ease, box-shadow .15s ease;
       white-space:nowrap;line-height:1.4;
     }
@@ -1403,10 +1406,11 @@
     }
 
     @media (max-width:767px){
-      .dept-title-row{flex-direction:column;align-items:flex-start;gap:12px;}
+      .dept-header-wrap{margin-bottom:15px !important;}
+      .dept-title-row{flex-direction:column;align-items:flex-start;gap:25px;}
       .dept-title{font-size:22px;}
-      .year-pills{width:100%;display:flex;justify-content:space-between;padding:3px;}
-      .year-pill{flex:1;text-align:center;padding:6px 4px;font-size:11.5px;}
+      .year-pills{width:100%;display:flex;justify-content:space-between;padding:4px;}
+      .year-pill{flex:1;text-align:center;padding:8px 4px;font-size:12px;}
     }
 
     .subject-card{
@@ -1460,13 +1464,13 @@
       background:#1E293B;border-color:#475569;transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,0.4);color:#FFFFFF;
     }
     [data-theme="dark"] .reset-btn:hover .ico-bubble{
-      background:#FFFFFF;color:#0F1626;
+      background:#CBD5E1;color:#0F1626;
     }
     .reset-btn svg{width:11px;height:11px;flex-shrink:0;display:block;}
 
     .semester-block{
-      margin:18px 20px 20px;
-      border-radius:18px;
+      margin:12px 10px 14px;
+      border-radius:16px;
       border:1px solid rgba(226,232,240,0.9);
       overflow:hidden;
       background:#FFFFFF;
@@ -1476,11 +1480,11 @@
       background:#0F1626;
     }
     .semester-block + .semester-block{
-      margin-top:22px;
+      margin-top:16px;
     }
     .year-total-block{
-      margin:22px 20px 20px;
-      border-radius:16px;
+      margin:16px 10px 12px;
+      border-radius:14px;
       border:1px solid rgba(203,213,225,0.9);
       background:#F8FAFC;
       overflow:hidden;
@@ -1490,8 +1494,8 @@
       background:rgba(255,255,255,0.02);
     }
     @media (max-width:640px){
-      .semester-block, .year-total-block{margin:14px 12px 16px;}
-      .semester-block + .semester-block, .year-total-block{margin-top:18px;}
+      .semester-block, .year-total-block{margin:10px 6px 12px;}
+      .semester-block + .semester-block, .year-total-block{margin-top:14px;}
     }
     .semester-head{
       display:flex;align-items:center;justify-content:space-between;gap:10px;
@@ -1545,10 +1549,10 @@
     [data-theme="dark"] table.marksheet tr:hover td{background:rgba(255,255,255,0.03);}
     tr.total td{
       font-family:var(--disp);font-weight:800;font-size:15.5px;background:#F8FAFC;color:#0F172A;
-      border-top:1.5px solid rgba(203,213,225,0.9);
+      border:none;border-top:none;border-bottom:none;
     }
     [data-theme="dark"] tr.total td{
-      color:#FFFFFF;border-top-color:rgba(30,41,59,0.9);background:rgba(255,255,255,0.03);
+      color:#FFFFFF;background:rgba(255,255,255,0.03);border:none;border-top:none;border-bottom:none;
     }
     tr.total td.paper{text-align:center;font-size:16px;}
     tr.total td.credit{font-family:var(--mono);font-size:16px;}
@@ -1630,15 +1634,16 @@
         content:'';position:absolute;top:0;left:0;width:50%;height:1px;background:var(--border);
       }
       table.marksheet td.grade::before{
-        content:'GRADE';font-family:var(--mono);font-size:10.5px;font-weight:700;
-        letter-spacing:.06em;color:var(--dim);
+        content:'GRADE';font-family:var(--mono);font-size:12.5px !important;font-weight:700;
+        letter-spacing:.05em;color:var(--dim);
       }
       table.marksheet td.grade select.grade-select{width:auto;}
 
       tr.total{
         background:linear-gradient(135deg,rgba(6,182,212,.08),rgba(99,102,241,.06)) !important;
-        border-radius:14px;border-bottom:none !important;padding:14px 16px !important;margin-top:8px;
+        border-radius:14px;border:none !important;border-top:none !important;border-bottom:none !important;padding:14px 16px !important;margin-top:8px;
       }
+      tr.total td{border:none !important;border-top:none !important;border-bottom:none !important;}
       tr.total::before{display:none;}
       tr.total td:first-child{display:none;}
       tr.total td.paper{order:1;flex:1 1 100%;font-size:15.5px !important;margin-bottom:2px;}
@@ -1659,7 +1664,19 @@
     }
     select.grade-select:focus{outline:none;border-color:var(--primary);}
 
-    .grade-actions{display:flex;flex-direction:row;justify-content:center;align-items:center;gap:12px;margin-top:20px;margin-bottom:24px;flex-wrap:wrap;}
+    .grade-actions{
+      display:flex;flex-direction:row;justify-content:center;align-items:stretch;
+      gap:12px;margin-top:22px;margin-bottom:28px;flex-wrap:nowrap;width:100%;
+    }
+    .grade-actions .btn{
+      flex:1 1 50%;max-width:320px;min-width:0;padding:11px 16px;text-align:center;
+      justify-content:center;white-space:normal;line-height:1.25;font-size:13px;
+    }
+    @media (max-width: 640px) {
+      .grade-actions{gap:8px;margin-top:16px;margin-bottom:20px;}
+      .grade-actions .btn{padding:9.5px 8px;font-size:12px;gap:6px;max-width:none;}
+      .grade-actions .ico-bubble{width:20px;height:20px;}
+    }
     .btn-icon{display:inline-flex;align-items:center;gap:8px;}
     .btn-icon{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
@@ -1679,13 +1696,20 @@
   background:rgba(255,255,255,0.08);color:#FFFFFF;
 }
 [data-theme="dark"] .btn-ghost:hover .ico-bubble, [data-theme="dark"] .btn-ghost:hover .ico-grad{
-  background:#FFFFFF;color:#0F1626;
+  background:#CBD5E1;color:#0F1626;
 }
 
 
     /* reset-btn styled in slate theme */
 
-    .back-row{text-align:center;}
+    .back-row{
+      text-align:center;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      width:100%;
+      margin:36px auto 28px;
+    }
     :focus-visible{outline:2px solid var(--primary);outline-offset:2px;}
 
     @media (max-width:767px){
@@ -1832,10 +1856,11 @@
        REDESIGNED MODALS (SLATE THEME) - NO INNER SCROLLBARS
     ============================================================ */
     .modal-overlay{
-      position:fixed;inset:0;z-index:200;background:rgba(15,23,42,0.45);
+      position:fixed;inset:0;z-index:1000;background:rgba(15,23,42,0.45);
       backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-      display:flex;align-items:center;justify-content:center;padding:24px 16px;
+      display:flex;align-items:flex-start;justify-content:center;padding:24px 16px;
       overflow-y:auto;overscroll-behavior:contain;
+      -webkit-overflow-scrolling:touch;touch-action:pan-y;
       opacity:0;pointer-events:none;transition:opacity .22s ease;
       scrollbar-width:none;-ms-overflow-style:none;
     }
@@ -1847,11 +1872,16 @@
       position:relative;overflow:hidden;border-radius:28px;
       border:1px solid rgba(203,213,225,0.9);background:#FFFFFF;
       padding:24px 20px;box-shadow:0 25px 60px -15px rgba(0,0,0,0.18);
-      width:100%;max-width:440px;margin:auto;
+      width:100%;max-width:440px;margin:auto 0;flex-shrink:0;
       transform:translateY(12px) scale(0.98);transition:all .22s ease;
       scrollbar-width:none;-ms-overflow-style:none;
     }
     .modal-card-slate::-webkit-scrollbar{display:none;}
+    @media (max-width:767px){
+      .modal-overlay{padding:16px 12px 28px;align-items:flex-start;}
+      .modal-card-slate{padding:20px 16px;border-radius:22px;margin:auto 0;}
+      .modal-card-slate.wide{max-width:100%;}
+    }
     @media (min-width:640px){.modal-card-slate{padding:28px;}}
     .modal-card-slate.wide{max-width:620px;}
     .modal-overlay.open .modal-card-slate{transform:translateY(0) scale(1);}
@@ -1929,9 +1959,9 @@
     .m-btn-primary:hover{background:#000000;transform:translateY(-1px);}
     .m-btn-primary:active{transform:scale(0.98);}
     [data-theme="dark"] .m-btn-primary{
-      background:#FFFFFF;color:#0F172A;
+      background:#CBD5E1;color:#0F172A;
     }
-    [data-theme="dark"] .m-btn-primary:hover{background:#F1F5F9;}
+    [data-theme="dark"] .m-btn-primary:hover{background:#FFFFFF;}
 
     .m-close-btn{
       display:flex;width:36px;height:36px;flex-shrink:0;align-items:center;justify-content:center;
@@ -2018,7 +2048,7 @@
       }
     }
 
-    .about-wrap, .contact-wrap, .faq-wrap {
+    .about-wrap, .contact-wrap, .faq-wrap, .legal-wrap {
       width: 100%;
       margin: 0 auto;
     }
@@ -2514,12 +2544,12 @@
       transform: translateY(-1px);
     }
     [data-theme="dark"] .contact-email-btn {
-      background: #FFFFFF;
+      background: #CBD5E1;
       color: #090D14 !important;
-      box-shadow: 0 4px 14px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
     }
     [data-theme="dark"] .contact-email-btn:hover {
-      background: #F1F5F9;
+      background: #FFFFFF;
     }
     .contact-reply-time {
       display: flex;
@@ -2602,9 +2632,20 @@
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
     }
 
-    /* Right Form Card */
+    /* Right Form Card - Hover Lift Disabled */
     .contact-form-card {
       padding: 32px 36px;
+      cursor: default;
+    }
+    .contact-form-card:hover {
+      transform: none !important;
+      border-color: rgba(203, 213, 225, 0.9) !important;
+      box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.08) !important;
+    }
+    [data-theme="dark"] .contact-form-card:hover {
+      transform: none !important;
+      border-color: rgba(30, 41, 59, 0.9) !important;
+      box-shadow: 0 14px 35px -5px rgba(0, 0, 0, 0.45) !important;
     }
     @media (max-width: 640px) {
       .contact-form-card {
@@ -2706,6 +2747,22 @@
       font-family: inherit;
     }
 
+    /* Smooth Contact Tab Panels */
+    .contact-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.28s cubic-bezier(0.2, 0.8, 0.25, 1), transform 0.28s cubic-bezier(0.2, 0.8, 0.25, 1);
+    }
+    .contact-panel.hidden {
+      display: none !important;
+      opacity: 0;
+      transform: translateY(6px);
+      pointer-events: none;
+    }
+
     /* Rating UI */
     .cf-rating-box {
       text-align: center;
@@ -2720,11 +2777,11 @@
     }
     .cf-rating-title {
       font-family: var(--disp);
-      font-size: 14px;
-      font-weight: 700;
+      font-size: 14.5px;
+      font-weight: 800;
       color: #0F172A;
       display: block;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     [data-theme="dark"] .cf-rating-title {
       color: #FFFFFF;
@@ -2733,8 +2790,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      font-size: 28px;
+      gap: 8px;
+      font-size: 38px;
       user-select: none;
     }
     .star-btn {
@@ -2742,30 +2799,34 @@
       border: none;
       cursor: pointer;
       color: #CBD5E1;
-      transition: color 0.15s, transform 0.15s;
-      padding: 0 3px;
+      transition: color 0.18s ease, transform 0.18s cubic-bezier(0.2, 0.8, 0.25, 1);
+      padding: 4px 6px;
       line-height: 1;
+      font-size: 38px;
     }
     .star-btn:hover {
-      color: #FBBF24;
-      transform: scale(1.15);
+      color: #F59E0B;
+      transform: scale(1.2);
     }
     .star-btn.active {
-      color: #FBBF24;
+      color: #F59E0B;
     }
     [data-theme="dark"] .star-btn {
-      color: #475569;
+      color: #334155;
     }
     [data-theme="dark"] .star-btn.active {
+      color: #FBBF24;
+    }
+    [data-theme="dark"] .star-btn:hover {
       color: #FBBF24;
     }
     .cf-rating-output {
       display: block;
       font-family: var(--mono);
-      font-size: 11.5px;
-      font-weight: 600;
+      font-size: 12px;
+      font-weight: 700;
       color: #64748B;
-      margin-top: 10px;
+      margin-top: 12px;
     }
     [data-theme="dark"] .cf-rating-output {
       color: #94A3B8;
@@ -2816,12 +2877,12 @@
       transform: translateY(-1px);
     }
     [data-theme="dark"] .cf-submit-btn {
-      background: #FFFFFF;
+      background: #CBD5E1;
       color: #090D14 !important;
-      box-shadow: 0 4px 14px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
     }
     [data-theme="dark"] .cf-submit-btn:hover {
-      background: #F1F5F9;
+      background: #FFFFFF;
     }
     #cfStatus {
       margin-top: 12px;
@@ -2864,10 +2925,10 @@
       text-transform: uppercase;
       letter-spacing: 0.14em;
       color: #64748B;
-      margin: 32px 0 14px;
+      margin: 18px 0 8px;
     }
     .faq-category-heading:first-child {
-      margin-top: 8px;
+      margin-top: 4px;
     }
     [data-theme="dark"] .faq-category-heading {
       color: #94A3B8;
@@ -2904,44 +2965,44 @@
     .faq-accordion-item {
       position: relative;
       overflow: hidden;
-      border-radius: 22px;
+      border-radius: 20px;
       border: 1px solid rgba(203, 213, 225, 0.9);
       background: #FFFFFF;
-      padding: 20px 24px;
-      margin-bottom: 12px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
-      transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.25, 1),
-                  box-shadow 0.32s cubic-bezier(0.2, 0.8, 0.25, 1),
-                  border-color 0.32s ease;
+      padding: 16px 20px;
+      margin-bottom: 0px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.03);
+      transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.25, 1),
+                  box-shadow 0.28s cubic-bezier(0.2, 0.8, 0.25, 1),
+                  border-color 0.28s ease;
       will-change: transform;
     }
     .faq-accordion-item:hover {
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       border-color: #94A3B8;
-      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
     }
     [data-theme="dark"] .faq-accordion-item {
       background: #0F1626;
       border-color: rgba(30, 41, 59, 0.9);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     }
     [data-theme="dark"] .faq-accordion-item:hover {
       border-color: #475569;
-      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
     }
     .faq-question-btn {
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 14px;
       text-align: left;
       background: none;
       border: none;
       padding: 0;
       cursor: pointer;
       font-family: var(--disp);
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 800;
       color: #0F172A;
     }
@@ -2953,19 +3014,19 @@
       line-height: 1.35;
     }
 
-    /* RED ACCORDION ICON (+ and ×) - EXPLICIT USER MANDATE */
+    /* RED ACCORDION ICON (+ and ×) */
     .faq-icon, .faq-q .plus {
       color: #E11D48 !important; /* Rose-Red in light mode */
       font-family: var(--mono);
       font-size: 22px;
       font-weight: 800;
       line-height: 1;
-      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.25, 1);
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.25, 1);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       flex-shrink: 0;
       user-select: none;
     }
@@ -2973,9 +3034,30 @@
       color: #F43F5E !important; /* Vivid Rose-Red in dark mode */
     }
 
+    /* Smooth Grid-based Accordion Drawer */
+    .faq-body-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.32s cubic-bezier(0.2, 0.8, 0.25, 1);
+    }
+    .faq-accordion-item.open .faq-body-wrap {
+      grid-template-rows: 1fr;
+    }
+    .faq-body-inner {
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+    .faq-accordion-item.open .faq-body-inner {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.28s ease 0.06s, transform 0.28s ease 0.06s;
+    }
+
     .faq-body {
-      padding-top: 14px;
-      margin-top: 14px;
+      padding-top: 12px;
+      margin-top: 12px;
       border-top: 1px solid rgba(203, 213, 225, 0.6);
       font-size: 13.5px;
       font-weight: 600;
@@ -2986,97 +3068,26 @@
       border-top-color: rgba(255, 255, 255, 0.08);
       color: #E2E8F0;
     }
-    .faq-body.hidden {
-      display: none;
-    }
     .faq-answer-p {
       margin: 0;
       color: inherit;
     }
 
-    /* Common "Back to home" button */
-    .back-home-pill-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border-radius: 999px;
-      background: #0F172A;
-      color: #FFFFFF !important;
-      padding: 12px 24px;
-      font-family: var(--disp);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      border: 1px solid transparent;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
-      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.25, 1);
-    }
-    .back-home-pill-btn:hover {
-      background: #000000;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    }
-    .back-home-pill-btn:hover .arrow-shift {
-      transform: translateX(4px);
-    }
-    .arrow-shift {
-      display: inline-block;
-      transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.25, 1);
-    }
-    [data-theme="dark"] .back-home-pill-btn {
-      background: #FFFFFF;
-      color: #0F172A !important;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-    }
-    [data-theme="dark"] .back-home-pill-btn:hover {
-      background: #F1F5F9;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
-    }
+
 
     /* ============================================================
-       REDESIGNED TERMS & PRIVACY PAGES (SLATE THEME)
+       REDESIGNED TERMS & PRIVACY PAGES (SLATE THEME - CONSISTENT CARD WIDTH)
     ============================================================ */
-    .legal-wrap{max-width:1152px;margin:0 auto;width:100%;}
-    .legal-hero-bar{
-      display:flex;flex-direction:column;gap:6px;
-      border-bottom:1px solid rgba(203,213,225,0.8);padding-bottom:20px;margin-bottom:32px;
-    }
-    [data-theme="dark"] .legal-hero-bar{
-      border-bottom-color:rgba(255,255,255,0.08);
-    }
-    .legal-eyebrow {
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: #64748B;
-    }
-    [data-theme="dark"] .legal-eyebrow {
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: #64748B;
-    }
-    .legal-title{
-      font-family:var(--disp);font-size:32px;font-weight:800;letter-spacing:-0.02em;color:#0F172A;margin:2px 0 6px;line-height:1.2;
-    }
-    [data-theme="dark"] .legal-title{color:#FFFFFF;}
-    .legal-subtitle{
-      font-size:13.5px;font-weight:600;color:#64748B;margin:0;line-height:1.5;
-    }
-    [data-theme="dark"] .legal-subtitle{color:#CBD5E1;}
-
-    /* Legal Cards */
     .legal-card{
       position:relative;overflow:hidden;border-radius:26px;
       border:1px solid rgba(203,213,225,0.9);background:#FFFFFF;
-      padding:30px 28px;margin-bottom:20px;box-shadow:0 12px 30px -5px rgba(0,0,0,0.08);
+      padding:24px 22px;margin-bottom:16px;box-shadow:0 12px 30px -5px rgba(0,0,0,0.08);
+      width:100%;
       transition:transform 0.32s cubic-bezier(0.2,0.8,0.25,1), box-shadow 0.32s cubic-bezier(0.2,0.8,0.25,1), border-color 0.32s ease;
       will-change:transform;
     }
+    @media (min-width:640px){ .legal-card{padding:28px 26px;margin-bottom:18px;} }
+    @media (min-width:768px){ .legal-card{padding:30px 28px;margin-bottom:20px;} }
     .legal-card:hover{
       transform:translateY(-4px);border-color:#94A3B8;
       box-shadow:0 16px 32px -6px rgba(15,23,42,0.12), 0 4px 12px -2px rgba(15,23,42,0.05);
@@ -3682,11 +3693,9 @@
       </div>
 
       <!-- Back to home -->
-      <div style="padding-top:24px;display:flex;justify-content:center;">
-        <button type="button" onclick="showView('home')" class="back-home-pill-btn">
-          <span>Back to home</span>
-          <span class="arrow-shift">→</span>
-        </button>
+            <!-- Back to home -->
+      <div class="back-row">
+        <button type="button" class="btn btn-ghost btn-icon" onclick="showView('home')"><span class="ico-bubble"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0l6-6m-6 6l6 6"/></svg></span><span>Back to home</span></button>
       </div>
     </div>
   </section>
@@ -3804,11 +3813,7 @@
         <div class="smooth-card contact-left-card">
           <span class="card-watermark">MAIL</span>
           <div style="position:relative;z-index:10;display:flex;flex-direction:column;gap:16px;">
-            <div class="contact-info-icon-box">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-              </svg>
-            </div>
+
             <h2 class="contact-info-title">Let's talk</h2>
             <p style="font-size:13px;font-weight:600;line-height:1.65;color:var(--muted);margin:0;">
               Half-baked idea at 1am? Found a typo that's bugging you? Skip the formalities — say it like you'd say it to a friend, messy and all.
@@ -3853,7 +3858,7 @@
             <input type="text" id="cfWebsite" name="cfWebsite" style="display:none;" tabindex="-1" autocomplete="off">
 
             <!-- Message Panel -->
-            <div id="panelContact" style="display:flex;flex-direction:column;gap:16px;">
+            <div id="panelContact" class="contact-panel">
               <div class="cf-field">
                 <label class="cf-label">What's this about? *</label>
                 <select id="cfType" required class="cf-input">
@@ -3885,7 +3890,7 @@
             </div>
 
             <!-- Rate Panel -->
-            <div id="panelRate" class="hidden" style="display:none;flex-direction:column;gap:16px;">
+            <div id="panelRate" class="contact-panel hidden" style="display:none;">
               <div class="cf-rating-box">
                 <span class="cf-rating-title">How was your experience? *</span>
                 <input type="hidden" id="cfRating" value="">
@@ -3929,11 +3934,9 @@
       </div>
 
       <!-- Back to home -->
-      <div style="padding-top:28px;display:flex;justify-content:center;">
-        <button type="button" onclick="showView('home')" class="back-home-pill-btn">
-          <span>Back to home</span>
-          <span class="arrow-shift">→</span>
-        </button>
+            <!-- Back to home -->
+      <div class="back-row">
+        <button type="button" class="btn btn-ghost btn-icon" onclick="showView('home')"><span class="ico-bubble"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0l6-6m-6 6l6 6"/></svg></span><span>Back to home</span></button>
       </div>
     </div>
   </section>
@@ -3949,14 +3952,12 @@
       </div>
 
       <!-- Accordion List Target -->
-      <div id="faqList" style="display:flex;flex-direction:column;gap:12px;"></div>
+      <div id="faqList" style="display:flex;flex-direction:column;gap:6px;"></div>
 
       <!-- Back to home -->
-      <div style="padding-top:28px;display:flex;justify-content:center;">
-        <button type="button" onclick="showView('home')" class="back-home-pill-btn">
-          <span>Back to home</span>
-          <span class="arrow-shift">→</span>
-        </button>
+            <!-- Back to home -->
+      <div class="back-row">
+        <button type="button" class="btn btn-ghost btn-icon" onclick="showView('home')"><span class="ico-bubble"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0l6-6m-6 6l6 6"/></svg></span><span>Back to home</span></button>
       </div>
     </div>
   </section>
@@ -3966,10 +3967,10 @@
     <div class="legal-wrap">
 
       <!-- Page Title & Header -->
-      <div class="legal-hero-bar">
-        <span class="legal-eyebrow">// privacy policy</span>
-        <h1 class="legal-title">Privacy Policy</h1>
-        <p class="legal-subtitle">Your grades stay yours — no accounts, no server tracking, completely local.</p>
+      <div class="view-hero-bar">
+        <span class="view-hero-eyebrow">// privacy policy</span>
+        <h1 class="view-hero-title">Privacy Policy</h1>
+        <p class="view-hero-subtitle">Your grades stay yours — no accounts, no server tracking, completely local.</p>
       </div>
 
       <!-- 0. Hero Overview Card -->
@@ -4071,8 +4072,9 @@
       </div>
 
       <!-- Back to Home Button -->
-      <div class="back-row" style="margin-top:36px;">
-        <button class="btn btn-ghost btn-icon" onclick="showView('home')"><span class="ico-bubble"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0l6-6m-6 6l6 6"/></svg></span><span>Back to home</span></button>
+            <!-- Back to home -->
+      <div class="back-row">
+        <button type="button" class="btn btn-ghost btn-icon" onclick="showView('home')"><span class="ico-bubble"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0l6-6m-6 6l6 6"/></svg></span><span>Back to home</span></button>
       </div>
 
     </div>
@@ -4083,10 +4085,10 @@
     <div class="legal-wrap">
 
       <!-- Page Title & Header -->
-      <div class="legal-hero-bar">
-        <span class="legal-eyebrow">// terms of use</span>
-        <h1 class="legal-title">Terms of Use</h1>
-        <p class="legal-subtitle">The fine print, kept short, clear, and human.</p>
+      <div class="view-hero-bar">
+        <span class="view-hero-eyebrow">// terms of use</span>
+        <h1 class="view-hero-title">Terms of Use</h1>
+        <p class="view-hero-subtitle">The fine print, kept short, clear, and human.</p>
       </div>
 
       <!-- 0. Overview / Preamble Card -->
@@ -4168,8 +4170,9 @@
       </div>
 
       <!-- Back to Home Action Button -->
-      <div class="back-row" style="margin-top:36px;">
-        <button class="btn btn-ghost btn-icon" onclick="showView('home')"><span class="ico-bubble"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0l6-6m-6 6l6 6"/></svg></span><span>Back to home</span></button>
+            <!-- Back to home -->
+      <div class="back-row">
+        <button type="button" class="btn btn-ghost btn-icon" onclick="showView('home')"><span class="ico-bubble"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0l6-6m-6 6l6 6"/></svg></span><span>Back to home</span></button>
       </div>
 
     </div>
@@ -4400,7 +4403,7 @@
       </div>
 
       <div class="si-grid">
-        <div class="si-field">
+        <div class="si-field" style="grid-column:1/-1;">
           <label class="si-label-new">Student Name</label>
           <input type="text" id="siStudentName" class="si-input-new" placeholder="Enter full name" oninput="this.value=this.value.replace(/[^A-Za-z\s.'-]/g,'')">
         </div>
@@ -4456,14 +4459,7 @@
           <input type="text" id="siSubject" class="si-input-new" readonly>
         </div>
 
-        <div class="si-field highlight">
-          <label class="si-label-new">Subject Result</label>
-          <div class="si-result-pill">
-            <span class="si-result-dot"></span>
-            In Progress
-          </div>
-          <input type="hidden" id="siResult" value="In Progress">
-        </div>
+
 
         <div class="si-field readonly">
           <label class="si-label-new" id="siCgpaLabel">CGPA</label>
@@ -4561,17 +4557,23 @@
   }
   #grdSheetHost .rs2-brand-qr img{ width:100%; height:100%; object-fit:contain; display:block; }
   #grdSheetHost .rs2-brand-text h1{ font-size:26px; font-weight:800; letter-spacing:-.03em; color:var(--rs2-accent-brand); line-height:1.1; }
+  #grdSheetHost .rs2-brand-logo-red{ color:#E11D48; }
   #grdSheetHost .rs2-brand-text p{ font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:.12em; color:var(--rs2-accent-champagne); margin-top:3px; }
-  #grdSheetHost .rs2-badge{ display:flex; align-items:center; justify-content:flex-start; text-align:left; }
-  #grdSheetHost .rs2-status-pill{
-    display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:5px 12px;
-    background:var(--rs2-accent-sage-soft); border:1px solid rgba(13,148,136,.25); border-radius:999px;
-    font-size:11px; font-weight:700; color:var(--rs2-accent-sage); text-transform:uppercase; letter-spacing:.05em;
-    text-align:center; line-height:normal; white-space:nowrap; flex:0 0 auto;
+  #grdSheetHost .rs2-header-badge{ display:flex; flex-direction:column; align-items:flex-end; text-align:right; gap:3px; }
+  #grdSheetHost .rs2-hbadge-pill{
+    display:inline-flex; align-items:center; gap:6px; padding:5px 12px;
+    border-radius:999px; background:var(--rs2-surface-subtle); border:1px solid var(--rs2-border-light);
+    font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700; color:var(--rs2-ink-primary);
+    letter-spacing:.06em; text-transform:uppercase; box-shadow:0 1px 2px rgba(0,0,0,.02);
   }
-  #grdSheetHost .rs2-status-pill .rs2-status-label{ display:inline-block; line-height:1; transform:translateY(0.5px); }
-  #grdSheetHost .rs2-status-pill.rs2-fail{ background:var(--rs2-accent-rose-soft); border-color:var(--rs2-accent-rose-border); color:var(--rs2-accent-rose); }
-  #grdSheetHost .rs2-status-pill .rs2-dot{ width:6px; height:6px; border-radius:50%; background:currentColor; flex-shrink:0; }
+  #grdSheetHost .rs2-hbadge-pill svg{ color:var(--rs2-accent-sage); flex-shrink:0; }
+  #grdSheetHost .rs2-hbadge-sub{ font-size:8.5px; font-weight:700; color:var(--rs2-ink-faint); text-transform:uppercase; letter-spacing:.08em; }
+  #grdSheetHost .rs2-doc-watermark{
+    position:absolute; top:52%; left:50%; transform:translate(-50%, -50%) rotate(-24deg);
+    font-family:'Space Grotesk',sans-serif; font-size:96px; font-weight:900;
+    color:rgba(15,39,68,0.024); letter-spacing:0.15em; text-transform:uppercase;
+    white-space:nowrap; pointer-events:none; user-select:none; z-index:0;
+  }
   #grdSheetHost .rs2-exam-banner{ text-align:center; margin-bottom:16px; }
   #grdSheetHost .rs2-exam-banner h2{ font-size:16.5px; font-weight:700; color:var(--rs2-ink-primary); letter-spacing:-.015em; margin-bottom:3px; }
   #grdSheetHost .rs2-exam-banner p{ font-size:12px; font-weight:500; color:var(--rs2-ink-muted); letter-spacing:.02em; }
@@ -5388,7 +5390,7 @@
       ? "Review your information, then download your full transcript as PDF"
       : "Review your information, then download this result as PDF";
     document.getElementById('siSubject').value = `${deptCodeNum(currentDept)} - ${currentDept}`;
-    document.getElementById('siResult').value = 'In Progress';
+    const siRes = document.getElementById('siResult'); if(siRes) siRes.value = 'In Progress';
 
     const isIncampus = activeSyllabus === 'incampus2013';
     const collegeWrap = document.getElementById('siCollegeWrap');
@@ -5529,19 +5531,26 @@
 
     const sheetHTML = `
     <div class="rs2-doc">
-      <div>
+      <div class="rs2-doc-watermark">GRADZZ</div>
+      <div style="position:relative;z-index:1;">
         <header class="rs2-header">
           <div class="rs2-brand-group">
             <div class="rs2-brand-qr">
               <img src="qr-code.svg" alt="Verification QR Code" onerror="this.parentElement.style.display='none'">
             </div>
             <div class="rs2-brand-text">
-              <h1>Gradzz</h1>
+              <h1>Grad<span class="rs2-brand-logo-red">zz</span></h1>
               <p>Academic Grade &amp; Overall CGPA Evaluation</p>
             </div>
           </div>
-          <div class="rs2-badge">
-            <span class="rs2-status-pill${isFail?' rs2-fail':''}"><span class="rs2-dot"></span><span class="rs2-status-label">${statusPillText}</span></span>
+          <div class="rs2-header-badge">
+            <div class="rs2-hbadge-pill">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span>ACADEMIC RESULT</span>
+            </div>
+            <div class="rs2-hbadge-sub">STATEMENT OF GRADES</div>
           </div>
         </header>
 
@@ -5829,19 +5838,26 @@
 
     const sheetHTML = `
     <div class="rs2-doc">
-      <div>
+      <div class="rs2-doc-watermark">GRADZZ</div>
+      <div style="position:relative;z-index:1;">
         <header class="rs2-header">
           <div class="rs2-brand-group">
             <div class="rs2-brand-qr">
               <img src="qr-code.svg" alt="Verification QR Code" onerror="this.parentElement.style.display='none'">
             </div>
             <div class="rs2-brand-text">
-              <h1>Gradzz</h1>
+              <h1>Grad<span class="rs2-brand-logo-red">zz</span></h1>
               <p>Academic Grade &amp; Overall CGPA Evaluation</p>
             </div>
           </div>
-          <div class="rs2-badge">
-            <span class="rs2-status-pill${isFail?' rs2-fail':''}"><span class="rs2-dot"></span><span class="rs2-status-label">${resultStatus}</span></span>
+          <div class="rs2-header-badge">
+            <div class="rs2-hbadge-pill">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span>OFFICIAL TRANSCRIPT</span>
+            </div>
+            <div class="rs2-hbadge-sub">ACADEMIC EVALUATION</div>
           </div>
         </header>
 
@@ -5918,8 +5934,12 @@
             <span class="faq-q-text">${f[0]}</span>
             <span class="faq-icon" aria-hidden="true">+</span>
           </button>
-          <div class="faq-body hidden">
-            ${body}
+          <div class="faq-body-wrap">
+            <div class="faq-body-inner">
+              <div class="faq-body">
+                ${body}
+              </div>
+            </div>
           </div>
         </div>
       `;
@@ -5927,24 +5947,37 @@
     listEl.innerHTML = out;
   }
 
-  /* Accordion mode: + and × are strictly RED (#E11D48 / #F43F5E) */
+  /* Smooth Accordion Toggle */
   function toggleFaq(i){
     const item = document.getElementById('faq-' + i);
     if (!item) return;
-    const body = item.querySelector('.faq-body');
-    const icon = item.querySelector('.faq-icon');
-    const isOpen = body && !body.classList.contains('hidden');
+    const isCurrentlyOpen = item.classList.contains('open');
 
-    document.querySelectorAll('.faq-accordion-item .faq-body, .faq-item .faq-body').forEach(b => b.classList.add('hidden'));
-    document.querySelectorAll('.faq-icon').forEach(ic => {
-      ic.textContent = '+';
-      ic.style.transform = 'rotate(0deg)';
+    // Close all other items smoothly
+    document.querySelectorAll('.faq-accordion-item').forEach(el => {
+      if (el !== item) {
+        el.classList.remove('open');
+        const ic = el.querySelector('.faq-icon');
+        if (ic) {
+          ic.textContent = '+';
+          ic.style.transform = 'rotate(0deg)';
+        }
+      }
     });
 
-    if (!isOpen && body && icon) {
-      body.classList.remove('hidden');
-      icon.textContent = '×';
-      icon.style.transform = 'rotate(90deg)';
+    const icon = item.querySelector('.faq-icon');
+    if (isCurrentlyOpen) {
+      item.classList.remove('open');
+      if (icon) {
+        icon.textContent = '+';
+        icon.style.transform = 'rotate(0deg)';
+      }
+    } else {
+      item.classList.add('open');
+      if (icon) {
+        icon.textContent = '×';
+        icon.style.transform = 'rotate(90deg)';
+      }
     }
   }
 
@@ -5954,12 +5987,14 @@
   }
 
   function closeAllFaqs(){
-    document.querySelectorAll('.faq-accordion-item .faq-body, .faq-item .faq-body').forEach(b => b.classList.add('hidden'));
-    document.querySelectorAll('.faq-icon').forEach(ic => {
-      ic.textContent = '+';
-      ic.style.transform = 'rotate(0deg)';
+    document.querySelectorAll('.faq-accordion-item').forEach(el => {
+      el.classList.remove('open');
+      const ic = el.querySelector('.faq-icon');
+      if (ic) {
+        ic.textContent = '+';
+        ic.style.transform = 'rotate(0deg)';
+      }
     });
-    document.querySelectorAll('.faq-accordion-item.open, .faq-item.open').forEach(el=>el.classList.remove('open'));
   }
 
   let currentView = 'home';
@@ -6370,10 +6405,13 @@
 
   function selectContactTopic(topicValue){
     showView('contact');
-    const tab = document.getElementById('cfTabContact');
+    const tab = document.getElementById('tabContact') || document.getElementById('cfTabContact');
     if(tab) tab.click();
-    const opt = document.querySelector(`#cfTopicMenu .cf-topic-opt[data-value="${topicValue}"]`);
-    if(opt) opt.click();
+    const cfType = document.getElementById('cfType');
+    if(cfType) {
+      cfType.value = topicValue;
+      if (window.CustomSelect) CustomSelect.refresh(cfType);
+    }
     const formCard = document.getElementById('contactFormArea');
     if(formCard) formCard.scrollIntoView({behavior:'smooth', block:'start'});
   }
@@ -6417,8 +6455,17 @@
       if (mode === 'contact') {
         if (tabContact) tabContact.classList.add('active');
         if (tabRate) tabRate.classList.remove('active');
-        if (panelContact) { panelContact.style.display = 'flex'; panelContact.classList.remove('hidden'); }
-        if (panelRate) { panelRate.style.display = 'none'; panelRate.classList.add('hidden'); }
+        if (panelRate) {
+          panelRate.classList.add('hidden');
+          panelRate.style.display = 'none';
+        }
+        if (panelContact) {
+          panelContact.style.display = 'flex';
+          panelContact.classList.add('hidden');
+          requestAnimationFrame(() => {
+            panelContact.classList.remove('hidden');
+          });
+        }
         if (submitLabel) submitLabel.textContent = 'Send Message';
         if (cfType) cfType.required = true;
         if (cfName) cfName.required = true;
@@ -6428,8 +6475,17 @@
       } else {
         if (tabRate) tabRate.classList.add('active');
         if (tabContact) tabContact.classList.remove('active');
-        if (panelRate) { panelRate.style.display = 'flex'; panelRate.classList.remove('hidden'); }
-        if (panelContact) { panelContact.style.display = 'none'; panelContact.classList.add('hidden'); }
+        if (panelContact) {
+          panelContact.classList.add('hidden');
+          panelContact.style.display = 'none';
+        }
+        if (panelRate) {
+          panelRate.style.display = 'flex';
+          panelRate.classList.add('hidden');
+          requestAnimationFrame(() => {
+            panelRate.classList.remove('hidden');
+          });
+        }
         if (submitLabel) submitLabel.textContent = 'Submit Rating';
         if (cfType) cfType.required = false;
         if (cfName) cfName.required = false;
@@ -6641,7 +6697,7 @@
     window.CustomSelect = { init: build, refresh };
 
     function initAll(root){
-      (root || document).querySelectorAll('#qsProgram,#qsSession,#qsSubject,#siStudentType,select.grade-select').forEach(build);
+      (root || document).querySelectorAll('#qsProgram,#qsSession,#qsSubject,#siStudentType,#cfType,select.grade-select').forEach(build);
     }
 
     if(document.readyState === 'loading'){
