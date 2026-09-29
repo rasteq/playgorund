@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gradzz - National University CGPA Calculator</title>
+  <title>Gradzz</title>
   <meta name="description" content="Gradzz is a free, no-login CGPA &amp; GPA calculator for National University Bangladesh students — built mobile-first, covers Honours and Masters, all four years, both syllabuses.">
   <meta name="theme-color" content="#0891B2">
   <meta property="og:title" content="Gradzz — National University CGPA Calculator">
@@ -1872,17 +1872,17 @@
       position:relative;overflow:hidden;border-radius:28px;
       border:1px solid rgba(203,213,225,0.9);background:#FFFFFF;
       padding:24px 20px;box-shadow:0 25px 60px -15px rgba(0,0,0,0.18);
-      width:100%;max-width:440px;margin:auto 0;flex-shrink:0;
+      width:100%;max-width:440px;margin:0 auto;flex-shrink:0;
       transform:translateY(12px) scale(0.98);transition:all .22s ease;
       scrollbar-width:none;-ms-overflow-style:none;
     }
     .modal-card-slate::-webkit-scrollbar{display:none;}
     @media (max-width:767px){
-      .modal-overlay{padding:16px 12px 28px;align-items:flex-start;}
-      .modal-card-slate{padding:20px 16px;border-radius:22px;margin:auto 0;}
+      .modal-overlay{padding:16px 12px 60px;align-items:flex-start;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
+      .modal-card-slate{padding:20px 16px;border-radius:22px;margin:0 auto;width:100%;max-width:100%;flex-shrink:0;}
       .modal-card-slate.wide{max-width:100%;}
     }
-    @media (min-width:640px){.modal-card-slate{padding:28px;}}
+    @media (min-width:640px){.modal-card-slate{padding:28px;margin:auto 0;}}
     .modal-card-slate.wide{max-width:620px;}
     .modal-overlay.open .modal-card-slate{transform:translateY(0) scale(1);}
 
@@ -4334,7 +4334,7 @@
 
 <!-- ================= SOON-DEPARTMENT POPUP ================= -->
 <!-- ================= SOON-DEPARTMENT POPUP ================= -->
-<div class="modal-overlay" id="soonModalOverlay" onclick="if(event.target===this) closeSoonModal()">
+<div class="modal-overlay" id="soonModalOverlay" data-lenis-prevent onclick="if(event.target===this) closeSoonModal()">
   <div class="modal-card-slate">
     <!-- Faint Corner Watermark -->
     <span class="modal-watermark" id="soonDeptWatermark">ENG</span>
@@ -4372,7 +4372,7 @@
 </div>
 
 <!-- ================= STUDENT INFORMATION / DOWNLOAD POPUP ================= -->
-<div class="modal-overlay" id="studentInfoOverlay" onclick="if(event.target===this) closeStudentInfoModal()">
+<div class="modal-overlay" id="studentInfoOverlay" data-lenis-prevent onclick="if(event.target===this) closeStudentInfoModal()">
   <div class="modal-card-slate wide">
     <!-- Faint Corner Watermark -->
     <span class="modal-watermark">PDF</span>
@@ -5354,7 +5354,7 @@
     document.getElementById('soonDeptCode').textContent = codeBadge || abbrev;
     const wm = document.getElementById('soonDeptWatermark');
     if(wm) wm.textContent = abbrev;
-    document.getElementById('soonModalOverlay').classList.add('open');
+    const snOv = document.getElementById('soonModalOverlay'); if(snOv){ snOv.scrollTop = 0; snOv.classList.add('open'); }
     document.body.style.overflow='hidden';
     lenis.stop();
   }
@@ -5416,7 +5416,7 @@
       document.getElementById('siCgpa').value = yearStats(currentDept, currentYear).gpa.toFixed(2);
     }
     ['siRollWrap','siRegNoWrap','siYearWrap'].forEach(clearFieldError);
-    document.getElementById('studentInfoOverlay').classList.add('open');
+    const siOv = document.getElementById('studentInfoOverlay'); if(siOv){ siOv.scrollTop = 0; siOv.classList.add('open'); }
     document.body.style.overflow='hidden';
     lenis.stop();
   }
@@ -5998,7 +5998,43 @@
   }
 
   let currentView = 'home';
+  
+  function updatePageTitle(viewId){
+    const vid = viewId || currentView || 'home';
+    if(!vid || vid === 'home'){
+      document.title = 'Gradzz';
+    } else if(vid === 'deptlist'){
+      const prog = PROGRAMS.find(p => p.key === activeSyllabus);
+      const sess = prog ? (SESSION_SHORT[prog.key] || '') : '';
+      const progTitle = prog ? (prog.title || 'Program') : 'Program';
+      const sessTag = sess ? ` (${sess})` : '';
+      document.title = `${progTitle}${sessTag} Departments | Gradzz`;
+    } else if(vid === 'grading'){
+      const prog = PROGRAMS.find(p => p.key === activeSyllabus);
+      const sess = prog ? (SESSION_SHORT[prog.key] || '') : '';
+      const sessTag = sess ? ` (${sess})` : '';
+      const uWord = unitWord(activeSyllabus);
+      const suffix = currentYear === 1 ? '1st' : currentYear === 2 ? '2nd' : currentYear === 3 ? '3rd' : `${currentYear}th`;
+      const yLabel = `${suffix} ${uWord}`;
+      const dept = currentDept || 'Department';
+      document.title = `${dept}${sessTag} - ${yLabel} | Gradzz`;
+    } else if(vid === 'about'){
+      document.title = 'About | Gradzz';
+    } else if(vid === 'faq'){
+      document.title = 'FAQ | Gradzz';
+    } else if(vid === 'contact'){
+      document.title = 'Contact | Gradzz';
+    } else if(vid === 'privacy'){
+      document.title = 'Privacy Policy | Gradzz';
+    } else if(vid === 'terms'){
+      document.title = 'Terms of Use | Gradzz';
+    } else {
+      document.title = 'Gradzz';
+    }
+  }
+
   function showView(id, pushState, skipScroll){
+    updatePageTitle(id);
     if(currentView === 'faq' && id !== 'faq') closeAllFaqs();
     if(id === 'home') qsReset();
     currentView = id;
@@ -6170,6 +6206,7 @@
   function setYear(y){
     currentYear = y;
     document.querySelectorAll('.year-pill').forEach((p,i)=>p.classList.toggle('active', i===y-1));
+    updatePageTitle('grading');
     renderYear();
   }
 
