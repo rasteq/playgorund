@@ -823,7 +823,7 @@
     [data-theme="dark"] .pc-watermark{color:rgba(255,255,255,0.04);}
 
     .pc-top{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;}
-    .pc-badge{ display:inline-flex;align-items:center;border-radius:10px;background:#F1F5F9;padding:5px 12px;font-family:var(--mono);font-size:12px;font-weight:700;color:#1E293B;border:1px solid rgba(226,232,240,0.9);box-shadow:0 1px 2px 0 rgba(0,0,0,0.05); }
+    .pc-badge{ display:inline-flex;align-items:center;border-radius:8px;background:#F1F5F9;padding:4px 10px;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:0.02em;line-height:1.35;color:#1E293B;border:1px solid rgba(226,232,240,0.9);box-shadow:0 1px 2px 0 rgba(0,0,0,0.05); }
     [data-theme="dark"] .pc-badge{ background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:#94A3B8;box-shadow:none; }
 
     .pc-body{margin-top:20px;}
@@ -3467,8 +3467,8 @@
             <option value="honours">Honours</option>
             <option value="pass">Degree (Pass Course)</option>
             <option value="masters">Masters</option>
-            <option value="incampus">In-Campus Masters</option>
             <option value="prelim">Preliminary to Masters</option>
+            <option value="incampus">In-Campus Masters</option>
           </select>
         </div>
         <div class="qs-field">
@@ -4854,9 +4854,9 @@
     {key:'pass2013', title:'Degree Pass', displayTitle:'Degree Pass Program', code:'DEG', tag:'2013–14 Syllabus', desc:'Explore Degree Pass programs and course structures using the old syllabus.', active:true},
     {key:'masters2024', title:'Masters', displayTitle:'Masters Program', code:'MAS', tag:'2024–25 Syllabus', desc:'Explore Masters programs and calculate your CGPA using the updated syllabus.', active:false},
     {key:'masters2013', title:'Masters', displayTitle:'Masters Program', code:'MAS', tag:'2013–14 Syllabus', desc:'Explore Masters programs and course structures using the current syllabus.', active:true},
-    {key:'incampus2013', title:'In-Campus Masters', displayTitle:'In-Campus Masters', code:'ICM', tag:'2013–14 Syllabus', desc:'Explore In-Campus Masters programs and course structures using the current syllabus.', active:true},
     {key:'prelim2024', title:'Preliminary to Masters', displayTitle:'Preliminary to Masters', code:'PRE', tag:'2024–25 Syllabus', desc:'Explore Preliminary to Masters programs and calculate your CGPA using the updated syllabus.', active:false},
     {key:'prelim2013', title:'Preliminary to Masters', displayTitle:'Preliminary to Masters', code:'PRE', tag:'2013–14 Syllabus', desc:'Explore Preliminary to Masters programs and course structures using the current syllabus.', active:true},
+    {key:'incampus2013', title:'In-Campus Masters', displayTitle:'In-Campus Masters', code:'ICM', tag:'2013–14 Syllabus', desc:'Explore In-Campus Masters programs and course structures using the current syllabus.', active:true},
   ];
 
   const PROGRAM_YEARS = {
@@ -5175,8 +5175,8 @@
     honours: [{key:'2024', label:'2024–25'}, {key:'2013', label:'2013–14'}],
     pass: [{key:'pass2024', label:'2024–25'}, {key:'pass2013', label:'2013–14'}],
     masters: [{key:'masters2013', label:'2013–14'}],
-    incampus: [{key:'incampus2013', label:'2013–14'}],
     prelim: [{key:'prelim2013', label:'2013–14'}],
+    incampus: [{key:'incampus2013', label:'2013–14'}],
   };
   function qsProgramChange(){
     const prog = document.getElementById('qsProgram').value;
