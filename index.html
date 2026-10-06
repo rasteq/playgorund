@@ -147,9 +147,9 @@
     /* [EDIT 05: Dark Header & Glass Surfaces - Deep Obsidian Glass with Clean Border] */
     /* header bar — deep glass with premium feel */
     [data-theme="dark"] header.site{
-      background:rgba(15, 16, 16, 0.94);
-      backdrop-filter:blur(16px) saturate(160%);
-      -webkit-backdrop-filter:blur(16px) saturate(160%);
+      background:rgba(15, 16, 16, 0.68);
+      backdrop-filter:blur(24px) saturate(180%);
+      -webkit-backdrop-filter:blur(24px) saturate(180%);
       border-bottom:1px solid rgba(255, 255, 255, 0.08);
       box-shadow:0 4px 20px -2px rgba(0, 0, 0, 0.25);
     }
@@ -176,6 +176,8 @@
     ::view-transition-old(site-header), ::view-transition-new(site-header){
       animation-duration:.35s;
       animation-timing-function:cubic-bezier(.4,0,.2,1);
+      /* Keep background opaque-backed during crossfade */
+      mix-blend-mode: normal;
     }
     @media (prefers-reduced-motion:reduce){ 
       ::view-transition-old(root),::view-transition-new(root),
@@ -199,9 +201,9 @@
 
     header.site{
       position:fixed;top:0;left:0;right:0;z-index:50;
-      background:rgba(240, 239, 239, 0.94);
-      backdrop-filter:blur(16px) saturate(160%);
-      -webkit-backdrop-filter:blur(16px) saturate(160%);
+      background:rgba(240, 239, 239, 0.68);
+      backdrop-filter:blur(24px) saturate(180%);
+      -webkit-backdrop-filter:blur(24px) saturate(180%);
       border-bottom:1px solid rgba(15, 16, 16, 0.08);
       box-shadow:0 4px 20px -2px rgba(15, 23, 42, 0.05);
       view-transition-name: site-header;
