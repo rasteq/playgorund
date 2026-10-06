@@ -556,20 +556,26 @@
       border-radius:26px;border:1px solid rgba(203,213,225,0.9);
       background:#FFFFFF;padding:26px 24px;
       box-shadow:0 12px 30px -5px rgba(0,0,0,0.08);
-      transition:transform 0.32s cubic-bezier(0.2,0.8,0.25,1), box-shadow 0.32s cubic-bezier(0.2,0.8,0.25,1), border-color 0.32s ease;
-      will-change:transform;display:flex;flex-direction:column;
+      transform:none !important;
+      transition:opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+      display:flex;flex-direction:column;
     }
-    .contact-panel:hover{
-      transform:translateY(-4px);border-color:#94A3B8;
-      box-shadow:0 16px 32px -6px rgba(15,23,42,0.12), 0 4px 12px -2px rgba(15,23,42,0.05);
+    .contact-panel:hover,
+    [data-theme="dark"] .contact-panel:hover,
+    .contact-form-card .contact-panel:hover {
+      transform: none !important;
+      border-color: rgba(203, 213, 225, 0.9) !important;
+      box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.08) !important;
+    }
+    [data-theme="dark"] .contact-form-card .contact-panel:hover {
+      border-color: rgba(30, 41, 59, 0.9) !important;
+      box-shadow: 0 14px 35px -5px rgba(0, 0, 0, 0.45) !important;
     }
     [data-theme="dark"] .contact-panel{
       background:#151618;border-color:rgba(30,41,59,0.9);
       box-shadow:0 14px 35px -5px rgba(0,0,0,0.45);
     }
-    [data-theme="dark"] .contact-panel:hover{
-      border-color:#475569;box-shadow:0 18px 36px -6px rgba(0,0,0,0.6), 0 4px 12px -2px rgba(0,0,0,0.35);
-    }
+    /* Dark panel hover lift disabled */
     .contact-panel-badge{
       width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;
       background:rgba(237,32,36,.12);color:var(--primary);margin-bottom:14px;border:1px solid var(--border);
@@ -2301,7 +2307,7 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: #94A3B8;
+      background: #10B981;
     }
     .about-origin-heading {
       font-family: inherit;
@@ -2423,7 +2429,7 @@
     }
     .about-card-title {
       font-family: var(--disp);
-      font-size: 19px;
+      font-size: 20px;
       font-weight: 800;
       letter-spacing: -0.01em;
       color: #0F172A;
@@ -2631,7 +2637,7 @@
       font-weight: 700;
       border: none;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.2, 0.8, 0.25, 1);
+      transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
       color: #64748B;
       background: transparent;
       text-align: center;
@@ -3388,6 +3394,71 @@
         font-size: 16px !important;
       }
     }
+
+  /* [EDIT 23: Quick Search Mobile Typography & Proportion Consistency] */
+  @media (max-width: 767px) {
+    .quick-search {
+      padding: 16px 14px !important;
+      margin-bottom: 20px !important;
+      border-radius: 20px !important;
+      gap: 10px !important;
+    }
+    .qs-field {
+      gap: 4px !important;
+    }
+    .qs-field label {
+      font-size: 11px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.02em !important;
+      margin-bottom: 2px !important;
+    }
+    .quick-search .csel-trigger,
+    .quick-search .csel-trigger-form,
+    .qs-field select {
+      font-size: 12px !important;
+      font-weight: 500 !important;
+      padding: 8.5px 11px !important;
+      border-radius: 10px !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      line-height: 1.2 !important;
+    }
+    .quick-search .csel-label {
+      font-size: 12px !important;
+      line-height: 1.2 !important;
+    }
+    .quick-search .csel-opt {
+      font-size: 12.5px !important;
+      padding: 7px 11px !important;
+    }
+    .qs-actions {
+      gap: 8px !important;
+    }
+    .qs-actions .btn {
+      font-size: 12px !important;
+      font-weight: 600 !important;
+      padding: 8.5px 16px !important;
+      border-radius: 10px !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+  }
+
+
+    /* [EDIT 24: Support Card FAQ Highlight Link - Consistent with Legal Link] */
+    .support-faq-link {
+      color: #ED2024 !important;
+      font-weight: 700 !important;
+      text-decoration: none !important;
+      transition: color 0.15s ease;
+    }
+    .support-card:hover .support-faq-link {
+      color: #D8191D !important;
+    }
+
 </style>
 
 
@@ -3483,7 +3554,7 @@
         <div class="qs-field">
           <label>Program <span class="req">*</span></label>
           <select id="qsProgram" onchange="qsProgramChange()">
-            <option value="">— Select Program —</option>
+            <option value="">Select Program</option>
             <option value="honours">Honours</option>
             <option value="pass">Degree (Pass Course)</option>
             <option value="masters">Masters</option>
@@ -3494,13 +3565,13 @@
         <div class="qs-field">
           <label>Syllabus <span class="req">*</span></label>
           <select id="qsSession" onchange="qsSessionChange()" disabled>
-            <option value="">— Select Syllabus —</option>
+            <option value="">Select Syllabus</option>
           </select>
         </div>
         <div class="qs-field">
           <label>Department</label>
           <select id="qsSubject" disabled>
-            <option value="">— Select Department —</option>
+            <option value="">Select Department</option>
           </select>
         </div>
         <div class="qs-actions">
@@ -3580,7 +3651,7 @@
         <div style="position:relative;z-index:10;display:flex;flex-direction:column;gap:18px;max-width:880px;">
           <div class="about-origin-badge">
             <span class="about-origin-dot"></span>
-            // origin story
+            origin story
           </div>
           <h2 class="about-origin-heading">
             Gradzz started as a late-night side project because doing National University’s CGPA math by hand was genuinely not it.
@@ -3610,7 +3681,6 @@
           <div class="smooth-card about-stat-card">
             <span class="card-watermark">PROG</span>
             <div style="position:relative;z-index:10;">
-              <div class="about-big-num">05</div>
               <h3 class="about-card-title">5 programs</h3>
               <p class="about-card-desc">Honours (BSc, BBA, BSS, BA), Degree Pass, Masters, In-Campus Masters, and Preliminary to Masters — all in one place.</p>
             </div>
@@ -3620,7 +3690,6 @@
           <div class="smooth-card about-stat-card">
             <span class="card-watermark">SYLL</span>
             <div style="position:relative;z-index:10;">
-              <div class="about-big-num">02</div>
               <h3 class="about-card-title">2 syllabuses</h3>
               <p class="about-card-desc">Full support for both the 2024–2025 and 2013–2014 credit structures, side by side.</p>
             </div>
@@ -3630,7 +3699,6 @@
           <div class="smooth-card about-stat-card">
             <span class="card-watermark">FREE</span>
             <div style="position:relative;z-index:10;">
-              <div class="about-big-num">00</div>
               <h3 class="about-card-title">0 sign-ups</h3>
               <p class="about-card-desc">No account, no email, no password. Your grades never leave your browser.</p>
             </div>
@@ -3779,7 +3847,7 @@
           </div>
           <div class="support-card-body">
             <h2 class="support-card-title">Check the FAQ first</h2>
-            <p class="support-card-desc">Have questions about credit weights, formulas, or how session storage keeps your grades private? We probably answered it.</p>
+            <p class="support-card-desc">Have questions about credit weights, formulas, or how session storage keeps your grades private? We probably answered it on the <span class="support-faq-link">FAQ page</span>.</p>
           </div>
         </a>
       </div>
@@ -5203,7 +5271,7 @@
     const sessionSel = document.getElementById('qsSession');
     qsResetSubject();
     if(!prog){
-      sessionSel.innerHTML = '<option value="">— Select Syllabus —</option>';
+      sessionSel.innerHTML = '<option value="">Select Syllabus</option>';
       sessionSel.disabled = true;
       return;
     }
@@ -5215,12 +5283,12 @@
       return;
     }
     sessionSel.disabled = false;
-    sessionSel.innerHTML = '<option value="">— Select Syllabus —</option>' +
+    sessionSel.innerHTML = '<option value="">Select Syllabus</option>' +
       opts.map(o=>`<option value="${o.key}">${o.label}</option>`).join('');
   }
   function qsResetSubject(){
     const subjSel = document.getElementById('qsSubject');
-    subjSel.innerHTML = '<option value="">— Select Department —</option>';
+    subjSel.innerHTML = '<option value="">Select Department</option>';
     subjSel.disabled = true;
   }
   function qsSessionChange(){
@@ -6576,25 +6644,19 @@ function openSoonModal(name, code){
     if (!form) return;
 
     function setMode(next) {
+      if (mode === next) return;
       mode = next;
       if (status) {
         status.className = 'hidden';
         status.textContent = '';
       }
+
+      const outgoing = mode === 'contact' ? panelRate : panelContact;
+      const incoming = mode === 'contact' ? panelContact : panelRate;
+
       if (mode === 'contact') {
         if (tabContact) tabContact.classList.add('active');
         if (tabRate) tabRate.classList.remove('active');
-        if (panelRate) {
-          panelRate.classList.add('hidden');
-          panelRate.style.display = 'none';
-        }
-        if (panelContact) {
-          panelContact.style.display = 'flex';
-          panelContact.classList.add('hidden');
-          requestAnimationFrame(() => {
-            panelContact.classList.remove('hidden');
-          });
-        }
         if (submitLabel) submitLabel.textContent = 'Send Message';
         if (cfType) cfType.required = true;
         if (cfName) cfName.required = true;
@@ -6604,23 +6666,30 @@ function openSoonModal(name, code){
       } else {
         if (tabRate) tabRate.classList.add('active');
         if (tabContact) tabContact.classList.remove('active');
-        if (panelContact) {
-          panelContact.classList.add('hidden');
-          panelContact.style.display = 'none';
-        }
-        if (panelRate) {
-          panelRate.style.display = 'flex';
-          panelRate.classList.add('hidden');
-          requestAnimationFrame(() => {
-            panelRate.classList.remove('hidden');
-          });
-        }
         if (submitLabel) submitLabel.textContent = 'Submit Rating';
         if (cfType) cfType.required = false;
         if (cfName) cfName.required = false;
         if (cfEmail) cfEmail.required = false;
         if (cfSubject) cfSubject.required = false;
         if (cfMessage) cfMessage.required = false;
+      }
+
+      if (outgoing && incoming) {
+        outgoing.style.transition = 'opacity 0.22s ease';
+        outgoing.style.opacity = '0';
+        setTimeout(() => {
+          outgoing.style.display = 'none';
+          outgoing.classList.add('hidden');
+
+          incoming.style.display = 'flex';
+          incoming.style.opacity = '0';
+          incoming.classList.remove('hidden');
+
+          requestAnimationFrame(() => {
+            incoming.style.transition = 'opacity 0.48s cubic-bezier(0.16, 1, 0.3, 1)';
+            incoming.style.opacity = '1';
+          });
+        }, 180);
       }
     }
 
