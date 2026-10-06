@@ -4820,12 +4820,12 @@
   }
 
   function initTheme() {
-    const saved = localStorage.getItem('gradzz-theme');
+    let saved = null;
+    try { saved = localStorage.getItem('gradzz-theme'); } catch(e) {}
     if (saved === 'dark' || saved === 'light') {
       applyTheme(saved);
     } else {
-      const systemDark = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) || false;
-      applyTheme(systemDark ? 'dark' : 'light');
+      applyTheme('light');
     }
   }
 
@@ -4851,24 +4851,6 @@
     }
 
     document.startViewTransition(applyAndSave);
-  }
-
-  if (window.matchMedia) {
-    try {
-      const systemThemeMedia = window.matchMedia('(prefers-color-scheme: dark)');
-      const handleSystemThemeChange = function(e) {
-        let saved = null;
-        try { saved = localStorage.getItem('gradzz-theme'); } catch(err) {}
-        if (!saved) {
-          applyTheme(e.matches ? 'dark' : 'light');
-        }
-      };
-      if (systemThemeMedia.addEventListener) {
-        systemThemeMedia.addEventListener('change', handleSystemThemeChange);
-      } else if (systemThemeMedia.addListener) {
-        systemThemeMedia.addListener(handleSystemThemeChange);
-      }
-    } catch(e) {}
   }
 
   initTheme();
