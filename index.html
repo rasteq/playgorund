@@ -13,15 +13,15 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Gradzz — National University CGPA Calculator">
   <meta name="twitter:description" content="Free, no-login CGPA &amp; GPA calculator for National University Bangladesh students.">
-  <!-- [EDIT 21: Clean Assets Folder Structure - High-DPI & Vector Suite] -->
+  <!-- [EDIT 22: White Tab & App Icon Suite - Clean Vector & Retina] -->
   <link rel="manifest" href="assets/manifest.json">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon-180x180-b.png">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon-b.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-b.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-b.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon-180x180-w.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon-w.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-w.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-w.png">
   <link rel="shortcut icon" href="assets/favicon.ico">
-  <!-- Desktop Pure Vector SVG: Infinite Crispness, Zero Blur -->
-  <link rel="icon" id="appFavicon" type="image/svg+xml" href="assets/icon-b.svg">
+  <!-- Desktop Vector Favicon: Always White Icon -->
+  <link rel="icon" id="appFavicon" type="image/svg+xml" href="assets/icon-w.svg">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Gradzz">
@@ -4730,15 +4730,8 @@
     }
   }
 
-  // [EDIT 20: Pure Vector SVG Switcher - Zero Blur, Infinite Resolution]
-  const FAVICON_LIGHT = "assets/icon-w.svg";
-  const FAVICON_DARK = "assets/icon-b.svg";
-
-  function updateAppIcons(theme) {
-    const favicon = document.getElementById('appFavicon');
-    const iconUri = theme === 'dark' ? FAVICON_DARK : FAVICON_LIGHT;
-    if (favicon) favicon.href = iconUri;
-  }
+  // [EDIT 22: Permanent White Vector Favicon Suite]
+  const FAVICON_ICON = "assets/icon-w.svg";
 
   function applyTheme(theme) {
     const html = document.documentElement;
@@ -4751,7 +4744,6 @@
     }
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', theme === 'dark' ? '#0F1010' : '#ED2024');
-    updateAppIcons(theme);
   }
 
   function getCurrentTheme() {
