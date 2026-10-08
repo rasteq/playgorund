@@ -1022,7 +1022,7 @@
        animate with 100% identical duration, easing & zero delay
     ============================================================ */
     html.theme-transitioning .mobile-menu-panel,
-    html.theme-transitioning .mobile-menu-panel *,
+    html.theme-transitioning .mobile-menu-panel *:not(.theme-toggle-switch):not(.theme-toggle-switch *),
     html.theme-transitioning .mobile-menu-panel *::before,
     html.theme-transitioning .mobile-menu-panel *::after {
       transition: background-color 0.38s cubic-bezier(0.4, 0, 0.2, 1),
@@ -1035,7 +1035,7 @@
       transition-delay: 0s !important;
     }
     html.theme-to-light .mobile-menu-panel,
-    html.theme-to-light .mobile-menu-panel *,
+    html.theme-to-light .mobile-menu-panel *:not(.theme-toggle-switch):not(.theme-toggle-switch *),
     html.theme-to-light .mobile-menu-panel *::before,
     html.theme-to-light .mobile-menu-panel *::after {
       transition: background-color 0.42s cubic-bezier(0.25, 1, 0.5, 1),
@@ -1048,7 +1048,7 @@
       transition-delay: 0s !important;
     }
     html.theme-to-dark .mobile-menu-panel,
-    html.theme-to-dark .mobile-menu-panel *,
+    html.theme-to-dark .mobile-menu-panel *:not(.theme-toggle-switch):not(.theme-toggle-switch *),
     html.theme-to-dark .mobile-menu-panel *::before,
     html.theme-to-dark .mobile-menu-panel *::after {
       transition: background-color 0.34s cubic-bezier(0.2, 0.8, 0.25, 1),
