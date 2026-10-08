@@ -3,17 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gradzz</title>
+  <title>Gradzz — National University CGPA &amp; GPA Calculator</title>
   <meta name="description" content="Gradzz is a free, no-login CGPA &amp; GPA calculator for National University Bangladesh students — built mobile-first, covers Honours and Masters, all four years, both syllabuses.">
+  <link rel="canonical" href="https://gradzz.app/">
   <!-- Meta Theme & Status Bar Color -->
   <meta name="theme-color" content="#ED2024">
   <meta name="color-scheme" content="light dark">
   <meta property="og:title" content="Gradzz — National University CGPA Calculator">
   <meta property="og:description" content="Calculate your National University CGPA in seconds — no account, no ads, just an accurate calculator built by students, for students.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gradzz.app/">
+  <meta property="og:image" content="assets/favicon-w.png">
+  <meta property="og:image:alt" content="Gradzz Logo">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Gradzz — National University CGPA Calculator">
   <meta name="twitter:description" content="Free, no-login CGPA &amp; GPA calculator for National University Bangladesh students.">
+  <meta name="twitter:image" content="assets/favicon-w.png">
+  <!-- Schema.org JSON-LD Structured Data for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Gradzz",
+    "url": "https://gradzz.app",
+    "description": "Free, no-login CGPA & GPA calculator for National University Bangladesh students covering Honours and Masters.",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BDT"
+    }
+  }
+  </script>
   <!-- App Icons & Manifest -->
   <link rel="manifest" href="assets/manifest.json">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon-180x180-w.png">
@@ -7358,8 +7380,14 @@
     closeHelpSupportSheet(true);
     closeMobileMenu();
     showView('contact');
-    const formCard = document.getElementById('contactFormArea');
-    if(formCard) formCard.scrollIntoView({behavior:'smooth', block:'start'});
+    const tabRate = document.getElementById('tabRate') || document.getElementById('cfTabRate');
+    if(tabRate) tabRate.click();
+    const formCard = document.getElementById('contactFormArea') || document.querySelector('.contact-form-card');
+    if(formCard) {
+      setTimeout(() => {
+        formCard.scrollIntoView({behavior:'smooth', block:'start'});
+      }, 50);
+    }
   }
 
   // Touch drag-to-dismiss for Help & Support bottom sheet
@@ -9123,6 +9151,15 @@ window.CustomSelect = { init: build, refresh };
       }
     })();
   })();
+</script>
+
+<!-- PWA Offline Service Worker Registration -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    });
+  }
 </script>
 </body>
 </html>
