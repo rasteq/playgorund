@@ -175,15 +175,16 @@
       text-size-adjust: 100%;
     }
     /* ============================================================
-       SMOOTH THEME TRANSITION (MIDDLE / MIDDLE+ SPEED: ~380ms)
-       Silky-smooth color, background & border transition without freeze
+       ASYMMETRIC SMOOTH THEME TRANSITION
+       Dark -> Light: ~420ms (Gentle & soft eye-comfort fade)
+       Light -> Dark: ~340ms (Snappy, crisp & instant night shift)
+       Performance: Optimized background-color & border-color rendering
     ============================================================ */
     html.theme-transitioning,
     html.theme-transitioning *:not(.theme-toggle-switch):not(.theme-toggle-switch *),
     html.theme-transitioning *::before,
     html.theme-transitioning *::after {
-      transition: background 0.38s cubic-bezier(0.4, 0, 0.2, 1),
-                  background-color 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+      transition: background-color 0.38s cubic-bezier(0.4, 0, 0.2, 1),
                   border-color 0.38s cubic-bezier(0.4, 0, 0.2, 1),
                   color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
                   box-shadow 0.38s cubic-bezier(0.4, 0, 0.2, 1),
@@ -191,11 +192,43 @@
                   stroke 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
       transition-delay: 0s !important;
     }
+    html.theme-to-light,
+    html.theme-to-light *:not(.theme-toggle-switch):not(.theme-toggle-switch *),
+    html.theme-to-light *::before,
+    html.theme-to-light *::after {
+      transition: background-color 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                  border-color 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                  color 0.38s cubic-bezier(0.25, 1, 0.5, 1),
+                  box-shadow 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                  fill 0.38s cubic-bezier(0.25, 1, 0.5, 1),
+                  stroke 0.38s cubic-bezier(0.25, 1, 0.5, 1) !important;
+      transition-delay: 0s !important;
+    }
+    html.theme-to-dark,
+    html.theme-to-dark *:not(.theme-toggle-switch):not(.theme-toggle-switch *),
+    html.theme-to-dark *::before,
+    html.theme-to-dark *::after {
+      transition: background-color 0.34s cubic-bezier(0.2, 0.8, 0.25, 1),
+                  border-color 0.34s cubic-bezier(0.2, 0.8, 0.25, 1),
+                  color 0.30s cubic-bezier(0.2, 0.8, 0.25, 1),
+                  box-shadow 0.34s cubic-bezier(0.2, 0.8, 0.25, 1),
+                  fill 0.30s cubic-bezier(0.2, 0.8, 0.25, 1),
+                  stroke 0.30s cubic-bezier(0.2, 0.8, 0.25, 1) !important;
+      transition-delay: 0s !important;
+    }
     @media (prefers-reduced-motion:reduce){
       html.theme-transitioning,
       html.theme-transitioning *,
       html.theme-transitioning *::before,
-      html.theme-transitioning *::after {
+      html.theme-transitioning *::after,
+      html.theme-to-light,
+      html.theme-to-light *,
+      html.theme-to-light *::before,
+      html.theme-to-light *::after,
+      html.theme-to-dark,
+      html.theme-to-dark *,
+      html.theme-to-dark *::before,
+      html.theme-to-dark *::after {
         transition: none !important;
       }
     }
@@ -648,22 +681,24 @@
       flex-direction: column;
       width: 100%;
       position: relative;
-      perspective: 1000px;
+      isolation: isolate;
     }
 
-    /* Base Stacked Card */
+    /* Base Stacked Card - 100% Solid Opaque Surfaces (Zero Transparency Bleed) */
     .mm-stack-card {
       position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       text-decoration: none;
-      border-radius: 20px;
-      padding: 13px 16px;
+      border-radius: 22px;
+      padding: 14px 18px;
       box-sizing: border-box;
       overflow: hidden;
       cursor: pointer;
       user-select: none;
+      isolation: isolate;
+      background-clip: padding-box;
       -webkit-tap-highlight-color: transparent;
       transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, filter 0.25s ease;
       will-change: transform, box-shadow;
@@ -672,22 +707,22 @@
     /* Overlapping Stack Margins & Elevation */
     .mm-stack-card:nth-child(1) {
       z-index: 1;
-      min-height: 76px;
+      min-height: 82px;
     }
     .mm-stack-card:nth-child(2) {
       z-index: 2;
-      margin-top: -18px;
-      min-height: 76px;
+      margin-top: -19px;
+      min-height: 82px;
     }
     .mm-stack-card:nth-child(3) {
       z-index: 3;
-      margin-top: -18px;
-      min-height: 76px;
+      margin-top: -19px;
+      min-height: 82px;
     }
     .mm-stack-card:nth-child(4) {
       z-index: 4;
-      margin-top: -18px;
-      min-height: 124px;
+      margin-top: -19px;
+      min-height: 98px;
     }
 
     /* Staggered Cascade Animation when Drawer Opens */
@@ -713,67 +748,74 @@
       animation: mmCascadeIn 0.38s cubic-bezier(0.16, 1, 0.3, 1) 0.28s backwards;
     }
 
-    /* Interactive Hover / Tap Expansion */
+    /* Interactive Hover / Tap Expansion - Fixed stack hierarchy */
     .mm-stack-card:hover,
     .mm-stack-card:focus-visible {
-      transform: translateY(-6px) scale(1.012);
-      z-index: 10 !important;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18) !important;
+      transform: translateY(-4px) scale(1.008);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16) !important;
     }
     .mm-stack-card:active {
-      transform: translateY(-3px) scale(0.99);
+      transform: translateY(-2px) scale(0.992);
       transition-duration: 0.1s;
     }
 
-    /* Card 1: Home (Gradzz Brand Crimson Gradient) */
+    /* Card 1: Home (Gradzz Brand Crimson - 100% Solid Opaque) */
     .mm-card-home {
-      background: linear-gradient(135deg, #EB2227 0%, #D8161A 100%);
+      background-color: #EB2227;
+      background-image: linear-gradient(135deg, #EB2227 0%, #D8161A 100%);
       color: #FFFFFF;
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       box-shadow: 0 8px 20px rgba(235, 34, 39, 0.28);
     }
     [data-theme="dark"] .mm-card-home {
-      background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+      background-color: #DC2626;
+      background-image: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
       border-color: rgba(255, 255, 255, 0.18);
       box-shadow: 0 8px 24px rgba(220, 38, 38, 0.35);
     }
 
-    /* Card 2: About (Midnight Obsidian Dark) */
+    /* Card 2: About (Midnight Obsidian Dark - 100% Solid Opaque) */
     .mm-card-about {
-      background: linear-gradient(135deg, #151C28 0%, #0F141E 100%);
+      background-color: #151C28;
+      background-image: linear-gradient(135deg, #151C28 0%, #0F141E 100%);
       color: #FFFFFF;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       box-shadow: 0 8px 22px rgba(15, 20, 30, 0.25);
     }
     [data-theme="dark"] .mm-card-about {
-      background: linear-gradient(135deg, #1E2636 0%, #111622 100%);
+      background-color: #1E2636;
+      background-image: linear-gradient(135deg, #1E2636 0%, #111622 100%);
       border-color: rgba(255, 255, 255, 0.14);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     }
 
-    /* Card 3: FAQ (Soft Warm Blush / Cream) */
+    /* Card 3: FAQ (100% Solid Warm Blush Cream / Crisp Slate Dark) */
     .mm-card-faq {
-      background: linear-gradient(135deg, #FCF2F2 0%, #F8EBEB 100%);
+      background-color: #FFF1F2;
+      background-image: linear-gradient(135deg, #FFF1F2 0%, #FEE2E2 100%);
       color: #0F172A;
-      border: 1px solid rgba(239, 68, 68, 0.14);
+      border: 1px solid #FECACA;
       box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
     }
     [data-theme="dark"] .mm-card-faq {
-      background: linear-gradient(135deg, #232936 0%, #1A1F2A 100%);
+      background-color: #212631;
+      background-image: linear-gradient(135deg, #232936 0%, #1A1F2A 100%);
       color: #FFFFFF;
-      border-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.12);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     }
 
-    /* Card 4: Contact (Pure Elevated Surface with Watermark Curve) */
+    /* Card 4: Contact (100% Solid Crisp White / Dark Elevation) */
     .mm-card-contact {
-      background: #FFFFFF;
+      background-color: #FFFFFF;
+      background-image: none;
       color: #0F172A;
-      border: 1px solid rgba(226, 232, 240, 0.95);
+      border: 1px solid #E2E8F0;
       box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
     }
     [data-theme="dark"] .mm-card-contact {
-      background: #181A1F;
+      background-color: #181A1F;
+      background-image: none;
       color: #FFFFFF;
       border-color: rgba(255, 255, 255, 0.08);
       box-shadow: 0 8px 26px rgba(0, 0, 0, 0.5);
@@ -835,20 +877,20 @@
     .mm-card-left {
       display: flex;
       align-items: center;
-      gap: 11px;
+      gap: 12px;
     }
     .mm-card-ico {
-      width: 20px;
-      height: 20px;
+      width: 21px;
+      height: 21px;
       flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
     }
     .mm-card-ico svg {
-      width: 18px;
-      height: 18px;
-      stroke-width: 2.1;
+      width: 20px;
+      height: 20px;
+      stroke-width: 2.15;
     }
     .mm-card-text-group {
       display: flex;
@@ -856,17 +898,17 @@
     }
     .mm-card-title {
       font-family: var(--disp);
-      font-size: 16.5px;
-      font-weight: 700;
-      letter-spacing: -0.015em;
-      line-height: 1.2;
+      font-size: 18.5px;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+      line-height: 1.18;
     }
     .mm-card-sub {
       font-family: var(--sans);
-      font-size: 11.5px;
+      font-size: 12.5px;
       font-weight: 500;
       letter-spacing: 0.005em;
-      margin-top: 1px;
+      margin-top: 2px;
       opacity: 0.8;
     }
     .mm-card-home .mm-card-sub,
@@ -875,34 +917,38 @@
       color: rgba(255, 255, 255, 0.9);
     }
     .mm-card-faq .mm-card-sub {
-      color: #64748B;
+      color: #475569;
+      font-weight: 520;
     }
     [data-theme="dark"] .mm-card-faq .mm-card-sub {
       color: #94A3B8;
+      font-weight: 500;
     }
     .mm-card-contact .mm-card-sub {
-      color: #64748B;
+      color: #475569;
+      font-weight: 520;
     }
     [data-theme="dark"] .mm-card-contact .mm-card-sub {
       color: #94A3B8;
+      font-weight: 500;
     }
 
-    /* Circular Action Arrow Badge */
+    /* Circular Action Arrow Badge - 100% Solid Opaque Backgrounds */
     .mm-card-badge {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 999px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, box-shadow 0.2s ease;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
     .mm-card-badge svg {
-      width: 13px;
-      height: 13px;
-      stroke-width: 2.4;
+      width: 14px;
+      height: 14px;
+      stroke-width: 2.5;
       transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .mm-stack-card:hover .mm-card-badge {
@@ -914,30 +960,76 @@
     }
 
     .mm-card-home .mm-card-badge {
-      background: rgba(255, 255, 255, 0.25);
+      background-color: #C4161A;
+      border: 1px solid #B01014;
       color: #FFFFFF;
-      backdrop-filter: blur(4px);
+    }
+    [data-theme="dark"] .mm-card-home .mm-card-badge {
+      background-color: #7F1D1D;
+      border: 1px solid #991B1B;
+      color: #FFFFFF;
     }
     .mm-card-about .mm-card-badge {
-      background: rgba(255, 255, 255, 0.16);
+      background-color: #232C3D;
+      border: 1px solid #2D3748;
       color: #FFFFFF;
-      backdrop-filter: blur(4px);
+    }
+    [data-theme="dark"] .mm-card-about .mm-card-badge {
+      background-color: #2D3748;
+      border: 1px solid #3E4C63;
+      color: #FFFFFF;
     }
     .mm-card-faq .mm-card-badge {
-      background: #FEE2E2;
+      background-color: #FEE2E2;
+      border: 1px solid #FECACA;
       color: #ED2024;
     }
     [data-theme="dark"] .mm-card-faq .mm-card-badge {
-      background: rgba(239, 68, 68, 0.2);
-      color: #FF6B6B;
+      background-color: #2D3748;
+      border: 1px solid #3E4C63;
+      color: #FFFFFF;
     }
     .mm-card-contact .mm-card-badge {
-      background: #FEE2E2;
+      background-color: #FEE2E2;
+      border: 1px solid #FECACA;
       color: #ED2024;
     }
     [data-theme="dark"] .mm-card-contact .mm-card-badge {
-      background: rgba(239, 68, 68, 0.2);
-      color: #FF6B6B;
+      background-color: #2D3748;
+      border: 1px solid #3E4C63;
+      color: #FFFFFF;
+    }
+
+    /* Asymmetric mobile menu card & badge transitions */
+    html.theme-transitioning .mm-stack-card,
+    html.theme-transitioning .mm-card-badge,
+    html.theme-transitioning .mm-appearance-card,
+    html.theme-transitioning .mm-support-card,
+    html.theme-transitioning .mm-support-badge {
+      transition: background-color 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                  border-color 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                  color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.38s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    html.theme-to-light .mm-stack-card,
+    html.theme-to-light .mm-card-badge,
+    html.theme-to-light .mm-appearance-card,
+    html.theme-to-light .mm-support-card,
+    html.theme-to-light .mm-support-badge {
+      transition: background-color 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                  border-color 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                  color 0.38s cubic-bezier(0.25, 1, 0.5, 1),
+                  box-shadow 0.42s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    }
+    html.theme-to-dark .mm-stack-card,
+    html.theme-to-dark .mm-card-badge,
+    html.theme-to-dark .mm-appearance-card,
+    html.theme-to-dark .mm-support-card,
+    html.theme-to-dark .mm-support-badge {
+      transition: background-color 0.34s cubic-bezier(0.2, 0.8, 0.25, 1),
+                  border-color 0.34s cubic-bezier(0.2, 0.8, 0.25, 1),
+                  color 0.30s cubic-bezier(0.2, 0.8, 0.25, 1),
+                  box-shadow 0.34s cubic-bezier(0.2, 0.8, 0.25, 1) !important;
     }
 
     /* ============================================================
@@ -1154,41 +1246,6 @@
       background: rgba(255, 255, 255, 0.06);
     }
 
-    /* Floating Quick Test Button */
-    .demo-floating-btn {
-      position: fixed;
-      bottom: 22px;
-      right: 22px;
-      z-index: 9990;
-      background: #0F172A;
-      color: #FFFFFF;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 999px;
-      padding: 11px 18px;
-      font-family: var(--sans);
-      font-size: 13.5px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s ease;
-    }
-    .demo-floating-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
-      background: #000000;
-    }
-    [data-theme="dark"] .demo-floating-btn {
-      background: #F8FAFC;
-      color: #0F172A;
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-    [data-theme="dark"] .demo-floating-btn:hover {
-      background: #FFFFFF;
-    }
-
     /* ============================================================
        LEGAL & FOOTER
     ============================================================ */
@@ -1196,9 +1253,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
-      padding-top: 4px;
-      padding-bottom: 8px;
+      gap: 12px;
+      margin-top: 16px;
+      padding-top: 8px;
+      padding-bottom: 12px;
     }
     .mm-legal-row {
       display: flex;
@@ -1256,9 +1314,6 @@
     @media (max-width: 400px) {
       .mm-bottom-brand .logo-img {
         height: 21px;
-      }
-    }
-        height: 23px;
       }
     }
 
@@ -5243,7 +5298,7 @@
               </span>
               <div class="mm-card-text-group">
                 <span class="mm-card-title">About</span>
-                <span class="mm-card-sub">Our Mission &amp; Story</span>
+                <span class="mm-card-sub">Academic Grading Platform</span>
               </div>
             </div>
             <span class="mm-card-badge" aria-hidden="true">
@@ -5382,16 +5437,7 @@
 
     </div>
   </div>
-
-  <!-- Floating Quick Test Button for Testing -->
-  <button type="button" class="demo-floating-btn" onclick="openMobileMenu();" title="Test Improvised Stacked Menu">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-      <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/>
-      <path d="M12 18h.01"/>
-    </svg>
-    <span>Test Stacked Cards Menu</span>
-  </button>
-  </div>
+</div>
 
   <!-- ================= HELP & SUPPORT BOTTOM SHEET ================= -->
   <div class="hs-backdrop" id="hsBackdrop" onclick="closeHelpSupportSheet()"></div>
@@ -6684,17 +6730,24 @@
     const current = getCurrentTheme();
     const next = current === 'dark' ? 'light' : 'dark';
     
-    // Smooth middle / middle+ theme transition (~380ms)
+    // Smooth asymmetric theme transition:
+    // Dark -> Light: ~420ms (Gentle eye comfort)
+    // Light -> Dark: ~340ms (Snappy night shift)
     const html = document.documentElement;
-    html.classList.add('theme-transitioning');
+    html.classList.remove('theme-transitioning', 'theme-to-light', 'theme-to-dark');
+    
+    const transitionClass = next === 'light' ? 'theme-to-light' : 'theme-to-dark';
+    const cleanupDelay = next === 'light' ? 460 : 380; // Animation duration + 40ms buffer
+    
+    html.classList.add('theme-transitioning', transitionClass);
     if (_themeTransitionTimer) clearTimeout(_themeTransitionTimer);
 
     applyTheme(next);
     try { localStorage.setItem('gradzz-theme', next); } catch(e) {}
 
     _themeTransitionTimer = setTimeout(() => {
-      html.classList.remove('theme-transitioning');
-    }, 420);
+      html.classList.remove('theme-transitioning', 'theme-to-light', 'theme-to-dark');
+    }, cleanupDelay);
   }
 
   initTheme();
@@ -7181,22 +7234,8 @@
     }
     else clearGlobalSearch();
   }
-  function updateStackedMenuActiveCard(){
-    const map = {
-      'home': 'mmCardHome',
-      'about': 'mmCardAbout',
-      'faq': 'mmCardFaq',
-      'contact': 'mmCardContact'
-    };
-    document.querySelectorAll('.mm-stack-card').forEach(c => c.classList.remove('is-active-card'));
-    const targetId = map[currentView] || 'mmCardHome';
-    const card = document.getElementById(targetId);
-    if(card) card.classList.add('is-active-card');
-  }
-
   function openMobileMenu(){
     clearGlobalSearch();
-    updateStackedMenuActiveCard();
     document.getElementById('mobileMenuOverlay').classList.add('open');
     const btn = document.getElementById('menuBtn');
     if(btn){
