@@ -1972,13 +1972,17 @@
       padding:0 14px;border-radius:12px;border:1px solid rgba(203,213,225,0.9);
       background:#FFFFFF;color:#0F172A;font-family:var(--disp);font-size:13.5px;font-weight:600;
       display:flex;align-items:center;
-      appearance:none;-webkit-appearance:none;cursor:pointer;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-      background-repeat:no-repeat;background-position:right 12px center;
+      cursor:pointer;
       transition:all 0.2s cubic-bezier(0.2,0.8,0.25,1);box-shadow:0 1px 3px rgba(0,0,0,0.04);
     }
-    .quick-search .qs-field select {
+    .qs-field select {
+      appearance:none;-webkit-appearance:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;background-position:right 12px center;
       padding-right:32px;
+    }
+    .quick-search .csel-trigger-form {
+      background-image:none !important;
     }
     .quick-search .csel-wrap{height:42px;}
     .qs-field select:hover{border-color:#94A3B8;}
@@ -1987,8 +1991,13 @@
     [data-theme="dark"] .qs-field select,
     [data-theme="dark"] .quick-search .csel-trigger-form{
       background-color:#151618;border-color:rgba(30,41,59,0.9);color:#FFFFFF;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
       box-shadow:0 1px 3px rgba(0,0,0,0.2);
+    }
+    [data-theme="dark"] .qs-field select {
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    }
+    [data-theme="dark"] .quick-search .csel-trigger-form {
+      background-image:none !important;
     }
     [data-theme="dark"] .qs-field select:hover{border-color:#475569;}
     [data-theme="dark"] .qs-field select:focus{border-color:#FFFFFF;box-shadow:0 0 0 3px rgba(255,255,255,0.1);}
@@ -2548,6 +2557,125 @@
       .rp-bottom-row{flex-direction:column;align-items:stretch;}
       .rp-stats{width:100%;}
       .rp-export{width:100%;justify-content:center;}
+    }
+
+    /* ============================================================
+       MINIMAL INTEGRATED TARGET CGPA PREDICTOR STRIP
+    ============================================================ */
+    .rp-target-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(226, 232, 240, 0.8);
+      position: relative;
+      z-index: 10;
+      flex-wrap: wrap;
+    }
+    [data-theme="dark"] .rp-target-row {
+      border-top-color: rgba(255, 255, 255, 0.08);
+    }
+    .rp-target-input-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .rp-target-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #64748B;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    [data-theme="dark"] .rp-target-tag { color: #94A3B8; }
+    .rp-target-field {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+    .rp-target-inp {
+      width: 105px;
+      height: 38px;
+      border-radius: 12px;
+      border: 1px solid rgba(203, 213, 225, 0.9);
+      background: #F8FAFC;
+      padding: 0 32px 0 12px;
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 800;
+      color: #0F172A;
+      outline: none;
+      transition: all 0.2s ease;
+      box-sizing: border-box;
+    }
+    .rp-target-inp:focus {
+      border-color: #ED2024;
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(237, 32, 36, 0.12);
+    }
+    [data-theme="dark"] .rp-target-inp {
+      background: #101113;
+      border-color: rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+    }
+    [data-theme="dark"] .rp-target-inp:focus {
+      border-color: #ED2024;
+      box-shadow: 0 0 0 3px rgba(237, 32, 36, 0.25);
+    }
+    .rp-target-max {
+      position: absolute;
+      right: 10px;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: #94A3B8;
+      pointer-events: none;
+    }
+    .rp-target-output-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      text-align: right;
+      margin-left: auto;
+    }
+    .rp-target-output-lead {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      color: #64748B;
+    }
+    [data-theme="dark"] .rp-target-output-lead { color: #94A3B8; }
+    .rp-target-output-val {
+      font-family: var(--disp);
+      font-size: 15px;
+      font-weight: 700;
+      color: #059669;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .rp-target-output-val.tp-challenging { color: #D97706; }
+    .rp-target-output-val.tp-impossible { color: #ED2024; }
+    .rp-target-output-sub {
+      font-family: var(--sans);
+      font-size: 11px;
+      color: #94A3B8;
+      width: 100%;
+    }
+    [data-theme="dark"] .rp-target-output-sub { color: #64748B; }
+
+    @media (max-width: 767px) {
+      .rp-target-row { flex-direction: column; align-items: stretch; gap: 12px; }
+      .rp-target-input-box { justify-content: space-between; }
+      .rp-target-output-box { text-align: left; margin-left: 0; justify-content: space-between; }
     }
 
     /* ============================================================
@@ -6329,6 +6457,21 @@
           Export transcript
         </button>
       </div>
+
+      <!-- Minimal Integrated Target CGPA Strip -->
+      <div class="rp-target-row" id="rpTargetRow">
+        <div class="rp-target-input-box">
+          <label class="rp-target-tag" for="tpTargetInput">🎯 TARGET CGPA</label>
+          <div class="rp-target-field">
+            <input type="number" step="0.01" min="2.00" max="4.00" value="3.25" id="tpTargetInput" oninput="recalcTargetPlanner()" placeholder="3.25" class="rp-target-inp" aria-label="Target CGPA">
+            <span class="rp-target-max">/ 4.00</span>
+          </div>
+        </div>
+        <div class="rp-target-output-box" id="rpTargetOutputBox">
+          <span class="rp-target-output-lead" id="tpReqLead">Required per year:</span>
+          <div class="rp-target-output-val" id="tpReqVal">3.25 GPA / yr</div>
+        </div>
+      </div>
     </div>
 
 
@@ -8657,6 +8800,87 @@ function openSoonModal(name, code){
     else if(cumulativeGpa>=2.25){cls.classList.add('cls-second');cls.textContent='Second Class';}
     else if(cumulativeGpa>=2.00){cls.classList.add('cls-third');cls.textContent='Third Class';}
     else{cls.classList.add('cls-fail');cls.textContent='Fail';}
+
+    recalcTargetPlanner();
+  }
+
+  function recalcTargetPlanner() {
+    const totalYears = PROGRAM_YEARS[activeSyllabus] || 1;
+    const targetInput = document.getElementById('tpTargetInput');
+    const targetCgpa = targetInput ? (parseFloat(targetInput.value) || 3.25) : 3.25;
+
+    const leadElem = document.getElementById('tpReqLead');
+    const valElem = document.getElementById('tpReqVal');
+
+    if (!valElem || !leadElem) return;
+
+    let completedYears = 0;
+    let totalEarnedPoints = 0;
+    let totalCreditsAll = 0;
+
+    for (let y = 1; y <= totalYears; y++) {
+      const st = yearStats(currentDept, y);
+      if (st.credits > 0) {
+        completedYears++;
+        totalEarnedPoints += st.credits * st.gpa;
+        totalCreditsAll += st.credits;
+      }
+    }
+
+    const currentCgpa = totalCreditsAll > 0 ? totalEarnedPoints / totalCreditsAll : 0;
+    const remYears = Math.max(0, totalYears - completedYears);
+
+    if (totalYears <= 1) {
+      leadElem.textContent = 'Single year target:';
+      valElem.textContent = `${targetCgpa.toFixed(2)} GPA`;
+      valElem.className = 'rp-target-output-val';
+      return;
+    }
+
+    if (completedYears === 0) {
+      leadElem.textContent = 'Required per year:';
+      valElem.textContent = `${targetCgpa.toFixed(2)} GPA / yr`;
+      valElem.className = 'rp-target-output-val';
+      return;
+    }
+
+    if (remYears === 0) {
+      if (currentCgpa >= targetCgpa) {
+        leadElem.textContent = '🎉 Goal Achieved:';
+        valElem.textContent = `${currentCgpa.toFixed(2)} CGPA`;
+        valElem.className = 'rp-target-output-val';
+      } else {
+        leadElem.textContent = 'Final Degree CGPA:';
+        valElem.textContent = `${currentCgpa.toFixed(2)} CGPA`;
+        valElem.className = 'rp-target-output-val tp-challenging';
+      }
+      return;
+    }
+
+    // Required GPA formula in remaining years
+    const reqGpa = ((targetCgpa * totalYears) - (currentCgpa * completedYears)) / remYears;
+
+    if (remYears === 1) {
+      leadElem.textContent = 'Required in final year:';
+    } else {
+      leadElem.textContent = 'Required per year:';
+    }
+
+    if (reqGpa > 4.00) {
+      const maxPossible = ((currentCgpa * completedYears) + (4.00 * remYears)) / totalYears;
+      valElem.textContent = `Max: ${maxPossible.toFixed(2)} CGPA`;
+      valElem.className = 'rp-target-output-val tp-impossible';
+    } else if (reqGpa <= 2.00) {
+      // Current CGPA is higher than target: student only needs the minimum pass mark (2.00) in remaining years
+      valElem.textContent = `2.00 GPA (Pass)`;
+      valElem.className = 'rp-target-output-val';
+    } else if (reqGpa >= 3.50) {
+      valElem.textContent = `${reqGpa.toFixed(2)} GPA / yr (A/A+)`;
+      valElem.className = 'rp-target-output-val tp-challenging';
+    } else {
+      valElem.textContent = `${reqGpa.toFixed(2)} GPA / yr`;
+      valElem.className = 'rp-target-output-val';
+    }
   }
 
   function recalc(){
