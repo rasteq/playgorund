@@ -5,15 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gradzz</title>
   <meta name="description" content="Gradzz is a free, no-login CGPA &amp; GPA calculator for National University Bangladesh students — built mobile-first, covers Honours and Masters, all four years, both syllabuses.">
-  <!-- [EDIT 01: Meta Theme & Status Bar Color - Updated to Brand Red #ED2024 and Obsidian #0F1010] -->
+  <!-- Meta Theme & Status Bar Color -->
   <meta name="theme-color" content="#ED2024">
+  <meta name="color-scheme" content="light dark">
   <meta property="og:title" content="Gradzz — National University CGPA Calculator">
   <meta property="og:description" content="Calculate your National University CGPA in seconds — no account, no ads, just an accurate calculator built by students, for students.">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Gradzz — National University CGPA Calculator">
   <meta name="twitter:description" content="Free, no-login CGPA &amp; GPA calculator for National University Bangladesh students.">
-  <!-- [EDIT 22: White Tab & App Icon Suite - Clean Vector & Retina] -->
+  <!-- App Icons & Manifest -->
   <link rel="manifest" href="assets/manifest.json">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon-180x180-w.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon-w.png">
@@ -30,8 +31,23 @@
   <meta name="msapplication-TileImage" content="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Hind+Siliguri:wght@500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Anti-Flash of Unstyled Theme (FOUC) Instant Script -->
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('gradzz-theme');
+        if (t === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.classList.add('dark');
+        } else if (t === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+          document.documentElement.classList.remove('dark');
+        }
+      } catch(e) {}
+    })();
+  </script>
   <style>
-    /* [EDIT 18: Applied Authentic Brand Red #ED2024 Palette from the 4 SVGs] */
+    /* Brand Theme Colors & Design Tokens */
     :root{
       --bg: #F0EFEF;
       --bg2: #E3E4E8;
@@ -144,7 +160,7 @@
       color:var(--text);
     }
 
-    /* [EDIT 05: Dark Header & Glass Surfaces - Deep Obsidian Glass with Clean Border] */
+    /* Dark Header & Glass Surfaces */
     /* header bar — deep glass with premium feel */
     [data-theme="dark"] header.site{
       background:rgba(15, 16, 16, 0.40);
@@ -164,7 +180,7 @@
       background:rgba(255,255,255,.06);
       border-color:rgba(255, 255, 255, 0.16);
     }
-    /* [EDIT 06: Obsidian Dark Theme Containers - Modern #151618 Charcoal Slate Styling] */
+    /* Dark Theme Surface Elevations */
     /* unified slate table styling */
     /* rest of the original styles — unchanged, only colors adapted */
     *{box-sizing:border-box;}
@@ -792,14 +808,14 @@
     /* Card 3: FAQ (100% Solid Warm Blush Cream / Crisp Slate Dark) */
     .mm-card-faq {
       background-color: #FFF1F2;
-      background-image: linear-gradient(135deg, #FFF1F2 0%, #FEE2E2 100%);
+      background-image: none;
       color: #0F172A;
       border: 1px solid #FECACA;
       box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
     }
     [data-theme="dark"] .mm-card-faq {
       background-color: #212631;
-      background-image: linear-gradient(135deg, #232936 0%, #1A1F2A 100%);
+      background-image: none;
       color: #FFFFFF;
       border-color: rgba(255, 255, 255, 0.12);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
@@ -909,16 +925,16 @@
       font-weight: 500;
       letter-spacing: 0.005em;
       margin-top: 2px;
-      opacity: 0.8;
+      opacity: 1;
+      line-height: 1.25;
     }
     .mm-card-home .mm-card-sub,
     .mm-card-about .mm-card-sub {
-      opacity: 0.85;
       color: rgba(255, 255, 255, 0.9);
     }
     .mm-card-faq .mm-card-sub {
       color: #475569;
-      font-weight: 520;
+      font-weight: 500;
     }
     [data-theme="dark"] .mm-card-faq .mm-card-sub {
       color: #94A3B8;
@@ -926,7 +942,7 @@
     }
     .mm-card-contact .mm-card-sub {
       color: #475569;
-      font-weight: 520;
+      font-weight: 500;
     }
     [data-theme="dark"] .mm-card-contact .mm-card-sub {
       color: #94A3B8;
@@ -1000,36 +1016,49 @@
       color: #FFFFFF;
     }
 
-    /* Asymmetric mobile menu card & badge transitions */
-    html.theme-transitioning .mm-stack-card,
-    html.theme-transitioning .mm-card-badge,
-    html.theme-transitioning .mm-appearance-card,
-    html.theme-transitioning .mm-support-card,
-    html.theme-transitioning .mm-support-badge {
+    /* ============================================================
+       SYNCHRONIZED UNIFIED MOBILE MENU THEME TRANSITIONS
+       Ensures ALL cards, badges, text, icons, bottom cards & logos
+       animate with 100% identical duration, easing & zero delay
+    ============================================================ */
+    html.theme-transitioning .mobile-menu-panel,
+    html.theme-transitioning .mobile-menu-panel *,
+    html.theme-transitioning .mobile-menu-panel *::before,
+    html.theme-transitioning .mobile-menu-panel *::after {
       transition: background-color 0.38s cubic-bezier(0.4, 0, 0.2, 1),
                   border-color 0.38s cubic-bezier(0.4, 0, 0.2, 1),
-                  color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                  box-shadow 0.38s cubic-bezier(0.4, 0, 0.2, 1) !important;
+                  color 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                  opacity 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                  box-shadow 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                  fill 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+                  stroke 0.38s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      transition-delay: 0s !important;
     }
-    html.theme-to-light .mm-stack-card,
-    html.theme-to-light .mm-card-badge,
-    html.theme-to-light .mm-appearance-card,
-    html.theme-to-light .mm-support-card,
-    html.theme-to-light .mm-support-badge {
+    html.theme-to-light .mobile-menu-panel,
+    html.theme-to-light .mobile-menu-panel *,
+    html.theme-to-light .mobile-menu-panel *::before,
+    html.theme-to-light .mobile-menu-panel *::after {
       transition: background-color 0.42s cubic-bezier(0.25, 1, 0.5, 1),
                   border-color 0.42s cubic-bezier(0.25, 1, 0.5, 1),
-                  color 0.38s cubic-bezier(0.25, 1, 0.5, 1),
-                  box-shadow 0.42s cubic-bezier(0.25, 1, 0.5, 1) !important;
+                  color 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                  opacity 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                  box-shadow 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                  fill 0.42s cubic-bezier(0.25, 1, 0.5, 1),
+                  stroke 0.42s cubic-bezier(0.25, 1, 0.5, 1) !important;
+      transition-delay: 0s !important;
     }
-    html.theme-to-dark .mm-stack-card,
-    html.theme-to-dark .mm-card-badge,
-    html.theme-to-dark .mm-appearance-card,
-    html.theme-to-dark .mm-support-card,
-    html.theme-to-dark .mm-support-badge {
+    html.theme-to-dark .mobile-menu-panel,
+    html.theme-to-dark .mobile-menu-panel *,
+    html.theme-to-dark .mobile-menu-panel *::before,
+    html.theme-to-dark .mobile-menu-panel *::after {
       transition: background-color 0.34s cubic-bezier(0.2, 0.8, 0.25, 1),
                   border-color 0.34s cubic-bezier(0.2, 0.8, 0.25, 1),
-                  color 0.30s cubic-bezier(0.2, 0.8, 0.25, 1),
-                  box-shadow 0.34s cubic-bezier(0.2, 0.8, 0.25, 1) !important;
+                  color 0.34s cubic-bezier(0.2, 0.8, 0.25, 1),
+                  opacity 0.34s cubic-bezier(0.2, 0.8, 0.25, 1),
+                  box-shadow 0.34s cubic-bezier(0.2, 0.8, 0.25, 1),
+                  fill 0.34s cubic-bezier(0.2, 0.8, 0.25, 1),
+                  stroke 0.34s cubic-bezier(0.2, 0.8, 0.25, 1) !important;
+      transition-delay: 0s !important;
     }
 
     /* ============================================================
@@ -2514,7 +2543,7 @@
       .subject-card{margin-bottom:22px;}
     }
     .dept-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap;}
-    /* [EDIT 07: Department Session Badges & Interactive Icons - Exact 46 Pill Glow] */
+    /* Department Session Badges & Interactive Icons */
     .dept-session-badge{
       display:inline-flex;align-items:center;gap:7px;
       font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.03em;
@@ -5045,41 +5074,67 @@
     }
     .pill-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;animation:dotPulse 2s ease-in-out infinite;}
     @keyframes dotPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(.65);}}
-    /* [EDIT 08: Glowing Elements & Glitch Animation - Red Shadow Palette] */
+    /* Glowing Accent Elements & Brand Shadows */
     @keyframes pillGlow{0%,100%{box-shadow:0 0 0 rgba(237,32,36,0);}50%{box-shadow:0 0 14px var(--primary-glow);}}
 
 
-    /* ===== BRAND LOGO GRAPHIC STYLES ===== */
+    /* ===== BRAND LOGO GRAPHIC STYLES (SMOOTH OPACITY CROSS-FADE) ===== */
     .logo {
       display: inline-flex;
       align-items: center;
       cursor: pointer;
       order: 1;
       text-decoration: none;
+      position: relative;
     }
-    .logo-img { height: 28px; width: auto; display: block; user-select: none; }
-    /* .logo:hover zoom removed */
+    .foot-brand-logo,
+    .mm-bottom-brand {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .logo-img {
+      height: 28px;
+      width: auto;
+      display: block;
+      user-select: none;
+      transition: opacity 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    }
     .logo-img-light {
       display: block;
+      opacity: 1;
+      transition: opacity 0.38s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .logo-img-dark {
-      display: none;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.38s cubic-bezier(0.4, 0, 0.2, 1);
     }
     [data-theme="dark"] .logo-img-light {
-      display: none;
+      opacity: 0;
+      pointer-events: none;
     }
     [data-theme="dark"] .logo-img-dark {
-      display: block;
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .foot-brand-logo {
-      display: inline-flex;
-      align-items: center;
-      cursor: pointer;
       margin-bottom: 2px;
     }
     .foot-brand-logo .logo-img {
       height: 30px;
+    }
+    .mm-bottom-brand .logo-img {
+      height: 28px;
     }
     @media (max-width: 767px) {
       .foot-brand-logo {
@@ -5093,12 +5148,15 @@
       .foot-brand-logo .logo-img {
         height: 26px;
       }
+      .mm-bottom-brand .logo-img {
+        height: 25px;
+      }
     }
 
 
     
     
-    /* [EDIT 20: Mobile Input Font-Size Normalization] */
+    /* Mobile Input & Typography Normalization */
     @media (max-width: 767px) {
       .cf-field input,
       .cf-field textarea,
@@ -5125,7 +5183,7 @@
       }
     }
 
-  /* [EDIT 23: Quick Search Mobile Typography & Proportion Consistency] */
+  /* Quick Search Mobile Layout & Typography */
   @media (max-width: 767px) {
     .quick-search {
       padding: 16px 14px !important;
@@ -5178,7 +5236,7 @@
   }
 
 
-    /* [EDIT 24: Support Card FAQ Highlight Link - Consistent with Legal Link] */
+    /* Support Card FAQ Highlight Links */
     .support-faq-link {
       color: #ED2024 !important;
       font-weight: 700 !important;
@@ -5200,7 +5258,7 @@
 
 <header class="site">
   <div class="site-inner">
-    <!-- [EDIT 09: Header Brand Logo - Using wordmark-b.svg (Light) & wordmark-w.svg (Dark)] -->
+    <!-- Header Brand Logo (Light & Dark) -->
     <div class="logo" onclick="showView('home')">
       <img src="assets/wordmark-b.svg" alt="Gradzz" class="logo-img logo-img-light" />
       <img src="assets/wordmark-w.svg" alt="Gradzz" class="logo-img logo-img-dark" />
@@ -6130,7 +6188,7 @@
       <div class="dl-underline"></div>
       <p class="dept-sub">
         <svg class="sub-spark" viewBox="0 0 24 24" aria-hidden="true">
-          <!-- [EDIT 10: SVG Sparkle Gradient - Red to Coral #ED2024 / #FF5A5F] -->
+          <!-- SVG Gradients & Brand Accents -->
           <defs><linearGradient id="sparkGradA" x1="0" y1="0" x2="24" y2="24">
             <stop offset="0" stop-color="#ED2024"/><stop offset="1" stop-color="#FF5A5F"/>
           </linearGradient></defs>
@@ -6319,16 +6377,7 @@
   </div>
 </div>
 
-<!-- ================= STUDENT INFORMATION / DOWNLOAD POPUP ================= -->
-<!-- ========================================================
-     [EDIT 12: REDESIGNED ACADEMIC EXPORT STUDIO MODAL]
-     ======================================================== -->
-<!-- ========================================================
-     [EDIT 13: SIMPLE & TRUSTWORTHY DOWNLOAD MODAL]
-     ======================================================== -->
-<!-- ========================================================
-     [EDIT 14: TRUSTWORTHY CLEAN MODAL WITH ALL 9 FIELDS]
-     ======================================================== -->
+<!-- ================= STUDENT INFORMATION / DOWNLOAD POPUP MODAL ================= -->
 <div class="modal-overlay" id="studentInfoOverlay" data-lenis-prevent onclick="if(event.target===this) closeStudentInfoModal()">
   <div class="modal-card-slate">
     <!-- Header -->
@@ -6429,7 +6478,7 @@
 <footer class="site">
   <div class="footer-grid">
     <div class="foot-brand">
-      <!-- [EDIT 11: Footer Brand Logo - Using wordmark-b.svg (Light) & wordmark-w.svg (Dark)] -->
+      <!-- Footer Brand Logo (Light & Dark) -->
       <div class="foot-brand-logo" onclick="showView('home')">
         <img src="assets/wordmark-b.svg" alt="Gradzz" class="logo-img logo-img-light" />
         <img src="assets/wordmark-w.svg" alt="Gradzz" class="logo-img logo-img-dark" />
@@ -6461,8 +6510,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/lenis@1.1.14/dist/lenis.css">
-<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.css">
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 <style id="grdSheetStyle">
   /* ============================================================
      RESULT SHEET v2 — "luxury" design, ported from the provided
@@ -6504,7 +6553,7 @@
   #grdSheetHost .rs2-brand-logo-svg{ height:30px; display:flex; align-items:center; }
   #grdSheetHost .rs2-brand-logo-svg svg{ height:30px; width:auto; display:block; }
   #grdSheetHost .rs2-brand-text h1{ font-size:26px; font-weight:800; letter-spacing:-.03em; color:var(--rs2-accent-brand); line-height:1.1; }
-  /* [EDIT 12: Result Sheet Transcript Brand Red Accent - #ED2024] */
+  /* Result Sheet Transcript Brand Red Accent */
   #grdSheetHost .rs2-brand-logo-red{ color:#ED2024; }
   #grdSheetHost .rs2-brand-text p{ font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:.12em; color:var(--rs2-accent-champagne); margin-top:3px; }
   #grdSheetHost .rs2-header-badge{ display:flex; flex-direction:column; align-items:flex-end; text-align:right; gap:3px; }
@@ -6688,7 +6737,7 @@
     }
   }
 
-  // [EDIT 22: Permanent White Vector Favicon Suite]
+  // White Vector Favicon Asset
   const FAVICON_ICON = "assets/icon-w.svg";
 
   function applyTheme(theme) {
