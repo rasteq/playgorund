@@ -205,12 +205,18 @@
     /* Dark Theme Surface Elevations */
     /* unified slate table styling */
     /* rest of the original styles — unchanged, only colors adapted */
-    *{box-sizing:border-box;}
-    html{
-      scroll-behavior:auto;
+    *, *::before, *::after {
+      box-sizing: border-box;
+      touch-action: manipulation;
+    }
+    html {
+      scroll-behavior: auto;
       touch-action: manipulation;
       -webkit-text-size-adjust: 100%;
       text-size-adjust: 100%;
+    }
+    body {
+      touch-action: manipulation;
     }
     /* ============================================================
        ASYMMETRIC SMOOTH THEME TRANSITION
@@ -2601,19 +2607,20 @@
       align-items: center;
     }
     .rp-target-inp {
-      width: 105px;
+      width: 108px;
       height: 38px;
       border-radius: 12px;
       border: 1px solid rgba(203, 213, 225, 0.9);
       background: #F8FAFC;
       padding: 0 32px 0 12px;
       font-family: var(--mono);
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 800;
       color: #0F172A;
       outline: none;
       transition: all 0.2s ease;
       box-sizing: border-box;
+      touch-action: manipulation;
     }
     .rp-target-inp:focus {
       border-color: #ED2024;
@@ -5306,26 +5313,48 @@
 
     
     
-    /* Mobile Input & Typography Normalization */
+    /* Mobile Input & Typography Normalization - Zero Auto-Zoom on Focus (16px minimum on all editable inputs) */
     @media (max-width: 767px) {
+      input[type="text"],
+      input[type="number"],
+      input[type="email"],
+      input[type="search"],
+      textarea,
+      .header-search input,
+      #globalDeptSearch,
+      .rp-target-inp,
+      #tpTargetInput,
       .cf-field input,
       .cf-field textarea,
-      .cf-field select {
+      .cf-field select,
+      .modal-card-slate .si-input-new:not([readonly]),
+      .qs-field select {
         font-size: 16px !important;
       }
-      .modal-card-slate .si-input-new,
-      .modal-card-slate .si-select-new,
-      .modal-card-slate .csel-trigger-form,
-      .modal-card-slate .csel-trigger-form .csel-label,
-      .modal-card-slate .csel-trigger-form .csel-text {
-        font-size: 12.5px !important;
-        font-weight: 500 !important;
+      .header-search input {
+        height: 42px !important;
+        padding: 0 18px !important;
+      }
+      .rp-target-inp {
+        height: 38px !important;
+        width: 108px !important;
+      }
+      .modal-card-slate .si-input-new:not([readonly]) {
+        height: 40px !important;
+        padding: 0 12px !important;
       }
       .modal-card-slate .si-field.readonly .si-input-new,
       #siSubject,
       #siCgpa {
         font-size: 12.5px !important;
         font-weight: 600 !important;
+      }
+      .modal-card-slate .si-select-new,
+      .modal-card-slate .csel-trigger-form,
+      .modal-card-slate .csel-trigger-form .csel-label,
+      .modal-card-slate .csel-trigger-form .csel-text {
+        font-size: 12.5px !important;
+        font-weight: 500 !important;
       }
       .csel-trigger-grade,
       select.grade-select {
