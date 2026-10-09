@@ -2518,8 +2518,8 @@
     .footer-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 32px;
-      padding-bottom: 28px;
+      gap: 16px;
+      padding-bottom: 20px;
       max-width: 1152px;
       margin-left: auto;
       margin-right: auto;
@@ -2529,15 +2529,16 @@
     @media (min-width: 640px) {
       .footer-grid { padding-left: 32px; padding-right: 32px; }
     }
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
       .footer-grid {
         grid-template-columns: 5fr 7fr;
         align-items: start;
         gap: 40px;
+        padding-bottom: 28px;
       }
     }
     .foot-brand { text-align: center; }
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
       .foot-brand { text-align: left; }
     }
     .foot-brand-logo {
@@ -2559,19 +2560,21 @@
       max-width: 340px;
       font-weight: 500;
     }
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
       .foot-brand p { margin-left: 0; margin-right: 0; }
     }
     [data-theme="dark"] .foot-brand p { color: #94A3B8; }
     .foot-links-row {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      text-align: center;
-      max-width: 100%;
+      display: none;
     }
-    @media (min-width: 768px) {
-      .foot-links-row { gap: 32px; text-align: left; }
+    @media (min-width: 1024px) {
+      .foot-links-row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 32px;
+        text-align: left;
+        max-width: 100%;
+      }
     }
     .foot-col {
       display: flex;
@@ -7894,6 +7897,8 @@
   }
   function openMobileMenu(){
     clearGlobalSearch();
+    const mmContent = document.querySelector('.mm-content');
+    if(mmContent) mmContent.scrollTop = 0;
     document.getElementById('mobileMenuOverlay').classList.add('open');
     const btn = document.getElementById('menuBtn');
     if(btn){
@@ -7917,6 +7922,8 @@
       btn.focus();
     }
     document.body.classList.remove('mobile-menu-open');
+    const mmContent = document.querySelector('.mm-content');
+    if(mmContent) mmContent.scrollTop = 0;
     if(window.lenis) lenis.start();
   }
 
