@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Gradzz — National University CGPA &amp; GPA Calculator</title>
   <meta name="description" content="Gradzz is a free, no-login CGPA &amp; GPA calculator for National University Bangladesh students — built mobile-first, covers Honours and Masters, all four years, both syllabuses.">
   <link rel="canonical" href="https://gradzz.app/">
@@ -5866,6 +5866,10 @@
         font-weight: 600;
         height: 38px;
       }
+      .modal-card-slate .si-input-new::placeholder {
+        font-size: 12.5px;
+        font-weight: 500;
+      }
       .modal-card-slate .csel-trigger-form,
       .modal-card-slate .csel-trigger-form .csel-label,
       .modal-card-slate .csel-trigger-form .csel-text {
@@ -8617,6 +8621,20 @@ function openSoonModal(name, code){
       closeCollegeSuggestions();
     }
   });
+
+  // Mobile Viewport Zoom Lock on Input Focus
+  (function() {
+    const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    const vp = document.querySelector('meta[name="viewport"]');
+    if (isTouch && vp) {
+      vp.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+      document.addEventListener('focusin', function(e) {
+        if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')) {
+          vp.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+        }
+      }, { passive: true });
+    }
+  })();
 
   let siMode = 'year';
   function openStudentInfoModal(mode){
