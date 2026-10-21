@@ -3331,7 +3331,6 @@
     }
     table.marksheet td{
       padding:12px 18px;border-bottom:1px solid rgba(226,232,240,0.7);font-size:13.5px;white-space:nowrap;text-align:center;
-      transition:background 0.15s ease;
     }
     [data-theme="dark"] table.marksheet td{
       border-bottom-color:rgba(30,41,59,0.7);
@@ -3345,8 +3344,17 @@
     [data-theme="dark"] table.marksheet td.credit{color:#CBD5E1;}
     table.marksheet td.marks{font-family:var(--mono);color:#64748B;font-size:13.5px;font-weight:500;}
     [data-theme="dark"] table.marksheet td.marks{color:#94A3B8;}
-    table.marksheet tr:hover td{background:#F8FAFC;}
-    [data-theme="dark"] table.marksheet tr:hover td{background:rgba(255,255,255,0.03);}
+    @media (min-width: 768px) {
+      table.marksheet tbody tr:not(.total){
+        transition:background 0.15s ease;
+      }
+      table.marksheet tbody tr:not(.total):hover td{
+        background:#F8FAFC;
+      }
+      [data-theme="dark"] table.marksheet tbody tr:not(.total):hover td{
+        background:rgba(255,255,255,0.03);
+      }
+    }
     tr.total{
       background:var(--marksheet-total-bg);
     }
@@ -3424,13 +3432,20 @@
         position:relative;
         display:flex;flex-wrap:wrap;align-items:center;column-gap:8px;row-gap:2px;
         padding:14px 16px 12px 10px;
+        transition:background 0.15s ease;
       }
       table.marksheet tr,table.marksheet td{border-bottom:none;}
       table.marksheet tr{border-bottom:1px solid var(--border);}
       table.marksheet tr:last-child{border-bottom:none;}
+      table.marksheet tbody tr:not(.total):hover{
+        background:#F8FAFC;
+      }
+      [data-theme="dark"] table.marksheet tbody tr:not(.total):hover{
+        background:rgba(255,255,255,0.03);
+      }
       table.marksheet td{
         padding:0;width:auto;text-align:left;white-space:normal;
-        font-size:12.5px;background:none;
+        font-size:12.5px;background:transparent;
       }
       table.marksheet td.paper{
         order:1;flex:1 1 100%;font-family:var(--font);font-weight:700;font-size:14px;
@@ -5754,8 +5769,10 @@
       border-bottom-color: rgba(255, 255, 255, 0.04);
       color: #CBD5E1;
     }
-    .criteria-table tr:hover td { background: rgba(241, 245, 249, 0.7); }
-    [data-theme="dark"] .criteria-table tr:hover td { background: rgba(255, 255, 255, 0.03); }
+    @media (hover: hover) and (pointer: fine) {
+      .criteria-table tr:hover td { background: rgba(241, 245, 249, 0.7); }
+      [data-theme="dark"] .criteria-table tr:hover td { background: rgba(255, 255, 255, 0.03); }
+    }
     .criteria-table tr:last-child td { border-bottom: none; }
     .criteria-notice-card {
       position: relative;
