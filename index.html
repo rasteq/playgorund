@@ -299,15 +299,27 @@
     *, *::before, *::after {
       box-sizing: border-box;
       touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+    :focus,
+    :focus-visible,
+    *:focus,
+    *:focus-visible {
+      outline: none;
     }
     html {
       scroll-behavior: auto;
       touch-action: manipulation;
       -webkit-text-size-adjust: 100%;
       text-size-adjust: 100%;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
     body {
       touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     }
     /* ============================================================
        ASYMMETRIC SMOOTH THEME TRANSITION
@@ -452,9 +464,9 @@
       color: #FFFFFF;
       font-weight: 700;
     }
+    nav.main-nav a:focus,
     nav.main-nav a:focus-visible{
-      outline: 2px solid var(--primary);
-      outline-offset: 2px;
+      outline: none;
     }
 
     /* Sliding Active Pill Indicator */
@@ -3143,9 +3155,9 @@
       color: #FFFFFF;
       font-weight: 700;
     }
+    .year-pill:focus,
     .year-pill:focus-visible{
-      outline: 2px solid var(--primary);
-      outline-offset: 2px;
+      outline: none;
     }
 
     /* Sliding Active Pill Indicator for Year/Semester Switcher */
@@ -3503,8 +3515,18 @@
       width:100%;
       margin:36px auto 28px;
     }
-    :focus-visible{outline:2px solid #0F172A;outline-offset:2px;}
-    [data-theme="dark"] :focus-visible{outline:2px solid rgba(255, 255, 255, 0.85);outline-offset:2px;}
+    :focus,
+    :focus-visible,
+    *:focus,
+    *:focus-visible{
+      outline: none;
+    }
+    [data-theme="dark"] :focus,
+    [data-theme="dark"] :focus-visible,
+    [data-theme="dark"] *:focus,
+    [data-theme="dark"] *:focus-visible{
+      outline: none;
+    }
 
     @media (max-width: 1023px) {
       .site-inner {
