@@ -1583,16 +1583,16 @@
 
     .hs-bottom-sheet {
       position: fixed;
-      bottom: 0;
+      bottom: 12%;
       left: 0;
       right: 0;
       z-index: 10002;
       background: #141517;
-      border-top: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 26px 26px 0 0;
-      padding: 22px 20px max(28px, env(safe-area-inset-bottom, 28px)) 20px;
-      box-shadow: 0 -16px 48px rgba(0, 0, 0, 0.7);
-      transform: translateY(105%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 26px;
+      padding: 22px 20px 24px 20px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7);
+      transform: translateY(calc(100% + 20vh));
       transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.38s;
       box-sizing: border-box;
       max-width: 500px;
@@ -1608,8 +1608,8 @@
     }
     [data-theme="light"] .hs-bottom-sheet {
       background: #FFFFFF;
-      border-top: 1px solid rgba(203, 213, 225, 0.95);
-      box-shadow: 0 -12px 40px rgba(15, 23, 42, 0.16);
+      border: 1px solid rgba(203, 213, 225, 0.95);
+      box-shadow: 0 16px 48px rgba(15, 23, 42, 0.18), 0 4px 16px rgba(15, 23, 42, 0.08);
     }
 
     .hs-drag-bar {
@@ -6433,12 +6433,12 @@
       <!-- 1. FAQ -->
       <a href="#faq" class="hs-option-row" onclick="onHsSelect('faq'); return false;">
         <span class="hs-option-label">FAQ</span>
-        <span class="hs-option-meta">Instant answers</span>
+        <span class="hs-option-meta">Common Questions</span>
       </a>
       <!-- 2. Send a message -->
       <a href="#contact" class="hs-option-row" onclick="onHsSelect('contact'); return false;">
         <span class="hs-option-label">Send a message</span>
-        <span class="hs-option-meta">Contact page</span>
+        <span class="hs-option-meta">Get in Touch</span>
       </a>
       <!-- 3. Email us -->
       <a href="mailto:hello@gradzz.app" class="hs-option-row" onclick="onHsSelect('email'); return false;">
