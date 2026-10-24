@@ -3513,6 +3513,15 @@
     select.grade-select:focus{outline:none;border-color:#0F172A;box-shadow:0 0 0 2px rgba(15,23,42,0.08);}
     [data-theme="dark"] select.grade-select:focus{border-color:#FFFFFF;box-shadow:0 0 0 2px rgba(255,255,255,0.12);}
 
+    /* ============================================================
+       ELECTIVE COURSES AUTOMATIC LOCKING SYSTEM (CLEAN UI)
+    ============================================================ */
+    .marksheet tr.row-locked{opacity:0.45;transition:opacity 0.2s ease;}
+    .marksheet tr.row-locked td.grade .csel-trigger{
+      cursor:not-allowed;pointer-events:none;background:var(--bg2,#F8FAFC);
+    }
+
+
     .grade-actions{
       display:flex;flex-direction:row;justify-content:center;align-items:stretch;
       gap:12px;margin-top:22px;margin-bottom:28px;flex-wrap:nowrap;width:100%;
@@ -7460,6 +7469,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.css">
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script src="honours-2024/hon-24-cse.js"></script>
 <style id="grdSheetStyle">
   /* ============================================================
      RESULT SHEET v2 — "luxury" design, ported from the provided
@@ -7784,30 +7794,30 @@
       'BSc Honours':['Biochemistry and Molecular Biology','Botany','Chemistry','Computer Science'],
       'BBA Honours':['Accounting'],
       'BSS Honours':['Anthropology','Economics'],
-      'BA Honours':['Arabic','Bangla','English (Soon)'],
+      'BA Honours':['Arabic','Bangla','English'],
     },
     '2013':{
-      'BSc Honours':['Home Economics','Mathematics','Physics','Psychology (Soon)'],
-      'BBA Honours':['Accounting'],
-      'BSS Honours':['Anthropology','Economics'],
-      'BA Honours':['Arabic','Bangla','English'],
+      'BSc Honours':['Biochemistry and Molecular Biology','Botany','Chemistry','Computer Science','Environmental Science','Geography and Environment','Home Economics','Mathematics','Physics','Psychology','Soil Science','Statistics','Zoology'],
+      'BBA Honours':['Accounting','Finance and Banking','Management','Marketing'],
+      'BSS Honours':['Anthropology','Economics','Political Science','Social Work','Sociology'],
+      'BA Honours':['Arabic','Bangla','English','History','Islamic History & Culture','Islamic Studies','Library and Information Science','Philosophy','Sanskrit'],
     },
     'pass2024':{
       'BA (Degree Pass)':['General BA'],
-      'Degree (Pass Course)':['Accounting','Botany','Chemistry','Computer Science','Economics','Management','Marketing','Physics','Statistics (Soon)'],
+      'Degree (Pass Course)':['Accounting','Botany','Chemistry','Computer Science','Economics','Management','Marketing','Physics','Statistics'],
     },
     'pass2013':{
       'BA (Degree Pass)':['General BA'],
-      'Degree (Pass Course)':['Accounting','Botany','Chemistry','Economics','Management','Marketing','Physics','Statistics','Zoology (Soon)'],
+      'Degree (Pass Course)':['Accounting','Botany','Chemistry','Economics','Management','Marketing','Physics','Statistics','Zoology'],
     },
     'masters2013':{
-      'Masters':['Accounting','Bangla','Botany','Economics','English','History','Mathematics','Physics','Sociology','Zoology (Soon)'],
+      'Masters':['Accounting','Bangla','Botany','Economics','English','History','Mathematics','Physics','Sociology','Zoology'],
     },
     'incampus2013':{
-      'In-Campus Masters':['Accounting','Bangla','Economics','English','Physics (Soon)'],
+      'In-Campus Masters':['Accounting','Bangla','Economics','English','Physics'],
     },
     'prelim2013':{
-      'Preliminary to Masters':['Accounting','Bangla','Botany','Economics','English','History','Mathematics','Physics','Sociology','Zoology (Soon)'],
+      'Preliminary to Masters':['Accounting','Bangla','Botany','Economics','English','History','Mathematics','Physics','Sociology','Zoology'],
     }
   };
 
@@ -7830,6 +7840,172 @@
     'incampus2013':3,
     'prelim2024':2, 'prelim2013':2,
   };
+
+  const DEPT_FILE_MAP = {
+    '2024': {
+      'Accounting': 'honours-2024/hon-24-acc.js',
+      'Computer Science': 'honours-2024/hon-24-cse.js',
+      'Chemistry': 'honours-2024/hon-24-chem.js',
+      'Botany': 'honours-2024/hon-24-bot.js',
+      'Biochemistry and Molecular Biology': 'honours-2024/hon-24-bmb.js',
+      'Economics': 'honours-2024/hon-24-econ.js',
+      'Anthropology': 'honours-2024/hon-24-anthro.js',
+      'Bangla': 'honours-2024/hon-24-bangla.js',
+      'Arabic': 'honours-2024/hon-24-arabic.js',
+      'English': 'honours-2024/hon-24-eng.js'
+    },
+    '2013': {
+      'Accounting': 'honours-2013/hon-13-acc.js',
+      'Anthropology': 'honours-2013/hon-13-anthro.js',
+      'Arabic': 'honours-2013/hon-13-arabic.js',
+      'Bangla': 'honours-2013/hon-13-bangla.js',
+      'Biochemistry and Molecular Biology': 'honours-2013/hon-13-bmb.js',
+      'Botany': 'honours-2013/hon-13-bot.js',
+      'Chemistry': 'honours-2013/hon-13-chem.js',
+      'Computer Science': 'honours-2013/hon-13-cse.js',
+      'Economics': 'honours-2013/hon-13-econ.js',
+      'English': 'honours-2013/hon-13-eng.js',
+      'Environmental Science': 'honours-2013/hon-13-env.js',
+      'Finance and Banking': 'honours-2013/hon-13-fin.js',
+      'Geography and Environment': 'honours-2013/hon-13-geo.js',
+      'History': 'honours-2013/hon-13-hist.js',
+      'Home Economics': 'honours-2013/hon-13-homeecon.js',
+      'Islamic History & Culture': 'honours-2013/hon-13-ihc.js',
+      'Islamic Studies': 'honours-2013/hon-13-islamic.js',
+      'Library and Information Science': 'honours-2013/hon-13-lis.js',
+      'Management': 'honours-2013/hon-13-mgmt.js',
+      'Marketing': 'honours-2013/hon-13-mkt.js',
+      'Mathematics': 'honours-2013/hon-13-math.js',
+      'Philosophy': 'honours-2013/hon-13-phil.js',
+      'Physics': 'honours-2013/hon-13-phy.js',
+      'Political Science': 'honours-2013/hon-13-pol.js',
+      'Psychology': 'honours-2013/hon-13-psych.js',
+      'Sanskrit': 'honours-2013/hon-13-sanskrit.js',
+      'Social Work': 'honours-2013/hon-13-sw.js',
+      'Sociology': 'honours-2013/hon-13-soc.js',
+      'Soil Science': 'honours-2013/hon-13-soil.js',
+      'Statistics': 'honours-2013/hon-13-stat.js',
+      'Zoology': 'honours-2013/hon-13-zoo.js'
+    },
+    'pass2024': {
+      'General BA': 'degree-pass-2024/deg-24-ba.js',
+      'Accounting': 'degree-pass-2024/deg-24-acc.js',
+      'Computer Science': 'degree-pass-2024/deg-24-cse.js',
+      'Botany': 'degree-pass-2024/deg-24-bot.js',
+      'Chemistry': 'degree-pass-2024/deg-24-chem.js',
+      'Economics': 'degree-pass-2024/deg-24-econ.js',
+      'Management': 'degree-pass-2024/deg-24-mgmt.js',
+      'Marketing': 'degree-pass-2024/deg-24-mkt.js',
+      'Physics': 'degree-pass-2024/deg-24-phy.js',
+      'Statistics': 'degree-pass-2024/deg-24-stat.js'
+    },
+    'pass2013': {
+      'General BA': 'degree-pass-2013/deg-13-ba.js',
+      'Accounting': 'degree-pass-2013/deg-13-acc.js',
+      'Botany': 'degree-pass-2013/deg-13-bot.js',
+      'Chemistry': 'degree-pass-2013/deg-13-chem.js',
+      'Economics': 'degree-pass-2013/deg-13-econ.js',
+      'Management': 'degree-pass-2013/deg-13-mgmt.js',
+      'Marketing': 'degree-pass-2013/deg-13-mkt.js',
+      'Physics': 'degree-pass-2013/deg-13-phy.js',
+      'Statistics': 'degree-pass-2013/deg-13-stat.js',
+      'Zoology': 'degree-pass-2013/deg-13-zoo.js'
+    },
+    'masters2013': {
+      'Accounting': 'masters-2013/mas-13-acc.js',
+      'Bangla': 'masters-2013/mas-13-bangla.js',
+      'Botany': 'masters-2013/mas-13-bot.js',
+      'Economics': 'masters-2013/mas-13-econ.js',
+      'English': 'masters-2013/mas-13-eng.js',
+      'History': 'masters-2013/mas-13-hist.js',
+      'Mathematics': 'masters-2013/mas-13-math.js',
+      'Physics': 'masters-2013/mas-13-phy.js',
+      'Sociology': 'masters-2013/mas-13-soc.js',
+      'Zoology': 'masters-2013/mas-13-zoo.js'
+    },
+    'incampus2013': {
+      'Accounting': 'incampus-masters-2013/inc-13-acc.js',
+      'Bangla': 'incampus-masters-2013/inc-13-bangla.js',
+      'Economics': 'incampus-masters-2013/inc-13-econ.js',
+      'English': 'incampus-masters-2013/inc-13-eng.js',
+      'Physics': 'incampus-masters-2013/inc-13-phy.js'
+    },
+    'prelim2013': {
+      'Accounting': 'prelim-masters-2013/pre-13-acc.js',
+      'Bangla': 'prelim-masters-2013/pre-13-bangla.js',
+      'Botany': 'prelim-masters-2013/pre-13-bot.js',
+      'Economics': 'prelim-masters-2013/pre-13-econ.js',
+      'English': 'prelim-masters-2013/pre-13-eng.js',
+      'History': 'prelim-masters-2013/pre-13-hist.js',
+      'Mathematics': 'prelim-masters-2013/pre-13-math.js',
+      'Physics': 'prelim-masters-2013/pre-13-phy.js',
+      'Sociology': 'prelim-masters-2013/pre-13-soc.js',
+      'Zoology': 'prelim-masters-2013/pre-13-zoo.js'
+    }
+  };
+
+  const loadedDeptScripts = {};
+
+  function getActiveDeptFilePath(progKey = activeSyllabus, dept = currentDept){
+    return (DEPT_FILE_MAP[progKey] && DEPT_FILE_MAP[progKey][dept]) || '';
+  }
+
+  function loadDeptData(programKey, deptName, callback){
+    if (window.GRADZZ_DEPT_STORE && window.GRADZZ_DEPT_STORE[programKey] && window.GRADZZ_DEPT_STORE[programKey][deptName]) {
+      if (callback) callback(window.GRADZZ_DEPT_STORE[programKey][deptName]);
+      return;
+    }
+    const file = DEPT_FILE_MAP[programKey] && DEPT_FILE_MAP[programKey][deptName];
+    if (!file) {
+      if (callback) callback(null);
+      return;
+    }
+    if (loadedDeptScripts[file]) {
+      const data = window.GRADZZ_DEPT_STORE && window.GRADZZ_DEPT_STORE[programKey] && window.GRADZZ_DEPT_STORE[programKey][deptName];
+      if (callback) callback(data || null);
+      return;
+    }
+    loadedDeptScripts[file] = true;
+    const script = document.createElement('script');
+    script.src = file;
+    script.async = false;
+    script.onload = function(){
+      const data = window.GRADZZ_DEPT_STORE && window.GRADZZ_DEPT_STORE[programKey] && window.GRADZZ_DEPT_STORE[programKey][deptName];
+      if (callback) callback(data || null);
+    };
+    script.onerror = function(){
+      console.warn('Could not load department file:', file);
+      if (callback) callback(null);
+    };
+    document.head.appendChild(script);
+  }
+
+  function getDeptData(progKey = activeSyllabus, dept = currentDept){
+    return (window.GRADZZ_DEPT_STORE && window.GRADZZ_DEPT_STORE[progKey] && window.GRADZZ_DEPT_STORE[progKey][dept]) || null;
+  }
+
+  function getSubjectsFor(progKey = activeSyllabus, dept = currentDept, year = currentYear){
+    const d = getDeptData(progKey, dept);
+    if (d && d.subjects && d.subjects[year]) {
+      return d.subjects[year];
+    }
+    if (dept === 'Computer Science' && progKey === '2024') {
+      return CSE_DEFAULT_SUBJECTS[year] || [];
+    }
+    return [];
+  }
+
+  function getSemesterGroupsFor(progKey = activeSyllabus, dept = currentDept, year = currentYear){
+    const d = getDeptData(progKey, dept);
+    if (d && d.semesterGroups && d.semesterGroups[year]) {
+      return d.semesterGroups[year];
+    }
+    if (dept === 'Computer Science' && progKey === '2024') {
+      return CSE_DEFAULT_SEMESTER_GROUPS[year] || null;
+    }
+    return null;
+  }
+
 
   const PROGRAM_HEADER_PREFIX = {
     '2024':'Bachelor Degree (Honours)', '2013':'Bachelor Degree (Honours)',
@@ -7902,7 +8078,7 @@
     return `${progPrefix} ${middle} — ${year}`;
   }
 
-  const SUBJECTS_BY_YEAR = {
+  const CSE_DEFAULT_SUBJECTS = {
     1: [
       {code:'510201', name:'Computer Fundamentals',              credit:3.0},
       {code:'510203', name:'Structured Programming Language',     credit:3.0},
@@ -7923,7 +8099,7 @@
     4: [],
   };
 
-  const SEMESTER_GROUPS_BY_YEAR = {
+  const CSE_DEFAULT_SEMESTER_GROUPS = {
     1: [
       {label:'1st Semester', start:0, end:5},
       {label:'2nd Semester', start:6, end:12},
@@ -7942,12 +8118,29 @@
     ],
   };
 
-  function isSemesterDept(){ return currentDept === 'Computer Science' && HONOURS_KEYS.includes(activeSyllabus); }
+  const SUBJECTS_BY_YEAR = new Proxy({}, {
+    get(target, prop){
+      const yr = Number(prop);
+      if(!isNaN(yr)){
+        return getSubjectsFor(activeSyllabus, currentDept, yr);
+      }
+      return target[prop];
+    }
+  });
+
+  function isSemesterDept(){
+    const d = getDeptData(activeSyllabus, currentDept);
+    if(d && typeof d.isSemester === 'boolean') return d.isSemester;
+    return currentDept === 'Computer Science' && HONOURS_KEYS.includes(activeSyllabus);
+  }
+
   function semesterGroupsFor(year){
     if(!isSemesterDept()) return null;
+    const groups = getSemesterGroupsFor(activeSyllabus, currentDept, year);
+    if(groups) return groups;
     const subs = SUBJECTS_BY_YEAR[year];
     if(!subs || subs.length === 0) return null;
-    return SEMESTER_GROUPS_BY_YEAR[year] || null;
+    return CSE_DEFAULT_SEMESTER_GROUPS[year] || null;
   }
 
   const YEAR_LABELS = {1:'First Year', 2:'Second Year', 3:'Third Year', 4:'Fourth Year'};
@@ -8060,14 +8253,53 @@
     'Sociology': 'সমাজবিজ্ঞান',
     'Management': 'ব্যবস্থাপনা',
     'Marketing': 'বিপণন',
-    'General BA': 'সাধারণ বিএ'
+    'General BA': 'সাধারণ বিএ',
+    'Environmental Science': 'পরিবেশ বিজ্ঞান',
+    'Finance and Banking': 'ফাইন্যান্স অ্যান্ড ব্যাংকিং',
+    'Geography and Environment': 'ভূগোল ও পরিবেশ',
+    'Islamic History & Culture': 'ইসলামের ইতিহাস ও সংস্কৃতি',
+    'Islamic Studies': 'ইসলামিক স্টাডিজ',
+    'Library and Information Science': 'তথ্যবিজ্ঞান ও গ্রন্থাগার ব্যবস্থাপনা',
+    'Philosophy': 'দর্শন',
+    'Political Science': 'রাষ্ট্রবিজ্ঞান',
+    'Sanskrit': 'সংস্কৃত',
+    'Social Work': 'সমাজকর্ম',
+    'Soil Science': 'মৃত্তিকাবিজ্ঞান'
   };
 
   const DEPT_ABBREVS = {
     'Computer Science': 'CSE',
     'Biochemistry and Molecular Biology': 'BMB',
     'Home Economics': 'HEC',
-    'General BA': 'GBA'
+    'General BA': 'GBA',
+    'Accounting': 'ACC',
+    'Anthropology': 'ANT',
+    'Arabic': 'ARA',
+    'Bangla': 'BNG',
+    'Botany': 'BOT',
+    'Chemistry': 'CHE',
+    'Economics': 'ECO',
+    'English': 'ENG',
+    'Environmental Science': 'ENV',
+    'Finance and Banking': 'FIN',
+    'Geography and Environment': 'GEO',
+    'History': 'HIS',
+    'Islamic History & Culture': 'IHC',
+    'Islamic Studies': 'ISL',
+    'Library and Information Science': 'LIS',
+    'Management': 'MGT',
+    'Marketing': 'MKT',
+    'Mathematics': 'MAT',
+    'Philosophy': 'PHI',
+    'Physics': 'PHY',
+    'Political Science': 'POL',
+    'Psychology': 'PSY',
+    'Sanskrit': 'SAN',
+    'Social Work': 'SWK',
+    'Sociology': 'SOC',
+    'Soil Science': 'SSC',
+    'Statistics': 'STAT',
+    'Zoology': 'ZOO'
   };
 
   function deptAbbrev(name){
@@ -8856,9 +9088,16 @@ function openSoonModal(name, code){
     const isMastersProg = MASTERS_KEYS.includes(activeSyllabus);
     const gpaFieldLabel = isMastersProg ? 'CGPA' : 'GPA';
 
-    const subjects = SUBJECTS_BY_YEAR[currentYear] || [];
+    const rawSubjects = SUBJECTS_BY_YEAR[currentYear] || [];
     let vals = {};
     try{ vals = JSON.parse(sessionStorage.getItem(gradeStorageKey(currentDept, currentYear))) || {}; }catch(e){ vals = {}; }
+
+    const applicableSubjects = rawSubjects.filter((s, i) => {
+      if(s && s.type === 'elective'){
+        return !!vals[i];
+      }
+      return true;
+    });
 
     let creditsEarned = 0, points = 0, gradedCount = 0, hasFail = false;
     function buildSubjectRow(s, i){
@@ -8888,8 +9127,9 @@ function openSoonModal(name, code){
       courseRows = resultSemGroups.map(grp=>{
         let semCredits = 0, semPoints = 0, rowsHtml = '';
         for(let i=grp.start; i<=grp.end; i++){
-          const s = subjects[i];
+          const s = rawSubjects[i];
           if(!s) continue;
+          if(s.type === 'elective' && !vals[i]) continue;
           const r = buildSubjectRow(s, i);
           rowsHtml += r.html;
           if(r.grade){
@@ -8904,13 +9144,16 @@ function openSoonModal(name, code){
         <tr class="rs2-sem-total-row"><td colspan="2" class="rs2-total-title">Semester Total</td><td>${semCredits}</td><td class="rs2-gpa-val">GPA ${semGpa.toFixed(2)}</td></tr>`;
       }).join('');
     } else {
-      courseRows = subjects.map((s,i)=>buildSubjectRow(s,i).html).join('');
+      courseRows = rawSubjects.map((s,i)=>{
+        if(s && s.type === 'elective' && !vals[i]) return '';
+        return buildSubjectRow(s,i).html;
+      }).filter(Boolean).join('');
     }
 
     const yGpa = creditsEarned ? points/creditsEarned : 0;
 
     let resultStatus = 'In Progress';
-    if(subjects.length > 0 && gradedCount === subjects.length){
+    if(applicableSubjects.length > 0 && gradedCount === applicableSubjects.length){
       const isFinalYear = currentYear === totalYears;
       resultStatus = hasFail ? (isFinalYear ? 'Not Passed' : 'Not Promoted') : (isFinalYear ? 'Passed' : 'Promoted');
     }
@@ -9092,13 +9335,21 @@ function openSoonModal(name, code){
     let allGraded = true, hasFailAny = false;
 
     for(let yr=1; yr<=totalYears; yr++){
-      const subjects = SUBJECTS_BY_YEAR[yr] || [];
+      const rawSubjects = SUBJECTS_BY_YEAR[yr] || [];
       let vals = {};
       try{ vals = JSON.parse(sessionStorage.getItem(gradeStorageKey(currentDept, yr))) || {}; }catch(e){ vals = {}; }
 
+      const subjects = rawSubjects.filter((s, i) => {
+        if(s && s.type === 'elective'){
+          return !!vals[i];
+        }
+        return true;
+      });
+
       let creditsEarned = 0, points = 0, gradedCount = 0;
-      const rows = subjects.map((s,i)=>{
-        const gCode = vals[i];
+      const rows = subjects.map((s)=>{
+        const originalIdx = rawSubjects.indexOf(s);
+        const gCode = vals[originalIdx];
         const grade = GRADES.find(g=>g.g===gCode);
         totalPossibleCredits += s.credit;
         if(grade){
@@ -9107,7 +9358,7 @@ function openSoonModal(name, code){
           points += s.credit*grade.pt;
           if(grade.g === 'F') hasFailAny = true;
         }
-        return { code:s.code, name:s.name, credit:s.credit, grade: grade ? grade.g : null };
+        return { origIdx: originalIdx, code:s.code, name:s.name, credit:s.credit, grade: grade ? grade.g : null };
       });
 
       const yGpa = creditsEarned ? points/creditsEarned : 0;
@@ -9180,7 +9431,7 @@ function openSoonModal(name, code){
             const rows = [];
             let credits = 0, points = 0;
             for(let i=grp.start; i<=grp.end; i++){
-              const row = yd.rows[i];
+              const row = yd.rows.find(r => r.origIdx === i);
               if(!row) continue;
               rows.push(row);
               if(row.grade){
@@ -9664,6 +9915,10 @@ function openSoonModal(name, code){
     renderYearStatTiles();
     renderYearPills();
     showView('grading');
+    loadDeptData(activeSyllabus, deptName, function(){
+      renderYear();
+      requestAnimationFrame(updateYearIndicator);
+    });
     renderYear();
     requestAnimationFrame(updateYearIndicator);
   }
@@ -9674,6 +9929,70 @@ function openSoonModal(name, code){
     updateYearIndicator();
     updatePageTitle('grading');
     renderYear();
+  }
+
+  
+  function enforceElectiveLocks(){
+    const panel = document.getElementById('subjectPanel');
+    if(!panel) return;
+    const subjects = SUBJECTS_BY_YEAR[currentYear] || [];
+
+    const groups = {};
+    subjects.forEach((s, i) => {
+      if(s && s.type === 'elective' && s.groupId){
+        if(!groups[s.groupId]){
+          groups[s.groupId] = {
+            maxSets: s.maxSets || s.maxSelect || 1,
+            sets: {}
+          };
+        }
+        const grp = groups[s.groupId];
+        const setId = s.setId || ('item_' + (s.code || i));
+        if(!grp.sets[setId]){
+          grp.sets[setId] = {
+            allIndices: [],
+            selectedIndices: []
+          };
+        }
+        grp.sets[setId].allIndices.push(i);
+
+        const sel = panel.querySelector(`select.grade-select[data-idx="${i}"]`);
+        if(sel && sel.value && sel.value !== ''){
+          grp.sets[setId].selectedIndices.push(i);
+        }
+      }
+    });
+
+    Object.keys(groups).forEach(groupId => {
+      const grp = groups[groupId];
+      const setKeys = Object.keys(grp.sets);
+
+      const activeSets = setKeys.filter(k => grp.sets[k].selectedIndices.length > 0);
+      const isLimitReached = activeSets.length >= grp.maxSets;
+
+      setKeys.forEach(setId => {
+        const setObj = grp.sets[setId];
+        const isActive = activeSets.includes(setId);
+
+        setObj.allIndices.forEach(idx => {
+          const sel = panel.querySelector(`select.grade-select[data-idx="${idx}"]`);
+          const row = panel.querySelector(`tr.subject-row[data-idx="${idx}"]`);
+          if(!sel) return;
+
+          if(isLimitReached && !isActive){
+            sel.disabled = true;
+            if(row) row.classList.add('row-locked');
+          } else {
+            sel.disabled = false;
+            if(row) row.classList.remove('row-locked');
+          }
+
+          if(window.CustomSelect && window.CustomSelect.refresh){
+            window.CustomSelect.refresh(sel);
+          }
+        });
+      });
+    });
   }
 
   function renderYear(){
@@ -9694,7 +10013,7 @@ function openSoonModal(name, code){
           ${curriculumTitle}
         </span>
         <button class="reset-btn" onclick="resetGrades()"><span class="ico-bubble"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg></span><span>Reset</span></button>
-      </div>`
+      </div>`;
 
     if(groups){
       const blocks = groups.map((grp,gi)=>{
@@ -9705,11 +10024,11 @@ function openSoonModal(name, code){
           if(!s) continue;
           semCredits += s.credit;
           rows.push(`
-            <tr>
+            <tr class="subject-row${s.type==='elective'?' is-elective':''}" data-idx="${i}" data-group-id="${s.groupId || ''}">
               <td class="code">${s.code}</td>
-              <td class="paper">${s.name}</td>
+              <td class="paper"><span class="paper-title-text">${s.name}</span></td>
               <td class="credit">${s.credit}</td>
-              <td class="grade"><select class="grade-select" data-idx="${i}" onchange="recalc()">
+              <td class="grade"><select class="grade-select" data-idx="${i}" data-group-id="${s.groupId || ''}" onchange="recalc()">
                 <option value="">—</option>
                 ${GRADES.map(g=>`<option value="${g.g}">${g.g} (${g.pt.toFixed(2)})</option>`).join('')}
               </select></td>
@@ -9743,20 +10062,32 @@ function openSoonModal(name, code){
 
       panel.innerHTML = headHTML + blocks + yearTotalBlock;
     } else {
+      const rowsHtml = subjects.length ? subjects.map((s,i)=>{
+        return `
+          <tr class="subject-row${s.type==='elective'?' is-elective':''}" data-idx="${i}" data-group-id="${s.groupId || ''}">
+            <td class="code">${s.code}</td>
+            <td class="paper"><span class="paper-title-text">${s.name}</span></td>
+            <td class="credit">${s.credit}</td>
+            <td class="grade"><select class="grade-select" data-idx="${i}" data-group-id="${s.groupId || ''}" onchange="recalc()">
+              <option value="">—</option>
+              ${GRADES.map(g=>`<option value="${g.g}">${g.g} (${g.pt.toFixed(2)})</option>`).join('')}
+            </select></td>
+            <td class="marks" id="marks-${i}">—</td>
+          </tr>`;
+      }).join('') : `
+        <tr>
+          <td colspan="5" style="text-align:center;padding:40px 16px;">
+            <div style="font-weight:600;font-size:14.5px;color:var(--text);margin-bottom:6px;">No courses added for this year yet</div>
+            <div style="font-size:12.5px;color:#64748B;">You can add subjects in <span style="font-family:var(--mono);font-size:12px;padding:3px 7px;border-radius:6px;background:rgba(0,0,0,0.06);color:var(--text);font-weight:600;">${getActiveDeptFilePath()}</span></div>
+          </td>
+        </tr>`;
+
       panel.innerHTML = headHTML + `
         <div class="semester-block">
           <div class="table-scroll">
           <table class="marksheet">
             <thead><tr><th class="code">Code</th><th class="paper">Paper title</th><th class="credit">Credit</th><th class="grade">Grade</th><th class="marks">Range</th></tr></thead>
-            <tbody id="subjectRows">${subjects.map((s,i)=>`
-              <tr>
-                <td class="code">${s.code}</td><td class="paper">${s.name}</td><td class="credit">${s.credit}</td>
-                <td class="grade"><select class="grade-select" data-idx="${i}" onchange="recalc()">
-                  <option value="">—</option>
-                  ${GRADES.map(g=>`<option value="${g.g}">${g.g} (${g.pt.toFixed(2)})</option>`).join('')}
-                </select></td>
-                <td class="marks" id="marks-${i}">—</td>
-              </tr>`).join('')}<tr class="total"><td></td><td class="paper">${unitWord(activeSyllabus)} Total</td><td class="credit" id="totalCredits">0</td><td colspan="2" id="totalGpa">0.00</td></tr></tbody>
+            <tbody id="subjectRows">${rowsHtml}<tr class="total"><td></td><td class="paper">${unitWord(activeSyllabus)} Total</td><td class="credit" id="totalCredits">0</td><td colspan="2" id="totalGpa">0.00</td></tr></tbody>
           </table>
           </div>
         </div>`;
@@ -9764,6 +10095,7 @@ function openSoonModal(name, code){
 
     loadGrades();
     recalc();
+    enforceElectiveLocks();
   }
 
   function gradeStorageKey(dept=currentDept, year=currentYear, syllabus=activeSyllabus){ return `gradzz:grades:${syllabus}:${dept}:${year}`; }
@@ -9781,7 +10113,7 @@ function openSoonModal(name, code){
   }
 
   function yearStats(dept, year){
-    const subjects = SUBJECTS_BY_YEAR[year] || [];
+    const subjects = getSubjectsFor(activeSyllabus, dept, year);
     let vals = {};
     try{ vals = JSON.parse(sessionStorage.getItem(gradeStorageKey(dept, year))) || {}; }catch(e){ vals = {}; }
     let creditsEarned=0, points=0;
@@ -9949,11 +10281,16 @@ function openSoonModal(name, code){
 
     saveGrades();
     updateSummaryCard();
+    enforceElectiveLocks();
   }
   function resetGrades(){
-    document.querySelectorAll('#subjectPanel select.grade-select').forEach(s=>s.value='');
+    document.querySelectorAll('#subjectPanel select.grade-select').forEach(s=>{
+      s.value = '';
+      s.disabled = false;
+    });
     try{ sessionStorage.removeItem(gradeStorageKey()); }catch(e){}
     recalc();
+    enforceElectiveLocks();
     if(window.CustomSelect && window.CustomSelect.refresh){
       document.querySelectorAll('#subjectPanel select.grade-select').forEach(window.CustomSelect.refresh);
     }
