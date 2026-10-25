@@ -52,7 +52,7 @@
   <meta name="msapplication-TileColor" content="#0F1010">
   <meta name="msapplication-TileImage" content="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Hind+Siliguri:wght@500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- Anti-Flash of Unstyled Theme (FOUC) Instant Script -->
   <script>
     (function() {
@@ -98,7 +98,7 @@
       --grad-modal: linear-gradient(135deg,#0F1010 0%,#ED2024 100%);
       --disp:'Space Grotesk','Noto Sans Bengali',sans-serif;
       --sans:'Inter','Noto Sans Bengali',sans-serif;
-      --mono:'Space Mono',monospace;
+      --mono:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
       --r:18px;
       --shadow:0 8px 30px rgba(15,16,16,.06);
       --card: #FFFFFF;
@@ -380,6 +380,9 @@
       }
     }
 
+    html{
+      scrollbar-gutter: stable;
+    }
     body{
       margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);
       -webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:15px;
@@ -2049,11 +2052,11 @@
     [data-theme="dark"] .csel-trigger-grade:focus,[data-theme="dark"] .csel-trigger-grade.open{
       border-color:#FFFFFF;box-shadow:0 0 0 2px rgba(255,255,255,0.12);
     }
-    @media (min-width:768px){
+    @media (min-width:861px){
       .csel-trigger-grade{font-size:13.5px;height:32px;padding:0 10px;border-radius:8px;}
     }
     table.marksheet td.grade .csel-wrap{width:auto;min-width:88px;}
-    @media (min-width:768px){
+    @media (min-width:861px){
       table.marksheet td.grade .csel-wrap{min-width:92px;}
     }
     .csel-menu-grade{border-radius:10px;padding:4px;min-width:88px;max-height:420px;scrollbar-width:none;-ms-overflow-style:none;}
@@ -2233,6 +2236,17 @@
       transform:translateY(-4px);border-color:#94A3B8;
       box-shadow:0 16px 32px -6px rgba(15,23,42,0.12), 0 4px 12px -2px rgba(15,23,42,0.05);
     }
+    .program-card.soon{
+      border-style:dashed;border-color:rgba(203,213,225,0.9);
+      background:rgba(248,250,252,0.5);opacity:0.8;
+      transition:transform 0.32s cubic-bezier(0.2,0.8,0.25,1), opacity 0.32s ease;
+    }
+    [data-theme="dark"] .program-card.soon{
+      border-color:rgba(30,41,59,0.9);background:rgba(255,255,255,0.02);
+    }
+    .program-card.soon:hover{transform:translateY(-2px);opacity:0.95;}
+    .pc-action-soon{color:#64748B;}
+    [data-theme="dark"] .pc-action-soon{color:#94A3B8;}
     [data-theme="dark"] .program-card{
       background:#151618;border:1px solid rgba(30,41,59,0.9);box-shadow:0 14px 35px -5px rgba(0,0,0,0.45);
     }
@@ -3352,7 +3366,7 @@
     [data-theme="dark"] table.marksheet td.credit{color:#CBD5E1;}
     table.marksheet td.marks{font-family:var(--mono);color:#64748B;font-size:13.5px;font-weight:500;}
     [data-theme="dark"] table.marksheet td.marks{color:#94A3B8;}
-    @media (min-width: 768px) {
+    @media (min-width: 861px) {
       table.marksheet tbody tr:not(.total){
         transition:background 0.15s ease;
       }
@@ -3431,9 +3445,46 @@
     table.gs-table td.gs-range{font-family:var(--mono);color:#334155;font-size:12.5px;}
     [data-theme="dark"] table.gs-table td.gs-range{color:#CBD5E1;}
 
-    @media (max-width:767px){
+    
+    @media (min-width: 861px) {
+      table.marksheet {
+        width: 100%;
+        table-layout: fixed;
+      }
+      table.marksheet th.code, table.marksheet td.code {
+        width: 115px;
+        padding-left: 20px;
+        padding-right: 12px;
+      }
+      table.marksheet th.paper, table.marksheet td.paper {
+        width: auto;
+        padding-left: 14px;
+        padding-right: 14px;
+        white-space: normal;
+        word-break: break-word;
+      }
+      table.marksheet th.credit, table.marksheet td.credit {
+        width: 85px;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+      table.marksheet th.grade, table.marksheet td.grade {
+        width: 165px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      table.marksheet th.marks, table.marksheet td.marks {
+        width: 162px;
+        padding-left: 10px;
+        padding-right: 20px;
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width:860px){
       .table-scroll{overflow-x:visible;}
       table.marksheet{display:block;width:100%;min-width:0;}
+      table.marksheet colgroup{display:none;}
       table.marksheet thead{display:none;}
       table.marksheet tbody{display:block;}
       table.marksheet tr{
@@ -3501,6 +3552,100 @@
       [data-theme="dark"] tr.total td[colspan]{color:var(--primary-light, #FF4D4F);}
       tr.total td[colspan]::before{content:'GPA ';font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.05em;color:var(--dim);text-transform:uppercase;}
     }
+
+    /* ============================================================
+       IPAD / TABLET PORTRAIT (768px - 860px) PROPORTIONAL TYPOGRAPHY & TOUCH SCALING
+    ============================================================ */
+    @media (min-width: 768px) and (max-width: 860px) {
+      table.marksheet tr {
+        padding: 16px 20px 14px 18px;
+        column-gap: 8px;
+        row-gap: 3px;
+      }
+      table.marksheet td {
+        padding: 0;
+        font-size: 14px;
+        width: auto;
+        background: transparent !important;
+      }
+      table.marksheet td.paper {
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 1.38;
+        margin-bottom: 2px;
+      }
+      table.marksheet td.code {
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 3px;
+        padding-left: 0 !important;
+      }
+      table.marksheet td.credit {
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 3px;
+      }
+      table.marksheet td.marks {
+        font-size: 14px;
+        font-weight: 500;
+        margin-top: 3px;
+        padding-right: 0 !important;
+      }
+      table.marksheet td.grade {
+        margin-top: 14px;
+        padding-top: 16px !important;
+        padding-bottom: 4px !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+      table.marksheet td.grade::before {
+        font-size: 12.5px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        line-height: 1;
+      }
+      table.marksheet td.grade .csel-wrap {
+        width: auto;
+        min-width: 96px;
+      }
+      table.marksheet td.grade .csel-trigger-grade {
+        height: 32px;
+        padding: 0 12px;
+        border-radius: 8px;
+        font-size: 13.5px;
+        font-weight: 600;
+        gap: 6px;
+      }
+      table.marksheet td.grade select.grade-select {
+        height: 32px;
+        font-size: 13.5px;
+        padding: 4px 20px 4px 10px;
+      }
+      tr.total {
+        padding: 16px 20px;
+        margin-top: 12px;
+        border-radius: 14px;
+      }
+      tr.total td.paper {
+        font-size: 15px;
+        font-weight: 700;
+      }
+      tr.total td.credit {
+        font-size: 15px;
+        font-weight: 700;
+      }
+      tr.total td.credit::before {
+        font-size: 11.5px;
+      }
+      tr.total td[colspan] {
+        font-size: 18px;
+        font-weight: 800;
+      }
+      tr.total td[colspan]::before {
+        font-size: 11.5px;
+      }
+    }
+
 
     /* Fallback arrow if CustomSelect enhancer fails to load. */
     select.grade-select{
@@ -3780,6 +3925,9 @@
       .result-panel{padding:36px 32px;}
       .rp-stat-n{font-size:20px;}
       h2.dept-title{font-size:24px;}
+      .sc-head{font-size:15px;}
+    }
+    @media (min-width: 861px){
       table.marksheet td{padding:12px 18px;font-size:13.5px;}
       table.marksheet th{font-size:11.5px;padding:12px 18px;}
       table.marksheet td.code,table.marksheet td.paper,table.marksheet td.credit,table.marksheet td.marks{font-size:13.5px;}
@@ -3787,7 +3935,6 @@
       table.marksheet th.marks,table.marksheet td.marks{padding-right:24px;}
       tr.total td{font-size:14.5px;}
       select.grade-select{font-size:13.5px;padding:5px 22px 5px 10px;height:32px;}
-      .sc-head{font-size:15px;}
     }
     @media (min-width: 1024px){
       .wrap{max-width:960px;}
@@ -6480,10 +6627,6 @@
           <select id="qsProgram" onchange="qsProgramChange()">
             <option value="">Select Program</option>
             <option value="honours">Honours</option>
-            <option value="pass">Degree (Pass Course)</option>
-            <option value="masters">Masters</option>
-            <option value="prelim">Preliminary to Masters</option>
-            <option value="incampus">In-Campus Masters</option>
           </select>
         </div>
         <div class="qs-field">
@@ -7518,7 +7661,7 @@
   #grdSheetHost .rs2-hbadge-pill{
     display:inline-flex; align-items:center; gap:6px; padding:5px 12px;
     border-radius:999px; background:var(--rs2-surface-subtle); border:1px solid var(--rs2-border-light);
-    font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700; color:var(--rs2-ink-primary);
+    font-family:'Plus Jakarta Sans',sans-serif; font-size:10px; font-weight:700; color:var(--rs2-ink-primary);
     letter-spacing:.06em; text-transform:uppercase; box-shadow:0 1px 2px rgba(0,0,0,.02);
   }
   #grdSheetHost .rs2-hbadge-pill svg{ color:var(--rs2-accent-sage); flex-shrink:0; }
@@ -7554,7 +7697,7 @@
   #grdSheetHost .rs2-record-item.rs2-fail .rs2-field-value{ color:var(--rs2-accent-rose); font-weight:800; }
   #grdSheetHost .rs2-metric-ribbon{ display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:14px; }
   #grdSheetHost .rs2-metric-card{ background:var(--rs2-surface-subtle); border:1px solid var(--rs2-border-light); border-radius:6px; padding:5px 14px; display:flex; align-items:center; gap:8px; }
-  #grdSheetHost .rs2-metric-card .rs2-val{ font-size:13.5px; font-weight:800; color:var(--rs2-ink-primary); font-family:'JetBrains Mono',monospace; }
+  #grdSheetHost .rs2-metric-card .rs2-val{ font-size:13.5px; font-weight:800; color:var(--rs2-ink-primary); font-family:'Plus Jakarta Sans',sans-serif; }
   #grdSheetHost .rs2-metric-card .rs2-lbl{ font-size:9.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--rs2-ink-muted); font-weight:600; }
   #grdSheetHost .rs2-table-shell{ border:1px solid var(--rs2-border-light); border-radius:var(--rs2-radius-md); overflow:hidden; background:var(--rs2-surface); box-shadow:0 1px 2px rgba(0,0,0,.02); }
   #grdSheetHost table.rs2-course-table{ width:100%; border-collapse:collapse; text-align:left; }
@@ -7570,7 +7713,7 @@
   #grdSheetHost table.rs2-course-table tbody tr:nth-child(even){ background:#fafbfd; }
   #grdSheetHost table.rs2-course-table td{ padding:7px 10px; font-size:11px; color:var(--rs2-ink-secondary); border-bottom:1px solid var(--rs2-border-hairline); border-right:1px solid var(--rs2-border-hairline); text-align:center; }
   #grdSheetHost table.rs2-course-table td:last-child{ border-right:none; }
-  #grdSheetHost table.rs2-course-table td.rs2-code{ font-family:'JetBrains Mono',monospace; font-size:10.5px; font-weight:600; color:var(--rs2-ink-muted); }
+  #grdSheetHost table.rs2-course-table td.rs2-code{ font-family:'Plus Jakarta Sans',sans-serif; font-size:10.5px; font-weight:600; color:var(--rs2-ink-muted); }
   #grdSheetHost table.rs2-course-table td.rs2-ttl{ text-align:left; font-weight:600; color:var(--rs2-ink-primary); font-size:11px; padding-left:12px; }
   #grdSheetHost table.rs2-course-table td.rs2-credit{ font-weight:600; color:var(--rs2-ink-secondary); }
   #grdSheetHost .rs2-grade-badge{
@@ -7592,7 +7735,7 @@
   #grdSheetHost table.rs2-course-table tr.rs2-sem-total-row td.rs2-total-title{ text-align:center; text-transform:uppercase; letter-spacing:.04em; font-size:9.5px; color:var(--rs2-ink-muted); padding-right:14px; }
   #grdSheetHost table.rs2-course-table tr.rs2-sem-total-row td.rs2-gpa-val{ color:var(--rs2-accent-brand); font-weight:800; }
   #grdSheetHost .rs2-footer{ margin-top:16px; padding-top:12px; border-top:1px solid var(--rs2-border-light); display:flex; align-items:flex-end; justify-content:space-between; gap:16px; }
-  #grdSheetHost .rs2-verification-info{ font-family:'JetBrains Mono',monospace; font-size:9.5px; color:var(--rs2-ink-muted); line-height:1.5; flex:1; }
+  #grdSheetHost .rs2-verification-info{ font-family:'Plus Jakarta Sans',sans-serif; font-size:9.5px; color:var(--rs2-ink-muted); line-height:1.5; flex:1; }
   #grdSheetHost .rs2-verification-info strong{ color:var(--rs2-ink-primary); }
   #grdSheetHost .rs2-auth-stamp{ display:flex; align-items:flex-start; gap:6px; padding:6px 10px; border-radius:6px; background:var(--rs2-surface-subtle); border:1px dashed var(--rs2-border-light); font-size:9px; color:var(--rs2-ink-muted); font-weight:500; line-height:1.4; max-width:320px; text-align:left; }
   #grdSheetHost .rs2-auth-stamp svg{ flex-shrink:0; margin-top:1px; }
@@ -7619,7 +7762,7 @@
     border-right:1px solid var(--rs2-border-hairline); vertical-align:middle; word-break:break-word;
   }
   #grdSheetHost table.rs2-transcript-table tbody td:last-child{ border-right:none; }
-  #grdSheetHost table.rs2-transcript-table tbody td.rs2-tcode{ font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:600; color:var(--rs2-ink-muted); white-space:nowrap; }
+  #grdSheetHost table.rs2-transcript-table tbody td.rs2-tcode{ font-family:'Plus Jakarta Sans',sans-serif; font-size:10px; font-weight:600; color:var(--rs2-ink-muted); white-space:nowrap; }
   #grdSheetHost table.rs2-transcript-table tbody td.rs2-tlg{ font-weight:700; color:var(--rs2-ink-primary); }
   #grdSheetHost table.rs2-transcript-table th.rs2-year-sep,
   #grdSheetHost table.rs2-transcript-table td.rs2-year-sep{ border-right:var(--rs2-year-sep-border); }
@@ -7637,7 +7780,7 @@
     padding:6px 4px; font-size:10px; font-weight:700; color:var(--rs2-ink-secondary); text-align:center;
   }
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script>
   const { jsPDF } = window.jspdf || {};
 
@@ -7822,15 +7965,15 @@
   };
 
   const PROGRAMS = [
-    {key:'2024', title:'Honours', displayTitle:'Honours Program', code:'HON', tag:'2024–25 Syllabus', desc:'Explore Honours programs and course structures using the updated syllabus.', active:true},
+    {key:'2024', title:'Honours', displayTitle:'Honours Program', code:'HON', tag:'2024–25 Syllabus', desc:'Explore Honours programs and course structures using the updated syllabus.', active:false},
     {key:'2013', title:'Honours', displayTitle:'Honours Program', code:'HON', tag:'2013–14 Syllabus', desc:'Explore Honours programs and course structures using the old syllabus.', active:true},
-    {key:'pass2024', title:'Degree Pass', displayTitle:'Degree Pass Program', code:'DEG', tag:'2024–25 Syllabus', desc:'Explore Degree Pass programs and course structures using the updated syllabus.', active:true},
-    {key:'pass2013', title:'Degree Pass', displayTitle:'Degree Pass Program', code:'DEG', tag:'2013–14 Syllabus', desc:'Explore Degree Pass programs and course structures using the old syllabus.', active:true},
+    {key:'pass2024', title:'Degree Pass', displayTitle:'Degree Pass Program', code:'DEG', tag:'2024–25 Syllabus', desc:'Explore Degree Pass programs and course structures using the updated syllabus.', active:false},
+    {key:'pass2013', title:'Degree Pass', displayTitle:'Degree Pass Program', code:'DEG', tag:'2013–14 Syllabus', desc:'Explore Degree Pass programs and course structures using the old syllabus.', active:false},
     {key:'masters2024', title:'Masters', displayTitle:'Masters Program', code:'MAS', tag:'2024–25 Syllabus', desc:'Explore Masters programs and calculate your CGPA using the updated syllabus.', active:false},
-    {key:'masters2013', title:'Masters', displayTitle:'Masters Program', code:'MAS', tag:'2013–14 Syllabus', desc:'Explore Masters programs and course structures using the current syllabus.', active:true},
+    {key:'masters2013', title:'Masters', displayTitle:'Masters Program', code:'MAS', tag:'2013–14 Syllabus', desc:'Explore Masters programs and course structures using the current syllabus.', active:false},
     {key:'prelim2024', title:'Preliminary to Masters', displayTitle:'Preliminary to Masters', code:'PRE', tag:'2024–25 Syllabus', desc:'Explore Preliminary to Masters programs and calculate your CGPA using the updated syllabus.', active:false},
-    {key:'prelim2013', title:'Preliminary to Masters', displayTitle:'Preliminary to Masters', code:'PRE', tag:'2013–14 Syllabus', desc:'Explore Preliminary to Masters programs and course structures using the current syllabus.', active:true},
-    {key:'incampus2013', title:'In-Campus Masters', displayTitle:'In-Campus Masters', code:'ICM', tag:'2013–14 Syllabus', desc:'Explore In-Campus Masters programs and course structures using the current syllabus.', active:true},
+    {key:'prelim2013', title:'Preliminary to Masters', displayTitle:'Preliminary to Masters', code:'PRE', tag:'2013–14 Syllabus', desc:'Explore Preliminary to Masters programs and course structures using the current syllabus.', active:false},
+    {key:'incampus2013', title:'In-Campus Masters', displayTitle:'In-Campus Masters', code:'ICM', tag:'2013–14 Syllabus', desc:'Explore In-Campus Masters programs and course structures using the current syllabus.', active:false},
   ];
 
   const PROGRAM_YEARS = {
@@ -8082,7 +8225,7 @@
     1: [
       {code:'510201', name:'Computer Fundamentals',              credit:3.0},
       {code:'510203', name:'Structured Programming Language',     credit:3.0},
-      {code:'510204', name:'Computer Programming Lab I',          credit:1.5},
+      {code:'510204', name:'Computer Programming Lab-I',          credit:1.5},
       {code:'510205', name:'Physics',                            credit:3.0},
       {code:'510207', name:'Calculus',                           credit:3.0},
       {code:'510209', name:'English',                            credit:3.0},
@@ -8192,7 +8335,7 @@
     ['Does Gradzz work on mobile?', 'Yes, it is designed mobile-first with high-contrast tactile cards optimized for phones.', 'Using Gradzz'],
   ];
 
-  let activeSyllabus = '2024';
+  let activeSyllabus = '2013';
   let currentDept = 'Accounting';
   let currentYear = 1;
 
@@ -8202,7 +8345,34 @@
   }
 
   function renderPrograms(){
-    document.getElementById('programGrid').innerHTML = PROGRAMS.filter(p=>p.active).map(p=>`
+    document.getElementById('programGrid').innerHTML = PROGRAMS.map(p=>{
+      if(!p.active){
+        const modalTitle = (p.displayTitle || (p.title + ' Program')) + ' (' + p.tag.replace(' Syllabus','') + ')';
+        const cleanTitle = modalTitle.replace(/'/g, "\\'");
+        return `
+      <div class="program-card soon" role="button" tabindex="0"
+        onclick="openSoonModal('${cleanTitle}', '${p.code || ''}')"
+        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openSoonModal('${cleanTitle}', '${p.code || ''}');}">
+        <span class="pc-watermark">${p.code || ''}</span>
+        <div>
+          <div class="pc-top">
+            <span class="pc-badge">${p.tag}</span>
+            <span class="m-soon-pill"><span class="m-soon-dot"></span>Coming Soon</span>
+          </div>
+          <div class="pc-body">
+            <h2>${p.displayTitle || (p.title + ' Program')}</h2>
+            <p>${p.desc}</p>
+          </div>
+        </div>
+        <div class="pc-footer">
+          <span class="pc-action pc-action-soon">
+            <span>Coming Soon</span>
+            <span class="pc-arrow">→</span>
+          </span>
+        </div>
+      </div>`;
+      }
+      return `
       <div class="program-card" role="button" tabindex="0"
         onclick="openProgram('${p.key}')"
         onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProgram('${p.key}');}">
@@ -8222,7 +8392,8 @@
             <span class="pc-arrow">→</span>
           </span>
         </div>
-      </div>`).join('');
+      </div>`;
+    }).join('');
   }
 
   const SESSION_LABELS = {'2024':'2024–25 Session','2013':'2013–14 Session','pass2024':'2024–25 Session','pass2013':'2013–14 Session','masters2024':'2024–25 Session','masters2013':'2013–14 Session','incampus2013':'2013–14 Session','prelim2024':'2024–25 Session','prelim2013':'2013–14 Session'};
@@ -8329,8 +8500,13 @@
   }
 
   function openProgram(key){
-    activeSyllabus = key;
     const prog = PROGRAMS.find(p=>p.key===key);
+    if(prog && !prog.active){
+      const modalTitle = (prog.displayTitle || (prog.title + ' Program')) + ' (' + prog.tag.replace(' Syllabus','') + ')';
+      openSoonModal(modalTitle, prog.code || '');
+      return;
+    }
+    activeSyllabus = key;
     updateDeptHeading(prog, key);
     renderDeptGroups();
     renderGradingScale();
@@ -8377,6 +8553,36 @@
     prelim: [{key:'prelim2013', label:'2013–14'}],
     incampus: [{key:'incampus2013', label:'2013–14'}],
   };
+
+  const PROGRAM_GROUP_LABELS = {
+    honours: 'Honours',
+    pass: 'Degree (Pass Course)',
+    masters: 'Masters',
+    prelim: 'Preliminary to Masters',
+    incampus: 'In-Campus Masters'
+  };
+
+  function initQuickSearch(){
+    const progSel = document.getElementById('qsProgram');
+    if(!progSel) return;
+    // Strict requirement: Only display programs in Quick Search that have at least one active syllabus
+    const activeGroups = Object.keys(PROGRAM_GROUPS).filter(gKey => {
+      const opts = PROGRAM_GROUPS[gKey] || [];
+      return opts.some(o => {
+        const p = PROGRAMS.find(pr => pr.key === o.key);
+        return p && p.active;
+      });
+    });
+    progSel.innerHTML = '<option value="">Select Program</option>' +
+      activeGroups.map(g => `<option value="${g}">${PROGRAM_GROUP_LABELS[g] || g}</option>`).join('');
+    qsResetSubject();
+    const sessionSel = document.getElementById('qsSession');
+    if(sessionSel){
+      sessionSel.innerHTML = '<option value="">Select Syllabus</option>';
+      sessionSel.disabled = true;
+    }
+  }
+
   function qsProgramChange(){
     const prog = document.getElementById('qsProgram').value;
     const sessionSel = document.getElementById('qsSession');
@@ -8386,8 +8592,13 @@
       sessionSel.disabled = true;
       return;
     }
-    const opts = PROGRAM_GROUPS[prog] || [];
-    // Safety net for future programs whose syllabus data isn't published yet.
+    const rawOpts = PROGRAM_GROUPS[prog] || [];
+    // Strict requirement: Exclude any coming soon syllabus from Quick Search
+    const opts = rawOpts.filter(o => {
+      const p = PROGRAMS.find(pr => pr.key === o.key);
+      return p && p.active;
+    });
+
     if(!opts.length){
       sessionSel.innerHTML = '<option value="">Coming soon</option>';
       sessionSel.disabled = true;
@@ -8406,6 +8617,10 @@
     const key = document.getElementById('qsSession').value;
     const subjSel = document.getElementById('qsSubject');
     if(!key){ qsResetSubject(); return; }
+    // Strict requirement: Only allow active syllabuses
+    const prog = PROGRAMS.find(p=>p.key===key);
+    if(!prog || !prog.active){ qsResetSubject(); return; }
+
     const groups = DEPTS[key] || {};
     let all = [];
     Object.values(groups).forEach(list=> list.forEach(d=>{ if(!d.includes('(Soon)')) all.push(d); }));
@@ -8422,6 +8637,9 @@
       return;
     }
     const prog = PROGRAMS.find(p=>p.key===key);
+    if(!prog || !prog.active){
+      return;
+    }
     if(dept){
       activeSyllabus = key;
       updateDeptHeading(prog, key);
@@ -8431,6 +8649,7 @@
     }
   }
   function qsReset(){
+    initQuickSearch();
     document.getElementById('qsProgram').value = '';
     qsProgramChange();
   }
@@ -8474,7 +8693,7 @@
       btn.setAttribute('aria-expanded','true');
     }
     document.body.classList.add('mobile-menu-open');
-    if(window.lenis) lenis.stop();
+    lockScroll();
     setTimeout(() => {
       const closeBtn = document.getElementById('mobileMenuCloseBtn');
       if(closeBtn) closeBtn.focus();
@@ -8490,6 +8709,7 @@
       btn.focus();
     }
     document.body.classList.remove('mobile-menu-open');
+    unlockScroll();
     const mmContent = document.querySelector('.mm-content');
     if(mmContent) mmContent.scrollTop = 0;
     if(window.lenis) lenis.start();
@@ -8674,7 +8894,46 @@
       }
     }
   });
-function openSoonModal(name, code){
+let activeModalLocks = 0;
+  function lockScroll(){
+    activeModalLocks++;
+    if(activeModalLocks === 1){
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      if(scrollbarWidth > 0){
+        document.body.style.paddingRight = scrollbarWidth + 'px';
+        const header = document.querySelector('header.site');
+        if(header) header.style.paddingRight = scrollbarWidth + 'px';
+      }
+      document.body.style.overflow = 'hidden';
+      if(window.lenis && typeof window.lenis.stop === 'function') lenis.stop();
+    }
+  }
+
+  function unlockScroll(){
+    activeModalLocks = Math.max(0, activeModalLocks - 1);
+    if(activeModalLocks === 0){
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+      const header = document.querySelector('header.site');
+      if(header) header.style.paddingRight = '';
+      if(window.lenis && typeof window.lenis.start === 'function') lenis.start();
+    }
+  }
+
+  function formatRomanNumerals(str){
+    if(!str || typeof str !== 'string') return str;
+    return str
+      .replace(/\s*[Ⅷ]|(?:\s+|-)(VIII)\b/g, '-VIII')
+      .replace(/\s*[Ⅶ]|(?:\s+|-)(VII)\b/g, '-VII')
+      .replace(/\s*[Ⅵ]|(?:\s+|-)(VI)\b/g, '-VI')
+      .replace(/\s*[Ⅳ]|(?:\s+|-)(IV)\b/g, '-IV')
+      .replace(/\s*[Ⅴ]|(?:\s+|-)(V)\b/g, '-V')
+      .replace(/\s*[Ⅲ]|(?:\s+|-)(III)\b/g, '-III')
+      .replace(/\s*[Ⅱ]|(?:\s+|-)(II)\b/g, '-II')
+      .replace(/\s*[Ⅰ]|(?:\s+|-)(I)\b/g, '-I');
+  }
+
+  function openSoonModal(name, code){
     const abbrev = deptAbbrev(name);
     const codeBadge = (code || '').replace('-', ' · ');
     document.getElementById('soonDeptName').textContent = name;
@@ -8682,13 +8941,11 @@ function openSoonModal(name, code){
     const wm = document.getElementById('soonDeptWatermark');
     if(wm) wm.textContent = abbrev;
     const snOv = document.getElementById('soonModalOverlay'); if(snOv){ snOv.scrollTop = 0; snOv.classList.add('open'); }
-    document.body.style.overflow='hidden';
-    lenis.stop();
+    lockScroll();
   }
   function closeSoonModal(){
     document.getElementById('soonModalOverlay').classList.remove('open');
-    document.body.style.overflow='';
-    lenis.start();
+    unlockScroll();
   }
 
   function validateNumericField(id, max, wrapId){
@@ -8990,14 +9247,12 @@ function openSoonModal(name, code){
     ['siRollWrap','siRegNoWrap','siYearWrap'].forEach(clearFieldError);
     const siOv = document.getElementById('studentInfoOverlay');
     if(siOv){ siOv.scrollTop = 0; siOv.classList.add('open'); }
-    document.body.style.overflow='hidden';
-    lenis.stop();
+    lockScroll();
   }
   function closeStudentInfoModal(){
     closeCollegeSuggestions();
     document.getElementById('studentInfoOverlay').classList.remove('open');
-    document.body.style.overflow='';
-    lenis.start();
+    unlockScroll();
   }
   let isGeneratingPdf = false;
   async function downloadTranscript(){
@@ -9092,12 +9347,13 @@ function openSoonModal(name, code){
     let vals = {};
     try{ vals = JSON.parse(sessionStorage.getItem(gradeStorageKey(currentDept, currentYear))) || {}; }catch(e){ vals = {}; }
 
-    const applicableSubjects = rawSubjects.filter((s, i) => {
+    const subjects = rawSubjects.filter((s, i) => {
       if(s && s.type === 'elective'){
         return !!vals[i];
       }
       return true;
     });
+    const applicableSubjects = subjects;
 
     let creditsEarned = 0, points = 0, gradedCount = 0, hasFail = false;
     function buildSubjectRow(s, i){
@@ -9114,7 +9370,7 @@ function openSoonModal(name, code){
         grade, credit: s.credit,
         html: `<tr>
         <td class="rs2-code">${s.code}</td>
-        <td class="rs2-ttl">${s.name.toUpperCase()}</td>
+        <td class="rs2-ttl">${formatRomanNumerals(s.name).toUpperCase()}</td>
         <td class="rs2-credit">${s.credit}</td>
         <td><span class="rs2-grade-badge${gradeFail?' rs2-fail':''}">${grade ? grade.g : '—'}</span></td>
       </tr>`
@@ -9937,9 +10193,42 @@ function openSoonModal(name, code){
     if(!panel) return;
     const subjects = SUBJECTS_BY_YEAR[currentYear] || [];
 
+    const streams = {};
     const groups = {};
+    const orGroups = {};
+    const selectedIndices = new Set();
+
+    // Step 1: Scan all elective subjects and collect current selections
     subjects.forEach((s, i) => {
-      if(s && s.type === 'elective' && s.groupId){
+      if(!s || s.type !== 'elective') return;
+
+      const sel = panel.querySelector(`select.grade-select[data-idx="${i}"]`);
+      const hasVal = !!(sel && sel.value && sel.value !== '');
+      if(hasVal) selectedIndices.add(i);
+
+      // Stream tracking (e.g. Science Stream Group A vs Social Science Stream Group B)
+      if(s.streamId){
+        if(!streams[s.streamId]){
+          streams[s.streamId] = { activeGroupId: null };
+        }
+        if(hasVal && !streams[s.streamId].activeGroupId){
+          streams[s.streamId].activeGroupId = s.groupId;
+        }
+      }
+
+      // Alternative / OR group tracking (e.g. 212009 vs 212111)
+      if(s.orGroup){
+        if(!orGroups[s.orGroup]){
+          orGroups[s.orGroup] = { activeIndex: null, allIndices: [] };
+        }
+        orGroups[s.orGroup].allIndices.push(i);
+        if(hasVal && orGroups[s.orGroup].activeIndex === null){
+          orGroups[s.orGroup].activeIndex = i;
+        }
+      }
+
+      // Group & Set tracking (e.g. maxSets: 2 or maxSelect: 3)
+      if(s.groupId){
         if(!groups[s.groupId]){
           groups[s.groupId] = {
             maxSets: s.maxSets || s.maxSelect || 1,
@@ -9955,43 +10244,74 @@ function openSoonModal(name, code){
           };
         }
         grp.sets[setId].allIndices.push(i);
-
-        const sel = panel.querySelector(`select.grade-select[data-idx="${i}"]`);
-        if(sel && sel.value && sel.value !== ''){
+        if(hasVal){
           grp.sets[setId].selectedIndices.push(i);
         }
       }
     });
 
-    Object.keys(groups).forEach(groupId => {
-      const grp = groups[groupId];
-      const setKeys = Object.keys(grp.sets);
+    // Step 2: Enforce locks and mute state on each elective subject
+    subjects.forEach((s, i) => {
+      if(!s || s.type !== 'elective') return;
 
-      const activeSets = setKeys.filter(k => grp.sets[k].selectedIndices.length > 0);
-      const isLimitReached = activeSets.length >= grp.maxSets;
+      const sel = panel.querySelector(`select.grade-select[data-idx="${i}"]`);
+      const row = panel.querySelector(`tr.subject-row[data-idx="${i}"]`);
+      if(!sel) return;
 
-      setKeys.forEach(setId => {
-        const setObj = grp.sets[setId];
-        const isActive = activeSets.includes(setId);
+      const isCurrentSelected = selectedIndices.has(i);
+      let shouldLock = false;
 
-        setObj.allIndices.forEach(idx => {
-          const sel = panel.querySelector(`select.grade-select[data-idx="${idx}"]`);
-          const row = panel.querySelector(`tr.subject-row[data-idx="${idx}"]`);
-          if(!sel) return;
+      // Rule 1: Stream Mutual Exclusion
+      // If a group in this stream is active, any subject belonging to a DIFFERENT group in this stream is locked
+      if(s.streamId && streams[s.streamId] && streams[s.streamId].activeGroupId){
+        if(streams[s.streamId].activeGroupId !== s.groupId){
+          shouldLock = true;
+        }
+      }
 
-          if(isLimitReached && !isActive){
-            sel.disabled = true;
-            if(row) row.classList.add('row-locked');
-          } else {
-            sel.disabled = false;
-            if(row) row.classList.remove('row-locked');
-          }
+      // Rule 2: OR Group Mutual Exclusion
+      // If one course in the OR group is selected, all other courses in this OR group are locked
+      if(!shouldLock && s.orGroup && orGroups[s.orGroup]){
+        const orGrp = orGroups[s.orGroup];
+        if(orGrp.activeIndex !== null && orGrp.activeIndex !== i){
+          shouldLock = true;
+        }
+      }
 
-          if(window.CustomSelect && window.CustomSelect.refresh){
-            window.CustomSelect.refresh(sel);
-          }
-        });
-      });
+      // Rule 3: Group Capacity Limit (maxSets / maxSelect)
+      // If active sets reach group limit, sets that are not currently active are locked
+      if(!shouldLock && s.groupId && groups[s.groupId]){
+        const grp = groups[s.groupId];
+        const setKeys = Object.keys(grp.sets);
+        const activeSets = setKeys.filter(k => grp.sets[k].selectedIndices.length > 0);
+        const isLimitReached = activeSets.length >= grp.maxSets;
+
+        const currentSetId = s.setId || ('item_' + (s.code || i));
+        const isSetAlreadyActive = activeSets.includes(currentSetId);
+
+        if(isLimitReached && !isSetAlreadyActive){
+          shouldLock = true;
+        }
+      }
+
+      // Apply disabled state & CSS classes
+      if(shouldLock){
+        if(isCurrentSelected){
+          sel.value = '';
+          const marksElem = document.getElementById('marks-' + i);
+          if(marksElem) marksElem.textContent = '—';
+          selectedIndices.delete(i);
+        }
+        sel.disabled = true;
+        if(row) row.classList.add('row-locked');
+      } else {
+        sel.disabled = false;
+        if(row) row.classList.remove('row-locked');
+      }
+
+      if(window.CustomSelect && window.CustomSelect.refresh){
+        window.CustomSelect.refresh(sel);
+      }
     });
   }
 
@@ -10026,7 +10346,7 @@ function openSoonModal(name, code){
           rows.push(`
             <tr class="subject-row${s.type==='elective'?' is-elective':''}" data-idx="${i}" data-group-id="${s.groupId || ''}">
               <td class="code">${s.code}</td>
-              <td class="paper"><span class="paper-title-text">${s.name}</span></td>
+              <td class="paper"><span class="paper-title-text">${formatRomanNumerals(s.name)}</span></td>
               <td class="credit">${s.credit}</td>
               <td class="grade"><select class="grade-select" data-idx="${i}" data-group-id="${s.groupId || ''}" onchange="recalc()">
                 <option value="">—</option>
@@ -10043,6 +10363,7 @@ function openSoonModal(name, code){
             </div>
             <div class="table-scroll">
               <table class="marksheet">
+                <colgroup><col style="width:115px"><col><col style="width:85px"><col style="width:165px"><col style="width:162px"></colgroup>
                 <thead><tr><th class="code">Code</th><th class="paper">Paper title</th><th class="credit">Credit</th><th class="grade">Grade</th><th class="marks">Range</th></tr></thead>
                 <tbody>${rows.join('')}<tr class="total"><td></td><td class="paper">Semester Total</td><td class="credit" id="semTotalCredits-${gi}">0</td><td colspan="2" id="semTotalGpa-${gi}">0.00</td></tr></tbody>
               </table>
@@ -10054,7 +10375,7 @@ function openSoonModal(name, code){
           <div class="year-total-block">
             <div class="table-scroll">
               <table class="marksheet">
-                <colgroup><col style="width:102px"><col><col style="width:72px"><col style="width:139px"><col style="width:136px"></colgroup>
+                <colgroup><col style="width:115px"><col><col style="width:85px"><col style="width:165px"><col style="width:162px"></colgroup>
                 <tbody><tr class="total"><td></td><td class="paper">${unitWord(activeSyllabus)} Total</td><td class="credit" id="totalCredits">0</td><td colspan="2" id="totalGpa">0.00</td></tr></tbody>
               </table>
             </div>
@@ -10066,7 +10387,7 @@ function openSoonModal(name, code){
         return `
           <tr class="subject-row${s.type==='elective'?' is-elective':''}" data-idx="${i}" data-group-id="${s.groupId || ''}">
             <td class="code">${s.code}</td>
-            <td class="paper"><span class="paper-title-text">${s.name}</span></td>
+            <td class="paper"><span class="paper-title-text">${formatRomanNumerals(s.name)}</span></td>
             <td class="credit">${s.credit}</td>
             <td class="grade"><select class="grade-select" data-idx="${i}" data-group-id="${s.groupId || ''}" onchange="recalc()">
               <option value="">—</option>
@@ -10086,6 +10407,7 @@ function openSoonModal(name, code){
         <div class="semester-block">
           <div class="table-scroll">
           <table class="marksheet">
+            <colgroup><col style="width:115px"><col><col style="width:85px"><col style="width:165px"><col style="width:162px"></colgroup>
             <thead><tr><th class="code">Code</th><th class="paper">Paper title</th><th class="credit">Credit</th><th class="grade">Grade</th><th class="marks">Range</th></tr></thead>
             <tbody id="subjectRows">${rowsHtml}<tr class="total"><td></td><td class="paper">${unitWord(activeSyllabus)} Total</td><td class="credit" id="totalCredits">0</td><td colspan="2" id="totalGpa">0.00</td></tr></tbody>
           </table>
@@ -10237,6 +10559,7 @@ function openSoonModal(name, code){
   }
 
   function recalc(){
+    enforceElectiveLocks();
     let creditsEarned=0, points=0;
     const subjects = SUBJECTS_BY_YEAR[currentYear] || [];
     document.querySelectorAll('#subjectPanel select.grade-select').forEach(sel=>{
@@ -10320,6 +10643,7 @@ function openSoonModal(name, code){
     }).join('');
   }
   renderPrograms();
+  initQuickSearch();
   renderFaq();
   renderGradingScale();
   renderClassScale();
