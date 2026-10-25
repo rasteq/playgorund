@@ -8490,7 +8490,43 @@
     if(words.length>=2) return words.slice(0,4).map(w=>w[0]).join('').toUpperCase();
     return name.replace(/[^A-Za-z]/g,'').slice(0,3).toUpperCase();
   }
+  const DEPT_OFFICIAL_CODES = {
+    'Bangla': '10',
+    'English': '11',
+    'Arabic': '12',
+    'Sanskrit': '13',
+    'History': '15',
+    'Islamic History & Culture': '16',
+    'Philosophy': '17',
+    'Islamic Studies': '18',
+    'Political Science': '19',
+    'Sociology': '20',
+    'Social Work': '21',
+    'Economics': '22',
+    'Marketing': '23',
+    'Finance and Banking': '24',
+    'Accounting': '25',
+    'Management': '26',
+    'Physics': '27',
+    'Chemistry': '28',
+    'Biochemistry and Molecular Biology': '29',
+    'Botany': '30',
+    'Zoology': '31',
+    'Geography and Environment': '32',
+    'Soil Science': '33',
+    'Psychology': '34',
+    'Home Economics': '35',
+    'Statistics': '36',
+    'Mathematics': '37',
+    'Library and Information Science': '38',
+    'Anthropology': '40',
+    'Environmental Science': '44',
+    'Computer Science': '42',
+    'General BA': '01'
+  };
+
   function deptCodeNum(name){
+    if (DEPT_OFFICIAL_CODES[name]) return DEPT_OFFICIAL_CODES[name];
     let h=0;
     for(let i=0;i<name.length;i++){ h=(h*31+name.charCodeAt(i))>>>0; }
     return String(10+(h%89)).padStart(2,'0');
