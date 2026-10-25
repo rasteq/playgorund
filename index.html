@@ -2266,8 +2266,12 @@
     [data-theme="dark"] .pc-watermark{color:rgba(255,255,255,0.04);}
 
     .pc-top{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;}
-    .pc-badge{ display:inline-flex;align-items:center;border-radius:8px;background:#F1F5F9;padding:4px 10px;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:0.02em;line-height:1.35;color:#1E293B;border:1px solid rgba(226,232,240,0.9);box-shadow:0 1px 2px 0 rgba(0,0,0,0.05); }
-    [data-theme="dark"] .pc-badge{ background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:#94A3B8;box-shadow:none; }
+    .pc-badge{ display:inline-flex;align-items:center;gap:7px;background:transparent;border:none;box-shadow:none;padding:0;font-family:var(--mono);font-size:11.5px;font-weight:600;letter-spacing:0.01em;line-height:1.35;color:#475569; }
+    .pc-badge::before{ content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:#0F172A;opacity:0.8; }
+    .program-card:not(.soon) .pc-badge::before{ background:#10B981;box-shadow:0 0 0 2px rgba(16,185,129,0.2); }
+    [data-theme="dark"] .pc-badge{ background:transparent;border:none;box-shadow:none;color:#94A3B8; }
+    [data-theme="dark"] .pc-badge::before{ background:#CBD5E1; }
+    [data-theme="dark"] .program-card:not(.soon) .pc-badge::before{ background:#10B981;box-shadow:0 0 0 2px rgba(16,185,129,0.25); }
 
     .pc-body{margin-top:20px;}
     .program-card h2{
@@ -8374,8 +8378,7 @@
         </div>
         <div class="pc-footer">
           <span class="pc-action pc-action-soon">
-            <span>Coming Soon</span>
-            <span class="pc-arrow">→</span>
+            <span>Not available yet</span>
           </span>
         </div>
       </div>`;
@@ -8906,13 +8909,6 @@ let activeModalLocks = 0;
   function lockScroll(){
     activeModalLocks++;
     if(activeModalLocks === 1){
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-      if(scrollbarWidth > 0){
-        document.body.style.paddingRight = scrollbarWidth + 'px';
-        const header = document.querySelector('header.site');
-        if(header) header.style.paddingRight = scrollbarWidth + 'px';
-      }
-      document.body.style.overflow = 'hidden';
       if(window.lenis && typeof window.lenis.stop === 'function') lenis.stop();
     }
   }
@@ -8920,13 +8916,29 @@ let activeModalLocks = 0;
   function unlockScroll(){
     activeModalLocks = Math.max(0, activeModalLocks - 1);
     if(activeModalLocks === 0){
-      document.body.style.overflow = '';
-      document.body.style.paddingRight = '';
-      const header = document.querySelector('header.site');
-      if(header) header.style.paddingRight = '';
       if(window.lenis && typeof window.lenis.start === 'function') lenis.start();
     }
   }
+
+  // Universal layer popup: wheel on backdrop does not scroll background page
+  document.addEventListener('wheel', function(e){
+    if(activeModalLocks > 0){
+      const target = e.target;
+      if(target && (target.id === 'soonModalOverlay' || target.id === 'studentInfoOverlay' || target.classList.contains('modal-overlay'))){
+        e.preventDefault();
+      }
+    }
+  }, { passive: false });
+
+  // Universal Escape key closes any open modal layer
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){
+      const soon = document.getElementById('soonModalOverlay');
+      if(soon && soon.classList.contains('open')) closeSoonModal();
+      const si = document.getElementById('studentInfoOverlay');
+      if(si && si.classList.contains('open')) closeStudentInfoModal();
+    }
+  });
 
   function formatRomanNumerals(str){
     if(!str || typeof str !== 'string') return str;
