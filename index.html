@@ -52,7 +52,8 @@
   <meta name="msapplication-TileColor" content="#0F1010">
   <meta name="msapplication-TileImage" content="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400..800&family=Inter:wght@400..800&family=Hind+Siliguri:wght@500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <!-- Anti-Flash of Unstyled Theme (FOUC) Instant Script -->
   <script>
     (function() {
@@ -96,8 +97,8 @@
       --grad2: linear-gradient(135deg,#FF4D4F 0%,#ED2024 100%);
       --grad3: linear-gradient(135deg,#10B981 0%,#ED2024 100%);
       --grad-modal: linear-gradient(135deg,#0F1010 0%,#ED2024 100%);
-      --disp:'Space Grotesk','Noto Sans Bengali',sans-serif;
-      --sans:'Inter','Noto Sans Bengali',sans-serif;
+      --disp:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans Bengali',sans-serif;
+      --sans:'Plus Jakarta Sans','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans Bengali',sans-serif;
       --mono:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
       --r:18px;
       --shadow:0 8px 30px rgba(15,16,16,.06);
@@ -385,9 +386,24 @@
     html{
       scrollbar-gutter: stable;
     }
-    body{
+    html{
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      text-rendering:optimizeLegibility;
+    }
+    
+    .brand-zz{
+      color: var(--primary, #ED2024);
+      font-weight: inherit;
+      font-style: inherit;
+      letter-spacing: inherit;
+    }
+body{
       margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);
-      -webkit-font-smoothing:antialiased;overflow-x:hidden;font-size:15px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      text-rendering:optimizeLegibility;
+      overflow-x:hidden;font-size:15px;
     }
     a{color:inherit;text-decoration:none;}
     button{font-family:inherit;cursor:pointer;}
@@ -1820,7 +1836,7 @@
       
     }
     h1.hero-title .g{background:var(--grad1);-webkit-background-clip:text;background-clip:text;color:transparent;}
-    p.hero-sub{font-size:clamp(12px,3.3vw,13px);color:var(--muted);max-width:520px;margin:0 auto 28px;line-height:1.6;}
+    p.hero-sub{font-size:clamp(12px,3.3vw,13px);font-weight:550;color:var(--muted);max-width:520px;margin:0 auto 28px;line-height:1.6;}
     .hero-sub-line{white-space:normal;display:inline;}
     .hero-sub-line + .hero-sub-line{margin-left:.3em;}
     .hero-cta{display:inline-flex;}
@@ -1914,7 +1930,7 @@
       border-color:#475569;box-shadow:0 18px 36px -6px rgba(0,0,0,0.6), 0 4px 12px -2px rgba(0,0,0,0.35);
     }
 
-    .contact-grid{display:grid;grid-template-columns:minmax(220px,270px) 1fr;gap:20px;align-items:start;}
+    .contact-grid{display:grid;grid-template-columns:minmax(260px,320px) 1fr;gap:24px;align-items:start;}
     @media (max-width:860px){ .contact-grid{grid-template-columns:1fr;} }
 
     .contact-panel{
@@ -2350,10 +2366,10 @@
     .dept-card.soon .dc-code{ font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.04em;color:#334155;white-space:nowrap; }
     [data-theme="dark"] .dept-card.soon .dc-code{ font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.04em;color:#334155;white-space:nowrap; }
 
-    .dc-badge{ display:inline-flex;align-items:center;border-radius:8px;background:#F1F5F9;padding:3px 8px;font-family:var(--mono);font-size:11px;font-weight:700;color:#1E293B;border:1px solid rgba(226,232,240,0.9);box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);white-space:nowrap; }
+    .dc-badge{ display:inline-flex;align-items:center;border-radius:8px;background:#EEEFF0;padding:3px 8px;font-family:var(--mono);font-size:11px;font-weight:700;color:#1E293B;border:1px solid rgba(226,232,240,0.9);box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);white-space:nowrap; }
     [data-theme="dark"] .dc-badge{ background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:#94A3B8;box-shadow:none; }
-    .dept-card.soon .dc-badge{ display:inline-flex;align-items:center;border-radius:8px;background:#F1F5F9;padding:3px 8px;font-family:var(--mono);font-size:11px;font-weight:700;color:#1E293B;border:1px solid rgba(226,232,240,0.9);box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);white-space:nowrap; }
-    [data-theme="dark"] .dept-card.soon .dc-badge{ display:inline-flex;align-items:center;border-radius:8px;background:#F1F5F9;padding:3px 8px;font-family:var(--mono);font-size:11px;font-weight:700;color:#1E293B;border:1px solid rgba(226,232,240,0.9);box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);white-space:nowrap; }
+    .dept-card.soon .dc-badge{ display:inline-flex;align-items:center;border-radius:8px;background:#EEEFF0;padding:3px 8px;font-family:var(--mono);font-size:11px;font-weight:700;color:#1E293B;border:1px solid rgba(226,232,240,0.9);box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);white-space:nowrap; }
+    [data-theme="dark"] .dept-card.soon .dc-badge{ background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.1);color:#94A3B8;box-shadow:none; }
 
     .dc-body{position:relative;z-index:10;margin-top:20px;text-align:left;}
     .dc-title{
@@ -2376,7 +2392,7 @@
     @media (max-width:479px) {
       .dept-card { padding: 15px 13px; border-radius: 20px; }
       .dc-code{ font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.04em;color:#334155;white-space:nowrap; }
-      .dc-badge{ display:inline-flex;align-items:center;border-radius:8px;background:#F1F5F9;padding:3px 8px;font-family:var(--mono);font-size:11px;font-weight:700;color:#1E293B;border:1px solid rgba(226,232,240,0.9);box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);white-space:nowrap; }
+      .dc-badge{ display:inline-flex;align-items:center;border-radius:8px;background:#EEEFF0;padding:3px 8px;font-family:var(--mono);font-size:11px;font-weight:700;color:#1E293B;border:1px solid rgba(226,232,240,0.9);box-shadow:0 1px 2px 0 rgba(0,0,0,0.05);white-space:nowrap; }
       .dc-body { margin-top: 14px; }
       .dc-watermark { font-size: 40px; }
     }
@@ -3383,6 +3399,208 @@
         background:rgba(255,255,255,0.03);
       }
     }
+    /* ===== FAQ SECTION BADGE PILLS ===== */
+    .faq-pill-indigo {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      padding: 4px 12px;
+      border-radius: 999px;
+      color: #4F46E5;
+      background: rgba(79, 70, 229, 0.08);
+      border: 1px solid rgba(79, 70, 229, 0.22);
+    }
+    [data-theme="dark"] .faq-pill-indigo {
+      color: #818CF8;
+      background: rgba(99, 102, 241, 0.12);
+      border-color: rgba(99, 102, 241, 0.28);
+    }
+    .faq-pill-indigo .faq-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #6366F1;
+      display: inline-block;
+    }
+    [data-theme="dark"] .faq-pill-indigo .faq-pill-dot {
+      background: #818CF8;
+    }
+
+    .faq-pill-blue {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      padding: 4px 12px;
+      border-radius: 999px;
+      color: #0284C7;
+      background: rgba(2, 132, 199, 0.08);
+      border: 1px solid rgba(2, 132, 199, 0.22);
+    }
+    [data-theme="dark"] .faq-pill-blue {
+      color: #38BDF8;
+      background: rgba(2, 132, 199, 0.14);
+      border-color: rgba(56, 189, 248, 0.28);
+    }
+    .faq-pill-blue .faq-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0284C7;
+      display: inline-block;
+    }
+    [data-theme="dark"] .faq-pill-blue .faq-pill-dot {
+      background: #38BDF8;
+    }
+
+    .faq-pill-green {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      padding: 4px 12px;
+      border-radius: 999px;
+      color: #059669;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.22);
+    }
+    [data-theme="dark"] .faq-pill-green {
+      color: #34D399;
+      background: rgba(16, 185, 129, 0.14);
+      border-color: rgba(52, 211, 153, 0.28);
+    }
+    .faq-pill-green .faq-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10B981;
+      display: inline-block;
+    }
+    [data-theme="dark"] .faq-pill-green .faq-pill-dot {
+      background: #34D399;
+    }
+
+    /* ===== DYNAMIC SUMMARY ROW & YEAR TOTAL BLOCK THEMES ===== */
+    .year-total-block {
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    tr.total {
+      transition: background 0.3s ease;
+    }
+    tr.total td {
+      transition: border-color 0.3s ease;
+    }
+    tr.total td[colspan] {
+      transition: color 0.3s ease;
+    }
+
+    /* 1. Default State (When GPA is 0.00 or no grades are selected) */
+    tr.total.state-default,
+    .year-total-block.state-default {
+      background: #F8FAFC !important;
+      border-color: rgba(226, 232, 240, 0.9) !important;
+    }
+    [data-theme="dark"] tr.total.state-default,
+    [data-theme="dark"] .year-total-block.state-default {
+      background: rgba(255, 255, 255, 0.03) !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    tr.total.state-default td {
+      border-top-color: rgba(226, 232, 240, 0.9) !important;
+    }
+    [data-theme="dark"] tr.total.state-default td {
+      border-top-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    tr.total.state-default td[colspan] {
+      color: #0F172A !important;
+    }
+    [data-theme="dark"] tr.total.state-default td[colspan] {
+      color: #FFFFFF !important;
+    }
+
+    /* 2. Success State (When valid grades are selected and GPA >= 2.00) */
+    tr.total.state-pass,
+    .year-total-block.state-pass {
+      background: rgba(16, 185, 129, 0.08) !important;
+      border-color: rgba(16, 185, 129, 0.25) !important;
+    }
+    [data-theme="dark"] tr.total.state-pass,
+    [data-theme="dark"] .year-total-block.state-pass {
+      background: rgba(16, 185, 129, 0.14) !important;
+      border-color: rgba(16, 185, 129, 0.25) !important;
+    }
+    tr.total.state-pass td {
+      border-top-color: rgba(16, 185, 129, 0.25) !important;
+    }
+    [data-theme="dark"] tr.total.state-pass td {
+      border-top-color: rgba(16, 185, 129, 0.25) !important;
+    }
+    tr.total.state-pass td[colspan] {
+      color: #059669 !important;
+    }
+    [data-theme="dark"] tr.total.state-pass td[colspan] {
+      color: #34D399 !important;
+    }
+
+    /* 3. Fail/Warning State (If any selected subject has 'F' or GPA < 2.00) */
+    tr.total.state-fail,
+    .year-total-block.state-fail {
+      background: rgba(237, 32, 36, 0.08) !important;
+      border-color: rgba(237, 32, 36, 0.22) !important;
+    }
+    [data-theme="dark"] tr.total.state-fail,
+    [data-theme="dark"] .year-total-block.state-fail {
+      background: rgba(237, 32, 36, 0.14) !important;
+      border-color: rgba(237, 32, 36, 0.22) !important;
+    }
+    tr.total.state-fail td {
+      border-top-color: rgba(237, 32, 36, 0.22) !important;
+    }
+    [data-theme="dark"] tr.total.state-fail td {
+      border-top-color: rgba(237, 32, 36, 0.22) !important;
+    }
+    tr.total.state-fail td[colspan] {
+      color: #ED2024 !important;
+    }
+    [data-theme="dark"] tr.total.state-fail td[colspan] {
+      color: #FF4D4F !important;
+    }
+
+    /* Mobile overrides for tr.total inside .semester-block */
+    @media (max-width: 767px) {
+      tr.total.state-default {
+        border: 1px solid rgba(226, 232, 240, 0.9) !important;
+      }
+      [data-theme="dark"] tr.total.state-default {
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      }
+      tr.total.state-pass {
+        border: 1px solid rgba(16, 185, 129, 0.25) !important;
+      }
+      tr.total.state-fail {
+        border: 1px solid rgba(237, 32, 36, 0.22) !important;
+      }
+    }
+
+    /* Prevent double background inside .year-total-block */
+    .year-total-block tr.total {
+      background: transparent !important;
+      border: none !important;
+    }
+    .year-total-block tr.total td {
+      border-top: none !important;
+    }
+
     tr.total{
       background:var(--marksheet-total-bg);
     }
@@ -4773,7 +4991,7 @@
     ============================================================ */
     .contact-wrap {
       width: 100%;
-      max-width: 1080px;
+      max-width: 100%;
       margin: 0 auto;
       box-sizing: border-box;
     }
@@ -5613,11 +5831,20 @@
       cursor: pointer;
       font-family: var(--disp);
       font-size: clamp(14px, 2.5vw, 15.5px);
-      font-weight: 750;
-      color: #0F172A;
+      font-weight: 700;
+      color: rgba(15, 23, 42, 0.82);
       text-wrap: balance;
+      transition: color 0.2s ease;
+    }
+    .faq-accordion-item:hover .faq-question-btn,
+    .faq-accordion-item.open .faq-question-btn {
+      color: #0F172A;
     }
     [data-theme="dark"] .faq-question-btn {
+      color: rgba(255, 255, 255, 0.86);
+    }
+    [data-theme="dark"] .faq-accordion-item:hover .faq-question-btn,
+    [data-theme="dark"] .faq-accordion-item.open .faq-question-btn {
       color: #FFFFFF;
     }
     .faq-q-text {
@@ -6655,56 +6882,6 @@
 
       <div class="program-grid" id="programGrid"></div>
     </div>
-
-    <div class="features">
-      <div class="section-eyebrow">// why Gradzz</div>
-      <h2 class="section-title">Built different, obviously</h2>
-      <div class="feat-grid-new">
-
-        <!-- 1. Auto-save (Floppy Disk / Save Icon Watermark) -->
-        <div class="feat-card-new">
-          <div class="feat-watermark">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.3">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
-            </svg>
-          </div>
-          <div style="position:relative;z-index:10;">
-            <h2>Auto-save</h2>
-            <p>Your grades save as you type - no button to hit, nothing lost while you're working. <span class="feat-note">(Grades clear when you close the tab, so download your result before you go.)</span></p>
-          </div>
-        </div>
-
-        <!-- 2. Every department, both syllabi (Graduation Cap Icon Watermark) -->
-        <div class="feat-card-new">
-          <div class="feat-watermark">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.3">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-            </svg>
-          </div>
-          <div style="position:relative;z-index:10;">
-            <h2>Every department, both syllabi</h2>
-            <p>BSc, BBA, BSS, BA - 2024–2025 and 2013–2014 credit structures, all verified and completely accurate.</p>
-          </div>
-        </div>
-
-        <!-- 3. Actually mobile-friendly (Smartphone Icon Watermark) -->
-        <div class="feat-card-new">
-          <div class="feat-watermark">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.3">
-              <rect x="5" y="2" width="14" height="20" rx="3" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5h6" />
-            </svg>
-          </div>
-          <div style="position:relative;z-index:10;">
-            <h2>Actually mobile-friendly</h2>
-            <p>Built for the phone in your hand, not just the laptop on your desk. Fast, tactile, and completely responsive.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
   </section>
 
     <!-- ================= ABOUT VIEW ================= -->
@@ -6727,7 +6904,7 @@
             origin story
           </div>
           <h2 class="about-origin-heading">
-            Gradzz started as a late-night side project because doing National University’s CGPA math by hand was genuinely not it.
+            Grad<span class="brand-zz">zz</span> started as a late-night side project because doing National University’s CGPA math by hand was genuinely not it.
           </h2>
           <p class="about-origin-p">
             Calculating grades across four years, ten distinct grade bands, and two different syllabuses manually is tedious and error-prone. We built a CGPA calculator that actually gets it right, and actually looks like something made in 2026.
@@ -6740,7 +6917,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <p class="about-disclaimer-text">
-              Gradzz is an independent educational project and isn't affiliated with National University Bangladesh - just students trying to make results day a little less stressful for everyone else.
+              Grad<span class="brand-zz">zz</span> is an independent educational project and isn't affiliated with National University Bangladesh - just students trying to make results day a little less stressful for everyone else.
             </p>
           </div>
         </div>
@@ -6830,7 +7007,7 @@
       <div class="view-hero-bar">
         <span class="view-hero-eyebrow">// help desk &amp; community</span>
         <h1 class="view-hero-title">Support &amp; Guidance</h1>
-        <p class="view-hero-subtitle">Gradzz is maintained by students, so every message gets read - whether it's a bug report, a missing syllabus, or feedback.</p>
+        <p class="view-hero-subtitle">Grad<span class="brand-zz">zz</span> is maintained by students, so every message gets read - whether it's a bug report, a missing syllabus, or feedback.</p>
       </div>
 
       <!-- Top FAQ Notice Banner -->
@@ -7062,7 +7239,7 @@
             Zero Server Storage
           </div>
           <p class="legal-card-p" style="font-weight:700;">
-            Gradzz doesn’t ask for an account, an email, or a password - so there’s nothing to leak in the first place. The grades you enter are saved only in your own browser’s session storage, on your own device, for as long as that browser tab stays open.
+            Grad<span class="brand-zz">zz</span> doesn’t ask for an account, an email, or a password - so there’s nothing to leak in the first place. The grades you enter are saved only in your own browser’s session storage, on your own device, for as long as that browser tab stays open.
           </p>
           <p class="legal-card-p">
             Nothing you type into the calculator is sent to a server, sold, or shared with anyone, including us. Closing the tab, or hitting the "Reset" button on a marksheet, clears that saved data for good.
@@ -7107,7 +7284,7 @@
           <span class="legal-badge">03 · Infrastructure &amp; Logs</span>
           <h2 class="legal-card-title">Cookies &amp; Analytics</h2>
           <p class="legal-card-p">
-            Gradzz does not use tracking cookies or intrusive third-party analytics scripts. Like most static websites, our hosting infrastructure may automatically register basic technical server logs (such as request timestamps and general traffic volume) for security, DDoS prevention, and uptime diagnostics.
+            Grad<span class="brand-zz">zz</span> does not use tracking cookies or intrusive third-party analytics scripts. Like most static websites, our hosting infrastructure may automatically register basic technical server logs (such as request timestamps and general traffic volume) for security, DDoS prevention, and uptime diagnostics.
           </p>
           <p class="legal-card-p">
             These network logs never contain your grades, student information, or any personal identifiers.
@@ -7122,7 +7299,7 @@
           <span class="legal-badge">04 · Outbound Destinations</span>
           <h2 class="legal-card-title">Third-Party Links</h2>
           <p class="legal-card-p">
-            Occasional links (such as social links or contact emails) point outside Gradzz. We are not responsible for the privacy policies or practices of external services you access through those destinations - please review their respective terms independently.
+            Occasional links (such as social links or contact emails) point outside Grad<span class="brand-zz">zz</span>. We are not responsible for the privacy policies or practices of external services you access through those destinations - please review their respective terms independently.
           </p>
         </div>
       </div>
@@ -7134,7 +7311,7 @@
           <span class="legal-badge">05 · Scope &amp; Audience</span>
           <h2 class="legal-card-title">Target Audience</h2>
           <p class="legal-card-p">
-            Gradzz is built specifically for current and prospective National University Bangladesh students, generally of adult university age. It is not engineered or marketed for children under 13, and we do not knowingly gather any data from them.
+            Grad<span class="brand-zz">zz</span> is built specifically for current and prospective National University Bangladesh students, generally of adult university age. It is not engineered or marketed for children under 13, and we do not knowingly gather any data from them.
           </p>
         </div>
       </div>
@@ -7146,7 +7323,7 @@
           <span class="legal-badge">06 · Revisions</span>
           <h2 class="legal-card-title">Policy Updates</h2>
           <p class="legal-card-p">
-            Gradzz is an independent, non-commercial student project. This privacy statement may be updated as the platform adds new features; check back here anytime for the latest revision. Have questions? Reach out directly on the <a href="#" onclick="showView('contact');return false;" class="legal-link">Contact page</a>.
+            Grad<span class="brand-zz">zz</span> is an independent, non-commercial student project. This privacy statement may be updated as the platform adds new features; check back here anytime for the latest revision. Have questions? Reach out directly on the <a href="#" onclick="showView('contact');return false;" class="legal-link">Contact page</a>.
           </p>
         </div>
       </div>
@@ -7168,17 +7345,17 @@
       <div class="view-hero-bar">
         <span class="view-hero-eyebrow">// terms of use</span>
         <h1 class="view-hero-title">Terms of Use</h1>
-        <p class="view-hero-subtitle">Simple, transparent guidelines for using the Gradzz platform.</p>
+        <p class="view-hero-subtitle">Simple, transparent guidelines for using the Grad<span class="brand-zz">zz</span> platform.</p>
       </div>
 
       <!-- 0. Overview / Preamble Card -->
       <div class="legal-card">
         <span class="legal-card-wm">LEGAL</span>
         <div class="legal-card-content">
-          <p class="legal-card-p" style="font-weight:700;">Gradzz is an independent educational initiative built by students, for students. It is not affiliated with, endorsed by, or officially connected to National University Bangladesh in any way.
+          <p class="legal-card-p" style="font-weight:700;">Grad<span class="brand-zz">zz</span> is an independent educational initiative built by students, for students. It is not affiliated with, endorsed by, or officially connected to National University Bangladesh in any way.
           </p>
           <p class="legal-card-p">
-            By accessing or using this site, you agree to the conditions outlined below. If you do not agree with them, please refrain from using Gradzz.
+            By accessing or using this site, you agree to the conditions outlined below. If you do not agree with them, please refrain from using Grad<span class="brand-zz">zz</span>.
           </p>
         </div>
       </div>
@@ -7190,10 +7367,10 @@
           <span class="legal-badge">01 · Advisory Notice</span>
           <h2 class="legal-card-title">Not an Official Record</h2>
           <p class="legal-card-p">
-            The CGPA calculator is provided for informational and convenience purposes only. While we do our best to keep grading scales, credit values, and syllabus data accurate, Gradzz is not an official record and should never replace your official transcript or result sheet issued by the university.
+            The CGPA calculator is provided for informational and convenience purposes only. While we do our best to keep grading scales, credit values, and syllabus data accurate, Grad<span class="brand-zz">zz</span> is not an official record and should never replace your official transcript or result sheet issued by the university.
           </p>
           <p class="legal-card-p">
-            Use Gradzz as a helpful estimate, not a guarantee - always confirm your final CGPA against official university documents before relying on it for academic admissions, scholarships, or employment applications.
+            Use Grad<span class="brand-zz">zz</span> as a helpful estimate, not a guarantee - always confirm your final CGPA against official university documents before relying on it for academic admissions, scholarships, or employment applications.
           </p>
         </div>
       </div>
@@ -7205,10 +7382,10 @@
           <span class="legal-badge">02 · Fair Conduct</span>
           <h2 class="legal-card-title">Acceptable Use Policy</h2>
           <p class="legal-card-p">
-            Gradzz is free to use for its intended purpose: computing and estimating your academic GPA/CGPA. Please do not attempt to scrape, mass-download, reverse-engineer for commercial resale, or otherwise disrupt the service for other students.
+            Grad<span class="brand-zz">zz</span> is free to use for its intended purpose: computing and estimating your academic GPA/CGPA. Please do not attempt to scrape, mass-download, reverse-engineer for commercial resale, or otherwise disrupt the service for other students.
           </p>
           <p class="legal-card-p">
-            Do not use Gradzz to generate or submit falsified academic records to the university, institutions, or any third parties.
+            Do not use Grad<span class="brand-zz">zz</span> to generate or submit falsified academic records to the university, institutions, or any third parties.
           </p>
         </div>
       </div>
@@ -7220,7 +7397,7 @@
           <span class="legal-badge">03 · Platform Status</span>
           <h2 class="legal-card-title">Uptime &amp; Availability</h2>
           <p class="legal-card-p">
-            Gradzz is an independently maintained student initiative - not a commercial enterprise with enterprise SLA guarantees. The platform may occasionally experience latency, undergo temporary maintenance downtime, or update course structures without prior notice.
+            Grad<span class="brand-zz">zz</span> is an independently maintained student initiative - not a commercial enterprise with enterprise SLA guarantees. The platform may occasionally experience latency, undergo temporary maintenance downtime, or update course structures without prior notice.
           </p>
         </div>
       </div>
@@ -7232,7 +7409,7 @@
           <span class="legal-badge">04 · Liability</span>
           <h2 class="legal-card-title">Limitation of Liability</h2>
           <p class="legal-card-p">
-            By using this tool, you acknowledge that it is provided strictly "as is," without warranties of any kind, whether express or implied. To the fullest extent permitted by law, Gradzz and its student developers cannot be held liable for any decisions, admissions outcomes, or losses incurred based on estimates displayed here.
+            By using this tool, you acknowledge that it is provided strictly "as is," without warranties of any kind, whether express or implied. To the fullest extent permitted by law, Grad<span class="brand-zz">zz</span> and its student developers cannot be held liable for any decisions, admissions outcomes, or losses incurred based on estimates displayed here.
           </p>
         </div>
       </div>
@@ -7244,7 +7421,7 @@
           <span class="legal-badge">05 · Amendments</span>
           <h2 class="legal-card-title">Revisions &amp; Inquiries</h2>
           <p class="legal-card-p">
-            These terms may be refined as Gradzz expands its syllabus library. The latest version will always remain accessible on this page. Spotted an error or have questions? Let us know directly through the <a href="#" onclick="showView('contact');return false;" class="legal-link">Contact page</a>.
+            These terms may be refined as Grad<span class="brand-zz">zz</span> expands its syllabus library. The latest version will always remain accessible on this page. Spotted an error or have questions? Let us know directly through the <a href="#" onclick="showView('contact');return false;" class="legal-link">Contact page</a>.
           </p>
         </div>
       </div>
@@ -7981,9 +8158,7 @@
     {key:'2013', title:'Honours', displayTitle:'Honours Program', code:'HON', tag:'2013–14 Syllabus', desc:'Explore Honours programs and course structures using the old syllabus.', active:true},
     {key:'pass2024', title:'Degree Pass', displayTitle:'Degree Pass Program', code:'DEG', tag:'2024–25 Syllabus', desc:'Explore Degree Pass programs and course structures using the updated syllabus.', active:false},
     {key:'pass2013', title:'Degree Pass', displayTitle:'Degree Pass Program', code:'DEG', tag:'2013–14 Syllabus', desc:'Explore Degree Pass programs and course structures using the old syllabus.', active:false},
-    {key:'masters2024', title:'Masters', displayTitle:'Masters Program', code:'MAS', tag:'2024–25 Syllabus', desc:'Explore Masters programs and calculate your CGPA using the updated syllabus.', active:false},
     {key:'masters2013', title:'Masters', displayTitle:'Masters Program', code:'MAS', tag:'2013–14 Syllabus', desc:'Explore Masters programs and course structures using the current syllabus.', active:false},
-    {key:'prelim2024', title:'Preliminary to Masters', displayTitle:'Preliminary to Masters', code:'PRE', tag:'2024–25 Syllabus', desc:'Explore Preliminary to Masters programs and calculate your CGPA using the updated syllabus.', active:false},
     {key:'prelim2013', title:'Preliminary to Masters', displayTitle:'Preliminary to Masters', code:'PRE', tag:'2013–14 Syllabus', desc:'Explore Preliminary to Masters programs and course structures using the current syllabus.', active:false},
     {key:'incampus2013', title:'In-Campus Masters', displayTitle:'In-Campus Masters', code:'ICM', tag:'2013–14 Syllabus', desc:'Explore In-Campus Masters programs and course structures using the current syllabus.', active:false},
   ];
@@ -7991,9 +8166,9 @@
   const PROGRAM_YEARS = {
     '2024':4, '2013':4,
     'pass2024':3, 'pass2013':3,
-    'masters2024':1, 'masters2013':1,
+    'masters2013':1,
     'incampus2013':3,
-    'prelim2024':2, 'prelim2013':2,
+    'prelim2013':2,
   };
 
   const DEPT_FILE_MAP = {
@@ -8165,11 +8340,11 @@
   const PROGRAM_HEADER_PREFIX = {
     '2024':'Bachelor Degree (Honours)', '2013':'Bachelor Degree (Honours)',
     'pass2024':'Bachelor Degree (Pass)', 'pass2013':'Bachelor Degree (Pass)',
-    'masters2024':"Master's", 'masters2013':"Master's",
+    'masters2013':"Master's",
     'incampus2013':"Master's (In-Campus)",
-    'prelim2024':"Preliminary to Master's", 'prelim2013':"Preliminary to Master's",
+    'prelim2013':"Preliminary to Master's",
   };
-  const MASTERS_KEYS = ['masters2024','masters2013'];
+  const MASTERS_KEYS = ['masters2013'];
   const HONOURS_KEYS = ['2024','2013'];
   const PROGRAM_UNIT_WORD = { 'incampus2013':'Semester' };
   function unitWord(key){ return PROGRAM_UNIT_WORD[key] || 'Year'; }
@@ -8328,23 +8503,114 @@
       </div>`;
     }).join('');
 
-    return `<div class="faq-table-wrap" style="display:flex;gap:16px;margin:12px 0 16px;">
-      ${tables}
-    </div>
-    <p style="font-size:12.5px;font-weight:600;color:#64748B;margin:8px 0 0;line-height:1.6;">Standard 4.00 scale, split across ten bands. Built into every calculator here.</p>`;
+    return `
+      <div style="margin-bottom:12px;">
+        <span class="faq-pill-blue">
+          <span class="faq-pill-dot"></span>
+          Honours, Degree Pass &amp; Regular Masters
+        </span>
+      </div>
+      <div class="faq-table-wrap" style="display:flex;gap:16px;margin:12px 0 16px;">
+        ${tables}
+      </div>
+      <p style="font-size:12.5px;font-weight:600;color:#64748B;margin:8px 0 0;line-height:1.6;">Standard 4.00 scale across ten grade bands. Minimum passing grade is D (40% / 2.00 GP). Below 40% is Fail (F).</p>`;
+  }
+
+  function faqIncampusGradingScaleHtml(){
+    const half = Math.ceil(GRADES.length / 2);
+    const cols = [GRADES.slice(0, half), GRADES.slice(half)];
+    const tables = cols.map(list => {
+      const rows = list.map(g => `<tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:9px 14px;font-weight:800;${g.g === 'F' ? 'color:#E11D48;' : 'color:var(--text);'}">${g.g}</td>
+        <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;">${g.pt.toFixed(2)}</td>
+        <td style="padding:9px 14px;font-family:var(--mono);color:#64748B;text-align:right;">${g.rangeIncampus}</td>
+      </tr>`).join('');
+      return `<div class="faq-table" style="flex:1;min-width:0;border-radius:16px;border:1px solid var(--border);overflow:hidden;background:var(--card);">
+        <table style="width:100%;text-align:left;font-size:12.5px;border-collapse:collapse;">
+          <thead style="background:rgba(241,245,249,0.5);font-family:var(--mono);font-weight:700;font-size:10.5px;color:var(--muted);text-transform:uppercase;">
+            <tr><th style="padding:8px 14px;">Grade</th><th style="padding:8px 14px;">Point</th><th style="padding:8px 14px;text-align:right;">Marks</th></tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
+    }).join('');
+
+    return `
+      <div style="margin-bottom:12px;">
+        <span class="faq-pill-blue">
+          <span class="faq-pill-dot"></span>
+          In-Campus Masters Only
+        </span>
+      </div>
+      <div class="faq-table-wrap" style="display:flex;gap:16px;margin:12px 0 16px;">
+        ${tables}
+      </div>
+      <p style="font-size:12.5px;font-weight:600;color:#64748B;margin:8px 0 0;line-height:1.6;">In-Campus Masters 4.00 scale. Requires 90%+ for A+, and minimum passing grade is D (50% / 2.00 GP). Below 50% is Fail (F).</p>`;
+  }
+
+  function faqClassDeterminationHtml(){
+    const rows = CLASSES.map(c => {
+      const isFail = !!c.fail;
+      return `<tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:10px 16px;font-family:var(--mono);font-weight:700;${isFail ? 'color:#E11D48;' : 'color:var(--text);'}">${c.range}</td>
+        <td style="padding:10px 16px;font-weight:800;text-align:right;${isFail ? 'color:#E11D48;' : 'color:var(--text);'}">${c.cls}</td>
+      </tr>`;
+    }).join('');
+
+    return `
+      <!-- Left-aligned Badge matching other cards -->
+      <div style="margin-bottom:12px;">
+        <span class="faq-pill-green">
+          <span class="faq-pill-dot"></span>
+          Final Academic Standing (Honours &amp; Degree)
+        </span>
+      </div>
+
+      <!-- 50% + 50% Responsive Split Layout -->
+      <div class="faq-table-wrap" style="display:flex;gap:16px;margin:12px 0 16px;align-items:stretch;">
+        <!-- Left: 50% Class Determination Table -->
+        <div class="faq-table" style="flex:1;min-width:0;border-radius:16px;border:1px solid var(--border);overflow:hidden;background:var(--card);margin:0;">
+          <table style="width:100%;text-align:left;font-size:12.5px;border-collapse:collapse;">
+            <thead style="background:rgba(241,245,249,0.5);font-family:var(--mono);font-weight:700;font-size:10.5px;color:var(--muted);text-transform:uppercase;">
+              <tr>
+                <th style="padding:9px 16px;">CGPA Range</th>
+                <th style="padding:9px 16px;text-align:right;">Academic Class</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+
+        <!-- Right: 50% Note Card -->
+        <div style="flex:1;min-width:0;display:flex;align-items:flex-start;">
+          <div style="width:fit-content;max-width:100%;height:fit-content;padding:14px 18px;border-radius:14px;background:rgba(237,32,36,0.05);border:1px solid rgba(237,32,36,0.18);">
+            <div style="display:flex;align-items:center;gap:7px;font-family:var(--disp);font-size:13px;font-weight:700;color:var(--primary);margin-bottom:6px;">
+              <svg style="width:16px;height:16px;flex-shrink:0;color:var(--primary);" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>Graduation Requirement</span>
+            </div>
+            <p style="margin:0;font-size:12.5px;line-height:1.6;color:var(--text);">
+              A minimum CGPA of <strong style="font-family:var(--mono);font-weight:800;color:var(--text);">2.00</strong> is required to obtain the degree. Results below 2.00 require academic re-examination.
+            </p>
+          </div>
+        </div>
+      </div>`;
   }
 
   const FAQS = [
     ['How is my National University CGPA actually calculated?', () => faqCgpaFormulaHtml(), 'General'],
     ['What\'s the National University grading scale?', () => faqGradingScaleHtml(), 'General'],
-    ['Is Gradzz free to use?', 'Completely - no accounts, no subscriptions, and no paywalls. It is an independent project built by students, for students.', 'General'],
+    ['What is the grading scale for In-Campus Masters?', () => faqIncampusGradingScaleHtml(), 'General'],
+    ['How are degree classes (First Class, Second Class, Third Class) determined?', () => faqClassDeterminationHtml(), 'General'],
+    ['Is Grad<span class="brand-zz">zz</span> free to use?', 'Completely - no accounts, no subscriptions, and no paywalls. It is an independent project built by students, for students.', 'General'],
     ['How accurate is this compared to my official result?', '100% mathematically exact to the official National University formula. If your input grades match your marksheet, your CGPA will match identically.', 'General'],
     ['Which programs are covered?', 'Honours (BSc, BBA, BSS, BA), Degree Pass, Regular Masters, In-Campus Masters, and Preliminary to Masters across both 2024–2025 and 2013–2014 syllabi.', 'Departments & Coverage'],
     ['What if my department or subject isn\'t listed yet?', 'Head to our <a href="#" onclick="showView(\'contact\');return false;" class="legal-link">Contact page</a> and tell us what\'s missing - we add new syllabi regularly based on student requests.', 'Departments & Coverage'],
-    ['Can I calculate my CGPA across all four years at once?', 'Yes - enter grades year by year and Gradzz rolls them up into one unified running CGPA automatically.', 'Departments & Coverage'],
+    ['Can I calculate my CGPA across all four years at once?', 'Yes - enter grades year by year and Grad<span class="brand-zz">zz</span> rolls them up into one unified running CGPA automatically.', 'Departments & Coverage'],
     ['Does this save my progress?', 'Yes, for as long as your browser tab stays open - grades save live in local session memory. Download your transcript before closing.', 'Data & Privacy'],
     ['Is my data stored on a server somewhere?', 'No. Everything runs strictly inside your device\'s browser memory. Nothing you enter ever leaves your device.', 'Data & Privacy'],
-    ['Does Gradzz work on mobile?', 'Yes, it is designed mobile-first with high-contrast tactile cards optimized for phones.', 'Using Gradzz'],
+    ['Does Grad<span class="brand-zz">zz</span> work on mobile?', 'Yes, it is designed mobile-first with high-contrast tactile cards optimized for phones.', 'Using Grad<span class="brand-zz">zz</span>'],
   ];
 
   let activeSyllabus = '2013';
@@ -8407,8 +8673,8 @@
     }).join('');
   }
 
-  const SESSION_LABELS = {'2024':'2024–25 Session','2013':'2013–14 Session','pass2024':'2024–25 Session','pass2013':'2013–14 Session','masters2024':'2024–25 Session','masters2013':'2013–14 Session','incampus2013':'2013–14 Session','prelim2024':'2024–25 Session','prelim2013':'2013–14 Session'};
-  const SESSION_SHORT = {'2024':'2024–25','2013':'2013–14','pass2024':'2024–25','pass2013':'2013–14','masters2024':'2024–25','masters2013':'2013–14','incampus2013':'2013–14','prelim2024':'2024–25','prelim2013':'2013–14'};
+  const SESSION_LABELS = {'2024':'2024–25 Session','2013':'2013–14 Session','pass2024':'2024–25 Session','pass2013':'2013–14 Session','masters2013':'2013–14 Session','incampus2013':'2013–14 Session','prelim2013':'2013–14 Session'};
+  const SESSION_SHORT = {'2024':'2024–25','2013':'2013–14','pass2024':'2024–25','pass2013':'2013–14','masters2013':'2013–14','incampus2013':'2013–14','prelim2013':'2013–14'};
   function glassPillClassFor(key){
     if(key.includes('2024')||key.includes('2013')) return 'ac-2024';
     return 'ac-pass';
@@ -9505,7 +9771,7 @@ let activeModalLocks = 0;
 
         <div class="rs2-exam-banner">
           <h2>${headerLine}</h2>
-          <p>Academic Result Sheet &amp; Statement of Grades by Gradzz</p>
+          <p>Academic Result Sheet &amp; Statement of Grades by Grad<span class="brand-zz">zz</span></p>
         </div>
 
         <section class="rs2-record-card">
@@ -9554,13 +9820,13 @@ let activeModalLocks = 0;
       <footer class="rs2-footer">
         <div class="rs2-verification-info">
           Result Published Date:<br />
-          Generated on <strong>${todayStr}</strong> by Gradzz.
+          Generated on <strong>${todayStr}</strong> by Grad<span class="brand-zz">zz</span>.
         </div>
         <div class="rs2-auth-stamp">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line>
           </svg>
-          <span>Gradzz uses your institution&rsquo;s standard grading formula. For academic reference and evaluation purposes.</span>
+          <span>Grad<span class="brand-zz">zz</span> uses your institution&rsquo;s standard grading formula. For academic reference and evaluation purposes.</span>
         </div>
       </footer>
     </div>`;
@@ -9836,7 +10102,7 @@ let activeModalLocks = 0;
 
         <div class="rs2-exam-banner">
           <h2>${headerLine}</h2>
-          <p>Academic Transcript &amp; Statement of Grades by Gradzz</p>
+          <p>Academic Transcript &amp; Statement of Grades by Grad<span class="brand-zz">zz</span></p>
         </div>
 
         <section class="rs2-record-card">
@@ -9861,13 +10127,13 @@ let activeModalLocks = 0;
       <footer class="rs2-footer">
         <div class="rs2-verification-info">
           Result Published Date:<br />
-          Generated on <strong>${todayStr}</strong> by Gradzz.
+          Generated on <strong>${todayStr}</strong> by Grad<span class="brand-zz">zz</span>.
         </div>
         <div class="rs2-auth-stamp">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line>
           </svg>
-          <span>Gradzz uses your institution&rsquo;s standard grading formula. For academic reference and evaluation purposes.</span>
+          <span>Grad<span class="brand-zz">zz</span> uses your institution&rsquo;s standard grading formula. For academic reference and evaluation purposes.</span>
         </div>
       </footer>
     </div>`;
@@ -10421,14 +10687,14 @@ let activeModalLocks = 0;
               <table class="marksheet">
                 <colgroup><col style="width:115px"><col><col style="width:85px"><col style="width:165px"><col style="width:162px"></colgroup>
                 <thead><tr><th class="code">Code</th><th class="paper">Paper title</th><th class="credit">Credit</th><th class="grade">Grade</th><th class="marks">Range</th></tr></thead>
-                <tbody>${rows.join('')}<tr class="total"><td></td><td class="paper">Semester Total</td><td class="credit" id="semTotalCredits-${gi}">0</td><td colspan="2" id="semTotalGpa-${gi}">0.00</td></tr></tbody>
+                <tbody>${rows.join('')}<tr class="total state-default"><td></td><td class="paper">Semester Total</td><td class="credit" id="semTotalCredits-${gi}">0</td><td colspan="2" id="semTotalGpa-${gi}">0.00</td></tr></tbody>
               </table>
             </div>
           </div>`;
       }).join('');
 
       const yearTotalBlock = `
-          <div class="year-total-block">
+          <div class="year-total-block state-default">
             <div class="table-scroll">
               <table class="marksheet">
                 <colgroup><col style="width:115px"><col><col style="width:85px"><col style="width:165px"><col style="width:162px"></colgroup>
@@ -10465,7 +10731,7 @@ let activeModalLocks = 0;
           <table class="marksheet">
             <colgroup><col style="width:115px"><col><col style="width:85px"><col style="width:165px"><col style="width:162px"></colgroup>
             <thead><tr><th class="code">Code</th><th class="paper">Paper title</th><th class="credit">Credit</th><th class="grade">Grade</th><th class="marks">Range</th></tr></thead>
-            <tbody id="subjectRows">${rowsHtml}<tr class="total"><td></td><td class="paper">${unitWord(activeSyllabus)} Total</td><td class="credit" id="totalCredits">0</td><td colspan="2" id="totalGpa">0.00</td></tr></tbody>
+            <tbody id="subjectRows">${rowsHtml}<tr class="total state-default"><td></td><td class="paper">${unitWord(activeSyllabus)} Total</td><td class="credit" id="totalCredits">0</td><td colspan="2" id="totalGpa">0.00</td></tr></tbody>
           </table>
           </div>
         </div>`;
@@ -10618,6 +10884,9 @@ let activeModalLocks = 0;
     enforceElectiveLocks();
     let creditsEarned=0, points=0;
     const subjects = SUBJECTS_BY_YEAR[currentYear] || [];
+    let yearGradedCount = 0;
+    let yearHasFail = false;
+
     document.querySelectorAll('#subjectPanel select.grade-select').forEach(sel=>{
       const i=+sel.dataset.idx;
       const subj = subjects[i];
@@ -10625,6 +10894,8 @@ let activeModalLocks = 0;
       const grade = GRADES.find(g=>g.g===sel.value);
       const m = document.getElementById('marks-'+i);
       if(grade){
+        yearGradedCount++;
+        if(grade.g === 'F') yearHasFail = true;
         if(creditCountsForEarned(grade)) creditsEarned+=credit;
         points+=credit*grade.pt;
         if(m) m.textContent=gradeRangeFor(grade);
@@ -10638,15 +10909,49 @@ let activeModalLocks = 0;
     if(tc) tc.textContent = creditsEarned;
     if(tg) tg.textContent = gpa.toFixed(2);
 
+    // Determine dynamic state for overall Year
+    let yearState = 'state-default';
+    if(yearGradedCount > 0){
+      if(yearHasFail || gpa < 2.00){
+        yearState = 'state-fail';
+      } else {
+        yearState = 'state-pass';
+      }
+    }
+
+    // Apply to .year-total-block and its inner tr.total if present (semester curriculums)
+    document.querySelectorAll('#subjectPanel .year-total-block').forEach(ytb => {
+      ytb.classList.remove('state-default', 'state-pass', 'state-fail');
+      ytb.classList.add(yearState);
+      const row = ytb.querySelector('tr.total');
+      if(row){
+        row.classList.remove('state-default', 'state-pass', 'state-fail');
+        row.classList.add(yearState);
+      }
+    });
+
+    // Apply to standalone year row (non-semester curriculums)
+    const standaloneYearRow = document.querySelector('#subjectPanel .semester-block:not([data-sem-index]) tr.total');
+    if(standaloneYearRow){
+      standaloneYearRow.classList.remove('state-default', 'state-pass', 'state-fail');
+      standaloneYearRow.classList.add(yearState);
+    }
+
+    // Dynamic states for each Semester total row
     document.querySelectorAll('#subjectPanel .semester-block[data-sem-index]').forEach(block=>{
       const idx = block.dataset.semIndex;
       let semCreditsEarned=0, semPoints=0;
+      let semGradedCount = 0;
+      let semHasFail = false;
+
       block.querySelectorAll('select.grade-select').forEach(sel=>{
         const i=+sel.dataset.idx;
         const subj = subjects[i];
         const credit = subj ? subj.credit : 0;
         const grade = GRADES.find(g=>g.g===sel.value);
         if(grade){
+          semGradedCount++;
+          if(grade.g === 'F') semHasFail = true;
           if(creditCountsForEarned(grade)) semCreditsEarned+=credit;
           semPoints+=credit*grade.pt;
         }
@@ -10656,6 +10961,21 @@ let activeModalLocks = 0;
       const stg = document.getElementById('semTotalGpa-'+idx);
       if(stc) stc.textContent = semCreditsEarned;
       if(stg) stg.textContent = semGpa.toFixed(2);
+
+      let semState = 'state-default';
+      if(semGradedCount > 0){
+        if(semHasFail || semGpa < 2.00){
+          semState = 'state-fail';
+        } else {
+          semState = 'state-pass';
+        }
+      }
+
+      const semRow = block.querySelector('tr.total');
+      if(semRow){
+        semRow.classList.remove('state-default', 'state-pass', 'state-fail');
+        semRow.classList.add(semState);
+      }
     });
 
     saveGrades();
