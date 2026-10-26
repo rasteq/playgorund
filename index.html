@@ -6786,13 +6786,7 @@ body{
         box-sizing: border-box;
       }
     }
-    /* Small mobile (< 480px): stacked 100% */
-    @media (max-width: 480px) {
-      .rp-actions {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-    }
+    /* Small mobile (< 480px): Keep 50/50 side-by-side matching Year Card */
 
     /* ============================================================
        STANDALONE YEAR RESULT CARD (SEPARATE FROM GRADE TABLE)
@@ -7011,7 +7005,9 @@ body{
         font-size: 12.5px;
       }
       .ysc-btn-download,
-      .ysc-btn-share {
+      .ysc-btn-share,
+      .rp-actions .rp-share-card,
+      .rp-actions .rp-export {
         padding: 10px 10px;
         font-size: 12.5px;
       }
@@ -7033,17 +7029,22 @@ body{
         font-size: 12px;
         line-height: 1.35;
       }
-      .ysc-actions {
+      .ysc-actions,
+      .rp-actions {
         gap: 8px;
       }
       .ysc-btn-download,
-      .ysc-btn-share {
+      .ysc-btn-share,
+      .rp-actions .rp-share-card,
+      .rp-actions .rp-export {
         padding: 9.5px 8px;
         font-size: 12px;
         gap: 5px;
       }
       .ysc-btn-download svg,
-      .ysc-btn-share svg {
+      .ysc-btn-share svg,
+      .rp-actions .rp-share-card svg,
+      .rp-actions .rp-export svg {
         width: 12px;
         height: 12px;
       }
@@ -7096,12 +7097,15 @@ body{
         line-height: 1.3;
       }
       /* On compact screens <= 360px: stack buttons so text NEVER wraps awkwardly! */
-      .ysc-actions {
+      .ysc-actions,
+      .rp-actions {
         grid-template-columns: 1fr;
         gap: 7px;
       }
       .ysc-btn-download,
-      .ysc-btn-share {
+      .ysc-btn-share,
+      .rp-actions .rp-share-card,
+      .rp-actions .rp-export {
         width: 100%;
         padding: 9.5px 10px;
         font-size: 12px;
