@@ -7545,24 +7545,18 @@ body{
         }
       }
 
-      /* Floating Pill on Mobile: Clean 5-column stats row (Image 2) */
+      /* Floating Pill: Full width edge-to-edge matching master card exactly */
       .overall-share-card.is-floating {
         position: fixed;
         bottom: 16px;
         bottom: max(16px, env(safe-area-inset-bottom, 16px));
-        left: 16px;
-        right: 16px;
-        width: auto;
-        max-width: 560px;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 10px 14px;
+        box-sizing: border-box;
+        padding: 10px 18px;
         border-radius: 20px;
         background: rgba(255, 255, 255, 0.98);
         border: 1px solid rgba(226, 232, 240, 0.95);
         box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04);
         z-index: 92;
-        box-sizing: border-box;
         gap: 0;
       }
       [data-theme="dark"] .overall-share-card.is-floating {
@@ -13901,21 +13895,12 @@ let activeModalLocks = 0;
         masterCard.classList.add('animating-detach');
 
         card.style.position = 'fixed';
-        if (isMobile) {
-          card.style.left = '16px';
-          card.style.right = '16px';
-          card.style.width = 'auto';
-          card.style.maxWidth = '560px';
-          card.style.marginLeft = 'auto';
-          card.style.marginRight = 'auto';
-        } else {
-          card.style.left = masterRect.left + 'px';
-          card.style.right = '';
-          card.style.width = masterRect.width + 'px';
-          card.style.maxWidth = '';
-          card.style.marginLeft = '';
-          card.style.marginRight = '';
-        }
+        card.style.left = masterRect.left + 'px';
+        card.style.right = '';
+        card.style.width = masterRect.width + 'px';
+        card.style.maxWidth = '';
+        card.style.marginLeft = '';
+        card.style.marginRight = '';
         card.style.top = '';
         card.style.bottom = bottomGap + 'px';
 
@@ -13947,21 +13932,12 @@ let activeModalLocks = 0;
         card.classList.remove('is-docked', 'animating-merge', 'animating-detach', 'gliding');
         card.classList.add('is-floating');
         card.style.position = 'fixed';
-        if (isMobile) {
-          card.style.left = '16px';
-          card.style.right = '16px';
-          card.style.width = 'auto';
-          card.style.maxWidth = '560px';
-          card.style.marginLeft = 'auto';
-          card.style.marginRight = 'auto';
-        } else {
-          card.style.left = masterRect.left + 'px';
-          card.style.right = '';
-          card.style.width = masterRect.width + 'px';
-          card.style.maxWidth = '';
-          card.style.marginLeft = '';
-          card.style.marginRight = '';
-        }
+        card.style.left = masterRect.left + 'px';
+        card.style.right = '';
+        card.style.width = masterRect.width + 'px';
+        card.style.maxWidth = '';
+        card.style.marginLeft = '';
+        card.style.marginRight = '';
         card.style.bottom = bottomGap + 'px';
         card.style.top = '';
       }
