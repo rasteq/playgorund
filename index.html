@@ -6596,20 +6596,22 @@ body{
 
     /* ============================================================
        TARGET CGPA CELEBRATION TOAST & PARTY WRAPPERS (DESIGN 3)
+       Universal responsive toast strictly below navbar on all screens (PC to phone)
     ============================================================ */
     .celebration-toast {
       position: fixed;
-      top: 26px;
+      top: calc(var(--header-h, 72px) + 12px);
       left: 50%;
-      transform: translate(-50%, -45px) scale(0.96);
+      transform: translate(-50%, -18px) scale(0.96);
       opacity: 0;
       pointer-events: none;
       z-index: 999999;
       width: fit-content;
-      max-width: 92vw;
+      max-width: calc(100vw - 32px);
       transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.32s ease;
       cursor: pointer;
       user-select: none;
+      box-sizing: border-box;
     }
 
     .celebration-toast.show {
@@ -6619,29 +6621,31 @@ body{
     }
 
     .celebration-toast.hide {
-      transform: translate(-50%, -24px) scale(0.96);
+      transform: translate(-50%, -14px) scale(0.96);
       opacity: 0;
       pointer-events: none;
     }
 
-    /* Clean Minimal Capsule: No red glow, no dot */
+    /* Clean Minimal Capsule */
     .toast-variant-minimal {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 8px 22px;
+      padding: 9px 22px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.96);
+      background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--border);
-      box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.08), 0 4px 10px rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--border, rgba(226, 232, 240, 0.95));
+      box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.12), 0 4px 10px rgba(0, 0, 0, 0.04);
+      box-sizing: border-box;
+      max-width: 100%;
     }
 
     [data-theme="dark"] .toast-variant-minimal {
-      background: rgba(21, 23, 27, 0.94);
-      border-color: rgba(255, 255, 255, 0.12);
-      box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.65);
+      background: rgba(21, 23, 27, 0.96);
+      border-color: rgba(255, 255, 255, 0.14);
+      box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.70);
     }
 
     .minimal-title {
@@ -6651,6 +6655,7 @@ body{
       color: var(--text);
       white-space: nowrap;
       letter-spacing: -0.01em;
+      line-height: 1.25;
     }
 
     .minimal-sep {
@@ -6665,10 +6670,56 @@ body{
       color: #059669;
       white-space: nowrap;
       transition: color 0.2s ease;
+      line-height: 1.25;
     }
 
     [data-theme="dark"] .minimal-sub {
       color: #10B981;
+    }
+
+    /* Responsive Adaptation for Tablets & Mobile Screens */
+    @media (max-width: 640px) {
+      .celebration-toast {
+        max-width: calc(100vw - 24px);
+        top: calc(var(--header-h, 66px) + 10px);
+      }
+      .toast-variant-minimal {
+        padding: 8px 14px;
+        gap: 4px 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        border-radius: 20px;
+      }
+      .minimal-title {
+        font-size: 12px;
+        white-space: nowrap;
+      }
+      .minimal-sep {
+        display: none;
+      }
+      .minimal-sub {
+        font-size: 11.5px;
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .celebration-toast {
+        max-width: calc(100vw - 16px);
+        top: calc(var(--header-h, 58px) + 8px);
+      }
+      .toast-variant-minimal {
+        padding: 6px 10px;
+        gap: 2px 6px;
+        border-radius: 16px;
+      }
+      .minimal-title {
+        font-size: 11px;
+      }
+      .minimal-sub {
+        font-size: 10.5px;
+      }
     }
 
 </style>
@@ -7397,7 +7448,7 @@ body{
 
     /* Actions */
     .overall-share-card .ysc-actions {
-      display: flex !important;
+      display: flex;
       align-items: center;
       gap: 10px;
       flex-shrink: 0;
@@ -7405,82 +7456,82 @@ body{
 
     /* Floating State: Water-smooth Floating Pill at bottom while scrolling */
     .overall-share-card.is-floating {
-      position: fixed !important;
-      bottom: 16px !important;
+      position: fixed;
+      bottom: 16px;
       z-index: 92;
-      padding: 12px 20px !important;
-      border-radius: 20px !important;
-      box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
-      background: rgba(255, 255, 255, 0.96) !important;
+      padding: 12px 20px;
+      border-radius: 20px;
+      box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(226, 232, 240, 0.95) !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: center !important;
-      gap: 0 !important;
-      box-sizing: border-box !important;
+      border: 1px solid rgba(226, 232, 240, 0.95);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+      box-sizing: border-box;
     }
     [data-theme="dark"] .overall-share-card.is-floating {
-      background: rgba(21, 22, 24, 0.96) !important;
-      border-color: rgba(255, 255, 255, 0.12) !important;
-      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55) !important;
+      background: rgba(21, 22, 24, 0.96);
+      border-color: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
     }
     .overall-share-card.is-floating .rh-panes-body {
-      flex: 1 1 auto !important;
-      min-width: 0 !important;
-      overflow: visible !important;
-      display: flex !important;
-      align-items: center !important;
-      height: auto !important;
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      height: auto;
     }
 
     /* Mobile: Hide actions in floating pill, smoothly reveal when merged on dock! */
     @media (max-width: 767px) {
       .overall-share-card.is-floating .ysc-actions {
-        display: none !important;
+        display: none;
       }
     }
 
     /* Desktop (from 1024px upwards):
-       Show Action buttons alongside stats/year in both floating and docked states!
-       Matches Image 1 (Overall) and Image 2 (Year) with full edge-to-edge spread */
+       Show Action buttons alongside stats in both floating and docked states!
+       While floating, always displays Overall stats + buttons (Option B) */
     @media (min-width: 1024px) {
       .overall-share-card.is-floating .ysc-actions {
-        display: flex !important;
-        flex-shrink: 0 !important;
+        display: flex;
+        flex-shrink: 0;
       }
       .overall-share-card.is-floating .rh-pane.active {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        gap: 20px !important;
-        width: 100% !important;
-        flex: 1 1 auto !important;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        width: 100%;
+        flex: 1 1 auto;
       }
       .overall-share-card.is-floating .overall-card-stats-wrap {
-        flex: 1 1 auto !important;
-        min-width: 0 !important;
-        width: auto !important;
+        flex: 1 1 auto;
+        min-width: 0;
+        width: auto;
       }
       .overall-share-card.is-floating .overall-card-stats-wrap .rp-stats {
-        width: 100% !important;
-        display: flex !important;
+        width: 100%;
+        display: flex;
       }
       .overall-share-card.is-floating .rh-year-summary {
-        flex: 1 1 auto !important;
-        min-width: 0 !important;
+        flex: 1 1 auto;
+        min-width: 0;
       }
     }
 
     /* Mobile, Large Phone & Tablet (up to 1023px, including 861px-1023px):
        Follow phone and large phone style:
-       While floating: sleek 5-column stats row pill matching Image 2
+       While floating: sleek 5-column stats row pill matching Image 2 (Clean CSS, 0 !important)
        When docked: reveal actions smoothly in 2-column grid */
     @media (max-width: 1023px) {
       .overall-share-card:not(.is-floating) .ysc-actions {
-        display: flex !important;
+        display: flex;
         animation: waterRevealActions 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
       }
       @keyframes waterRevealActions {
@@ -7496,136 +7547,136 @@ body{
 
       /* Floating Pill on Mobile: Clean 5-column stats row (Image 2) */
       .overall-share-card.is-floating {
-        position: fixed !important;
-        bottom: 16px !important;
-        bottom: max(16px, env(safe-area-inset-bottom, 16px)) !important;
-        left: 16px !important;
-        right: 16px !important;
-        width: auto !important;
-        max-width: 560px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        padding: 10px 14px !important;
-        border-radius: 20px !important;
-        background: rgba(255, 255, 255, 0.98) !important;
-        border: 1px solid rgba(226, 232, 240, 0.95) !important;
-        box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
-        z-index: 92 !important;
-        box-sizing: border-box !important;
-        gap: 0 !important;
+        position: fixed;
+        bottom: 16px;
+        bottom: max(16px, env(safe-area-inset-bottom, 16px));
+        left: 16px;
+        right: 16px;
+        width: auto;
+        max-width: 560px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 10px 14px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.98);
+        border: 1px solid rgba(226, 232, 240, 0.95);
+        box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04);
+        z-index: 92;
+        box-sizing: border-box;
+        gap: 0;
       }
       [data-theme="dark"] .overall-share-card.is-floating {
-        background: rgba(21, 22, 24, 0.98) !important;
-        border-color: rgba(255, 255, 255, 0.12) !important;
-        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55) !important;
+        background: rgba(21, 22, 24, 0.98);
+        border-color: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
       }
 
-      /* Force display 5-column stats pane and hide year summary while floating on mobile */
+      /* Display 5-column stats pane while floating on mobile */
       .overall-share-card.is-floating .rh-panes-body {
-        width: 100% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        height: auto !important;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+        height: auto;
       }
       .overall-share-card.is-floating .rh-pane#rhPaneOverall {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        width: 100% !important;
-        min-height: unset !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        opacity: 1 !important;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        min-height: unset;
+        padding: 0;
+        margin: 0;
+        opacity: 1;
       }
       .overall-share-card.is-floating .rh-pane#rhPaneYear {
-        display: none !important;
-        opacity: 0 !important;
+        display: none;
+        opacity: 0;
       }
       .overall-share-card.is-floating .overall-card-stats-wrap {
-        display: flex !important;
-        align-items: center !important;
-        width: 100% !important;
-        min-height: unset !important;
-        padding: 0 !important;
-        margin: 0 !important;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        min-height: unset;
+        padding: 0;
+        margin: 0;
       }
       .overall-share-card.is-floating .rp-stats {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        width: 100% !important;
-        padding: 0 !important;
-        margin: 0 !important;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0;
+        margin: 0;
       }
       .overall-share-card.is-floating .rp-stat {
-        flex: 1 1 0 !important;
-        min-width: 0 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 2px !important;
-        padding: 1px 3px !important;
-        border-right: 1px solid rgba(226, 232, 240, 0.85) !important;
-        position: relative !important;
+        flex: 1 1 0;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        padding: 1px 3px;
+        border-right: 1px solid rgba(226, 232, 240, 0.85);
+        position: relative;
       }
       [data-theme="dark"] .overall-share-card.is-floating .rp-stat {
-        border-right: 1px solid rgba(255, 255, 255, 0.09) !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.09);
       }
       .overall-share-card.is-floating .rp-stat:last-child,
       .overall-share-card.is-floating .rp-stat.rp-stat-overall {
-        border-right: none !important;
+        border-right: none;
       }
 
       /* Numbers matching Image 2 */
       .overall-share-card.is-floating .rp-stat-n {
-        font-family: var(--mono) !important;
-        font-size: 18px !important;
-        font-weight: 800 !important;
-        letter-spacing: -0.01em !important;
-        line-height: 1.15 !important;
+        font-family: var(--mono);
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        line-height: 1.15;
         color: #0F172A;
       }
       [data-theme="dark"] .overall-share-card.is-floating .rp-stat-n {
-        color: #FFFFFF !important;
+        color: #FFFFFF;
       }
       .overall-share-card.is-floating .rp-stat-overall .rp-stat-n {
-        font-weight: 800 !important;
+        font-weight: 800;
       }
 
       /* Labels matching Image 2 */
       .overall-share-card.is-floating .rp-stat-l {
-        font-family: var(--mono) !important;
-        font-size: 10px !important;
-        font-weight: 700 !important;
-        letter-spacing: 0.08em !important;
-        text-transform: uppercase !important;
-        line-height: 1.15 !important;
-        color: #64748B !important;
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        line-height: 1.15;
+        color: #64748B;
       }
       [data-theme="dark"] .overall-share-card.is-floating .rp-stat-l {
-        color: #94A3B8 !important;
+        color: #94A3B8;
       }
       .overall-share-card.is-floating .rp-stat-overall .rp-stat-l {
-        font-weight: 800 !important;
-        color: #0F172A !important;
+        font-weight: 800;
+        color: #0F172A;
       }
       [data-theme="dark"] .overall-share-card.is-floating .rp-stat-overall .rp-stat-l {
-        color: #FFFFFF !important;
+        color: #FFFFFF;
       }
 
       /* Hide action buttons in floating pill on mobile */
       .overall-share-card.is-floating .ysc-actions {
-        display: none !important;
+        display: none;
       }
 
       /* When docked on mobile & tablet (up to 1023px) */
       .overall-share-card:not(.is-floating) {
-        padding: 16px 16px !important;
+        padding: 16px 16px;
       }
       .overall-share-card:not(.is-floating) .rh-pane {
         flex-direction: column;
@@ -7633,18 +7684,18 @@ body{
         gap: 14px;
       }
       .overall-share-card:not(.is-floating) .rp-stat-n {
-        font-family: var(--mono) !important;
-        font-size: 18px !important;
-        font-weight: 800 !important;
+        font-family: var(--mono);
+        font-size: 18px;
+        font-weight: 800;
       }
       .overall-share-card:not(.is-floating) .rp-stat-l {
-        font-family: var(--mono) !important;
-        font-size: 10px !important;
-        font-weight: 700 !important;
-        letter-spacing: 0.08em !important;
+        font-family: var(--mono);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
       }
       .overall-share-card:not(.is-floating) .ysc-actions {
-        display: grid !important;
+        display: grid;
         grid-template-columns: 1fr 1fr;
         width: 100%;
         gap: 10px;
@@ -7659,18 +7710,18 @@ body{
     }
     @media (max-width: 360px) {
       .overall-share-card.is-floating {
-        border-radius: 18px !important;
-        padding: 9px 8px !important;
+        border-radius: 18px;
+        padding: 9px 8px;
       }
       .overall-share-card.is-floating .rp-stat {
-        padding: 1px 1.5px !important;
+        padding: 1px 1.5px;
       }
       .overall-share-card.is-floating .rp-stat-n {
-        font-size: 16px !important;
+        font-size: 16px;
       }
       .overall-share-card.is-floating .rp-stat-l {
-        font-size: 9px !important;
-        letter-spacing: 0.04em !important;
+        font-size: 9px;
+        letter-spacing: 0.04em;
       }
       .rh-tab {
         font-size: 10.5px;
@@ -13835,6 +13886,11 @@ let activeModalLocks = 0;
       if (!isCurrentlyFloating && !isBarTransitioning) {
         isBarTransitioning = true;
 
+        // Dismerge / Detach moment (Option B): Permanently reset tab selection to Overall Result!
+        if (typeof resetResultHubToOverall === 'function') {
+          resetResultHubToOverall();
+        }
+
         // 1. First: record current docked position
         const dockRect = card.getBoundingClientRect();
 
@@ -14028,6 +14084,14 @@ let activeModalLocks = 0;
       subElem.textContent = subtitle;
       var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       subElem.style.color = isDark ? '#10B981' : '#059669';
+    }
+
+    // Accurately position toast right below the header on any device
+    var header = document.querySelector('header.site');
+    if (header) {
+      var headerRect = header.getBoundingClientRect();
+      var gap = window.innerWidth <= 360 ? 8 : (window.innerWidth <= 640 ? 10 : 12);
+      toast.style.top = (headerRect.bottom + gap) + 'px';
     }
 
     toast.classList.remove('hide');
