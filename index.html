@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Gradzz - NU GPA Calculator | Floating Result Hub & Smart Filter</title>
+  <title>Gradzz - Milestone 225: Share Card Redesign Clean Labels and Single Line Grid</title>
   <meta name="description" content="Gradzz is a free, no-login CGPA &amp; GPA calculator for National University Bangladesh students - built mobile-first, covers Honours and Masters, all four years, both syllabuses.">
   <link rel="canonical" href="https://gradzz.app/">
   <!-- Meta Theme & Status Bar Color -->
@@ -2989,8 +2989,8 @@ body{
     .rp-stat-l{font-family:var(--mono);font-size:10px;font-weight:700;color:#64748B;letter-spacing:0.08em;text-transform:uppercase;}
     [data-theme="dark"] .rp-stat-l{color:#94A3B8;}
     .rp-stat-overall .rp-stat-n{font-weight:800;transition:color 0.3s ease;}
-    .rp-stat-overall .rp-stat-l{color:#0F172A !important;font-weight:800 !important;letter-spacing:0.08em;}
-    [data-theme="dark"] .rp-stat-overall .rp-stat-l{color:#FFFFFF !important;}
+    .rp-stat-overall .rp-stat-l{color:#0F172A;font-weight:800;letter-spacing:0.08em;}
+    [data-theme="dark"] .rp-stat-overall .rp-stat-l{color:#FFFFFF;}
 
     .rp-export{
       display:inline-flex;align-items:center;justify-content:center;gap:8px;
@@ -5336,9 +5336,9 @@ body{
     }
     .contact-tab-btn.active {
       color: #0F172A;
-      background: transparent !important;
-      box-shadow: none !important;
-      border: none !important;
+      background: transparent;
+      box-shadow: none;
+      border: none;
     }
     .contact-tab-btn:not(.active):hover {
       color: #1E293B;
@@ -5348,9 +5348,9 @@ body{
     }
     [data-theme="dark"] .contact-tab-btn.active {
       color: #FFFFFF;
-      background: transparent !important;
-      box-shadow: none !important;
-      border: none !important;
+      background: transparent;
+      box-shadow: none;
+      border: none;
     }
     [data-theme="dark"] .contact-tab-btn:not(.active):hover {
       color: #E2E8F0;
@@ -6694,13 +6694,18 @@ body{
       .minimal-title {
         font-size: 12px;
         white-space: nowrap;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .minimal-sep {
         display: none;
       }
       .minimal-sub {
         font-size: 11.5px;
-        white-space: nowrap;
+        white-space: normal;
+        max-width: 100%;
+        word-break: break-word;
       }
     }
 
@@ -6716,9 +6721,15 @@ body{
       }
       .minimal-title {
         font-size: 11px;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .minimal-sub {
         font-size: 10.5px;
+        white-space: normal;
+        max-width: 100%;
+        word-break: break-word;
       }
     }
 
@@ -6901,11 +6912,11 @@ body{
     /* No blue glow on hover */
     .year-share-card:hover {
       border-color: rgba(226, 232, 240, 0.95);
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+      box-shadow: none;
     }
     [data-theme="dark"] .year-share-card:hover {
       border-color: rgba(255, 255, 255, 0.09);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+      box-shadow: none;
     }
 
     /* Left Info */
@@ -7077,13 +7088,13 @@ body{
 
     /* Master Tab Card (Top Half): ALWAYS 100% Solid White / Solid Dark */
     .overall-master-card {
-      margin-top: 0 !important;
+      margin-top: 0;
       box-sizing: border-box;
       background: var(--card-bg, #FFFFFF);
       border: 1px solid rgba(226, 232, 240, 0.95);
       border-radius: 20px;
       padding: 14px 20px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+      box-shadow: none;
       display: flex;
       flex-direction: column;
       width: 100%;
@@ -7098,7 +7109,7 @@ body{
     [data-theme="dark"] .overall-master-card {
       background: #151618;
       border-color: rgba(255, 255, 255, 0.09);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+      box-shadow: none;
     }
     .overall-master-card:hover {
       border-color: rgba(226, 232, 240, 0.95);
@@ -7110,16 +7121,16 @@ body{
     /* When Docked or Detaching: Master Card has NO bottom border (ZERO black lines!) */
     .overall-master-card.is-docked,
     .overall-master-card.animating-detach {
-      border-bottom: none !important;
-      border-bottom-left-radius: 0 !important;
-      border-bottom-right-radius: 0 !important;
-      box-shadow: none !important;
-      padding-bottom: 6px !important;
+      border-bottom: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      box-shadow: none;
+      padding-bottom: 6px;
     }
     @media (max-width: 1023px) {
       .overall-master-card.is-docked,
       .overall-master-card.animating-detach {
-        padding-bottom: 5px !important;
+        padding-bottom: 5px;
       }
     }
 
@@ -7131,7 +7142,7 @@ body{
       border: 1px solid rgba(226, 232, 240, 0.95);
       border-radius: 20px;
       padding: 14px 20px 18px 20px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+      box-shadow: none;
       display: flex;
       flex-direction: column;
       margin-top: 0;
@@ -7147,7 +7158,7 @@ body{
     [data-theme="dark"] .overall-share-card {
       background: #151618;
       border-color: rgba(255, 255, 255, 0.09);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+      box-shadow: none;
     }
     .overall-share-card:hover {
       border-color: rgba(226, 232, 240, 0.95);
@@ -7158,17 +7169,17 @@ body{
 
     /* When Docked: Share Card flattens top and connects directly to Master Card (12px clean single-card gap) */
     .overall-share-card.is-docked {
-      position: static !important;
-      border-top: none !important;
-      border-top-left-radius: 0 !important;
-      border-top-right-radius: 0 !important;
-      margin-top: -1px !important;
-      padding-top: 6px !important;
+      position: static;
+      border-top: none;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      margin-top: -1px;
+      padding-top: 6px;
       transform: none;
     }
     @media (max-width: 1023px) {
       .overall-share-card.is-docked {
-        padding-top: 5px !important;
+        padding-top: 5px;
       }
     }
 
@@ -7177,50 +7188,79 @@ body{
     .overall-share-card.animating-detach {
       will-change: transform, box-shadow, border-radius;
       pointer-events: none;
+      transform-origin: top center;
     }
 
-    /* Liquid Detach: ZERO black lines!
-       Top border is kept NONE throughout the entire glide away from master card */
+    /* Liquid Detach: Exact symmetrical reverse of the liquid merge effect.
+       Starts fused to master card with top corners 0, then smoothly pulls away like a drop of water,
+       rounding out into a 20px capsule with soft floating shadow. */
     .overall-share-card.animating-detach {
-      border-top: none !important;
-      border-top-left-radius: 0 !important;
-      border-top-right-radius: 0 !important;
-      box-shadow: none !important;
-      transition: transform 0.52s cubic-bezier(0.22, 1, 0.36, 1),
-                  border-radius 0.52s cubic-bezier(0.22, 1, 0.36, 1),
-                  box-shadow 0.52s cubic-bezier(0.22, 1, 0.36, 1),
-                  border-color 0.4s ease !important;
+      border-top: none;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      box-shadow: none;
+      transition: transform 0.64s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-radius 0.64s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.64s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.4s ease;
     }
     .overall-share-card.animating-detach.gliding {
-      border-top: none !important;
-      border-top-left-radius: 20px !important;
-      border-top-right-radius: 20px !important;
-      box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+      border-top: 1px solid rgba(226, 232, 240, 0.95);
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      box-shadow: none;
+    }
+    [data-theme="dark"] .overall-share-card.animating-detach {
+      box-shadow: none;
     }
     [data-theme="dark"] .overall-share-card.animating-detach.gliding {
-      border-top: none !important;
-      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55) !important;
+      border-top-color: rgba(255, 255, 255, 0.12);
+      box-shadow: none;
     }
 
-    /* Liquid Merge: glides up into dock slot, top smoothly fuses into master card */
+    /* Liquid Merge: Starts as floating capsule, glides up into master card and top smoothly fuses into it */
     .overall-share-card.animating-merge {
-      border-radius: 20px !important;
-      box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
-      transition: transform 0.54s cubic-bezier(0.22, 1, 0.36, 1),
-                  border-radius 0.54s cubic-bezier(0.22, 1, 0.36, 1),
-                  box-shadow 0.54s cubic-bezier(0.22, 1, 0.36, 1) !important;
+      border-radius: 20px;
+      box-shadow: none;
+      transition: transform 0.64s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-radius 0.64s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 0.64s cubic-bezier(0.16, 1, 0.3, 1);
     }
     [data-theme="dark"] .overall-share-card.animating-merge {
-      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55) !important;
+      box-shadow: none;
     }
     .overall-share-card.animating-merge.gliding {
-      border-top: none !important;
-      border-top-left-radius: 0 !important;
-      border-top-right-radius: 0 !important;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04) !important;
+      border-top: none;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      box-shadow: none;
     }
     [data-theme="dark"] .overall-share-card.animating-merge.gliding {
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35) !important;
+      box-shadow: none;
+    }
+
+    
+    /* ============================================================
+       ZERO DROP SHADOW / ZERO GLOW FOR OVERALL CARDS (ALL SCREENS & THEMES)
+       Guarantees crisp, clean flat borders with 0 drop shadow bleeding
+       ============================================================ */
+    .overall-master-card,
+    .overall-share-card,
+    .overall-share-strip-container,
+    .overall-share-card.is-floating,
+    .overall-share-card.animating-merge,
+    .overall-share-card.animating-detach,
+    .overall-share-card.is-docked,
+    .overall-share-card.gliding,
+    [data-theme="dark"] .overall-master-card,
+    [data-theme="dark"] .overall-share-card,
+    [data-theme="dark"] .overall-share-strip-container,
+    [data-theme="dark"] .overall-share-card.is-floating,
+    [data-theme="dark"] .overall-share-card.animating-merge,
+    [data-theme="dark"] .overall-share-card.animating-detach,
+    [data-theme="dark"] .overall-share-card.is-docked,
+    [data-theme="dark"] .overall-share-card.gliding {
+      box-shadow: none;
     }
 
     /* Scope Switcher Tabs (With Sliding Pill Indicator like Navbar & Contact Page) */
@@ -7266,11 +7306,11 @@ body{
       z-index: 1;
       flex: 1;
       min-width: 0;
-      white-space: nowrap !important;
+      white-space: nowrap;
       word-break: keep-all;
       border: none;
-      background: transparent !important;
-      box-shadow: none !important;
+      background: transparent;
+      box-shadow: none;
       padding: 8.5px 14px;
       font-size: 12.5px;
       font-weight: 700;
@@ -7287,20 +7327,20 @@ body{
       user-select: none;
     }
     .rh-tab * {
-      white-space: nowrap !important;
+      white-space: nowrap;
     }
     .rh-tab.active {
-      color: #0F172A !important;
-      background: transparent !important;
-      box-shadow: none !important;
+      color: #0F172A;
+      background: transparent;
+      box-shadow: none;
     }
     [data-theme="dark"] .rh-tab {
       color: #94A3B8;
     }
     [data-theme="dark"] .rh-tab.active {
-      color: #FFFFFF !important;
-      background: transparent !important;
-      box-shadow: none !important;
+      color: #FFFFFF;
+      background: transparent;
+      box-shadow: none;
     }
     .rh-tab:not(.active):hover {
       color: #1E293B;
@@ -7454,14 +7494,19 @@ body{
       flex-shrink: 0;
     }
 
-    /* Floating State: Water-smooth Floating Pill at bottom while scrolling */
+    /* Floating State: Water-smooth Floating Pill at bottom while scrolling.
+       Width dynamically & flawlessly matches the grade input table box (#subjectPanel) and aligns dead-center. */
     .overall-share-card.is-floating {
       position: fixed;
-      bottom: 16px;
+      bottom: 20px;
+      bottom: max(20px, env(safe-area-inset-bottom, 20px));
+      margin-left: auto;
+      margin-right: auto;
+      box-sizing: border-box;
       z-index: 92;
       padding: 12px 20px;
       border-radius: 20px;
-      box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04);
+      box-shadow: none;
       background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
@@ -7470,12 +7515,11 @@ body{
       flex-direction: column;
       justify-content: center;
       gap: 0;
-      box-sizing: border-box;
     }
     [data-theme="dark"] .overall-share-card.is-floating {
       background: rgba(21, 22, 24, 0.96);
       border-color: rgba(255, 255, 255, 0.12);
-      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
+      box-shadow: none;
     }
     .overall-share-card.is-floating .rh-panes-body {
       flex: 1 1 auto;
@@ -7497,6 +7541,9 @@ body{
        Show Action buttons alongside stats in both floating and docked states!
        While floating, always displays Overall stats + buttons (Option B) */
     @media (min-width: 1024px) {
+      .overall-share-card.is-floating {
+        max-width: 100%;
+      }
       .overall-share-card.is-floating .ysc-actions {
         display: flex;
         flex-shrink: 0;
@@ -7519,15 +7566,15 @@ body{
         width: 100%;
         display: flex;
       }
-      .overall-share-card.is-floating .rh-year-summary {
-        flex: 1 1 auto;
-        min-width: 0;
+      .overall-share-card.is-floating .rp-stat-overall .rp-stat-l {
+        font-size: 8.8px;
+        letter-spacing: 0.05em;
       }
     }
 
     /* Mobile, Large Phone & Tablet (up to 1023px, including 861px-1023px):
        Follow phone and large phone style:
-       While floating: sleek 5-column stats row pill matching Image 2 (Clean CSS, 0 !important)
+       While floating: sleek 5-column stats row pill matching Image 2 (Clean CSS, 0 important)
        When docked: reveal actions smoothly in 2-column grid */
     @media (max-width: 1023px) {
       .overall-share-card:not(.is-floating) .ysc-actions {
@@ -7548,21 +7595,21 @@ body{
       /* Floating Pill: Full width edge-to-edge matching master card exactly */
       .overall-share-card.is-floating {
         position: fixed;
-        bottom: 16px;
-        bottom: max(16px, env(safe-area-inset-bottom, 16px));
+        bottom: 20px;
+        bottom: max(20px, env(safe-area-inset-bottom, 20px));
         box-sizing: border-box;
         padding: 10px 18px;
         border-radius: 20px;
         background: rgba(255, 255, 255, 0.98);
         border: 1px solid rgba(226, 232, 240, 0.95);
-        box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04);
+        box-shadow: none;
         z-index: 92;
         gap: 0;
       }
       [data-theme="dark"] .overall-share-card.is-floating {
         background: rgba(21, 22, 24, 0.98);
         border-color: rgba(255, 255, 255, 0.12);
-        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
+        box-shadow: none;
       }
 
       /* Display 5-column stats pane while floating on mobile */
@@ -7656,7 +7703,9 @@ body{
         color: #94A3B8;
       }
       .overall-share-card.is-floating .rp-stat-overall .rp-stat-l {
+        font-size: 8.8px;
         font-weight: 800;
+        letter-spacing: 0.05em;
         color: #0F172A;
       }
       [data-theme="dark"] .overall-share-card.is-floating .rp-stat-overall .rp-stat-l {
@@ -7717,6 +7766,10 @@ body{
         font-size: 9px;
         letter-spacing: 0.04em;
       }
+      .overall-share-card.is-floating .rp-stat-overall .rp-stat-l {
+        font-size: 8px;
+        letter-spacing: 0.03em;
+      }
       .rh-tab {
         font-size: 10.5px;
         padding: 6px 8px;
@@ -7729,46 +7782,50 @@ body{
        ============================================================ */
     .overall-share-card.is-floating.animating-detach,
     .overall-share-card.animating-detach {
-      border-top: none !important;
-      border-top-color: transparent !important;
-      border-top-left-radius: 0 !important;
-      border-top-right-radius: 0 !important;
-      box-shadow: none !important;
+      border-top: none;
+      border-top-color: transparent;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      box-shadow: none;
     }
     .overall-share-card.is-floating.animating-detach.gliding,
     .overall-share-card.animating-detach.gliding {
-      border-top: none !important;
-      border-top-color: transparent !important;
-      border-top-left-radius: 20px !important;
-      border-top-right-radius: 20px !important;
-      box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+      border-top: none;
+      border-top-color: transparent;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      box-shadow: none;
     }
     [data-theme="dark"] .overall-share-card.is-floating.animating-detach.gliding,
     [data-theme="dark"] .overall-share-card.animating-detach.gliding {
-      border-top: none !important;
-      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55) !important;
+      border-top: none;
+      box-shadow: none;
     }
 
     .overall-master-card.animating-detach,
     .overall-master-card.is-docked {
-      border-bottom: none !important;
-      border-bottom-color: transparent !important;
-      border-bottom-left-radius: 0 !important;
-      border-bottom-right-radius: 0 !important;
-      box-shadow: none !important;
+      border-bottom: none;
+      border-bottom-color: transparent;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      box-shadow: none;
     }
 
     .overall-share-card.animating-merge.gliding {
-      border-top: none !important;
-      border-top-color: transparent !important;
-      border-top-left-radius: 0 !important;
-      border-top-right-radius: 0 !important;
+      border-top: none;
+      border-top-color: transparent;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
     }
 
     /* Print Safety */
     @media print {
-      .result-hub-card, .overall-share-strip-container, .overall-share-card {
-        display: none !important;
+      body .result-hub-card,
+      body .overall-share-strip-container,
+      body .overall-share-card,
+      body .overall-share-card.is-floating,
+      body .overall-share-card.is-docked {
+        display: none;
       }
     }
 
@@ -9098,14 +9155,29 @@ body{
   color: #34D399;
 }
 
-/* When hide-locked-rows class is active on #subjectPanel: hide unselected locked rows */
+/* When hide-locked-rows class is active on #subjectPanel: hide unselected locked rows with ultra-smooth liquid flow */
 #subjectPanel.hide-locked-rows tr.subject-row.is-elective.row-locked {
   display: none;
 }
 
-/* Row transition when unlocking */
+/* Fluid Row Transitions */
 .marksheet tr.subject-row {
-  transition: opacity 0.2s ease, background-color 0.2s ease;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.table-scroll {
+  will-change: height;
+}
+
+/* Ensure generous clearance below subject table so Year Total never touches docked or floating elements */
+.calc-container .subject-card,
+.subject-card {
+  margin-bottom: 28px;
+}
+
+body main,
+main {
+  padding-bottom: 90px;
 }
 
 @media (max-width: 640px) {
@@ -13031,15 +13103,29 @@ let activeModalLocks = 0;
     });
     updateNavIndicator();
     if(id === 'grading'){
-      if (typeof resetResultHubToOverall === 'function') resetResultHubToOverall();
+      if (typeof resetResultHubToOverall === 'function') resetResultHubToOverall(true);
       requestAnimationFrame(updateYearIndicator);
       requestAnimationFrame(updateResultHubTabIndicator);
-      requestAnimationFrame(updateOverallBarPosition);
+      requestAnimationFrame(() => updateOverallBarPosition(true));
     } else if(id === 'contact'){
       requestAnimationFrame(updateContactTabIndicator);
     } else {
       const osc = document.getElementById('overallShareCard');
-      if (osc) osc.classList.remove('is-floating', 'is-docked');
+      if (osc) {
+        osc.classList.remove('is-floating', 'animating-merge', 'animating-detach', 'gliding');
+        osc.classList.add('is-docked');
+        osc.style.position = 'static';
+        osc.style.left = '';
+        osc.style.right = '';
+        osc.style.top = '';
+        osc.style.width = '100%';
+        osc.style.maxWidth = '';
+        osc.style.marginLeft = '';
+        osc.style.marginRight = '';
+        osc.style.bottom = '';
+        osc.style.transform = '';
+        osc.style.transition = '';
+      }
       const omc = document.getElementById('overallMasterCard');
       if (omc) omc.classList.remove('is-docked', 'master-water-ripple');
       const oscContainer = document.getElementById('overallShareStripContainer');
@@ -13292,18 +13378,136 @@ let activeModalLocks = 0;
     }
   }
 
+  var isFilterToggling = false;
+
   function toggleEnrolledOnlyView() {
     const panel = document.getElementById('subjectPanel');
-    if (!panel) return;
+    if (!panel || isFilterToggling) return;
     const wasHiding = panel.classList.contains('hide-locked-rows');
+    const scrollWrappers = panel.querySelectorAll('.table-scroll');
+    const lockedRows = panel.querySelectorAll('tr.subject-row.is-elective.row-locked');
+
+    isFilterToggling = true;
+
+    // Helper: smoothly pump updateOverallBarPosition during the transition
+    let animFrameId = null;
+    function pumpPositionUpdates() {
+      updateOverallBarPosition(false);
+      animFrameId = requestAnimationFrame(pumpPositionUpdates);
+    }
+    pumpPositionUpdates();
+
     if (wasHiding) {
+      // EXPAND TO TALL (Show All) with slow, liquid mercury transition
+      const startHeights = Array.from(scrollWrappers).map(w => w.offsetHeight);
+
+      // Prepare rows with initial 0 opacity and slight upward offset
+      lockedRows.forEach(r => {
+        r.style.opacity = '0';
+        r.style.transform = 'translateY(-6px)';
+        r.style.transition = 'none';
+      });
+
+      // Show rows in DOM to measure natural expanded height
       panel.classList.remove('hide-locked-rows');
       userManuallyToggledFilter = true;
+      updateEnrolledFilterBar();
+
+      const targetHeights = Array.from(scrollWrappers).map(w => w.scrollHeight);
+
+      // Lock starting heights and prepare liquid ease
+      scrollWrappers.forEach((w, i) => {
+        w.style.overflow = 'hidden';
+        w.style.height = startHeights[i] + 'px';
+        w.style.transition = 'height 0.54s cubic-bezier(0.22, 1, 0.36, 1)';
+      });
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          scrollWrappers.forEach((w, i) => {
+            w.style.height = targetHeights[i] + 'px';
+          });
+          lockedRows.forEach((r, idx) => {
+            r.style.transition = 'opacity 0.44s cubic-bezier(0.16, 1, 0.3, 1), transform 0.44s cubic-bezier(0.16, 1, 0.3, 1)';
+            r.style.opacity = '1';
+            r.style.transform = 'translateY(0)';
+          });
+        });
+      });
+
+      setTimeout(() => {
+        cancelAnimationFrame(animFrameId);
+        scrollWrappers.forEach(w => {
+          w.style.height = '';
+          w.style.overflow = '';
+          w.style.transition = '';
+        });
+        lockedRows.forEach(r => {
+          r.style.opacity = '';
+          r.style.transform = '';
+          r.style.transition = '';
+        });
+        isFilterToggling = false;
+        updateOverallBarPosition(true);
+      }, 560);
+
     } else {
-      panel.classList.add('hide-locked-rows');
-      userManuallyToggledFilter = false;
+      // COLLAPSE TO ENROLLED ONLY with slow liquid glide
+      const startHeights = Array.from(scrollWrappers).map(w => w.offsetHeight);
+
+      // Fade out locked rows gracefully first
+      lockedRows.forEach(r => {
+        r.style.transition = 'opacity 0.28s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1)';
+        r.style.opacity = '0';
+        r.style.transform = 'translateY(-6px)';
+      });
+
+      scrollWrappers.forEach((w, i) => {
+        w.style.overflow = 'hidden';
+        w.style.height = startHeights[i] + 'px';
+        w.style.transition = 'height 0.52s cubic-bezier(0.22, 1, 0.36, 1)';
+      });
+
+      setTimeout(() => {
+        panel.classList.add('hide-locked-rows');
+        userManuallyToggledFilter = false;
+        updateEnrolledFilterBar();
+
+        const targetHeights = Array.from(scrollWrappers).map(w => {
+          // Temporarily release height to measure target collapsed height
+          w.style.transition = 'none';
+          w.style.height = 'auto';
+          const h = w.offsetHeight;
+          w.style.height = startHeights[scrollWrappers.indexOf ? Array.prototype.indexOf.call(scrollWrappers, w) : 0] + 'px';
+          return h;
+        });
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            scrollWrappers.forEach((w, i) => {
+              w.style.transition = 'height 0.52s cubic-bezier(0.22, 1, 0.36, 1)';
+              w.style.height = targetHeights[i] + 'px';
+            });
+          });
+        });
+
+        setTimeout(() => {
+          cancelAnimationFrame(animFrameId);
+          scrollWrappers.forEach(w => {
+            w.style.height = '';
+            w.style.overflow = '';
+            w.style.transition = '';
+          });
+          lockedRows.forEach(r => {
+            r.style.opacity = '';
+            r.style.transform = '';
+            r.style.transition = '';
+          });
+          isFilterToggling = false;
+          updateOverallBarPosition(true);
+        }, 540);
+      }, 160);
     }
-    updateEnrolledFilterBar();
   }
 
   function renderYearPills(){
@@ -13712,7 +13916,7 @@ let activeModalLocks = 0;
     }
   }
 
-  function resetResultHubToOverall() {
+  function resetResultHubToOverall(instant = false) {
     const tabOverall = document.getElementById('rhTabOverall');
     const tabYear = document.getElementById('rhTabYear');
     const paneOverall = document.getElementById('rhPaneOverall');
@@ -13722,13 +13926,32 @@ let activeModalLocks = 0;
     tabOverall.classList.add('active');
     tabYear.classList.remove('active');
 
-    paneOverall.classList.add('active');
-    paneOverall.style.display = 'flex';
-    paneOverall.style.opacity = '1';
+    if (instant) {
+      paneOverall.classList.add('active');
+      paneOverall.style.display = 'flex';
+      paneOverall.style.opacity = '1';
+      paneOverall.style.transition = '';
 
-    paneYear.classList.remove('active');
-    paneYear.style.display = 'none';
-    paneYear.style.opacity = '0';
+      paneYear.classList.remove('active');
+      paneYear.style.display = 'none';
+      paneYear.style.opacity = '0';
+      paneYear.style.transition = '';
+    } else {
+      // Smooth liquid cross-fade transition so it feels intentional and elegant, NOT like a glitch/error!
+      paneYear.style.transition = 'opacity 0.22s ease';
+      paneYear.style.opacity = '0';
+      setTimeout(() => {
+        paneYear.classList.remove('active');
+        paneYear.style.display = 'none';
+        paneOverall.classList.add('active');
+        paneOverall.style.display = 'flex';
+        paneOverall.style.opacity = '0';
+        requestAnimationFrame(() => {
+          paneOverall.style.transition = 'opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1)';
+          paneOverall.style.opacity = '1';
+        });
+      }, 140);
+    }
 
     updateResultHubTabIndicator();
   }
@@ -13762,7 +13985,7 @@ let activeModalLocks = 0;
   let cachedDockedHeight = 140;
   let isBarTransitioning = false;
 
-  function updateOverallBarPosition() {
+  function updateOverallBarPosition(immediate = false) {
     const gradingView = document.getElementById('view-grading');
     const masterCard = document.getElementById('overallMasterCard');
     const card = document.getElementById('overallShareCard');
@@ -13770,6 +13993,7 @@ let activeModalLocks = 0;
     if (!masterCard || !card || !container || !gradingView || gradingView.classList.contains('hidden')) {
       if (card) {
         card.classList.remove('is-floating', 'animating-merge', 'animating-detach', 'gliding');
+        card.classList.add('is-docked');
         card.style.position = 'static';
         card.style.left = '';
         card.style.right = '';
@@ -13788,6 +14012,7 @@ let activeModalLocks = 0;
       if (container) {
         container.classList.remove('is-docked');
       }
+      isBarTransitioning = false;
       return;
     }
 
@@ -13803,22 +14028,58 @@ let activeModalLocks = 0;
     container.style.minHeight = cachedDockedHeight + 'px';
 
     const masterRect = masterCard.getBoundingClientRect();
-    const bottomGap = 16;
+    const bottomGap = isMobile ? 20 : 20;
     const floatingBarH = isMobile ? 56 : 50;
 
-    // Contact threshold: When masterCard bottom reaches the floating bar's top edge
-    const triggerPoint = window.innerHeight - bottomGap - floatingBarH;
+    // Target the INNER table box (.semester-block inside #subjectPanel)
+    // which holds the exact "Code | Paper title | Credit | Grade | Range" table!
+    const innerTableBox = (gradingView && gradingView.querySelector('#subjectPanel .semester-block')) 
+                          || document.getElementById('subjectPanel') 
+                          || masterCard;
+    const tableRect = (innerTableBox && innerTableBox.offsetWidth > 40) ? innerTableBox.getBoundingClientRect() : masterRect;
 
-    const shouldDock = isCurrentlyFloating 
-      ? (masterRect.bottom <= triggerPoint + 6) 
-      : (masterRect.bottom <= triggerPoint + 24);
+    // Contact threshold with ~5% Touch/Overlap Zone:
+    // When masterCard.bottom and the floating pill's top edge enter within ~5% (~14px) of each other,
+    // they smoothly fuse/merge like water. And when scrolling back up past that 5% zone,
+    // they dismerge in the exact liquid reverse!
+    const floatingBarTop = window.innerHeight - bottomGap - floatingBarH;
+    const isAtPageBottom = (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 36);
+    // Exact ~0% to 1% edge-to-edge physical contact threshold:
+    // Merges right at the exact instant masterCard's bottom touches floatingBarTop.
+    // Dismerges instantly the moment they separate.
+    const overlapContactZone = 2; // ~0% - 1% physical edge contact threshold
+
+    const shouldDock = isAtPageBottom || (isCurrentlyFloating 
+      ? (masterRect.bottom <= floatingBarTop + overlapContactZone) 
+      : (masterRect.bottom <= floatingBarTop + overlapContactZone + 8));
 
     if (shouldDock) {
       // DOCKING (MERGE into 1 unified card)
+      if (immediate) {
+        // Immediate instant docking without playing 560ms transition on initial load or view switch
+        card.classList.remove('is-floating', 'animating-merge', 'animating-detach', 'gliding');
+        card.classList.add('is-docked');
+        masterCard.classList.remove('animating-detach');
+        masterCard.classList.add('is-docked');
+        card.style.position = 'static';
+        card.style.left = '';
+        card.style.right = '';
+        card.style.top = '';
+        card.style.width = '100%';
+        card.style.maxWidth = '';
+        card.style.marginLeft = '';
+        card.style.marginRight = '';
+        card.style.bottom = '';
+        card.style.transform = '';
+        card.style.transition = '';
+        isBarTransitioning = false;
+        return;
+      }
+
       if (isCurrentlyFloating && !isBarTransitioning) {
         isBarTransitioning = true;
 
-        // 1. First: record current floating position
+        // 1. Record starting floating position & full geometry
         const floatRect = card.getBoundingClientRect();
 
         // 2. Switch DOM classes to docked state with animating-merge
@@ -13836,28 +14097,32 @@ let activeModalLocks = 0;
         card.style.marginRight = '';
         card.style.bottom = '';
 
-        // 3. Invert: calculate distance from old floating pos to new docked pos
+        // 3. Invert: calculate full 2D delta (X, Y, and horizontal scale)
         const dockRect = card.getBoundingClientRect();
         const dy = floatRect.top - dockRect.top;
+        const dx = floatRect.left - dockRect.left;
+        const scaleX = dockRect.width > 0 ? (floatRect.width / dockRect.width) : 1;
 
-        // Apply starting inverted transform without delay (pure translation, no scale bounce)
+        // Invert instantly without delay: matches starting floating bounding box with zero horizontal jump!
+        card.style.transformOrigin = 'top center';
         card.style.transition = 'none';
-        card.style.transform = `translateY(${dy}px)`;
+        card.style.transform = `translate3d(${dx}px, ${dy}px, 0) scaleX(${scaleX})`;
 
-        // 4. Play: smooth liquid water glide into dock slot with ZERO bounce
+        // 4. Play: Ultra-smooth liquid water fuse into the master card
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             card.classList.add('gliding');
-            card.style.transition = 'transform 0.54s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.54s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.54s cubic-bezier(0.22, 1, 0.36, 1)';
-            card.style.transform = 'translateY(0)';
+            card.style.transition = 'transform 0.64s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.64s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.64s cubic-bezier(0.16, 1, 0.3, 1)';
+            card.style.transform = 'translate3d(0, 0, 0) scaleX(1)';
             setTimeout(() => {
               card.style.transition = '';
               card.style.transform = '';
+              card.style.transformOrigin = '';
               card.classList.remove('animating-merge', 'gliding');
               card.classList.add('is-docked');
               masterCard.classList.add('is-docked');
               isBarTransitioning = false;
-            }, 560);
+            }, 660);
           });
         });
       } else if (!isCurrentlyFloating && !isBarTransitioning) {
@@ -13877,53 +14142,81 @@ let activeModalLocks = 0;
       }
     } else {
       // FLOATING (DISMERGE / DETACH smoothly to bottom of screen)
+      if (immediate) {
+        if (typeof resetResultHubToOverall === 'function') {
+          resetResultHubToOverall(true);
+        }
+        masterCard.classList.remove('is-docked', 'animating-detach');
+        card.classList.remove('is-docked', 'animating-merge', 'animating-detach', 'gliding');
+        card.classList.add('is-floating');
+        card.style.position = 'fixed';
+        card.style.left = tableRect.left + 'px';
+        card.style.right = '';
+        card.style.width = tableRect.width + 'px';
+        card.style.maxWidth = tableRect.width + 'px';
+        card.style.marginLeft = '';
+        card.style.marginRight = '';
+        card.style.bottom = bottomGap + 'px';
+        card.style.top = '';
+        card.style.transform = '';
+        card.style.transition = '';
+        isBarTransitioning = false;
+        return;
+      }
+
       if (!isCurrentlyFloating && !isBarTransitioning) {
         isBarTransitioning = true;
 
-        // Dismerge / Detach moment (Option B): Permanently reset tab selection to Overall Result!
+        // Dismerge / Detach moment: Smoothly cross-fade tab selection to Overall Result!
         if (typeof resetResultHubToOverall === 'function') {
-          resetResultHubToOverall();
+          resetResultHubToOverall(false);
         }
 
-        // 1. First: record current docked position
+        // 1. Record starting docked position & full geometry
         const dockRect = card.getBoundingClientRect();
 
-        // 2. Setup floating state: card starts at dy, masterCard smoothly keeps border-bottom clean
+        // 2. Setup floating state
         card.classList.remove('is-docked');
         card.classList.add('is-floating', 'animating-detach');
         masterCard.classList.remove('is-docked');
         masterCard.classList.add('animating-detach');
 
         card.style.position = 'fixed';
-        card.style.left = masterRect.left + 'px';
+        card.style.left = tableRect.left + 'px';
         card.style.right = '';
-        card.style.width = masterRect.width + 'px';
-        card.style.maxWidth = '';
+        card.style.width = tableRect.width + 'px';
+        card.style.maxWidth = tableRect.width + 'px';
         card.style.marginLeft = '';
         card.style.marginRight = '';
         card.style.top = '';
         card.style.bottom = bottomGap + 'px';
 
-        // 3. Invert: calculate distance from old docked pos to new floating pos
+        // 3. Invert: calculate full 2D delta (X, Y, and horizontal scale)
         const floatRect = card.getBoundingClientRect();
         const dy = dockRect.top - floatRect.top;
+        const dx = dockRect.left - floatRect.left;
+        const scaleX = floatRect.width > 0 ? (dockRect.width / floatRect.width) : 1;
 
+        // Invert instantly: matches starting docked bounding box with zero horizontal jump!
+        card.style.transformOrigin = 'top center';
         card.style.transition = 'none';
-        card.style.transform = `translateY(${dy}px)`;
+        card.style.transform = `translate3d(${dx}px, ${dy}px, 0) scaleX(${scaleX})`;
 
-        // 4. Play: smooth liquid glide down to bottom of screen with ZERO bounce and ZERO black lines
+        // 4. Play: Liquid water drop separation down to bottom of screen with zero snapping
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             card.classList.add('gliding');
-            card.style.transition = 'transform 0.52s cubic-bezier(0.22, 1, 0.36, 1), border-radius 0.52s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.52s cubic-bezier(0.22, 1, 0.36, 1)';
-            card.style.transform = 'translateY(0)';
+            card.style.transition = 'transform 0.64s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.64s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.64s cubic-bezier(0.16, 1, 0.3, 1)';
+            card.style.transform = 'translate3d(0, 0, 0) scaleX(1)';
             setTimeout(() => {
               card.style.transition = '';
               card.style.transform = '';
-              card.classList.remove('animating-detach', 'gliding');
-              masterCard.classList.remove('animating-detach');
+              card.style.transformOrigin = '';
+              card.classList.remove('animating-merge', 'gliding');
+              card.classList.add('is-docked');
+              masterCard.classList.add('is-docked');
               isBarTransitioning = false;
-            }, 540);
+            }, 660);
           });
         });
       } else if (isCurrentlyFloating && !isBarTransitioning) {
@@ -13932,10 +14225,10 @@ let activeModalLocks = 0;
         card.classList.remove('is-docked', 'animating-merge', 'animating-detach', 'gliding');
         card.classList.add('is-floating');
         card.style.position = 'fixed';
-        card.style.left = masterRect.left + 'px';
+        card.style.left = tableRect.left + 'px';
         card.style.right = '';
-        card.style.width = masterRect.width + 'px';
-        card.style.maxWidth = '';
+        card.style.width = tableRect.width + 'px';
+        card.style.maxWidth = tableRect.width + 'px';
         card.style.marginLeft = '';
         card.style.marginRight = '';
         card.style.bottom = bottomGap + 'px';
@@ -14085,6 +14378,7 @@ let activeModalLocks = 0;
     toast.classList.add('hide');
     setTimeout(function() {
       toast.classList.remove('show', 'hide');
+      toast.style.top = '';
     }, 380);
   }
 
@@ -14918,37 +15212,37 @@ window.CustomSelect = { init: build, refresh };
 
   const MODAL_SCOPE_CONFIG = {
     'y1': {
-      pill: 'Honours 1st Year',
+      pill: 'Bachelor Degree Honours',
       metricTitle: '1st Year GPA',
-      level: 'Honours 1st Year',
+      level: '1st Year',
       footer: 'Academic Result Card',
       yearNum: 1
     },
     'y2': {
-      pill: 'Honours 2nd Year',
+      pill: 'Bachelor Degree Honours',
       metricTitle: '2nd Year GPA',
-      level: 'Honours 2nd Year',
+      level: '2nd Year',
       footer: 'Academic Result Card',
       yearNum: 2
     },
     'y3': {
-      pill: 'Honours 3rd Year',
+      pill: 'Bachelor Degree Honours',
       metricTitle: '3rd Year GPA',
-      level: 'Honours 3rd Year',
+      level: '3rd Year',
       footer: 'Academic Result Card',
       yearNum: 3
     },
     'y4': {
-      pill: 'Honours 4th Year',
+      pill: 'Bachelor Degree Honours',
       metricTitle: '4th Year GPA',
-      level: 'Honours 4th Year',
+      level: '4th Year',
       footer: 'Academic Result Card',
       yearNum: 4
     },
     'overall': {
-      pill: 'Honours Final Degree',
+      pill: 'Bachelor Degree Honours',
       metricTitle: 'Cumulative CGPA',
-      level: 'Honours 4-Year Degree',
+      level: '4-Year Degree',
       footer: 'Academic Result Card',
       yearNum: null
     }
@@ -15022,9 +15316,9 @@ window.CustomSelect = { init: build, refresh };
     let gpaVal = 0;
     if(scopeKey === 'overall') {
       if(badge) badge.textContent = 'Cumulative CGPA';
-      if(pillEl) pillEl.textContent = `${progTitle} Final Degree`;
+      if(pillEl) pillEl.textContent = progTitle;
       if(metricTitleEl) metricTitleEl.textContent = 'Cumulative CGPA';
-      if(levelEl) levelEl.textContent = `${progTitle} ${totalYears > 1 ? totalYears + '-Year Degree' : 'Degree'}`;
+      if(levelEl) levelEl.textContent = totalYears > 1 ? `${totalYears}-Year Degree` : '1-Year Degree';
       if(footerEl) footerEl.textContent = 'Academic Result Card';
 
       let totalEarnedPoints = 0, totalCreditsAll = 0, totalPossibleAll = 0;
@@ -15049,9 +15343,9 @@ window.CustomSelect = { init: build, refresh };
       const unitLabel = typeof unitWord === 'function' ? unitWord(activeSyllabus) : 'Year';
 
       if(badge) badge.textContent = `${ordinal} ${unitLabel} Result`;
-      if(pillEl) pillEl.textContent = `${progTitle} ${ordinal} ${unitLabel}`;
+      if(pillEl) pillEl.textContent = progTitle;
       if(metricTitleEl) metricTitleEl.textContent = `${ordinal} ${unitLabel} GPA`;
-      if(levelEl) levelEl.textContent = `${progTitle} ${ordinal} ${unitLabel}`;
+      if(levelEl) levelEl.textContent = `${ordinal} ${unitLabel}`;
       if(footerEl) footerEl.textContent = 'Academic Result Card';
 
       const st = yearStats(currentDept, yNum);
@@ -15163,7 +15457,7 @@ window.CustomSelect = { init: build, refresh };
                 <path class="brand-ink" d="M258.59,443.82l-23.4,26.43-7.16,8.1a80.55,80.55,0,0,0-15.22-10.44,84.4,84.4,0,0,0-122.6,90.51,79.29,79.29,0,0,0,3.28,12.12A82.2,82.2,0,0,0,104,590.9a84.2,84.2,0,0,0,12.19,13.86c1.47,1.36,3,2.65,4.57,3.88L90.21,643.2c-1.54-1.29-3.07-2.61-4.54-3.94A127.67,127.67,0,0,1,72.93,626a129.21,129.21,0,0,1-27.24-55.45,115.3,115.3,0,0,1-2.1-12.12,128.49,128.49,0,0,1-1-16A130.54,130.54,0,0,1,235.19,427.62c3,1.6,5.87,3.35,8.7,5.17A129.27,129.27,0,0,1,258.59,443.82Z" transform="translate(-42.62 -411.94)"/>
                 <polygon class="brand-ink" points="235.53 103.5 235.53 187.86 192.57 236.4 192.57 146.48 90.13 146.48 128.15 103.5 235.53 103.5"/>
               </svg>
-              <span id="scCardProgramPill" class="card-session-pill">Honours 1st Year</span>
+              <span id="scCardProgramPill" class="card-session-pill">Bachelor Degree Honours</span>
             </div>
 
             <!-- Hero Metric: Large GPA / CGPA Number -->
@@ -15193,7 +15487,7 @@ window.CustomSelect = { init: build, refresh };
               </div>
               <div class="card-detail-row">
                 <span class="card-dt-label">Curriculum</span>
-                <span class="card-dt-val" id="scCardAcademicLevel">Honours 1st Year</span>
+                <span class="card-dt-val" id="scCardAcademicLevel">4-Year Degree</span>
               </div>
               <div class="card-detail-row">
                 <span class="card-dt-label">Credits</span>
@@ -15201,7 +15495,7 @@ window.CustomSelect = { init: build, refresh };
               </div>
               <div class="card-detail-row">
                 <span class="card-dt-label">Institution</span>
-                <span class="card-dt-val" id="scCardInstitution">National University, Bangladesh</span>
+                <span class="card-dt-val" id="scCardInstitution">National University</span>
               </div>
             </div>
 
