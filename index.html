@@ -7476,7 +7476,7 @@ body{
 
     /* Mobile, Large Phone & Tablet (up to 1023px, including 861px-1023px):
        Follow phone and large phone style:
-       While floating: hide action buttons for ultra-slim stats ticker
+       While floating: sleek 5-column stats row pill matching Image 2
        When docked: reveal actions smoothly in 2-column grid */
     @media (max-width: 1023px) {
       .overall-share-card:not(.is-floating) .ysc-actions {
@@ -7493,23 +7493,134 @@ body{
           transform: translateY(0) scale(1);
         }
       }
+
+      /* Floating Pill on Mobile: Clean 5-column stats row (Image 2) */
       .overall-share-card.is-floating {
-        border-radius: 18px !important;
-        padding: 11px 16px !important;
+        position: fixed !important;
+        bottom: 16px !important;
+        bottom: max(16px, env(safe-area-inset-bottom, 16px)) !important;
+        left: 16px !important;
+        right: 16px !important;
+        width: auto !important;
+        max-width: 560px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 10px 14px !important;
+        border-radius: 20px !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        border: 1px solid rgba(226, 232, 240, 0.95) !important;
+        box-shadow: 0 10px 28px -4px rgba(0, 0, 0, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+        z-index: 92 !important;
+        box-sizing: border-box !important;
         gap: 0 !important;
       }
-      .overall-share-card.is-floating .ysc-actions {
-        display: none !important;
+      [data-theme="dark"] .overall-share-card.is-floating {
+        background: rgba(21, 22, 24, 0.98) !important;
+        border-color: rgba(255, 255, 255, 0.12) !important;
+        box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55) !important;
+      }
+
+      /* Force display 5-column stats pane and hide year summary while floating on mobile */
+      .overall-share-card.is-floating .rh-panes-body {
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        height: auto !important;
       }
       .overall-share-card.is-floating .rh-pane#rhPaneOverall {
         display: flex !important;
         flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
         width: 100% !important;
-        justify-content: center;
+        min-height: unset !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        opacity: 1 !important;
+      }
+      .overall-share-card.is-floating .rh-pane#rhPaneYear {
+        display: none !important;
+        opacity: 0 !important;
       }
       .overall-share-card.is-floating .overall-card-stats-wrap {
-        width: 100%;
-        justify-content: center;
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
+        min-height: unset !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .overall-share-card.is-floating .rp-stats {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .overall-share-card.is-floating .rp-stat {
+        flex: 1 1 0 !important;
+        min-width: 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 2px !important;
+        padding: 1px 3px !important;
+        border-right: 1px solid rgba(226, 232, 240, 0.85) !important;
+        position: relative !important;
+      }
+      [data-theme="dark"] .overall-share-card.is-floating .rp-stat {
+        border-right: 1px solid rgba(255, 255, 255, 0.09) !important;
+      }
+      .overall-share-card.is-floating .rp-stat:last-child,
+      .overall-share-card.is-floating .rp-stat.rp-stat-overall {
+        border-right: none !important;
+      }
+
+      /* Numbers matching Image 2 */
+      .overall-share-card.is-floating .rp-stat-n {
+        font-family: var(--mono) !important;
+        font-size: 18px !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.01em !important;
+        line-height: 1.15 !important;
+        color: #0F172A;
+      }
+      [data-theme="dark"] .overall-share-card.is-floating .rp-stat-n {
+        color: #FFFFFF !important;
+      }
+      .overall-share-card.is-floating .rp-stat-overall .rp-stat-n {
+        font-weight: 800 !important;
+      }
+
+      /* Labels matching Image 2 */
+      .overall-share-card.is-floating .rp-stat-l {
+        font-family: var(--mono) !important;
+        font-size: 10px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        line-height: 1.15 !important;
+        color: #64748B !important;
+      }
+      [data-theme="dark"] .overall-share-card.is-floating .rp-stat-l {
+        color: #94A3B8 !important;
+      }
+      .overall-share-card.is-floating .rp-stat-overall .rp-stat-l {
+        font-weight: 800 !important;
+        color: #0F172A !important;
+      }
+      [data-theme="dark"] .overall-share-card.is-floating .rp-stat-overall .rp-stat-l {
+        color: #FFFFFF !important;
+      }
+
+      /* Hide action buttons in floating pill on mobile */
+      .overall-share-card.is-floating .ysc-actions {
+        display: none !important;
       }
 
       /* When docked on mobile & tablet (up to 1023px) */
@@ -7520,6 +7631,17 @@ body{
         flex-direction: column;
         align-items: stretch;
         gap: 14px;
+      }
+      .overall-share-card:not(.is-floating) .rp-stat-n {
+        font-family: var(--mono) !important;
+        font-size: 18px !important;
+        font-weight: 800 !important;
+      }
+      .overall-share-card:not(.is-floating) .rp-stat-l {
+        font-family: var(--mono) !important;
+        font-size: 10px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.08em !important;
       }
       .overall-share-card:not(.is-floating) .ysc-actions {
         display: grid !important;
@@ -7537,8 +7659,18 @@ body{
     }
     @media (max-width: 360px) {
       .overall-share-card.is-floating {
-        border-radius: 16px !important;
-        padding: 10px 10px !important;
+        border-radius: 18px !important;
+        padding: 9px 8px !important;
+      }
+      .overall-share-card.is-floating .rp-stat {
+        padding: 1px 1.5px !important;
+      }
+      .overall-share-card.is-floating .rp-stat-n {
+        font-size: 16px !important;
+      }
+      .overall-share-card.is-floating .rp-stat-l {
+        font-size: 9px !important;
+        letter-spacing: 0.04em !important;
       }
       .rh-tab {
         font-size: 10.5px;
@@ -13595,8 +13727,12 @@ let activeModalLocks = 0;
         card.classList.remove('is-floating', 'animating-merge', 'animating-detach', 'gliding');
         card.style.position = 'static';
         card.style.left = '';
+        card.style.right = '';
         card.style.top = '';
         card.style.width = '100%';
+        card.style.maxWidth = '';
+        card.style.marginLeft = '';
+        card.style.marginRight = '';
         card.style.bottom = '';
         card.style.transform = '';
         card.style.transition = '';
@@ -13647,8 +13783,12 @@ let activeModalLocks = 0;
 
         card.style.position = 'static';
         card.style.left = '';
+        card.style.right = '';
         card.style.top = '';
         card.style.width = '100%';
+        card.style.maxWidth = '';
+        card.style.marginLeft = '';
+        card.style.marginRight = '';
         card.style.bottom = '';
 
         // 3. Invert: calculate distance from old floating pos to new docked pos
@@ -13682,8 +13822,12 @@ let activeModalLocks = 0;
         masterCard.classList.add('is-docked');
         card.style.position = 'static';
         card.style.left = '';
+        card.style.right = '';
         card.style.top = '';
         card.style.width = '100%';
+        card.style.maxWidth = '';
+        card.style.marginLeft = '';
+        card.style.marginRight = '';
         card.style.bottom = '';
       }
     } else {
@@ -13701,8 +13845,21 @@ let activeModalLocks = 0;
         masterCard.classList.add('animating-detach');
 
         card.style.position = 'fixed';
-        card.style.left = masterRect.left + 'px';
-        card.style.width = masterRect.width + 'px';
+        if (isMobile) {
+          card.style.left = '16px';
+          card.style.right = '16px';
+          card.style.width = 'auto';
+          card.style.maxWidth = '560px';
+          card.style.marginLeft = 'auto';
+          card.style.marginRight = 'auto';
+        } else {
+          card.style.left = masterRect.left + 'px';
+          card.style.right = '';
+          card.style.width = masterRect.width + 'px';
+          card.style.maxWidth = '';
+          card.style.marginLeft = '';
+          card.style.marginRight = '';
+        }
         card.style.top = '';
         card.style.bottom = bottomGap + 'px';
 
@@ -13734,8 +13891,21 @@ let activeModalLocks = 0;
         card.classList.remove('is-docked', 'animating-merge', 'animating-detach', 'gliding');
         card.classList.add('is-floating');
         card.style.position = 'fixed';
-        card.style.left = masterRect.left + 'px';
-        card.style.width = masterRect.width + 'px';
+        if (isMobile) {
+          card.style.left = '16px';
+          card.style.right = '16px';
+          card.style.width = 'auto';
+          card.style.maxWidth = '560px';
+          card.style.marginLeft = 'auto';
+          card.style.marginRight = 'auto';
+        } else {
+          card.style.left = masterRect.left + 'px';
+          card.style.right = '';
+          card.style.width = masterRect.width + 'px';
+          card.style.maxWidth = '';
+          card.style.marginLeft = '';
+          card.style.marginRight = '';
+        }
         card.style.bottom = bottomGap + 'px';
         card.style.top = '';
       }
