@@ -1777,8 +1777,8 @@ body{
     h2.section-title{font-family:var(--disp);font-size:clamp(20px, 3.2vw, 28px);font-weight: 700;text-align:center;margin:0 0 32px;letter-spacing:-.015em;text-wrap:balance;}
     h2.pick-program-title{font-size:clamp(17.5px, 2.8vw, 22px);text-wrap:balance;}
     .features{padding:50px 0 20px;}
-    #view-about,#view-contact,#view-faq,#view-privacy,#view-terms{padding-top:36px;}
-    @media (max-width:479px){ #view-about,#view-contact,#view-faq,#view-privacy,#view-terms{padding-top:24px;} }
+    #view-about,#view-contact,#view-faq,#view-privacy,#view-terms,#view-deptlist,#view-grading{padding-top:36px;}
+    @media (max-width:479px){ #view-about,#view-contact,#view-faq,#view-privacy,#view-terms,#view-deptlist,#view-grading{padding-top:24px;} }
     .feat-grid{display:grid;grid-template-columns:1fr;gap:16px;}
     .feat-card{
       border-radius:26px;border:1px solid rgba(203,213,225,0.9);
@@ -2086,7 +2086,7 @@ body{
       box-shadow:0 12px 32px -5px rgba(0,0,0,0.40);
     }
     .qs-field{flex:1 1 150px;min-width:140px;max-width:220px;display:flex;flex-direction:column;gap:6px;}
-    .qs-field label{font-family:var(--disp);font-size:11.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#64748B;}
+    .qs-field label{font-family:var(--disp);font-size:11.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#64748B;cursor:pointer;user-select:none;}
     .qs-field label .req{color:var(--accent-rose);}
     [data-theme="dark"] .qs-field label{color:#94A3B8;}
     .qs-field select,
@@ -2336,10 +2336,6 @@ body{
       letter-spacing:-.015em;text-align:left;text-wrap:balance;
     }
     .dl-underline{width:44px;height:4px;border-radius:999px;background:var(--grad1);margin:12px 0 12px;}
-    .prog-pill{
-      display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;font-weight:700;
-      padding:6px 14px 6px 11px;border-radius:999px;letter-spacing:.03em;
-    }
     .pill-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;animation:dotPulse 2s ease-in-out infinite;}
     @keyframes dotPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(.65);}}
     
@@ -2842,9 +2838,6 @@ body{
       .foot-col a { font-size: 12.5px; }
     }
 
-    #view-grading{padding-top:32px;}
-    #view-deptlist{padding-top:32px;}
-
     .cgpa-ticket-wrap {
       width: 100%;
       margin-bottom: 36px;
@@ -3123,16 +3116,16 @@ body{
       cursor: text;
     }
     .tk-fld:focus-within {
-      border-color: #0E7C86;
-      box-shadow: 0 0 0 3px rgba(14, 124, 134, 0.2);
+      border-color: #ED2024;
+      box-shadow: 0 0 0 3px rgba(237, 32, 36, 0.12);
     }
     [data-theme="dark"] .tk-fld {
       background: #101011;
       border-color: #3B3D42;
     }
     [data-theme="dark"] .tk-fld:focus-within {
-      border-color: #2DD4BF;
-      box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.25);
+      border-color: #ED2024;
+      box-shadow: 0 0 0 3px rgba(237, 32, 36, 0.25);
     }
     .tk-target-inp {
       width: 4.4ch;
@@ -3402,11 +3395,25 @@ body{
     }
     .dept-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap;}
     /* Department Session Badges & Interactive Icons */
+    .prog-pill,
     .dept-session-badge{
       display:inline-flex;align-items:center;gap:7px;
       font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.03em;
-      padding:6px 14px 6px 11px;border-radius:999px;
+      padding:6px 14px;border-radius:999px;
+      background:rgba(255, 255, 255, 0.88);
+      border:1px solid rgba(203, 213, 225, 0.85);
+      color:#0F172A;
+      box-shadow:0 1px 3px rgba(0, 0, 0, 0.04);
       animation:pillGlow 3s ease-in-out infinite;
+      transition:background 0.25s ease, color 0.25s ease;
+    }
+    [data-theme="dark"] .prog-pill,
+    [data-theme="dark"] .dept-session-badge{
+      background:rgba(255, 255, 255, 0.06);
+      border:1px solid rgba(255, 255, 255, 0.14);
+      color:#F8FAFC;
+      box-shadow:0 2px 8px rgba(0, 0, 0, 0.35);
+      animation:pillGlowDark 3s ease-in-out infinite;
     }
     .dept-track-text{font-family:var(--sans);font-size:15px;font-weight:600;color:#64748B;}
     [data-theme="dark"] .dept-track-text{color:#94A3B8;}
@@ -4310,7 +4317,21 @@ body{
       .theme-toggle-standalone { display: none; }
       nav.main-nav { display: none; }
     }
-    @media (min-width: 768px) and (max-width: 1023px) {
+    @media (min-width: 480px) and (max-width: 767px) {
+      .site-inner {
+        max-width: 600px;
+        padding: 0 22px;
+      }
+      .mm-top-bar {
+        padding-left: max(22px, calc((100% - 600px) / 2 + 22px));
+        padding-right: max(22px, calc((100% - 600px) / 2 + 22px));
+      }
+      .mm-content {
+        padding-left: max(22px, calc((100% - 600px) / 2 + 22px));
+        padding-right: max(22px, calc((100% - 600px) / 2 + 22px));
+      }
+    }
+    @media (min-width: 768px) and (max-width: 860px) {
       .site-inner {
         max-width: 720px;
         padding: 0 24px;
@@ -4741,7 +4762,9 @@ body{
     .si-label-new{
       display:block;font-family:var(--sans);font-size:12px;font-weight:700;
       text-transform:none;letter-spacing:-0.01em;color:var(--text);margin-bottom:6px;
+      cursor:pointer;user-select:none;
     }
+    .si-field.readonly .si-label-new{cursor:default;}
     [data-theme="dark"] .si-label-new{color:var(--text);}
     .si-input-new, .si-select-new{
       width:100%;height:38px;border-radius:12px;border:1px solid var(--border);
@@ -6739,14 +6762,29 @@ body{
     [data-theme="dark"] .criteria-notice-card p { color: #CBD5E1; }
 
 
-    .prog-pill{
-      display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;font-weight:700;
-      padding:6px 14px 6px 11px;border-radius:999px;letter-spacing:.03em;animation:pillGlow 3s ease-in-out infinite;
-    }
     .pill-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;animation:dotPulse 2s ease-in-out infinite;}
     @keyframes dotPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(.65);}}
     /* Glowing Accent Elements & Brand Shadows */
-    @keyframes pillGlow{0%,100%{box-shadow:0 0 0 rgba(237,32,36,0);}50%{box-shadow:0 0 14px var(--primary-glow);}}
+    @keyframes pillGlow{
+      0%, 100%{
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        border-color: rgba(203, 213, 225, 0.85);
+      }
+      50%{
+        box-shadow: 0 0 16px rgba(237, 32, 36, 0.26), 0 1px 4px rgba(237, 32, 36, 0.16);
+        border-color: rgba(237, 32, 36, 0.35);
+      }
+    }
+    @keyframes pillGlowDark{
+      0%, 100%{
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35), 0 0 0 rgba(237, 32, 36, 0);
+        border-color: rgba(255, 255, 255, 0.14);
+      }
+      50%{
+        box-shadow: 0 0 18px rgba(237, 32, 36, 0.45), 0 0 6px rgba(255, 90, 95, 0.35);
+        border-color: rgba(237, 32, 36, 0.40);
+      }
+    }
 
 
     /* ===== BRAND LOGO GRAPHIC STYLES (SMOOTH OPACITY CROSS-FADE) ===== */
@@ -7029,6 +7067,10 @@ body{
     /* Screens <= 319px (Galaxy Fold Cover & Ultra-compact screens 280px) */
     @media (max-width: 319px) {
       .wrap {
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      .site-inner {
         padding-left: 10px;
         padding-right: 10px;
       }
@@ -9719,6 +9761,18 @@ main {
         padding-right: 24px;
         max-width: 960px;
       }
+      .site-inner {
+        max-width: 960px;
+        padding: 0 24px;
+      }
+      .mm-top-bar {
+        padding-left: max(24px, calc((100% - 960px) / 2 + 24px));
+        padding-right: max(24px, calc((100% - 960px) / 2 + 24px));
+      }
+      .mm-content {
+        padding-left: max(24px, calc((100% - 960px) / 2 + 24px));
+        padding-right: max(24px, calc((100% - 960px) / 2 + 24px));
+      }
       .dept-card-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 16px;
@@ -9822,11 +9876,11 @@ main {
       <a href="#" onclick="showView('faq');return false;">FAQ</a>
     </nav>
     <div class="header-search" id="headerSearch">
-      <input type="text" id="globalDeptSearch" placeholder="Search any department… (e.g. Physics)" oninput="globalSearch(this.value)">
+      <input type="text" id="globalDeptSearch" placeholder="Search any department… (e.g. Physics)" aria-label="Search departments" oninput="globalSearch(this.value)">
       <div id="globalSearchResults" class="global-search-results"></div>
     </div>
     <div class="mobile-actions">
-      <button class="icon-btn" aria-label="Search" onclick="toggleMobileSearch()">
+      <button class="icon-btn" id="mobileSearchBtn" aria-label="Search" aria-expanded="false" onclick="toggleMobileSearch()">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/>
           <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
@@ -10037,20 +10091,20 @@ main {
 
       <div class="quick-search">
         <div class="qs-field">
-          <label>Program <span class="req">*</span></label>
+          <label for="qsProgram">Program <span class="req">*</span></label>
           <select id="qsProgram" onchange="qsProgramChange()">
             <option value="">Select Program</option>
             <option value="honours">Honours</option>
           </select>
         </div>
         <div class="qs-field">
-          <label>Syllabus <span class="req">*</span></label>
+          <label for="qsSession">Syllabus <span class="req">*</span></label>
           <select id="qsSession" onchange="qsSessionChange()" disabled>
             <option value="">Select Syllabus</option>
           </select>
         </div>
         <div class="qs-field">
-          <label>Department</label>
+          <label for="qsSubject">Department</label>
           <select id="qsSubject" disabled>
             <option value="">Select Department</option>
           </select>
@@ -10297,7 +10351,7 @@ main {
           </div>
 
           <form id="cfForm" novalidate>
-            <input type="text" id="cfWebsite" name="cfWebsite" style="display:none;" tabindex="-1" autocomplete="off">
+            <input type="text" id="cfWebsite" name="cfWebsite" style="display:none;" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Do not fill this field">
 
             <!-- Message Panel -->
             <div id="panelContact" class="contact-panel">
@@ -10999,40 +11053,40 @@ main {
       <div class="si-grid">
         <!-- 1. Student Name -->
         <div class="si-field" style="grid-column:1/-1;">
-          <label class="si-label-new">Student Name</label>
+          <label class="si-label-new" for="siStudentName">Student Name</label>
           <input type="text" id="siStudentName" class="si-input-new" placeholder="Enter full name" oninput="this.value=this.value.replace(/[^A-Za-z\s.'-]/g,'')">
         </div>
 
         <!-- 2. Examination Roll -->
         <div class="si-field" id="siRollWrap">
-          <label class="si-label-new">Examination Roll</label>
+          <label class="si-label-new" for="siRoll">Examination Roll</label>
           <input type="text" id="siRoll" class="si-input-new" inputmode="numeric" placeholder="e.g., 1234567" maxlength="7" oninput="this.value=this.value.replace(/[^0-9]/g,'');clearFieldError('siRollWrap')" onblur="validateNumericField('siRoll',7,'siRollWrap')">
           <span class="si-field-msg">Max 7 digits</span>
         </div>
 
         <!-- 3. Registration No -->
         <div class="si-field" id="siRegNoWrap">
-          <label class="si-label-new">Registration No</label>
+          <label class="si-label-new" for="siRegNo">Registration No</label>
           <input type="text" id="siRegNo" class="si-input-new" inputmode="numeric" placeholder="e.g., 12345678901" maxlength="11" oninput="this.value=this.value.replace(/[^0-9]/g,'');clearFieldError('siRegNoWrap')" onblur="validateNumericField('siRegNo',11,'siRegNoWrap')">
           <span class="si-field-msg">Max 11 digits</span>
         </div>
 
         <!-- 4. Examination Year -->
         <div class="si-field" id="siYearWrap">
-          <label class="si-label-new">Examination Year</label>
+          <label class="si-label-new" for="siYear">Examination Year</label>
           <input type="text" id="siYear" class="si-input-new" inputmode="numeric" placeholder="e.g., 2024" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'');clearFieldError('siYearWrap')" onblur="validateNumericField('siYear',4,'siYearWrap')">
           <span class="si-field-msg">Max 4 digits</span>
         </div>
 
         <!-- 5. Session -->
         <div class="si-field">
-          <label class="si-label-new">Session</label>
+          <label class="si-label-new" for="siSession">Session</label>
           <input type="text" id="siSession" class="si-input-new" inputmode="numeric" placeholder="e.g., 2021-22" oninput="this.value=this.value.replace(/[^0-9-]/g,'')">
         </div>
 
         <!-- 6. Student Type -->
         <div class="si-field">
-          <label class="si-label-new">Student Type</label>
+          <label class="si-label-new" for="siStudentType">Student Type</label>
           <select id="siStudentType">
             <option value="">-- Select Type --</option>
             <option value="Regular" selected>Regular</option>
@@ -11059,13 +11113,13 @@ main {
 
         <!-- 8. Subject (Read-only) -->
         <div class="si-field readonly">
-          <label class="si-label-new">Subject</label>
+          <label class="si-label-new" for="siSubject">Subject</label>
           <input type="text" id="siSubject" class="si-input-new" readonly style="font-size:12.5px;font-weight:600;">
         </div>
 
         <!-- 9. CGPA (Read-only) -->
         <div class="si-field readonly">
-          <label class="si-label-new" id="siCgpaLabel">CGPA</label>
+          <label class="si-label-new" id="siCgpaLabel" for="siCgpa">CGPA</label>
           <input type="text" id="siCgpa" class="si-input-new" readonly style="font-family:var(--mono);font-size:12.5px;font-weight:600;">
         </div>
       </div>
@@ -12339,6 +12393,8 @@ main {
     }
     const box = document.getElementById('headerSearch');
     if(box) box.classList.remove('open');
+    const sBtn = document.getElementById('mobileSearchBtn');
+    if(sBtn) sBtn.setAttribute('aria-expanded', 'false');
     const siteInner = document.querySelector('.site-inner');
     if(siteInner) siteInner.classList.remove('search-expanded');
   }
@@ -12347,9 +12403,12 @@ main {
     const box = document.getElementById('headerSearch');
     if(!box) return;
     box.classList.toggle('open');
+    const isOpen = box.classList.contains('open');
+    const sBtn = document.getElementById('mobileSearchBtn');
+    if(sBtn) sBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     const siteInner = document.querySelector('.site-inner');
-    if(siteInner) siteInner.classList.toggle('search-expanded', box.classList.contains('open'));
-    if(box.classList.contains('open')){
+    if(siteInner) siteInner.classList.toggle('search-expanded', isOpen);
+    if(isOpen){
       const input = document.getElementById('globalDeptSearch');
       if(input){
         try{ input.focus({preventScroll:true}); }catch(e){ input.focus(); }
@@ -13531,11 +13590,11 @@ let activeModalLocks = 0;
       const body = typeof f[1] === 'function' ? f[1]() : `<p class="faq-answer-p">${f[1]}</p>`;
       out += `
         <div class="faq-accordion-item" id="faq-${i}">
-          <button type="button" class="faq-question-btn" onclick="toggleFaq(${i})">
+          <button type="button" class="faq-question-btn" id="faq-btn-${i}" aria-expanded="false" aria-controls="faq-body-${i}" onclick="toggleFaq(${i})">
             <span class="faq-q-text">${f[0]}</span>
             <span class="faq-icon" aria-hidden="true">+</span>
           </button>
-          <div class="faq-body-wrap">
+          <div class="faq-body-wrap" id="faq-body-${i}" role="region" aria-labelledby="faq-btn-${i}">
             <div class="faq-body-inner">
               <div class="faq-body">
                 ${body}
@@ -13558,6 +13617,8 @@ let activeModalLocks = 0;
     document.querySelectorAll('.faq-accordion-item').forEach(el => {
       if (el !== item) {
         el.classList.remove('open');
+        const qb = el.querySelector('.faq-question-btn');
+        if (qb) qb.setAttribute('aria-expanded', 'false');
         const ic = el.querySelector('.faq-icon');
         if (ic) {
           ic.textContent = '+';
@@ -13566,15 +13627,18 @@ let activeModalLocks = 0;
       }
     });
 
+    const btn = item.querySelector('.faq-question-btn');
     const icon = item.querySelector('.faq-icon');
     if (isCurrentlyOpen) {
       item.classList.remove('open');
+      if (btn) btn.setAttribute('aria-expanded', 'false');
       if (icon) {
         icon.textContent = '+';
         icon.style.transform = 'rotate(0deg)';
       }
     } else {
       item.classList.add('open');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
       if (icon) {
         icon.textContent = '×';
         icon.style.transform = 'rotate(90deg)';
@@ -13590,6 +13654,8 @@ let activeModalLocks = 0;
   function closeAllFaqs(){
     document.querySelectorAll('.faq-accordion-item').forEach(el => {
       el.classList.remove('open');
+      const qb = el.querySelector('.faq-question-btn');
+      if (qb) qb.setAttribute('aria-expanded', 'false');
       const ic = el.querySelector('.faq-icon');
       if (ic) {
         ic.textContent = '+';
@@ -13603,7 +13669,7 @@ let activeModalLocks = 0;
   function updatePageTitle(viewId){
     const vid = viewId || currentView || 'home';
     if(!vid || vid === 'home'){
-      document.title = 'Gradzz';
+      document.title = 'Gradzz - National University CGPA Calculator';
     } else if(vid === 'deptlist'){
       const prog = PROGRAMS.find(p => p.key === activeSyllabus);
       const sess = prog ? (SESSION_SHORT[prog.key] || '') : '';
@@ -13631,7 +13697,7 @@ let activeModalLocks = 0;
     } else if(vid === 'terms'){
       document.title = 'Terms of Use | Gradzz';
     } else {
-      document.title = 'Gradzz';
+      document.title = 'Gradzz - National University CGPA Calculator';
     }
   }
 
@@ -14313,7 +14379,7 @@ let activeModalLocks = 0;
               <td class="code">${s.code}</td>
               <td class="paper"><span class="paper-title-text">${formatRomanNumerals(s.name)}</span></td>
               <td class="credit">${s.credit}</td>
-              <td class="grade"><select class="grade-select" data-idx="${i}" data-group-id="${s.groupId || ''}" onchange="recalc()">
+              <td class="grade"><select class="grade-select" data-idx="${i}" data-group-id="${s.groupId || ''}" aria-label="Grade for ${s.name || s.code}" onchange="recalc()">
                 <option value="">-</option>
                 ${GRADES.map(g=>`<option value="${g.g}">${g.g} (${g.pt.toFixed(2)})</option>`).join('')}
               </select></td>
@@ -14354,7 +14420,7 @@ let activeModalLocks = 0;
             <td class="code">${s.code}</td>
             <td class="paper"><span class="paper-title-text">${formatRomanNumerals(s.name)}</span></td>
             <td class="credit">${s.credit}</td>
-            <td class="grade"><select class="grade-select" data-idx="${i}" data-group-id="${s.groupId || ''}" onchange="recalc()">
+            <td class="grade"><select class="grade-select" data-idx="${i}" data-group-id="${s.groupId || ''}" aria-label="Grade for ${s.name || s.code}" onchange="recalc()">
               <option value="">-</option>
               ${GRADES.map(g=>`<option value="${g.g}">${g.g} (${g.pt.toFixed(2)})</option>`).join('')}
             </select></td>
@@ -14824,7 +14890,7 @@ let activeModalLocks = 0;
         points += s.credit*grade.pt;
       }
     });
-    return { credits: creditsEarned, gpa: creditsEarned ? points/creditsEarned : 0, gradedCount: gradedCount };
+    return { credits: creditsEarned, points: points, gpa: creditsEarned ? points/creditsEarned : 0, gradedCount: gradedCount };
   }
 
   function updateSummaryCard(){
@@ -14837,7 +14903,7 @@ let activeModalLocks = 0;
       const tile = document.getElementById('statY'+y);
       if(tile) tile.textContent = st.gpa.toFixed(2);
       if(st.credits > 0){
-        totalEarnedPoints += st.credits * st.gpa;
+        totalEarnedPoints += (st.points !== undefined ? st.points : st.credits * st.gpa);
         totalCreditsAll += st.credits;
       }
     }
@@ -15150,7 +15216,7 @@ let activeModalLocks = 0;
         const st = yearStats(currentDept, y);
         if (st.credits > 0) {
           completedYears++;
-          totalEarnedPoints += st.credits * st.gpa;
+          totalEarnedPoints += (st.points !== undefined ? st.points : st.credits * st.gpa);
           totalCreditsAll += st.credits;
         }
       }
@@ -15163,14 +15229,14 @@ let activeModalLocks = 0;
     if (totalYears <= 1) {
       leadElem.textContent = 'Single year target:';
       valElem.textContent = `${targetCgpa.toFixed(2)} GPA`;
-      valElem.className = 'rp-target-output-val';
+      valElem.className = 'tk-req-val rp-target-output-val';
       return;
     }
 
     if (completedYears === 0) {
       leadElem.textContent = 'Required per year:';
       valElem.textContent = `${targetCgpa.toFixed(2)} GPA / yr`;
-      valElem.className = 'rp-target-output-val';
+      valElem.className = 'tk-req-val rp-target-output-val';
       return;
     }
 
@@ -15178,11 +15244,11 @@ let activeModalLocks = 0;
       if (currentCgpa >= targetCgpa) {
         leadElem.textContent = '🎉 Goal Achieved:';
         valElem.textContent = `${currentCgpa.toFixed(2)} CGPA`;
-        valElem.className = 'rp-target-output-val';
+        valElem.className = 'tk-req-val rp-target-output-val';
       } else {
         leadElem.textContent = 'Final Degree CGPA:';
         valElem.textContent = `${currentCgpa.toFixed(2)} CGPA`;
-        valElem.className = 'rp-target-output-val tp-challenging';
+        valElem.className = 'tk-req-val rp-target-output-val tp-challenging';
       }
       return;
     }
@@ -15199,17 +15265,17 @@ let activeModalLocks = 0;
     if (reqGpa > 4.00) {
       const maxPossible = ((currentCgpa * completedYears) + (4.00 * remYears)) / totalYears;
       valElem.textContent = `Max: ${maxPossible.toFixed(2)} CGPA`;
-      valElem.className = 'rp-target-output-val tp-impossible';
+      valElem.className = 'tk-req-val rp-target-output-val tp-impossible';
     } else if (reqGpa <= 2.00) {
       // Current CGPA is higher than target: student only needs the minimum pass mark (2.00) in remaining years
       valElem.textContent = `2.00 GPA / yr`;
-      valElem.className = 'rp-target-output-val';
+      valElem.className = 'tk-req-val rp-target-output-val';
     } else if (reqGpa >= 3.50) {
       valElem.textContent = `${reqGpa.toFixed(2)} GPA / yr`;
-      valElem.className = 'rp-target-output-val tp-challenging';
+      valElem.className = 'tk-req-val rp-target-output-val tp-challenging';
     } else {
       valElem.textContent = `${reqGpa.toFixed(2)} GPA / yr`;
-      valElem.className = 'rp-target-output-val';
+      valElem.className = 'tk-req-val rp-target-output-val';
     }
   }
 
@@ -15623,6 +15689,8 @@ let activeModalLocks = 0;
       const trigger = document.createElement('button');
       trigger.type = 'button';
       trigger.className = 'csel-trigger ' + (isGrade ? 'csel-trigger-grade' : 'csel-trigger-form');
+      const ariaLbl = select.getAttribute('aria-label') || (select.id && document.querySelector(`label[for="${select.id}"]`) ? document.querySelector(`label[for="${select.id}"]`).textContent.trim() : '');
+      if(ariaLbl) trigger.setAttribute('aria-label', ariaLbl);
       trigger.innerHTML =
         '<span class="csel-label"></span>' +
         (isGrade
@@ -15678,6 +15746,7 @@ let activeModalLocks = 0;
       menu.addEventListener('touchmove', e => e.stopPropagation());
       rec.place = place;
       document.addEventListener('click', closeMenu);
+      select.addEventListener('focus', () => { trigger.focus(); });
 
       refresh(select);
     }
