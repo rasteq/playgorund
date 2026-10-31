@@ -2844,33 +2844,355 @@ body{
 
     #view-grading{padding-top:32px;}
     #view-deptlist{padding-top:32px;}
-    .result-panel{
-      position:relative;overflow:hidden;border-radius:28px;
-      border:1px solid rgba(203,213,225,0.9);background:#FFFFFF;
-      padding:28px 24px;box-shadow:0 12px 30px -5px rgba(0,0,0,0.08);
-      margin-bottom:45px;
-    }
-    @media (min-width:640px){.result-panel{padding:32px;}}
-    [data-theme="dark"] .result-panel{
-      background:#161616;border-color:rgba(255,255,255,0.08);
-      box-shadow:0 14px 35px -5px rgba(0,0,0,0.45);
-    }
-    .rp-watermark{
-      pointer-events:none;position:absolute;bottom:-12px;right:-8px;
-      font-family:var(--mono);font-size:72px;font-weight:900;
-      color:rgba(15,23,42,0.03);user-select:none;line-height:1;
-    }
-    [data-theme="dark"] .rp-watermark{color:rgba(255,255,255,0.03);}
 
-    .rp-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;position:relative;z-index:10;}
-    .rp-num{
-      font-family:var(--disp);font-size:48px;font-weight:800;letter-spacing:-0.03em;line-height:1;
-      color:#0F172A;
+    .cgpa-ticket-wrap {
+      width: 100%;
+      margin-bottom: 36px;
+      filter: drop-shadow(0 8px 20px rgba(15, 23, 42, 0.08));
     }
-    @media (min-width:640px){.rp-num{font-size:56px;}}
-    [data-theme="dark"] .rp-num{color:#FFFFFF;}
-    .rp-lbl{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.12em;color:#64748B;margin-top:8px;}
-    [data-theme="dark"] .rp-lbl{color:#94A3B8;}
+    [data-theme="dark"] .cgpa-ticket-wrap {
+      filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.45));
+    }
+
+    .cgpa-ticket {
+      --sw: 168px;
+      --sh: 80px;
+      display: grid;
+      grid-template-columns: 1fr var(--sw);
+      background: #FFFFFF;
+      color: #0F172A;
+      border-radius: 22px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+      -webkit-mask: radial-gradient(circle 14px at calc(100% - var(--sw)) 0, #0000 98%, #000), radial-gradient(circle 14px at calc(100% - var(--sw)) 100%, #0000 98%, #000);
+      -webkit-mask-composite: source-in;
+      mask: radial-gradient(circle 14px at calc(100% - var(--sw)) 0, #0000 98%, #000), radial-gradient(circle 14px at calc(100% - var(--sw)) 100%, #0000 98%, #000);
+      mask-composite: intersect;
+    }
+    [data-theme="dark"] .cgpa-ticket {
+      background: #171718;
+      color: #FFFFFF;
+    }
+
+    .tk-main {
+      position: relative;
+      padding: 22px 26px 20px;
+      min-width: 0;
+      overflow: hidden;
+    }
+    .tk-wm {
+      position: absolute;
+      right: 12px;
+      bottom: -14px;
+      font-family: var(--disp);
+      font-size: 72px;
+      font-weight: 900;
+      color: rgba(15, 23, 42, 0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+    [data-theme="dark"] .tk-wm {
+      color: rgba(255, 255, 255, 0.035);
+    }
+
+    .tk-hd {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    .tk-hd-title {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #64748B;
+      text-transform: uppercase;
+    }
+    [data-theme="dark"] .tk-hd-title {
+      color: #8B93A1;
+    }
+
+    .tk-nums {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 14px;
+      position: relative;
+      z-index: 2;
+    }
+    .tk-num-col {
+      display: flex;
+      flex-direction: column;
+    }
+    .tk-num-col-goal {
+      text-align: right;
+      align-items: flex-end;
+    }
+    .tk-lab {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #64748B;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    [data-theme="dark"] .tk-lab {
+      color: #8B93A1;
+    }
+    .tk-num {
+      font-family: var(--disp);
+      font-size: 44px;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: #0F172A;
+      font-variant-numeric: tabular-nums;
+    }
+    [data-theme="dark"] .tk-num {
+      color: #FFFFFF;
+    }
+    .tk-num-goal {
+      color: #059669;
+    }
+    [data-theme="dark"] .tk-num-goal {
+      color: #22C58B;
+    }
+
+    .tk-path {
+      position: relative;
+      height: 26px;
+      margin-top: 14px;
+      z-index: 2;
+    }
+    .tk-dots {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 12px;
+      border-top: 2px dotted #C3CFDC;
+      z-index: 1;
+    }
+    [data-theme="dark"] .tk-dots {
+      border-top-color: #3B3D42;
+    }
+    .tk-fill {
+      position: absolute;
+      left: 0;
+      top: 11px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--primary, #ED2024);
+      transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+      z-index: 2;
+    }
+    .tk-plane-wrap {
+      position: absolute;
+      top: 2px;
+      color: var(--primary, #ED2024);
+      transition: left 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 4;
+      line-height: 1;
+    }
+    .tk-plane {
+      width: 20px;
+      height: 20px;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
+    }
+    .tk-goal-marker {
+      position: absolute;
+      top: 5px;
+      width: 3px;
+      height: 16px;
+      border-radius: 2px;
+      background: #059669;
+      transform: translateX(-50%);
+      z-index: 3;
+      box-shadow: 0 0 6px rgba(5, 150, 105, 0.4);
+      transition: left 0.35s ease;
+    }
+    [data-theme="dark"] .tk-goal-marker {
+      background: #22C58B;
+      box-shadow: 0 0 8px rgba(34, 197, 139, 0.5);
+    }
+
+    .tk-scale {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #94A3B8;
+      margin-top: 3px;
+      position: relative;
+      z-index: 2;
+    }
+    [data-theme="dark"] .tk-scale {
+      color: #8B93A1;
+    }
+
+    .tk-req {
+      margin-top: 14px;
+      font-family: var(--sans);
+      font-size: 13.5px;
+      color: #64748B;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+    [data-theme="dark"] .tk-req {
+      color: #8B93A1;
+    }
+    .tk-req-val,
+    .rp-target-output-val {
+      font-family: var(--disp);
+      font-size: 15px;
+      font-weight: 700;
+      color: #059669;
+      transition: color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .tk-req-val.tp-challenging,
+    .rp-target-output-val.tp-challenging { color: #D97706; }
+    .tk-req-val.tp-impossible,
+    .rp-target-output-val.tp-impossible { color: #ED2024; }
+    [data-theme="dark"] .tk-req-val,
+    [data-theme="dark"] .rp-target-output-val { color: #22C58B; }
+    [data-theme="dark"] .tk-req-val.tp-challenging,
+    [data-theme="dark"] .rp-target-output-val.tp-challenging { color: #FBBF24; }
+    [data-theme="dark"] .tk-req-val.tp-impossible,
+    [data-theme="dark"] .rp-target-output-val.tp-impossible { color: #FF6B8A; }
+
+    /* Stub Section (Interactive Target CGPA Control) */
+    .tk-stub {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 18px 14px;
+      background: #EAF5F5;
+      border-left: 2px dashed #C3CFDC;
+      position: relative;
+      transition: background 0.3s ease, border-color 0.3s ease;
+      z-index: 2;
+    }
+    [data-theme="dark"] .tk-stub {
+      background: #1E1F21;
+      border-left-color: #3B3D42;
+    }
+    .tk-stub-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #64748B;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    [data-theme="dark"] .tk-stub-tag {
+      color: #8B93A1;
+    }
+    .tk-fld {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 6px 12px;
+      background: #F6F9FB;
+      border: 1px solid #C3CFDC;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      box-sizing: border-box;
+      cursor: text;
+    }
+    .tk-fld:focus-within {
+      border-color: #0E7C86;
+      box-shadow: 0 0 0 3px rgba(14, 124, 134, 0.2);
+    }
+    [data-theme="dark"] .tk-fld {
+      background: #101011;
+      border-color: #3B3D42;
+    }
+    [data-theme="dark"] .tk-fld:focus-within {
+      border-color: #2DD4BF;
+      box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.25);
+    }
+    .tk-target-inp {
+      width: 4.4ch;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      text-align: center;
+      color: #0F172A;
+      font-family: var(--disp);
+      font-weight: 800;
+      font-size: 24px;
+      padding: 0;
+      margin: 0;
+      -moz-appearance: textfield;
+      font-variant-numeric: tabular-nums;
+    }
+    .tk-target-inp::-webkit-outer-spin-button,
+    .tk-target-inp::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    [data-theme="dark"] .tk-target-inp {
+      color: #FFFFFF;
+    }
+    .tk-fld-max {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748B;
+    }
+    [data-theme="dark"] .tk-fld-max {
+      color: #8B93A1;
+    }
+
+    @media (max-width: 600px) {
+      .cgpa-ticket {
+        grid-template-columns: 1fr;
+        -webkit-mask: radial-gradient(circle 14px at 0 calc(100% - var(--sh)), #0000 98%, #000), radial-gradient(circle 14px at 100% calc(100% - var(--sh)), #0000 98%, #000);
+        -webkit-mask-composite: source-in;
+        mask: radial-gradient(circle 14px at 0 calc(100% - var(--sh)), #0000 98%, #000), radial-gradient(circle 14px at 100% calc(100% - var(--sh)), #0000 98%, #000);
+        mask-composite: intersect;
+      }
+      .tk-main {
+        padding: 20px 20px 18px;
+      }
+      .tk-num {
+        font-size: 38px;
+      }
+      .tk-stub {
+        height: var(--sh);
+        flex-direction: row;
+        justify-content: space-between;
+        border-left: 0;
+        border-top: 2px dashed #C3CFDC;
+        padding: 0 24px;
+      }
+      [data-theme="dark"] .tk-stub {
+        border-top-color: #3B3D42;
+      }
+    }
 
     .cls{
       display:inline-flex;align-items:center;gap:6px;border-radius:12px;
@@ -3072,20 +3394,6 @@ body{
        DEPARTMENT VIEW HEADER & SEGMENTED YEAR PILLS
     ============================================================ */
     
-    /* Top Navigation in Grading Sheet View */
-    .grading-top-nav {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      margin-bottom: 18px;
-      width: 100%;
-    }
-    @media (max-width: 600px) {
-      .grading-top-nav {
-        margin-bottom: 14px;
-      }
-    }
-
     .dept-header-wrap{margin-bottom:var(--dept-header-mb);}
     @media (max-width: 767px) {
       .result-panel{margin-bottom:45px;padding:22px 18px;}
@@ -10461,41 +10769,64 @@ main {
   <!-- ================= GRADING VIEW ================= -->
   <section id="view-grading" class="hidden">
 
-    <!-- Top Back to departments Navigation -->
-    <div class="grading-top-nav">
-      <button type="button" class="btn btn-ghost btn-icon" onclick="openProgram(activeSyllabus)">
-        <span class="ico-bubble"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0l6-6m-6 6l6 6"/></svg></span>
-        <span>Back to departments</span>
-      </button>
-    </div>
-
-    <div class="result-panel">
-      <span class="rp-watermark">CGPA</span>
-      <div class="rp-top">
-        <div>
-          <div class="rp-num" id="sealCgpa">0.00</div>
-          <div class="rp-lbl">OVERALL CGPA</div>
-        </div>
-        <span class="cls cls-fail" id="sealClass">Fail</span>
-      </div>
-      <div class="rp-bar-track">
-        <div class="rp-bar-fill" id="cfBarFill" style="width:0%"></div>
-      </div>
-      <div class="rp-bar-scale"><span>0.00</span><span>4.00</span></div>
-
-
-      <!-- Minimal Integrated Target CGPA Strip -->
-      <div class="rp-target-row" id="rpTargetRow">
-        <div class="rp-target-input-box">
-          <label class="rp-target-tag" for="tpTargetInput">🎯 TARGET CGPA</label>
-          <div class="rp-target-field">
-            <input type="number" step="0.01" min="2.00" max="4.00" value="3.25" id="tpTargetInput" oninput="recalcTargetPlanner()" placeholder="3.25" class="rp-target-inp" aria-label="Target CGPA">
-            <span class="rp-target-max">/ 4.00</span>
+    <!-- ================= CGPA TICKET (BOARDING PASS) ================= -->
+    <div class="cgpa-ticket-wrap">
+      <div class="cgpa-ticket" id="cgpaTicket">
+        <!-- Main Flight Section -->
+        <div class="tk-main">
+          <!-- Background Faint Watermark -->
+          <div class="tk-wm">CGPA</div>
+          
+          <!-- Top Header: Title & Class Badge -->
+          <div class="tk-hd">
+            <span class="tk-hd-title">Overall CGPA</span>
+            <span class="cls cls-fail" id="sealClass">Fail</span>
+          </div>
+          
+          <!-- Dual Numbers: Now (Current CGPA) vs Goal (Target CGPA) -->
+          <div class="tk-nums">
+            <div class="tk-num-col">
+              <span class="tk-lab">Now</span>
+              <div class="tk-num" id="sealCgpa">0.00</div>
+            </div>
+            <div class="tk-num-col tk-num-col-goal">
+              <span class="tk-lab">Goal</span>
+              <div class="tk-num tk-num-goal" id="tkGoalNum">3.25</div>
+            </div>
+          </div>
+          
+          <!-- Flight Path with Dotted Track, Fill, Airplane & Goal Marker -->
+          <div class="tk-path">
+            <div class="tk-dots"></div>
+            <div class="tk-fill" id="cfBarFill" style="width:0%"></div>
+            <div class="tk-plane-wrap" id="tkPlaneWrap" style="left:0%; transform:translateX(0%);">
+              <svg class="tk-plane" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" transform="rotate(90 12 12)"/>
+              </svg>
+            </div>
+            <div class="tk-goal-marker" id="tkGoalMarker" style="left:81.25%" title="Target Goal"></div>
+          </div>
+          
+          <!-- Scale Bar -->
+          <div class="tk-scale">
+            <span>0.00</span>
+            <span>4.00</span>
+          </div>
+          
+          <!-- Target Status / Requirement Text -->
+          <div class="tk-req">
+            <span id="tpReqLead">Required per year:</span>
+            <b id="tpReqVal" class="tk-req-val">3.25 GPA / yr</b>
           </div>
         </div>
-        <div class="rp-target-output-box" id="rpTargetOutputBox">
-          <span class="rp-target-output-lead" id="tpReqLead">Required per year:</span>
-          <div class="rp-target-output-val" id="tpReqVal">3.25 GPA / yr</div>
+
+        <!-- Perforated Stub Section (Target CGPA Controller) -->
+        <div class="tk-stub">
+          <span class="tk-stub-tag">🎯 Target CGPA</span>
+          <label class="tk-fld" for="tpTargetInput">
+            <input type="number" step="0.01" min="0.00" max="4.00" value="3.25" id="tpTargetInput" oninput="recalcTargetPlanner()" onblur="handleTargetBlur(this)" placeholder="3.25" class="tk-target-inp" aria-label="Target CGPA">
+            <small class="tk-fld-max">/ 4.00</small>
+          </label>
         </div>
       </div>
     </div>
@@ -14537,6 +14868,14 @@ let activeModalLocks = 0;
       cfBar.style.boxShadow = themeGlow;
     }
 
+    const planeWrap = document.getElementById('tkPlaneWrap');
+    if(planeWrap) {
+      const p = Math.max(0, Math.min(100, (cumulativeGpa / 4) * 100));
+      planeWrap.style.left = p + '%';
+      planeWrap.style.transform = `translateX(-${p}%)`;
+      planeWrap.style.color = themeColor;
+    }
+
     const statOverallEl = document.getElementById('statOverallCgpa');
     if(statOverallEl) {
       statOverallEl.textContent = cumulativeGpa.toFixed(2);
@@ -14771,11 +15110,31 @@ let activeModalLocks = 0;
     }, 350);
   }
 
+  function handleTargetBlur(el) {
+    if (!el) return;
+    let v = parseFloat(el.value);
+    if (!isNaN(v)) {
+      v = Math.max(0, Math.min(4, v));
+      el.value = v.toFixed(2);
+      recalcTargetPlanner();
+    }
+  }
+
   function recalcTargetPlanner() {
     hasUserEverInteracted = true;
     const totalYears = PROGRAM_YEARS[activeSyllabus] || 1;
     const targetInput = document.getElementById('tpTargetInput');
     const targetCgpa = targetInput ? (parseFloat(targetInput.value) || 3.25) : 3.25;
+
+    const goalNumEl = document.getElementById('tkGoalNum');
+    if (goalNumEl) {
+      goalNumEl.textContent = targetCgpa.toFixed(2);
+    }
+    const goalMarkerEl = document.getElementById('tkGoalMarker');
+    if (goalMarkerEl) {
+      const goalPercent = Math.max(0, Math.min(100, (targetCgpa / 4) * 100));
+      goalMarkerEl.style.left = goalPercent + '%';
+    }
 
     const leadElem = document.getElementById('tpReqLead');
     const valElem = document.getElementById('tpReqVal');
