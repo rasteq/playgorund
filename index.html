@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Gradzz - Milestone 259: Dark Mode Footer Hover Soft Reddish Tone</title>
+  <title>Gradzz - National University CGPA Calculator</title>
   <meta name="description" content="Gradzz is a free, no-login CGPA &amp; GPA calculator for National University Bangladesh students - built mobile-first, covers Honours and Masters, all four years, both syllabuses.">
   <link rel="canonical" href="https://gradzz.app/">
   <!-- Meta Theme & Status Bar Color -->
@@ -3072,6 +3072,20 @@ body{
        DEPARTMENT VIEW HEADER & SEGMENTED YEAR PILLS
     ============================================================ */
     
+    /* Top Navigation in Grading Sheet View */
+    .grading-top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-bottom: 18px;
+      width: 100%;
+    }
+    @media (max-width: 600px) {
+      .grading-top-nav {
+        margin-bottom: 14px;
+      }
+    }
+
     .dept-header-wrap{margin-bottom:var(--dept-header-mb);}
     @media (max-width: 767px) {
       .result-panel{margin-bottom:45px;padding:22px 18px;}
@@ -3572,7 +3586,7 @@ body{
        REDESIGNED GRADING SCALE & CLASS DETERMINATION CARDS (SLATE THEME)
     ============================================================ */
     .grading-scale-card{
-      position:relative;overflow:hidden;border-radius:28px;
+      position:relative;overflow:hidden;border-radius:26px;
       border:1px solid rgba(203,213,225,0.9);background:#FFFFFF;
       box-shadow:0 12px 30px -5px rgba(0,0,0,0.08);padding:26px 24px;
       margin-top:0;width:100%;
@@ -4444,8 +4458,21 @@ body{
       cursor:not-allowed;border-color:var(--border);
     }
     .si-field-msg{font-size:10.5px;color:var(--dim);margin-top:3px;letter-spacing:0.01em;}
-    .si-field.field-error .si-input-new, .si-field.field-error .si-input-new:focus{border-color:var(--input-error-border);box-shadow:var(--input-error-shadow);}
-    .si-field.field-error .si-field-msg{color:#ef4444;font-weight:600;}
+    .si-field.field-error .si-input-new,
+    .si-field.field-error .si-input-new:focus {
+      border-color: rgba(237, 32, 36, 0.42) !important;
+      box-shadow: 0 0 0 3px rgba(237, 32, 36, 0.08) !important;
+      animation: fieldSubtleShake 0.36s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+    .si-field.field-error .si-field-msg {
+      color: #ED2024;
+      font-weight: 600;
+    }
+    [data-theme="dark"] .si-field.field-error .si-input-new,
+    [data-theme="dark"] .si-field.field-error .si-input-new:focus {
+      border-color: rgba(237, 32, 36, 0.52) !important;
+      box-shadow: 0 0 0 3px rgba(237, 32, 36, 0.12) !important;
+    }
 
     .m-footer-row{
       margin-top:20px;padding-top:16px;border-top:1px solid var(--border);
@@ -4460,8 +4487,8 @@ body{
     .m-btn-primary:hover{background:#000000;box-shadow:0 6px 18px rgba(0,0,0,0.22);transform:translateY(-1px);}
     .m-btn-primary:active{transform:translateY(0);}
     .m-btn-primary:disabled{opacity:0.6;cursor:not-allowed;transform:none;}
-    [data-theme="dark"] .m-btn-primary{background:#FFFFFF;color:#0F172A;box-shadow:0 4px 14px rgba(0,0,0,0.45);}
-    [data-theme="dark"] .m-btn-primary:hover{background:#E2E8F0;box-shadow:0 6px 18px rgba(255,255,255,0.15);}
+    [data-theme="dark"] .m-btn-primary{background:#CBD5E1;color:#0F172A;box-shadow:0 4px 14px rgba(0,0,0,0.4);}
+    [data-theme="dark"] .m-btn-primary:hover{background:#FFFFFF;box-shadow:0 6px 18px rgba(255,255,255,0.2);transform:translateY(-1px);}
 
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     .spinner-svg{animation: spin 0.8s linear infinite;}
@@ -4979,7 +5006,7 @@ body{
     /* Section Tag */
     .contact-sec-tag {
       font-family: var(--mono);
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.08em;
       color: #64748B;
@@ -4987,7 +5014,7 @@ body{
       text-transform: lowercase;
     }
     [data-theme="dark"] .contact-sec-tag {
-      color: #71717A;
+      color: #94A3B8;
     }
 
     /* Contact Hero Bar: Line & Margin Clean-up - Milestone 239 */
@@ -5005,6 +5032,7 @@ body{
       display: grid;
       gap: 34px;
       align-items: flex-start;
+      justify-items: stretch;
       margin-bottom: 28px;
       width: 100%;
       box-sizing: border-box;
@@ -5027,39 +5055,46 @@ body{
       }
     }
 
-    /* Screens Lower than Standard Laptop (768px to 1023px, e.g. Tablets & Smaller Laptops):
-       Let's talk on LEFT (50%), Form/Table on RIGHT (50%) */
-    @media (min-width: 768px) and (max-width: 1023px) {
-      .contact-layout-grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas: "info form";
-        gap: 26px;
-      }
-      .contact-info-panel {
-        grid-area: info;
-        padding: 4px 8px 10px 0;
-      }
-      .contact-form-card {
-        grid-area: form;
-      }
-    }
-
-    /* Mobile Screens (< 768px):
-       Single Column Stack - Let's talk on TOP, Form/Table BELOW */
-    @media (max-width: 767px) {
+    /* Screens Below Standard Laptop (< 1024px: Tablets & All Mobile Screens):
+       Single Column Stack - Let's talk on TOP (100%), Form Card BELOW (100%)
+       Ensures Let's talk items and Form Card have identical 100% width and align edge-to-edge */
+    @media (max-width: 1023px) {
       .contact-layout-grid {
         grid-template-columns: 1fr;
         grid-template-areas: 
           "info"
           "form";
-        gap: 24px;
+        gap: 28px;
+        width: 100%;
       }
       .contact-info-panel {
         grid-area: info;
         padding: 0;
+        width: 100%;
+        max-width: 100%;
+      }
+      .contact-info-desc {
+        max-width: 100%;
+        width: 100%;
+      }
+      .contact-items-list {
+        max-width: 100%;
+        width: 100%;
+      }
+      .contact-item-row {
+        max-width: 100%;
+        width: 100%;
       }
       .contact-form-card {
         grid-area: form;
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .contact-layout-grid {
+        gap: 24px;
       }
     }
 
@@ -5068,28 +5103,19 @@ body{
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      align-items: stretch;
       background: transparent;
       border: none;
       box-shadow: none;
       box-sizing: border-box;
       position: relative;
+      width: 100%;
+      max-width: 100%;
     }
     .contact-info-header {
       display: flex;
       flex-direction: column;
       margin-bottom: 22px;
-    }
-    .contact-info-eyebrow {
-      font-family: var(--mono);
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: #ED2024;
-      margin-bottom: 8px;
-      text-transform: lowercase;
-    }
-    [data-theme="dark"] .contact-info-eyebrow {
-      color: #FF4D58;
     }
 
     /* Ratio-based Responsive Sizing for Let's talk Heading - Milestone 239 */
@@ -5129,7 +5155,8 @@ body{
       line-height: 1.65;
       color: #475569;
       margin: 0;
-      max-width: 520px;
+      width: 100%;
+      max-width: 100%;
     }
     [data-theme="dark"] .contact-info-desc {
       color: #9F9F9F;
@@ -5139,9 +5166,12 @@ body{
     .contact-items-list {
       display: flex;
       flex-direction: column;
+      align-items: stretch;
       gap: 13px;
       margin-bottom: 24px;
-      max-width: 520px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
     }
     .contact-item-row {
       display: flex;
@@ -5155,6 +5185,10 @@ body{
       transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
       box-sizing: border-box;
       color: inherit;
+      width: 100%;
+      max-width: 100%;
+      position: relative;
+      overflow: hidden;
     }
     [data-theme="dark"] .contact-item-row {
       background: rgba(255, 255, 255, 0.025);
@@ -5172,6 +5206,35 @@ body{
       box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.4);
     }
 
+    /* Watermark Icon on Let's talk Contact Rows - Consistent with Bottom Support Cards */
+    .contact-item-wm {
+      position: absolute;
+      right: -6px;
+      bottom: -8px;
+      width: 62px;
+      height: 62px;
+      opacity: 0.045;
+      color: #0F172A;
+      pointer-events: none;
+      user-select: none;
+      transition: opacity 0.22s ease, transform 0.22s ease, color 0.22s ease;
+      z-index: 0;
+    }
+    .contact-item-row:hover .contact-item-wm {
+      opacity: 0.075;
+      color: #059669;
+      transform: scale(1.05);
+    }
+    [data-theme="dark"] .contact-item-wm {
+      opacity: 0.055;
+      color: #FFFFFF;
+    }
+    [data-theme="dark"] .contact-item-row:hover .contact-item-wm {
+      opacity: 0.09;
+      color: #10B981;
+      transform: scale(1.05);
+    }
+
     /* Squircle Icon Box - NO RED, Deep Eye-Comfort Green Matching Download Button */
     .contact-item-icon-box {
       width: 46px;
@@ -5186,6 +5249,8 @@ body{
       flex-shrink: 0;
       transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      position: relative;
+      z-index: 1;
     }
     [data-theme="dark"] .contact-item-icon-box {
       background: #1C1C1C;
@@ -5215,6 +5280,8 @@ body{
       gap: 2.5px;
       flex: 1;
       min-width: 0;
+      position: relative;
+      z-index: 1;
     }
     .contact-item-label {
       font-family: var(--disp);
@@ -5292,7 +5359,7 @@ body{
     }
     .contact-find-tag {
       font-family: var(--mono);
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.08em;
       color: #64748B;
@@ -5300,7 +5367,7 @@ body{
       text-transform: lowercase;
     }
     [data-theme="dark"] .contact-find-tag {
-      color: #71717A;
+      color: #94A3B8;
     }
     .contact-social-row {
       display: flex;
@@ -5351,6 +5418,8 @@ body{
       box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.08);
       box-sizing: border-box;
       cursor: default;
+      width: 100%;
+      max-width: 100%;
     }
     [data-theme="dark"] .contact-form-card {
       background:#161616;
@@ -6261,10 +6330,10 @@ body{
     .criteria-eyebrow {
       display: block;
       font-family: var(--mono);
-      font-size: 10.5px;
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-transform: lowercase;
       color: #64748B;
     }
     [data-theme="dark"] .criteria-eyebrow { color: #94A3B8; }
@@ -8782,33 +8851,6 @@ body{
       gap: 6px;
       margin-top: 4px;
     }
-    .btn-modal-dl-png {
-      font-family: var(--disp, sans-serif);
-      font-weight: 700;
-      font-size: 14px;
-      letter-spacing: 0.01em;
-      color: #FFFFFF;
-      background: linear-gradient(135deg, #059669, #047857);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 12px;
-      height: 46px;
-      width: 100%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 14px rgba(5, 150, 105, 0.32);
-    }
-    .btn-modal-dl-png:hover {
-      background: linear-gradient(135deg, #047857, #065F46);
-      transform: translateY(-1.5px);
-      box-shadow: 0 6px 18px rgba(5, 150, 105, 0.42);
-    }
-    .btn-modal-dl-png:active {
-      transform: scale(0.98);
-    }
 
         /* Mobile / Small Screen Modal Scrolling Solution (<= 768px) */
     @media (max-width: 768px) {
@@ -9877,6 +9919,10 @@ main {
                   <span>Usually replies within 2-3 days</span>
                 </div>
               </div>
+              <svg class="contact-item-wm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
             </a>
 
             <!-- 2. GitHub Community -->
@@ -9890,6 +9936,9 @@ main {
                 <span class="contact-item-label">GitHub Community</span>
                 <span class="contact-item-value">Report bugs &amp; suggest features</span>
               </div>
+              <svg class="contact-item-wm" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
             </a>
 
             <!-- 3. Social Channels -->
@@ -9905,6 +9954,11 @@ main {
                 <span class="contact-item-label">Social Channels</span>
                 <span class="contact-item-value">Follow for syllabus updates</span>
               </div>
+              <svg class="contact-item-wm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
             </div>
 
             <!-- 4. Direct Support -->
@@ -9918,6 +9972,9 @@ main {
                 <span class="contact-item-label">Direct Support</span>
                 <span class="contact-item-value">WhatsApp Community</span>
               </div>
+              <svg class="contact-item-wm" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M17.472 14.382c-.301-.15-1.782-.879-2.057-.98-.276-.1-.476-.15-.677.15-.2.301-.776.98-.952 1.18-.175.201-.351.226-.652.075-.301-.15-1.272-.469-2.424-1.496-.895-.798-1.5-1.784-1.675-2.085-.175-.301-.019-.464.132-.614.135-.135.301-.351.451-.527.151-.175.2-.301.301-.501.101-.2.05-.376-.025-.526-.075-.15-.677-1.633-.927-2.235-.243-.587-.49-.507-.676-.517-.175-.008-.376-.01-.577-.01-.201 0-.527.075-.802.376-.276.301-1.053 1.029-1.053 2.508 0 1.48 1.078 2.909 1.229 3.11.15.201 2.122 3.24 5.141 4.544.718.31 1.278.496 1.716.635.722.23 1.378.197 1.898.12.579-.087 1.782-.728 2.032-1.431.251-.703.251-1.305.176-1.43-.075-.127-.276-.202-.577-.353zm-5.426 7.425c-2.015 0-3.989-.54-5.719-1.564l-.41-.243-4.249 1.114 1.134-4.143-.268-.426a11.666 11.666 0 01-1.788-6.262c0-6.467 5.263-11.73 11.734-11.73 3.133 0 6.079 1.22 8.295 3.437 2.217 2.218 3.436 5.165 3.435 8.298 0 6.468-5.263 11.731-11.733 11.731z"/>
+              </svg>
             </a>
           </div>
         </div>
@@ -10322,8 +10379,8 @@ main {
     </div>
     <div id="deptGroups"></div>
 
-    <div class="back-row" style="margin-top:26px;">
-      <button class="btn btn-ghost btn-icon" onclick="goSection('departments')"><span class="ico-bubble"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0l6-6m-6 6l6 6"/></svg></span><span>Back to programs</span></button>
+    <div class="back-row">
+      <button type="button" class="btn btn-ghost btn-icon" onclick="goSection('departments')"><span class="ico-bubble"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0l6-6m-6 6l6 6"/></svg></span><span>Back to programs</span></button>
     </div>
 
     <!-- ================= 2-COLUMN CRITERIA GRID ================= -->
@@ -10337,7 +10394,7 @@ main {
           <!-- Header -->
           <div class="criteria-header">
             <div>
-              <span class="criteria-eyebrow">Evaluation Standard</span>
+              <span class="criteria-eyebrow">// evaluation standard</span>
               <h2 class="criteria-title">Grading Scale</h2>
             </div>
             <span class="criteria-pill">4.00 Point System</span>
@@ -10367,7 +10424,7 @@ main {
           <!-- Header -->
           <div class="criteria-header">
             <div>
-              <span class="criteria-eyebrow">Honours &amp; Degree</span>
+              <span class="criteria-eyebrow">// honours &amp; degree</span>
               <h2 class="criteria-title">Class Determination</h2>
             </div>
             <span class="criteria-pill">Standing</span>
@@ -10403,6 +10460,14 @@ main {
 
   <!-- ================= GRADING VIEW ================= -->
   <section id="view-grading" class="hidden">
+
+    <!-- Top Back to departments Navigation -->
+    <div class="grading-top-nav">
+      <button type="button" class="btn btn-ghost btn-icon" onclick="openProgram(activeSyllabus)">
+        <span class="ico-bubble"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0l6-6m-6 6l6 6"/></svg></span>
+        <span>Back to departments</span>
+      </button>
+    </div>
 
     <div class="result-panel">
       <span class="rp-watermark">CGPA</span>
@@ -10532,8 +10597,8 @@ main {
       </div>
     </div>
 
-    <div class="grade-actions">
-      <button class="btn btn-ghost btn-icon" onclick="openProgram(activeSyllabus)"><span class="ico-bubble"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0l6-6m-6 6l6 6"/></svg></span><span>Back to departments</span></button>
+    <div class="back-row grade-actions">
+      <button type="button" class="btn btn-ghost btn-icon" onclick="openProgram(activeSyllabus)"><span class="ico-bubble"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5m0 0l6-6m-6 6l6 6"/></svg></span><span>Back to departments</span></button>
     </div>
   </section>
 
