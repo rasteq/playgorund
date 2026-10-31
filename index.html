@@ -6761,9 +6761,6 @@ body{
     }
     [data-theme="dark"] .criteria-notice-card p { color: #CBD5E1; }
 
-
-    .pill-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;animation:dotPulse 2s ease-in-out infinite;}
-    @keyframes dotPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(.65);}}
     /* Glowing Accent Elements & Brand Shadows */
     @keyframes pillGlow{
       0%, 100%{
@@ -10112,12 +10109,12 @@ main {
     </div>
     <div class="hs-options-list">
       <!-- 1. FAQ -->
-      <a href="#faq" class="hs-option-row" onclick="onHsSelect('faq'); return false;">
+      <a href="#view-faq" class="hs-option-row" onclick="onHsSelect('faq'); return false;">
         <span class="hs-option-label">FAQ</span>
         <span class="hs-option-meta">Common Questions</span>
       </a>
       <!-- 2. Send a message -->
-      <a href="#contact" class="hs-option-row" onclick="onHsSelect('contact'); return false;">
+      <a href="#view-contact" class="hs-option-row" onclick="onHsSelect('contact'); return false;">
         <span class="hs-option-label">Send a message</span>
         <span class="hs-option-meta">Get in Touch</span>
       </a>
@@ -10128,7 +10125,6 @@ main {
       </a>
     </div>
   </div>
-</div>
 
 <main class="wrap">
 
@@ -10303,7 +10299,7 @@ main {
       <!-- Top FAQ Notice Banner -->
       <div class="contact-faq-banner">
         <span class="contact-faq-banner-text">Have a question about credits, formulas or privacy?</span>
-        <a href="#faq" onclick="showView('faq'); return false;" class="contact-faq-banner-link">Check the FAQ first</a>
+        <a href="#view-faq" onclick="showView('faq'); return false;" class="contact-faq-banner-link">Check the FAQ first</a>
       </div>
 
       <!-- Section Eyebrow -->
@@ -12057,11 +12053,6 @@ main {
   let currentDept = 'Accounting';
   let currentYear = 1;
 
-  function accentClassFor(key){
-    if(key.includes('2024')||key.includes('2013')) return 'acc-2024';
-    return 'acc-pass';
-  }
-
   function renderPrograms(){
     document.getElementById('programGrid').innerHTML = PROGRAMS.map(p=>{
       const yearMatch = (p.tag || '').match(/^(\d{4}[--]\d{2})\s*(.*)$/);
@@ -12598,27 +12589,6 @@ main {
   function toggleMobileMenu(){
     const open = document.getElementById('mobileMenuOverlay').classList.contains('open');
     if(open) closeMobileMenu(); else openMobileMenu();
-  }
-  function toggleMobileSubMenu(id){
-    const wrap = document.getElementById(id);
-    const trigger = document.getElementById('mmProgTrigger') || document.getElementById('mmDeptTrigger');
-    if(!wrap || !trigger) return;
-    const isExpanded = wrap.classList.contains('open');
-    wrap.classList.toggle('open', !isExpanded);
-    trigger.classList.toggle('open', !isExpanded);
-    trigger.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
-  }
-  function selectProgramAndScroll(progKey){
-    closeMobileMenu();
-    showView('home');
-    setTimeout(() => {
-      const sel = document.getElementById('qsProgram');
-      if(sel){
-        sel.value = progKey;
-        if(typeof qsProgramChange === 'function') qsProgramChange();
-      }
-      if(typeof goSection === 'function') goSection('departments');
-    }, 120);
   }
   document.addEventListener('click', function(e){
     const box = document.querySelector('.header-search');
@@ -13701,11 +13671,6 @@ let activeModalLocks = 0;
         icon.style.transform = 'rotate(90deg)';
       }
     }
-  }
-
-  function closeFaqIcon(e, i){
-    if (e && e.stopPropagation) e.stopPropagation();
-    toggleFaq(i);
   }
 
   function closeAllFaqs(){
@@ -15712,13 +15677,6 @@ let activeModalLocks = 0;
 <script>
   (function(){
     const map = new Map();
-
-    function removeMenuFor(select){
-      const rec = map.get(select);
-      if(rec && rec.menu) rec.menu.remove();
-      map.delete(select);
-      if(select) select.__cselDone = false;
-    }
 
     function sweepDisconnected(){
       for(const [sel, rec] of map){
