@@ -776,29 +776,44 @@ body{
     }
     .mm-top-bar .mm-close-btn {
       margin-left: auto;
-      width: 38px;
-      height: 38px;
-      min-width: 38px;
-      min-height: 38px;
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      min-height: 36px;
       border-radius: 12px;
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      background: #F1F5F9;
+      border: 1px solid rgba(203, 213, 225, 0.9);
+      background: #FFFFFF;
       color: #0F172A;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
       transition: all 0.2s cubic-bezier(0.2, 0.8, 0.25, 1);
       flex-shrink: 0;
     }
     .mm-top-bar .mm-close-btn:hover {
-      border-color: rgba(203, 213, 225, 0.9);
-      background: #E2E8F0;
+      border-color: #94A3B8;
+      background: #F8FAFC;
       transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+      color: #0F172A;
     }
     .mm-top-bar .mm-close-btn:active {
       transform: scale(0.94);
+    }
+    [data-theme="dark"] .mm-top-bar .mm-close-btn {
+      background: #161616;
+      border-color: rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    [data-theme="dark"] .mm-top-bar .mm-close-btn:hover {
+      background: #1E293B;
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      color: #FFFFFF;
     }
     @media (max-width: 400px) {
       .mm-top-bar .mm-close-btn {
@@ -2134,6 +2149,17 @@ body{
       width:20px;height:20px;min-width:20px;min-height:20px;
       border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
       margin:0;line-height:1;
+      background:rgba(15,23,42,0.07);color:#0F172A;
+      transition:all 0.2s cubic-bezier(0.2,0.8,0.25,1);
+    }
+    .qs-actions .btn.btn-ghost:hover .ico-bubble{
+      background:#0F172A;color:#FFFFFF;
+    }
+    [data-theme="dark"] .qs-actions .btn .ico-bubble{
+      background:rgba(255,255,255,0.08);color:#FFFFFF;
+    }
+    [data-theme="dark"] .qs-actions .btn.btn-ghost:hover .ico-bubble{
+      background:#CBD5E1;color:#151618;
     }
     @media (max-width:479px){ .qs-actions{width:100%;} .qs-actions .btn{flex:1;} }
     @media (min-width:768px){ .quick-search{justify-content:center;} }
