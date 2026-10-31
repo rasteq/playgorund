@@ -8321,6 +8321,41 @@ body{
       }
     }
     @media (max-width: 360px) {
+      .overall-master-card {
+        padding: 12px 10px 4px 10px;
+      }
+      .overall-share-card:not(.is-floating) {
+        padding: 12px 10px 16px 10px;
+      }
+      .overall-share-card:not(.is-floating) .ysc-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        width: 100%;
+      }
+      .overall-share-card:not(.is-floating) .ysc-actions .ysc-btn-download,
+      .overall-share-card:not(.is-floating) .ysc-actions .ysc-btn-share {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 12px;
+        font-size: 12px;
+      }
+      .overall-share-card:not(.is-floating) .rp-stat {
+        padding: 1px 2px;
+      }
+      .overall-share-card:not(.is-floating) .rp-stat-n {
+        font-size: 15px;
+      }
+      .overall-share-card:not(.is-floating) .rp-stat-l {
+        font-size: 9px;
+        letter-spacing: 0.03em;
+        white-space: nowrap;
+      }
+      .overall-share-card:not(.is-floating) .rp-stat-overall .rp-stat-l {
+        font-size: 8px;
+        letter-spacing: 0.02em;
+        white-space: nowrap;
+      }
       .overall-share-card.is-floating {
         border-radius: 18px;
         padding: 9px 8px;
@@ -8334,14 +8369,87 @@ body{
       .overall-share-card.is-floating .rp-stat-l {
         font-size: 9px;
         letter-spacing: 0.04em;
+        white-space: nowrap;
       }
       .overall-share-card.is-floating .rp-stat-overall .rp-stat-l {
         font-size: 8px;
         letter-spacing: 0.03em;
+        white-space: nowrap;
       }
       .rh-tab {
-        font-size: 10.5px;
+        font-size: 11px;
         padding: 6px 8px;
+        gap: 4px;
+        white-space: nowrap;
+      }
+    }
+    @media (max-width: 320px) {
+      .overall-master-card {
+        padding: 10px 8px 4px 8px;
+      }
+      .overall-share-card:not(.is-floating) {
+        padding: 10px 8px 14px 8px;
+      }
+      .rh-tabs {
+        padding: 2.5px;
+        gap: 2px;
+      }
+      .rh-tab {
+        font-size: 10px;
+        padding: 5px 4px;
+        gap: 3px;
+        white-space: nowrap;
+      }
+      .rh-tab span {
+        white-space: nowrap;
+      }
+      .overall-share-card:not(.is-floating) .ysc-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 7px;
+        width: 100%;
+      }
+      .overall-share-card:not(.is-floating) .ysc-actions .ysc-btn-download,
+      .overall-share-card:not(.is-floating) .ysc-actions .ysc-btn-share {
+        width: 100%;
+        justify-content: center;
+        padding: 9px 10px;
+        font-size: 11.5px;
+      }
+      .overall-share-card:not(.is-floating) .rp-stat {
+        padding: 1px 1px;
+      }
+      .overall-share-card:not(.is-floating) .rp-stat-n {
+        font-size: 13px;
+        line-height: 1.1;
+      }
+      .overall-share-card:not(.is-floating) .rp-stat-l {
+        font-size: 7.8px;
+        letter-spacing: 0;
+        white-space: nowrap;
+      }
+      .overall-share-card:not(.is-floating) .rp-stat-overall .rp-stat-l {
+        font-size: 7.2px;
+        letter-spacing: 0;
+        white-space: nowrap;
+      }
+      .overall-share-card:not(.is-floating) .rp-stat-overall .rp-stat-n {
+        font-size: 13px;
+      }
+      .rh-year-summary {
+        gap: 6px;
+      }
+      .rh-year-summary .ysc-title {
+        font-size: 13px;
+      }
+      .rh-year-summary .ysc-sub {
+        font-size: 10px;
+      }
+      .rh-year-stat-n {
+        font-size: 15px;
+      }
+      .rh-year-stat-l {
+        font-size: 8px;
       }
     }
 
@@ -8643,11 +8751,11 @@ body{
     }
 
     /* ============================================================
-       TABLET & IPAD PORTRAIT MARKSHEET CARD VIEW (up to 1023px)
-       Follows picture card style on 861*1023 and all tablet screens;
-       PC / Large Desktop table view only activates at 1024px+
+       TABLET PORTRAIT & MOBILE MARKSHEET CARD VIEW (up to 860px)
+       Follows touch card style on mobile and tablet portrait (<= 860px);
+       Table view activates at 861px+ (Landscape Tablet, Laptop, Desktop PC)
     ============================================================ */
-    @media (max-width: 1023px) {
+    @media (max-width: 860px) {
       .table-scroll { overflow-x: visible; }
       table.marksheet { display: block; width: 100%; min-width: 0; }
       table.marksheet colgroup { display: none; }
@@ -8755,8 +8863,8 @@ body{
       tr.total td[colspan]::before { font-size: 10.5px; }
     }
 
-    /* Desktop PC / Large Desktop Table Layout (>= 1024px) */
-    @media (min-width: 1024px) {
+    /* Desktop PC / Landscape Tablet / Large Desktop Table Layout (>= 861px) */
+    @media (min-width: 861px) {
       table.marksheet {
         display: table;
         width: 100%;
@@ -8893,6 +9001,15 @@ body{
       }
       [data-theme="dark"] table.marksheet td.marks {
         color: #94A3B8;
+      }
+
+      /* Cleanly reset mobile card pseudo-elements in table view */
+      table.marksheet td.code::after,
+      table.marksheet td.credit::after,
+      table.marksheet td.grade::before,
+      table.marksheet td.grade::after {
+        display: none !important;
+        content: none !important;
       }
 
       /* Year / Semester Total Row */
@@ -9752,8 +9869,8 @@ main {
 
     /* ============================================================
        DEDICATED 861px TO 1023px WIDE SCREEN (TABLET LANDSCAPE / SLIM LAPTOP)
-       Follows mobile touch card layout ("phone er mot")
-       Full desktop table view strictly begins at 1024px+
+       Container & card padding optimizations.
+       Table view active for clean desktop/tablet parity (>= 861px).
     ============================================================ */
     @media (min-width: 861px) and (max-width: 1023px) {
       .wrap {
@@ -9780,66 +9897,6 @@ main {
       .result-panel {
         padding: 24px 22px;
         border-radius: 24px;
-      }
-      .table-scroll {
-        overflow-x: visible;
-      }
-      table.marksheet {
-        display: block;
-        width: 100%;
-        min-width: 0;
-      }
-      table.marksheet colgroup,
-      table.marksheet thead {
-        display: none;
-      }
-      table.marksheet tbody {
-        display: block;
-      }
-      table.marksheet tr {
-        position: relative;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        column-gap: 10px;
-        row-gap: 4px;
-        padding: 16px 20px 14px 18px;
-        border-bottom: 1px solid var(--border);
-        border-radius: 12px;
-        margin-bottom: 6px;
-      }
-      table.marksheet td.paper {
-        order: 1;
-        flex: 1 1 100%;
-        font-size: 16px;
-        font-weight: 700;
-        line-height: 1.35;
-      }
-      table.marksheet td.code {
-        order: 2;
-        font-size: 13.5px;
-        color: var(--dim);
-      }
-      table.marksheet td.credit {
-        order: 3;
-        font-size: 13.5px;
-        color: var(--dim);
-      }
-      table.marksheet td.marks {
-        order: 4;
-        margin-left: auto;
-        font-size: 13.5px;
-        color: var(--dim);
-      }
-      table.marksheet td.grade {
-        order: 5;
-        flex: 1 1 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 12px;
-        padding-top: 14px;
-        border-top: 1px solid var(--border);
       }
       .overall-master-card {
         padding: 16px 22px;
