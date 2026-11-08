@@ -642,17 +642,15 @@ body{
 
     @media (max-width:400px){
       .site-inner{
-        grid-template-rows: 58px auto;
+        height: 58px;
         min-height: 58px;
+        max-height: 58px;
         padding: 0 12px;
       }
       .logo{font-size:20px;gap:6px;}
       .logo .dot{width:8px;height:8px;}
       .mobile-actions{gap:4px;display:flex;align-items:center;}
       .mobile-actions .icon-btn{width:34px;height:34px;}
-      .header-search.open{
-        padding: 0 0 10px 0;
-      }
     }
 
     /* ---- hamburger ⇄ close morph ---- */
@@ -772,39 +770,50 @@ body{
       height: 36px;
       min-width: 36px;
       min-height: 36px;
-      border-radius: 12px;
-      border: 1px solid rgba(203, 213, 225, 0.9);
-      background: #FFFFFF;
+      border-radius: 50%;
+      border: 1px solid rgba(203, 213, 225, 0.75);
+      background: rgba(255, 255, 255, 0.75);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
       color: #0F172A;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       transition: all 0.2s cubic-bezier(0.2, 0.8, 0.25, 1);
       flex-shrink: 0;
     }
+    .mm-top-bar .mm-close-btn svg {
+      opacity: 0.75;
+      transition: opacity 0.2s ease;
+    }
     .mm-top-bar .mm-close-btn:hover {
       border-color: #94A3B8;
-      background: #F8FAFC;
+      background: rgba(255, 255, 255, 0.92);
       transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.10);
       color: #0F172A;
+    }
+    .mm-top-bar .mm-close-btn:hover svg {
+      opacity: 1;
     }
     .mm-top-bar .mm-close-btn:active {
       transform: scale(0.94);
     }
     [data-theme="dark"] .mm-top-bar .mm-close-btn {
-      background: #161616;
-      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(22, 22, 22, 0.75);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border-color: rgba(255, 255, 255, 0.15);
       color: #FFFFFF;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
     }
     [data-theme="dark"] .mm-top-bar .mm-close-btn:hover {
-      background: #1E293B;
+      background: rgba(30, 41, 59, 0.92);
       border-color: rgba(255, 255, 255, 0.25);
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
       color: #FFFFFF;
     }
     @media (max-width: 400px) {
@@ -816,14 +825,16 @@ body{
       }
     }
     [data-theme="dark"] .mm-top-bar .mm-close-btn {
-      background: #1C1E22;
-      border-color: rgba(255, 255, 255, 0.08);
+      background: rgba(22, 22, 22, 0.75);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border-color: rgba(255, 255, 255, 0.15);
       color: #FFFFFF;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
     }
     [data-theme="dark"] .mm-top-bar .mm-close-btn:hover {
-      background: #272A30;
-      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(30, 41, 59, 0.92);
+      border-color: rgba(255, 255, 255, 0.25);
     }
 
     /* Scrollable Content */
@@ -1645,27 +1656,93 @@ body{
     }
 
     .header-search{
-      position:relative;order:6;flex:1 1 100%;
-      max-height:0;opacity:0;overflow:hidden;transform:translateY(-6px);
-      margin-top:0;pointer-events:none;
-      transition:max-height .42s cubic-bezier(.4,0,.2,1),opacity .32s ease,transform .38s cubic-bezier(.4,0,.2,1),margin-top .38s cubic-bezier(.4,0,.2,1);
+      position:relative;
+      display:none;
     }
-    .header-search.open{
-      max-height:64px;opacity:1;overflow:visible;transform:translateY(0);
-      margin-top:8px;pointer-events:auto;
+    .header-search .header-search-bar{
+      position:relative;
+      display:flex;
+      align-items:center;
+      width:100%;
     }
     .header-search input{
-      width:100%;padding:10px 18px;border-radius:999px;border:1px solid rgba(203,213,225,0.9);background:#FFFFFF;
-      color:#0F172A;font-size:13.5px;font-weight:600;outline:none;transition:all 0.2s cubic-bezier(0.2,0.8,0.25,1);
+      width:100%;
+      padding:10px 18px;
+      border-radius:999px;
+      border:1px solid rgba(203,213,225,0.9);
+      background:#FFFFFF;
+      color:#0F172A;
+      font-size:13.5px;
+      font-weight:600;
+      outline:none;
+      transition:all 0.2s cubic-bezier(0.2,0.8,0.25,1);
       box-shadow:0 1px 3px rgba(0,0,0,0.04);
+      box-sizing:border-box;
     }
     .header-search input::placeholder{color:#94A3B8;font-weight:500;}
     .header-search input:focus{border-color:#0F172A;box-shadow:0 0 0 3px rgba(15,23,42,0.08);}
     [data-theme="dark"] .header-search input{
-      background:#161616;border-color:rgba(255,255,255,0.08);color:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,0.2);
+      background:#161616;
+      border-color:rgba(255,255,255,0.08);
+      color:#FFFFFF;
+      box-shadow:0 1px 3px rgba(0,0,0,0.2);
     }
     [data-theme="dark"] .header-search input::placeholder{color:#64748B;}
     [data-theme="dark"] .header-search input:focus{border-color:#FFFFFF;box-shadow:0 0 0 3px rgba(255,255,255,0.1);}
+    .hs-close-btn{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      width:36px;
+      height:36px;
+      min-width:36px;
+      min-height:36px;
+      margin-left:8px;
+      border-radius:50%;
+      border:1px solid rgba(203, 213, 225, 0.75);
+      background:rgba(255, 255, 255, 0.75);
+      -webkit-backdrop-filter:blur(10px);
+      backdrop-filter:blur(10px);
+      color:#0F172A;
+      box-shadow:0 2px 8px rgba(0, 0, 0, 0.05);
+      cursor:pointer;
+      padding:0;
+      flex-shrink:0;
+      transition:all 0.2s cubic-bezier(0.2, 0.8, 0.25, 1);
+      -webkit-tap-highlight-color:transparent;
+    }
+    .hs-close-btn svg{
+      opacity:0.75;
+      transition:opacity 0.2s ease;
+    }
+    .hs-close-btn:hover{
+      border-color:#94A3B8;
+      background:rgba(255, 255, 255, 0.92);
+      transform:translateY(-1px);
+      box-shadow:0 4px 12px rgba(15, 23, 42, 0.10);
+      color:#0F172A;
+    }
+    .hs-close-btn:hover svg{
+      opacity:1;
+    }
+    .hs-close-btn:active{
+      transform:scale(0.94);
+    }
+    [data-theme="dark"] .hs-close-btn{
+      background:rgba(22, 22, 22, 0.75);
+      -webkit-backdrop-filter:blur(10px);
+      backdrop-filter:blur(10px);
+      border-color:rgba(255, 255, 255, 0.15);
+      color:#FFFFFF;
+      box-shadow:0 2px 8px rgba(0, 0, 0, 0.35);
+    }
+    [data-theme="dark"] .hs-close-btn:hover{
+      background:rgba(30, 41, 59, 0.92);
+      border-color:rgba(255, 255, 255, 0.25);
+      transform:translateY(-1px);
+      box-shadow:0 4px 14px rgba(0, 0, 0, 0.5);
+      color:#FFFFFF;
+    }
     .global-search-results{
       position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(-6px) scale(.98);
       z-index:60;width:125%;max-width:calc(100vw - 24px);
@@ -2328,7 +2405,7 @@ body{
       letter-spacing:-.015em;text-align:left;text-wrap:balance;
     }
     .dl-underline{width:44px;height:4px;border-radius:999px;background:var(--grad1);margin:12px 0 12px;}
-    .pill-dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;animation:dotPulse 2s ease-in-out infinite;}
+    .pill-dot{width:6px;height:6px;border-radius:50%;background:#ED2024;flex-shrink:0;animation:dotPulse 2s ease-in-out infinite;}
     @keyframes dotPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(.65);}}
     
     .dept-sub{
@@ -3226,10 +3303,10 @@ body{
     .rp-stat:last-child{border-right:none;}
     .rp-stat-n{font-family:var(--mono);font-size:19px;font-weight:800;letter-spacing:-0.01em;color:#0F172A;}
     [data-theme="dark"] .rp-stat-n{color:#FFFFFF;}
-    .rp-stat-l{font-family:var(--mono);font-size:10px;font-weight:700;color:#64748B;letter-spacing:0.08em;text-transform:uppercase;}
+    .rp-stat-l{font-family:var(--sans);font-size:10px;font-weight:700;color:#64748B;letter-spacing:0.02em;text-transform:capitalize;}
     [data-theme="dark"] .rp-stat-l{color:#94A3B8;}
     .rp-stat-overall .rp-stat-n{font-weight:800;transition:color 0.3s ease;}
-    .rp-stat-overall .rp-stat-l{color:#0F172A;font-weight:800;letter-spacing:0.08em;}
+    .rp-stat-overall .rp-stat-l{color:#0F172A;font-weight:800;letter-spacing:0.02em;text-transform:capitalize;}
     [data-theme="dark"] .rp-stat-overall .rp-stat-l{color:#FFFFFF;}
 
     .rp-export{
@@ -4215,23 +4292,24 @@ body{
 
     @media (max-width: 1023px) {
       .site-inner {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        grid-template-rows: 66px auto;
+        position: relative;
+        display: flex;
         align-items: center;
+        justify-content: space-between;
         padding: 0 16px;
         box-sizing: border-box;
-        height: auto;
+        height: 66px;
         min-height: 66px;
-        max-height: none;
+        max-height: 66px;
         row-gap: 0;
         gap: 0;
       }
     }
     @media (max-width: 400px) {
       .site-inner {
-        grid-template-rows: 58px auto;
+        height: 58px;
         min-height: 58px;
+        max-height: 58px;
         padding: 0 12px;
       }
       .mobile-actions {
@@ -4253,59 +4331,186 @@ body{
         min-width: 34px;
         min-height: 34px;
       }
+      .header-search {
+        left: 12px !important;
+        right: 12px !important;
+        height: 38px !important;
+      }
+      .header-search .header-search-bar {
+        height: 38px !important;
+      }
+      .header-search input {
+        height: 38px !important;
+        font-size: 13.5px !important;
+        padding: 0 14px !important;
+      }
+      .hs-close-btn {
+        width: 34px !important;
+        height: 34px !important;
+        min-width: 34px !important;
+        min-height: 34px !important;
+        margin-left: 6px !important;
+      }
     }
     @media (max-width: 1023px) {
       .logo {
-        grid-column: 1;
-        grid-row: 1;
         align-self: center;
         margin: 0;
         display: inline-flex;
         align-items: center;
         flex-shrink: 0;
+        transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
       }
       .mobile-actions {
-        grid-column: 3;
-        grid-row: 1;
         align-self: center;
         margin-left: auto;
         display: flex;
         align-items: center;
         gap: 6px;
         flex-shrink: 0;
+        transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s;
+      }
+      .site-inner.search-expanded .logo,
+      .site-inner.search-expanded .mobile-actions {
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
       }
       .header-search {
-        grid-column: 1 / -1;
-        grid-row: 2;
-        width: 100%;
-        max-width: 480px;
-        margin: 0 auto;
-        position: relative;
-        max-height: 0;
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%) scale(0.97);
+        margin: 0;
+        width: auto;
+        max-width: none;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        z-index: 50;
         opacity: 0;
-        overflow: hidden;
-        padding: 0;
         pointer-events: none;
-        transform: translateY(-4px);
-        transition: max-height 0.35s cubic-bezier(0.2, 0.8, 0.25, 1), opacity 0.25s ease, padding 0.35s ease, transform 0.3s ease;
+        visibility: hidden;
+        transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.22s;
       }
       .header-search.open {
-        display: block;
-        max-height: 70px;
         opacity: 1;
-        overflow: visible;
-        transform: translateY(0);
-        padding: 0 0 12px 0;
         pointer-events: auto;
+        visibility: visible;
+        transform: translateY(-50%) scale(1);
+      }
+      .header-search .header-search-bar {
+        position: relative;
+        flex: 1 1 auto;
+        min-width: 0;
+        height: 42px;
+        display: flex;
+        align-items: center;
+      }
+      .header-search input {
+        width: 100%;
+        height: 42px;
+        padding: 0 16px;
+        border-radius: 999px;
+        border: 1.5px solid #0F172A;
+        background: #FFFFFF;
+        color: #0F172A;
+        font-size: 16px;
+        font-weight: 500;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08), 0 2px 8px rgba(15, 23, 42, 0.04);
+        box-sizing: border-box;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .header-search input::placeholder {
+        color: #94A3B8;
+        font-weight: 400;
+      }
+      [data-theme="dark"] .header-search input {
+        background: #161616;
+        border-color: rgba(255, 255, 255, 0.25);
+        color: #FFFFFF;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.10), 0 2px 8px rgba(0, 0, 0, 0.4);
+      }
+      [data-theme="dark"] .header-search input:focus {
+        border-color: #FFFFFF;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.14);
+      }
+      [data-theme="dark"] .header-search input::placeholder {
+        color: #64748B;
+      }
+      .hs-close-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        min-height: 36px;
+        margin-left: 8px;
+        border-radius: 50%;
+        border: 1px solid rgba(203, 213, 225, 0.75);
+        background: rgba(255, 255, 255, 0.75);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        color: #0F172A;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        cursor: pointer;
+        padding: 0;
+        flex-shrink: 0;
+        transition: all 0.2s cubic-bezier(0.2, 0.8, 0.25, 1);
+        -webkit-tap-highlight-color: transparent;
+      }
+      .hs-close-btn svg {
+        opacity: 0.75;
+        transition: opacity 0.2s ease;
+      }
+      .hs-close-btn:hover {
+        border-color: #94A3B8;
+        background: rgba(255, 255, 255, 0.92);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.10);
+        color: #0F172A;
+      }
+      .hs-close-btn:hover svg {
+        opacity: 1;
+      }
+      .hs-close-btn:active {
+        transform: scale(0.94);
+      }
+      [data-theme="dark"] .hs-close-btn {
+        background: rgba(22, 22, 22, 0.75);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        border-color: rgba(255, 255, 255, 0.15);
+        color: #FFFFFF;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+      }
+      [data-theme="dark"] .hs-close-btn:hover {
+        background: rgba(30, 41, 59, 0.92);
+        border-color: rgba(255, 255, 255, 0.25);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+        color: #FFFFFF;
       }
       .header-search .global-search-results {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        right: 0;
         width: 100%;
-        max-width: 480px;
-        left: 50%;
-        transform: translateX(-50%) translateY(-6px) scale(.98);
+        max-width: none;
+        transform: translateY(-4px) scale(0.98);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        z-index: 70;
       }
       .header-search .global-search-results.show {
-        transform: translateX(-50%) translateY(0) scale(1);
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
       }
       .theme-toggle-standalone { display: none; }
       nav.main-nav { display: none; }
@@ -4314,6 +4519,10 @@ body{
       .site-inner {
         max-width: 600px;
         padding: 0 22px;
+      }
+      .header-search {
+        left: 22px;
+        right: 22px;
       }
       .mm-top-bar {
         padding-left: max(22px, calc((100% - 600px) / 2 + 22px));
@@ -4328,6 +4537,10 @@ body{
       .site-inner {
         max-width: 720px;
         padding: 0 24px;
+      }
+      .header-search {
+        left: 24px;
+        right: 24px;
       }
       .mm-top-bar {
         padding-left: max(24px, calc((100% - 720px) / 2 + 24px));
@@ -4445,8 +4658,17 @@ body{
       .site-inner{flex-wrap:nowrap;}
       .header-search{
         display:block;order:2;flex:1 1 42%;max-width:42%;margin:0 auto;
-        max-height:none;opacity:1;overflow:visible;transform:none;margin-top:0;pointer-events:auto;transition:none;
+        position:relative;left:auto;right:auto;top:auto;bottom:auto;height:auto;
+        max-height:none;opacity:1 !important;visibility:visible !important;overflow:visible;transform:none !important;pointer-events:auto !important;transition:none;
       }
+      .header-search .header-search-bar{position:relative;width:100%;display:flex;align-items:center;}
+      .header-search input{width:100%;padding:10px 18px;border-radius:999px;border:1px solid rgba(203,213,225,0.9);background:#FFFFFF;color:#0F172A;font-size:13.5px;font-weight:600;outline:none;transition:all 0.2s cubic-bezier(0.2,0.8,0.25,1);box-shadow:0 1px 3px rgba(0,0,0,0.04);}
+      .header-search input::placeholder{color:#94A3B8;font-weight:500;}
+      .header-search input:focus{border-color:#0F172A;box-shadow:0 0 0 3px rgba(15,23,42,0.08);}
+      [data-theme="dark"] .header-search input{background:#161616;border-color:rgba(255,255,255,0.08);color:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,0.2);}
+      [data-theme="dark"] .header-search input::placeholder{color:#64748B;}
+      [data-theme="dark"] .header-search input:focus{border-color:#FFFFFF;box-shadow:0 0 0 3px rgba(255,255,255,0.1);}
+      .hs-close-btn{display:none !important;}
       .mobile-actions{display:none;}
       .logo{font-size:27px;gap:11px;}
       .logo .dot{width:10.2px;height:10.2px;}
@@ -4649,24 +4871,30 @@ body{
     }
     .m-title{font-size:clamp(16.5px, 2.5vw, 18px);font-weight: 700;color:var(--text);margin:0;letter-spacing:-0.01em;}
     .m-close-btn{
-      width:36px;height:36px;border-radius:12px;flex-shrink:0;
-      border:1px solid rgba(203,213,225,0.9);background:#FFFFFF;color:#0F172A;
+      width:36px;height:36px;border-radius:50%;flex-shrink:0;
+      border:1px solid rgba(203,213,225,0.75);background:rgba(255,255,255,0.75);color:#0F172A;
+      -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
       display:flex;align-items:center;justify-content:center;
       cursor:pointer;transition:all 0.2s cubic-bezier(0.2,0.8,0.25,1);
-      box-shadow:0 1px 3px rgba(0,0,0,0.04);
+      box-shadow:0 2px 8px rgba(0,0,0,0.05);
+    }
+    .m-close-btn svg{
+      opacity:0.75;transition:opacity 0.2s ease;
     }
     .m-close-btn:hover{
-      border-color:#94A3B8;background:#F8FAFC;transform:translateY(-1px);
-      box-shadow:0 4px 10px rgba(15,23,42,0.08);color:#0F172A;
+      border-color:#94A3B8;background:rgba(255,255,255,0.92);transform:translateY(-1px);
+      box-shadow:0 4px 12px rgba(15,23,42,0.10);color:#0F172A;
     }
+    .m-close-btn:hover svg{opacity:1;}
     .m-close-btn:active{transform:scale(0.94);}
     [data-theme="dark"] .m-close-btn{
-      background:#161616;border-color:rgba(255,255,255,0.12);color:#FFFFFF;
-      box-shadow:0 1px 3px rgba(0,0,0,0.2);
+      background:rgba(22,22,22,0.75);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+      border-color:rgba(255,255,255,0.15);color:#FFFFFF;
+      box-shadow:0 2px 8px rgba(0,0,0,0.35);
     }
     [data-theme="dark"] .m-close-btn:hover{
-      background:#1E293B;border-color:rgba(255,255,255,0.25);transform:translateY(-1px);
-      box-shadow:0 4px 12px rgba(0,0,0,0.4);color:#FFFFFF;
+      background:rgba(30,41,59,0.92);border-color:rgba(255,255,255,0.25);transform:translateY(-1px);
+      box-shadow:0 4px 14px rgba(0,0,0,0.5);color:#FFFFFF;
     }
     
     .m-badge-row{display:flex;align-items:center;justify-content:space-between;width:100%;margin-bottom:16px;}
@@ -6752,15 +6980,15 @@ body{
     }
     [data-theme="dark"] .criteria-notice-card p { color: #CBD5E1; }
 
-    /* Glowing Accent Elements & Brand Shadows */
+    /* Glowing Accent Elements & Brand Shadows (Soft Warm Brand Red Glow - Not Hard Red) */
     @keyframes pillGlow{
       0%, 100%{
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
         border-color: rgba(203, 213, 225, 0.85);
       }
       50%{
-        box-shadow: 0 0 16px rgba(237, 32, 36, 0.26), 0 1px 4px rgba(237, 32, 36, 0.16);
-        border-color: rgba(237, 32, 36, 0.35);
+        box-shadow: 0 0 12px rgba(237, 32, 36, 0.10), 0 2px 6px rgba(237, 32, 36, 0.06);
+        border-color: rgba(237, 32, 36, 0.18);
       }
     }
     @keyframes pillGlowDark{
@@ -6769,8 +6997,8 @@ body{
         border-color: rgba(255, 255, 255, 0.14);
       }
       50%{
-        box-shadow: 0 0 18px rgba(237, 32, 36, 0.45), 0 0 6px rgba(255, 90, 95, 0.35);
-        border-color: rgba(237, 32, 36, 0.40);
+        box-shadow: 0 0 14px rgba(237, 32, 36, 0.18), 0 0 4px rgba(255, 107, 107, 0.12);
+        border-color: rgba(237, 32, 36, 0.22);
       }
     }
 
@@ -8047,12 +8275,12 @@ body{
       margin-right: auto;
       box-sizing: border-box;
       z-index: 92;
-      padding: 12px 20px;
-      border-radius: 20px;
+      padding: 8px 10px 8px 16px;
+      border-radius: 22px;
       box-shadow: none;
       background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border: 1px solid rgba(226, 232, 240, 0.95);
       display: flex;
       flex-direction: column;
@@ -8060,8 +8288,8 @@ body{
       gap: 0;
     }
     [data-theme="dark"] .overall-share-card.is-floating {
-      background: rgba(21, 22, 24, 0.96);
-      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(18, 20, 28, 0.96);
+      border-color: rgba(255, 255, 255, 0.09);
       box-shadow: none;
     }
     .overall-share-card.is-floating .rh-panes-body {
@@ -8071,6 +8299,99 @@ body{
       display: flex;
       align-items: center;
       height: auto;
+    }
+
+    /* Floating Pill Core Stats Row (Clean divider-less layout matching reference design) */
+    .overall-share-card.is-floating .rp-stats {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      gap: 0;
+    }
+    .overall-share-card.is-floating .rp-stat {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      padding: 2px 4px;
+      border: none !important;
+      border-right: none !important;
+      position: relative;
+    }
+    [data-theme="dark"] .overall-share-card.is-floating .rp-stat {
+      border: none !important;
+      border-right: none !important;
+    }
+    .overall-share-card.is-floating .rp-stat:last-child {
+      border: none !important;
+      border-right: none !important;
+    }
+
+    /* Floating Pill Year Numbers */
+    .overall-share-card.is-floating .rp-stat:not(.rp-stat-overall) .rp-stat-n {
+      font-family: var(--sans);
+      font-size: 17.5px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      color: #0F172A;
+    }
+    [data-theme="dark"] .overall-share-card.is-floating .rp-stat:not(.rp-stat-overall) .rp-stat-n {
+      color: #FFFFFF;
+    }
+
+    /* Floating Pill Labels (Title Case) */
+    .overall-share-card.is-floating .rp-stat-l {
+      font-family: var(--sans);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      text-transform: capitalize;
+      line-height: 1.2;
+      color: #64748B;
+    }
+    [data-theme="dark"] .overall-share-card.is-floating .rp-stat-l {
+      color: #8E95A5;
+    }
+
+    /* Elevated Overall Chip Box (Matching Reference Design!) */
+    .overall-share-card.is-floating .rp-stat.rp-stat-overall {
+      flex: 0 0 auto;
+      min-width: 74px;
+      padding: 6px 14px;
+      border-radius: 14px;
+      margin-left: 6px;
+      background: #F1F5F9;
+      border: 1px solid rgba(203, 213, 225, 0.9) !important;
+      box-sizing: border-box;
+    }
+    [data-theme="dark"] .overall-share-card.is-floating .rp-stat.rp-stat-overall {
+      background: #232733;
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+    }
+    .overall-share-card.is-floating .rp-stat.rp-stat-overall .rp-stat-n {
+      font-family: var(--sans);
+      font-size: 17.5px;
+      font-weight: 800;
+      transition: color 0.3s ease;
+      color: var(--primary, #ED2024);
+    }
+    .overall-share-card.is-floating .rp-stat.rp-stat-overall .rp-stat-l {
+      font-family: var(--sans);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      text-transform: capitalize;
+      color: #0F172A;
+    }
+    [data-theme="dark"] .overall-share-card.is-floating .rp-stat.rp-stat-overall .rp-stat-l {
+      color: #FFFFFF;
     }
 
     /* Mobile: Hide actions in floating pill, smoothly reveal when merged on dock! */
@@ -8109,10 +8430,6 @@ body{
         width: 100%;
         display: flex;
       }
-      .overall-share-card.is-floating .rp-stat-overall .rp-stat-l {
-        font-size: 8.8px;
-        letter-spacing: 0.05em;
-      }
     }
 
     /* Mobile, Large Phone & Tablet (up to 1023px, including 861px-1023px):
@@ -8141,8 +8458,8 @@ body{
         bottom: 20px;
         bottom: max(20px, env(safe-area-inset-bottom, 20px));
         box-sizing: border-box;
-        padding: 10px 18px;
-        border-radius: 20px;
+        padding: 8px 8px 8px 14px;
+        border-radius: 22px;
         background: rgba(255, 255, 255, 0.98);
         border: 1px solid rgba(226, 232, 240, 0.95);
         box-shadow: none;
@@ -8150,8 +8467,8 @@ body{
         gap: 0;
       }
       [data-theme="dark"] .overall-share-card.is-floating {
-        background: rgba(21, 22, 24, 0.98);
-        border-color: rgba(255, 255, 255, 0.12);
+        background: rgba(18, 20, 28, 0.98);
+        border-color: rgba(255, 255, 255, 0.09);
         box-shadow: none;
       }
 
@@ -8195,6 +8512,7 @@ body{
         width: 100%;
         padding: 0;
         margin: 0;
+        gap: 0;
       }
       .overall-share-card.is-floating .rp-stat {
         flex: 1 1 0;
@@ -8204,54 +8522,76 @@ body{
         align-items: center;
         justify-content: center;
         gap: 2px;
-        padding: 1px 3px;
-        border-right: 1px solid rgba(226, 232, 240, 0.85);
+        padding: 2px 4px;
+        border: none !important;
+        border-right: none !important;
         position: relative;
       }
       [data-theme="dark"] .overall-share-card.is-floating .rp-stat {
-        border-right: 1px solid rgba(255, 255, 255, 0.09);
+        border: none !important;
+        border-right: none !important;
       }
-      .overall-share-card.is-floating .rp-stat:last-child,
-      .overall-share-card.is-floating .rp-stat.rp-stat-overall {
-        border-right: none;
+      .overall-share-card.is-floating .rp-stat:last-child {
+        border: none !important;
+        border-right: none !important;
       }
 
-      /* Numbers matching Image 2 */
-      .overall-share-card.is-floating .rp-stat-n {
-        font-family: var(--mono);
-        font-size: 18px;
+      /* Numbers matching reference design */
+      .overall-share-card.is-floating .rp-stat:not(.rp-stat-overall) .rp-stat-n {
+        font-family: var(--sans);
+        font-size: 17.5px;
         font-weight: 800;
         letter-spacing: -0.01em;
         line-height: 1.15;
         color: #0F172A;
       }
-      [data-theme="dark"] .overall-share-card.is-floating .rp-stat-n {
+      [data-theme="dark"] .overall-share-card.is-floating .rp-stat:not(.rp-stat-overall) .rp-stat-n {
         color: #FFFFFF;
       }
-      .overall-share-card.is-floating .rp-stat-overall .rp-stat-n {
-        font-weight: 800;
-      }
 
-      /* Labels matching Image 2 */
+      /* Labels matching reference design */
       .overall-share-card.is-floating .rp-stat-l {
-        font-family: var(--mono);
-        font-size: 10px;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        line-height: 1.15;
+        font-family: var(--sans);
+        font-size: 10.5px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        text-transform: capitalize;
+        line-height: 1.2;
         color: #64748B;
       }
       [data-theme="dark"] .overall-share-card.is-floating .rp-stat-l {
-        color: #94A3B8;
+        color: #8E95A5;
       }
-      .overall-share-card.is-floating .rp-stat-overall .rp-stat-l {
-        font-size: 8.8px;
+
+      /* Elevated Overall Chip Box on mobile */
+      .overall-share-card.is-floating .rp-stat.rp-stat-overall {
+        flex: 0 0 auto;
+        min-width: 74px;
+        padding: 6px 14px;
+        border-radius: 14px;
+        margin-left: 6px;
+        background: #F1F5F9;
+        border: 1px solid rgba(203, 213, 225, 0.9) !important;
+      }
+      [data-theme="dark"] .overall-share-card.is-floating .rp-stat.rp-stat-overall {
+        background: #232733;
+        border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      }
+      .overall-share-card.is-floating .rp-stat.rp-stat-overall .rp-stat-n {
+        font-family: var(--sans);
+        font-size: 17.5px;
         font-weight: 800;
-        letter-spacing: 0.05em;
+        transition: color 0.3s ease;
+      }
+      .overall-share-card.is-floating .rp-stat.rp-stat-overall .rp-stat-l {
+        font-family: var(--sans);
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        text-transform: capitalize;
         color: #0F172A;
       }
-      [data-theme="dark"] .overall-share-card.is-floating .rp-stat-overall .rp-stat-l {
+      [data-theme="dark"] .overall-share-card.is-floating .rp-stat.rp-stat-overall .rp-stat-l {
         color: #FFFFFF;
       }
 
@@ -8332,22 +8672,31 @@ body{
       }
       .overall-share-card.is-floating {
         border-radius: 18px;
-        padding: 9px 8px;
+        padding: 6px 6px 6px 8px;
       }
       .overall-share-card.is-floating .rp-stat {
-        padding: 1px 1.5px;
+        padding: 1px 2px;
       }
       .overall-share-card.is-floating .rp-stat-n {
-        font-size: 16px;
+        font-size: 15px;
       }
       .overall-share-card.is-floating .rp-stat-l {
         font-size: 9px;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.01em;
         white-space: nowrap;
       }
-      .overall-share-card.is-floating .rp-stat-overall .rp-stat-l {
-        font-size: 8px;
-        letter-spacing: 0.03em;
+      .overall-share-card.is-floating .rp-stat.rp-stat-overall {
+        min-width: 58px;
+        padding: 5px 8px;
+        border-radius: 11px;
+        margin-left: 3px;
+      }
+      .overall-share-card.is-floating .rp-stat.rp-stat-overall .rp-stat-n {
+        font-size: 15px;
+      }
+      .overall-share-card.is-floating .rp-stat.rp-stat-overall .rp-stat-l {
+        font-size: 9px;
+        letter-spacing: 0.01em;
         white-space: nowrap;
       }
       .rh-tab {
@@ -9075,46 +9424,57 @@ body{
       transform: translateY(0) scale(1);
     }
 
-    /* Close Button: Positioned neatly in top right */
+    /* Close Button: Positioned neatly in top right with frosted glassmorphism (75% translucent + blur) */
     .modal-close-icon-btn {
       position: absolute;
       top: 16px;
       right: 16px;
       width: 36px;
       height: 36px;
-      border-radius: 12px;
-      background: #FFFFFF;
-      border: 1px solid rgba(203, 213, 225, 0.9);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.75);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(203, 213, 225, 0.75);
       color: #0F172A;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.2s cubic-bezier(0.2, 0.8, 0.25, 1);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       z-index: 40;
+    }
+    .modal-close-icon-btn svg {
+      opacity: 0.75;
+      transition: opacity 0.2s ease;
     }
     .modal-close-icon-btn:hover {
       border-color: #94A3B8;
-      background: #F8FAFC;
+      background: rgba(255, 255, 255, 0.92);
       transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.10);
       color: #0F172A;
+    }
+    .modal-close-icon-btn:hover svg {
+      opacity: 1;
     }
     .modal-close-icon-btn:active {
       transform: scale(0.94);
     }
     [data-theme="dark"] .modal-close-icon-btn {
-      background: #1E293B;
+      background: rgba(30, 41, 59, 0.75);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
       border-color: rgba(255, 255, 255, 0.15);
       color: #FFFFFF;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
     }
     [data-theme="dark"] .modal-close-icon-btn:hover {
-      background: #334155;
+      background: rgba(51, 65, 85, 0.92);
       border-color: rgba(255, 255, 255, 0.25);
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
       color: #FFFFFF;
     }
 
@@ -9856,6 +10216,10 @@ main {
         max-width: 960px;
         padding: 0 24px;
       }
+      .header-search {
+        left: 24px;
+        right: 24px;
+      }
       .mm-top-bar {
         padding-left: max(24px, calc((100% - 960px) / 2 + 24px));
         padding-right: max(24px, calc((100% - 960px) / 2 + 24px));
@@ -9880,346 +10244,6 @@ main {
       }
     }
 
-
-    /* ============================================================
-       MOBILE APP BOTTOM DOCK (ONLY ON PHONE SCREEN <= 860px)
-       Matching User Screenshot: 1:1 Pixel-Perfect
-       ============================================================ */
-    @media (min-width: 861px) {
-      .app-native-dock {
-        display: none !important;
-      }
-    }
-
-    @media (max-width: 860px) {
-      :root {
-        --app-dock-h: 64px;
-        --app-safe-b: max(16px, env(safe-area-inset-bottom, 16px));
-      }
-
-      /* Reserve bottom space so page content is never hidden behind dock */
-      body {
-        padding-bottom: 160px !important;
-      }
-
-      /* Edge-to-Edge Bottom Dock (Exact Color & Transparency Parity with Nav Header) */
-      .app-native-dock {
-        position: fixed !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        height: calc(var(--app-dock-h) + var(--app-safe-b)) !important;
-        padding-bottom: var(--app-safe-b) !important;
-        background: rgba(15, 16, 16, 0.40) !important;
-        backdrop-filter: blur(28px) saturate(200%) !important;
-        -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
-        border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-        box-shadow: 0 -4px 20px -2px rgba(0, 0, 0, 0.22) !important;
-        z-index: 99995 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-around !important;
-        box-sizing: border-box !important;
-        padding-left: 12px !important;
-        padding-right: 12px !important;
-      }
-      [data-theme="light"] .app-native-dock {
-        background: rgba(240, 239, 239, 0.40) !important;
-        backdrop-filter: blur(28px) saturate(200%) !important;
-        -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
-        border-top: 1px solid rgba(15, 16, 16, 0.07) !important;
-        box-shadow: 0 -4px 20px -2px rgba(15, 23, 42, 0.04) !important;
-      }
-
-      .app-dock-btn {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 3px !important;
-        min-width: 82px !important;
-        height: 52px !important;
-        border-radius: 16px !important;
-        border: 1.5px solid transparent !important;
-        background: transparent !important;
-        color: #7E8594 !important;
-        cursor: pointer !important;
-        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
-        padding: 4px 12px !important;
-        -webkit-tap-highlight-color: transparent !important;
-      }
-      .app-dock-btn:active {
-        transform: scale(0.92) !important;
-      }
-      .app-dock-btn svg {
-        width: 21px !important;
-        height: 21px !important;
-        stroke: currentColor !important;
-        fill: none !important;
-        stroke-width: 2.1 !important;
-      }
-      .app-dock-btn .app-dock-label {
-        font-family: var(--sans) !important;
-        font-size: 11px !important;
-        font-weight: 600 !important;
-        color: currentColor !important;
-      }
-
-      /* Active Tab: Rounded Rectangle Stroke Box (Matching Screenshot!) */
-      .app-dock-btn.active {
-        border-color: #2B72EE !important;
-        background: rgba(43, 114, 238, 0.08) !important;
-        color: #2B72EE !important;
-      }
-      .app-dock-btn.active svg {
-        stroke: #2B72EE !important;
-      }
-      .app-dock-btn.active .app-dock-label {
-        color: #2B72EE !important;
-        font-weight: 700 !important;
-      }
-
-      /* Floating Score Pill: Positioned cleanly above the dock */
-      .overall-share-card.is-floating {
-        position: fixed !important;
-        bottom: calc(var(--app-dock-h) + var(--app-safe-b) + 12px) !important;
-        background: #141720 !important;
-        backdrop-filter: blur(24px) saturate(180%) !important;
-        -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        border-radius: 20px !important;
-        box-shadow: 0 14px 34px rgba(0, 0, 0, 0.45) !important;
-        left: 14px !important;
-        right: 14px !important;
-        width: calc(100% - 28px) !important;
-        max-width: 440px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        height: 62px !important;
-        z-index: 99990 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        padding: 0 6px 0 12px !important;
-      }
-      [data-theme="light"] .overall-share-card.is-floating {
-        background: rgba(255, 255, 255, 0.95) !important;
-        border-color: rgba(226, 232, 240, 0.95) !important;
-      }
-
-      .overall-share-card.is-floating .rp-stats {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        width: 100% !important;
-        gap: 0 !important;
-      }
-      .overall-share-card.is-floating .rp-stat {
-        flex: 1 !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        border-right: none !important;
-        gap: 2px !important;
-      }
-      .overall-share-card.is-floating .rp-stat-n {
-        font-family: var(--sans) !important;
-        font-size: 15px !important;
-        font-weight: 800 !important;
-        color: #FFFFFF !important;
-        line-height: 1.1 !important;
-      }
-      [data-theme="light"] .overall-share-card.is-floating .rp-stat-n {
-        color: #0F172A !important;
-      }
-      .overall-share-card.is-floating .rp-stat-l {
-        font-family: var(--sans) !important;
-        font-size: 10.5px !important;
-        font-weight: 600 !important;
-        color: #8E95A5 !important;
-        text-transform: capitalize !important;
-      }
-      [data-theme="light"] .overall-share-card.is-floating .rp-stat-l {
-        color: #64748B !important;
-      }
-
-      /* Overall Chip Box (Matching Screenshot!) */
-      .overall-share-card.is-floating .rp-stat.rp-stat-overall {
-        background: #232733 !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        border-radius: 14px !important;
-        padding: 6px 14px !important;
-        min-width: 72px !important;
-        flex: 0 0 auto !important;
-      }
-      [data-theme="light"] .overall-share-card.is-floating .rp-stat.rp-stat-overall {
-        background: #F1F5F9 !important;
-        border-color: rgba(203, 213, 225, 0.9) !important;
-      }
-      .overall-share-card.is-floating .rp-stat.rp-stat-overall .rp-stat-n {
-        color: #FFFFFF !important;
-        font-size: 15.5px !important;
-        font-weight: 800 !important;
-      }
-      [data-theme="light"] .overall-share-card.is-floating .rp-stat.rp-stat-overall .rp-stat-n {
-        color: #0F172A !important;
-      }
-      .overall-share-card.is-floating .rp-stat.rp-stat-overall .rp-stat-l {
-        color: #F1F3F7 !important;
-        font-size: 10.5px !important;
-        font-weight: 700 !important;
-      }
-      [data-theme="light"] .overall-share-card.is-floating .rp-stat.rp-stat-overall .rp-stat-l {
-        color: #334155 !important;
-      }
-    }
-
-    /* ============================================================
-       APP PHONE VIEW REFINEMENTS (CLEAN & SIMPLE)
-       1. Header: Hide Search & Menu on phone view
-       2. Settings Drawer: Hide Home option
-       3. Search Drawer: Clean, Simple, No Pre-Options
-       ============================================================ */
-    @media (max-width: 860px) {
-      header.site .mobile-actions {
-        display: none !important;
-      }
-    }
-
-    #mmCardHome, #mmHomeSep {
-      display: none !important;
-    }
-
-    /* Clean Sticky Search Bar Header */
-    .app-search-sticky-header {
-      background: #F4F6F9;
-      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-      padding: 12px max(16px, calc((100% - 560px) / 2 + 16px));
-      flex-shrink: 0;
-      transition: background 0.3s ease, border-color 0.3s ease;
-    }
-    [data-theme="dark"] .app-search-sticky-header {
-      background: #0C0D0F;
-      border-bottom-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .app-search-box {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--card, #FFFFFF);
-      border: 1.5px solid rgba(226, 232, 240, 0.95);
-      border-radius: 16px;
-      padding: 11px 15px;
-      color: var(--txt);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
-    }
-    [data-theme="dark"] .app-search-box {
-      background: #141720;
-      border-color: rgba(255, 255, 255, 0.12);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-    }
-    .app-search-box:focus-within {
-      border-color: #2B72EE;
-      box-shadow: 0 0 0 3px rgba(43, 114, 238, 0.18);
-    }
-    .app-search-box input {
-      flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: var(--txt);
-      font-size: 14.5px;
-      font-family: var(--sans);
-      font-weight: 600;
-      min-width: 0;
-    }
-    .app-search-box input::placeholder {
-      color: var(--dim, #8E95A5);
-      font-weight: 500;
-    }
-    .app-search-clear-btn {
-      background: rgba(142, 149, 165, 0.15);
-      border: none;
-      color: var(--dim);
-      font-size: 11px;
-      font-weight: 800;
-      cursor: pointer;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      line-height: 1;
-      transition: background 0.18s ease, color 0.18s ease;
-      flex-shrink: 0;
-      padding: 0;
-    }
-    .app-search-clear-btn:hover {
-      background: rgba(142, 149, 165, 0.3);
-      color: var(--txt);
-    }
-
-    /* Scrollable Results Container with bottom clearance for dock */
-    .app-search-results-container {
-      padding-top: 12px !important;
-      padding-bottom: 120px !important;
-    }
-    #appSearchResultsList .gsr-item {
-      min-height: 46px;
-      padding: 10px 14px;
-      border-radius: 14px;
-      -webkit-tap-highlight-color: transparent;
-    }
-    #appSearchResultsList .gsr-item:active {
-      transform: scale(0.985);
-    }
-
-    /* Simple Clean Department Rows */
-    .app-dept-simple-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 13px 16px;
-      background: var(--card, #FFFFFF);
-      border-radius: 14px;
-      border: 1px solid rgba(226, 232, 240, 0.85);
-      cursor: pointer;
-      transition: all 0.15s ease;
-      -webkit-tap-highlight-color: transparent;
-    }
-    [data-theme="dark"] .app-dept-simple-row {
-      background: #13151D;
-      border-color: rgba(255, 255, 255, 0.06);
-    }
-    .app-dept-simple-row:hover, .app-dept-simple-row:active {
-      transform: scale(0.99);
-      background: rgba(43, 114, 238, 0.05);
-      border-color: #2B72EE;
-    }
-    [data-theme="dark"] .app-dept-simple-row:hover, [data-theme="dark"] .app-dept-simple-row:active {
-      background: rgba(43, 114, 238, 0.12);
-    }
-    .app-dept-simple-name {
-      font-size: 14.5px;
-      font-weight: 600;
-      color: var(--txt);
-      line-height: 1.25;
-      min-width: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .app-dept-simple-arrow {
-      font-size: 16px;
-      line-height: 1;
-      color: var(--dim, #8E95A5);
-      opacity: 0.6;
-    }
 </style>
 </head>
 <body>
@@ -10247,7 +10271,15 @@ main {
       <a href="#" onclick="showView('faq');return false;">FAQ</a>
     </nav>
     <div class="header-search" id="headerSearch">
-      <input type="text" id="globalDeptSearch" placeholder="Search any department… (e.g. Physics)" aria-label="Search departments" oninput="globalSearch(this.value)">
+      <div class="header-search-bar">
+        <input type="text" id="globalDeptSearch" placeholder="Search department… (e.g. Physics)" aria-label="Search departments" oninput="globalSearch(this.value)" autocomplete="off">
+      </div>
+      <button type="button" class="icon-btn hs-close-btn" id="headerSearchCloseBtn" aria-label="Close search" onclick="clearGlobalSearch()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
       <div id="globalSearchResults" class="global-search-results"></div>
     </div>
     <div class="mobile-actions">
@@ -10289,7 +10321,21 @@ main {
 
       <!-- 2.1 Primary Navigation: 1 Single Card with Colored Icons (Milestone 242: Contact 3rd, FAQ 4th) -->
       <div class="mm-primary-nav-card">
-        
+        <!-- 1. Home -->
+        <a href="#" class="mm-nav-row" id="mmCardHome" onclick="closeMobileMenu();showView('home');return false;">
+          <span class="mm-nav-ico-box mm-ico-home" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </span>
+          <div class="mm-nav-text-col">
+            <span class="mm-nav-title">Home</span>
+            <span class="mm-nav-sub">GPA &amp; Grade Calculator</span>
+          </div>
+          <span class="mm-nav-chevron" aria-hidden="true">&rsaquo;</span>
+        </a>
+        <div class="mm-nav-sep"></div>
 
         <!-- 2. About -->
         <a href="#" class="mm-nav-row" id="mmCardAbout" onclick="closeMobileMenu();showView('about');return false;">
@@ -12748,7 +12794,10 @@ main {
 
   function clearGlobalSearch(){
     const inp = document.getElementById('globalDeptSearch');
-    if(inp) inp.value = '';
+    if(inp){
+      inp.value = '';
+      try{ inp.blur(); }catch(e){}
+    }
     const gsr = document.getElementById('globalSearchResults');
     if(gsr){
       gsr.innerHTML = '';
@@ -14512,8 +14561,8 @@ let activeModalLocks = 0;
     let html = '';
     for(let y=1; y<=totalYears; y++){
       const uWord = unitWord(activeSyllabus);
-      const labelWord = uWord.toLowerCase() === 'semester' ? 'SEM' : uWord.toUpperCase();
-      html += `<div class="rp-stat"><div class="rp-stat-n" id="statY${y}">0.00</div><div class="rp-stat-l">Year ${y}</div></div>`;
+      const labelWord = uWord.toLowerCase() === 'semester' ? 'Sem' : 'Year';
+      html += `<div class="rp-stat"><div class="rp-stat-n" id="statY${y}">0.00</div><div class="rp-stat-l">${labelWord} ${y}</div></div>`;
     }
     html += `<div class="rp-stat rp-stat-overall"><div class="rp-stat-n" id="statOverallCgpa">0.00</div><div class="rp-stat-l" id="statOverallLabel">Overall</div></div>`;
     wrap.innerHTML = html;
@@ -15004,7 +15053,7 @@ let activeModalLocks = 0;
     container.style.minHeight = cachedDockedHeight + 'px';
 
     const masterRect = masterCard.getBoundingClientRect();
-    const bottomGap = isMobile ? 100 : 20;
+    const bottomGap = isMobile ? 20 : 20;
     const floatingBarH = isMobile ? 56 : 50;
 
     // Target the INNER table box (.semester-block inside #subjectPanel)
@@ -16561,257 +16610,6 @@ window.CustomSelect = { init: build, refresh };
       </div>
       </div>
   </div>
-
-
-  
-    <!-- ============================================================
-       DEDICATED APP SEARCH DRAWER (CLEAN & SIMPLE)
-       Opens via bottom dock Search button
-       ============================================================ -->
-  <div class="mobile-menu-overlay" id="appSearchOverlay" role="dialog" aria-modal="true" aria-label="Search Departments">
-    <div class="mobile-menu-panel" id="appSearchPanel" data-lenis-prevent>
-      <!-- 1. Header: Clean Title + Close Button -->
-      <div class="mm-top-bar" style="display:flex; align-items:center; justify-content:space-between;">
-        <h2 style="font-family:var(--disp); font-size:18px; font-weight:700; color:var(--txt); margin:0;">Search</h2>
-        <button type="button" class="icon-btn mm-close-btn" id="appSearchCloseBtn" onclick="closeAppSearch()" aria-label="Close search">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
-      </div>
-
-      <!-- 2. Sticky Search Box (Clean, No Pre-Option Chips) -->
-      <div class="app-search-sticky-header">
-        <div class="app-search-box">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0; color:var(--dim);">
-            <circle cx="11" cy="11" r="7.5"></circle>
-            <path d="m21 21-4.35-4.35"></path>
-          </svg>
-          <input type="text" id="appSearchInput" placeholder="Search department or code (e.g. Physics, 2701)..." oninput="onAppSearchInput(this.value)" autocomplete="off" autocorrect="off" spellcheck="false">
-          <button type="button" class="app-search-clear-btn" id="appSearchClearBtn" onclick="clearAppSearch()" style="display:none;" aria-label="Clear search">✕</button>
-        </div>
-      </div>
-
-      <!-- 3. Scrollable Results List (Simple Clean Rows) -->
-      <div class="mm-content app-search-results-container" id="appSearchContent" data-lenis-prevent>
-        <div id="appSearchResultsList" style="display:flex; flex-direction:column; gap:8px;">
-          <!-- Dynamically populated -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mobile App Bottom Dock (Only appears on phone screen <= 860px) -->
-  <nav class="app-native-dock" id="appNativeDock" aria-label="Mobile Navigation">
-    <button type="button" class="app-dock-btn active" id="btnDockHome" onclick="handleMobileDock('home')">
-      <svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span class="app-dock-label">Home</span>
-    </button>
-    <button type="button" class="app-dock-btn" id="btnDockSearch" onclick="handleMobileDock('search')">
-      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"/><path d="m21 21-4.35-4.35"/></svg>
-      <span class="app-dock-label">Search</span>
-    </button>
-    <button type="button" class="app-dock-btn" id="btnDockSettings" onclick="handleMobileDock('settings')">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-      <span class="app-dock-label">Settings</span>
-    </button>
-  </nav>
-
-  <script>
-    // ============================================================
-    // DEDICATED APP SEARCH DRAWER LOGIC (CLEAN & SIMPLE)
-    // ============================================================
-    function openAppSearch() {
-      if (typeof closeMobileMenu === 'function') closeMobileMenu();
-      const overlay = document.getElementById('appSearchOverlay');
-      if (!overlay) return;
-      overlay.classList.add('open');
-      document.body.classList.add('mobile-menu-open');
-      if (typeof lockScroll === 'function') lockScroll();
-
-      const input = document.getElementById('appSearchInput');
-      if (input) {
-        input.value = '';
-        const clearBtn = document.getElementById('appSearchClearBtn');
-        if (clearBtn) clearBtn.style.display = 'none';
-        setTimeout(() => {
-          input.focus();
-        }, 150);
-      }
-      renderAppSearchList('');
-    }
-
-    function closeAppSearch() {
-      const overlay = document.getElementById('appSearchOverlay');
-      if (!overlay) return;
-      overlay.classList.remove('open');
-      document.body.classList.remove('mobile-menu-open');
-      if (typeof unlockScroll === 'function') unlockScroll();
-
-      // Reset active dock button to Home
-      document.querySelectorAll('.app-dock-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('btnDockHome')?.classList.add('active');
-    }
-
-    function clearAppSearch() {
-      const input = document.getElementById('appSearchInput');
-      if (input) {
-        input.value = '';
-        const clearBtn = document.getElementById('appSearchClearBtn');
-        if (clearBtn) clearBtn.style.display = 'none';
-        input.focus();
-        renderAppSearchList('');
-      }
-    }
-
-    function onAppSearchInput(val) {
-      const clearBtn = document.getElementById('appSearchClearBtn');
-      if (clearBtn) {
-        clearBtn.style.display = (val && val.trim().length > 0) ? 'flex' : 'none';
-      }
-      renderAppSearchList(val);
-    }
-
-    function renderAppSearchList(filterVal) {
-      const container = document.getElementById('appSearchResultsList');
-      if (!container) return;
-
-      const q = (filterVal || '').trim().toLowerCase();
-
-      // When search input is empty, show NOTHING (per user request)
-      if (!q) {
-        container.innerHTML = '';
-        return;
-      }
-
-      let matches = [];
-      const progList = (typeof PROGRAMS !== 'undefined' ? PROGRAMS : []).filter(p => p.active);
-      const deptSource = (typeof DEPTS !== 'undefined' ? DEPTS : {});
-
-      progList.forEach(p => {
-        const groups = deptSource[p.key] || {};
-        Object.entries(groups).forEach(([progName, list]) => {
-          list.forEach(d => {
-            if (d.includes('(Soon)')) return;
-            const dLower = d.toLowerCase();
-            const tag = (typeof SESSION_SHORT !== 'undefined' && SESSION_SHORT[p.key]) || p.tag || '';
-            const tagLower = tag.toLowerCase();
-
-            // Also match department code and subject code
-            const storeEntry = (window.GRADZZ_DEPT_STORE && window.GRADZZ_DEPT_STORE[p.key] && window.GRADZZ_DEPT_STORE[p.key][d]) || {};
-            const codeMatch = (storeEntry.deptCode || '').toString().toLowerCase().includes(q);
-            let subMatch = false;
-            const subs = storeEntry.subjects || {};
-            for (const yr in subs) {
-              if (Array.isArray(subs[yr])) {
-                for (const s of subs[yr]) {
-                  if (s && s.code && s.code.toString().toLowerCase().includes(q)) {
-                    subMatch = true;
-                    break;
-                  }
-                }
-              }
-              if (subMatch) break;
-            }
-
-            if (dLower.includes(q) || tagLower.includes(q) || codeMatch || subMatch) {
-              matches.push({ dept: d, program: p, progName: progName });
-            }
-          });
-        });
-      });
-
-      if (matches.length === 0) {
-        container.innerHTML = `
-          <div style="text-align:center; padding:36px 16px; color:var(--dim); font-size:13.5px; font-weight:500;">
-            No departments found
-          </div>
-        `;
-        return;
-      }
-
-      // Render exact .gsr-item structure matching user screenshot
-      container.innerHTML = matches.map(m => {
-        const pillCls = (typeof glassPillClassFor === 'function') ? glassPillClassFor(m.program.key) : 'ac-2024';
-        const tagText = (typeof SESSION_SHORT !== 'undefined' && SESSION_SHORT[m.program.key]) || m.program.tag || '2013-14';
-        const pillText = m.program.title.toUpperCase().replace('PRELIMINARY', 'PRE');
-        return `
-          <button type="button" class="gsr-item" onclick="selectAppDepartment('${m.dept.replace(/'/g, "\\'")}', '${m.program.key}')">
-            <span class="gsr-main">
-              <span class="gsr-name">${m.dept}</span>
-              <span class="gsr-tag">${tagText}</span>
-            </span>
-            <span class="gsr-pill ${pillCls}">${pillText}</span>
-          </button>
-        `;
-      }).join('');
-    }
-
-    function selectAppDepartment(deptName, progKey) {
-      closeAppSearch();
-      if (typeof jumpToDept === 'function') {
-        jumpToDept(progKey || activeSyllabus || '2013', deptName);
-      } else if (typeof openGrading === 'function') {
-        openGrading(deptName);
-      }
-      setTimeout(() => {
-        const el = document.getElementById('subjectPanel') || document.getElementById('view-grading');
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 120);
-    }
-
-    // Bottom Dock Handler: Routes dock tabs
-    function handleMobileDock(action) {
-      document.querySelectorAll('.app-dock-btn').forEach(b => b.classList.remove('active'));
-      const btn = document.getElementById(action === 'home' ? 'btnDockHome' : action === 'search' ? 'btnDockSearch' : 'btnDockSettings');
-      if (btn) btn.classList.add('active');
-
-      if (action === 'home') {
-        closeAppSearch();
-        if (typeof closeMobileMenu === 'function') closeMobileMenu();
-        const el = document.getElementById('subjectPanel') || document.getElementById('view-grading');
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else if (action === 'search') {
-        openAppSearch();
-      } else if (action === 'settings') {
-        closeAppSearch();
-        if (typeof openMobileMenu === 'function') openMobileMenu();
-      }
-    }
-
-    // Attach listener so closing Settings drawer resets dock active tab to Home
-    document.addEventListener('DOMContentLoaded', () => {
-      const origClose = window.closeMobileMenu;
-      if (typeof origClose === 'function') {
-        window.closeMobileMenu = function() {
-          origClose.apply(this, arguments);
-          document.querySelectorAll('.app-dock-btn').forEach(b => b.classList.remove('active'));
-          document.getElementById('btnDockHome')?.classList.add('active');
-        };
-      }
-      
-      // Close search drawer when clicking on overlay background
-      const searchOverlay = document.getElementById('appSearchOverlay');
-      if (searchOverlay) {
-        searchOverlay.addEventListener('click', (e) => {
-          if (e.target === searchOverlay) {
-            closeAppSearch();
-          }
-        });
-      }
-    });
-
-    // Support Escape key for app search overlay
-    window.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' || e.keyCode === 27) {
-        const searchOverlay = document.getElementById('appSearchOverlay');
-        if (searchOverlay && searchOverlay.classList.contains('open')) {
-          closeAppSearch();
-        }
-      }
-    });
-  </script>
 
 </body>
 </html>
