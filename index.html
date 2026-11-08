@@ -402,7 +402,7 @@ body{
     main, header, footer{position:relative;z-index:1;}
 
     header.site{
-      position:fixed;top:0;left:0;right:0;z-index:50;
+      position:fixed;top:0;left:0;right:0;z-index:10000;
       background:rgba(240, 239, 239, 0.40);
       backdrop-filter:blur(28px) saturate(200%);
       -webkit-backdrop-filter:blur(28px) saturate(200%);
@@ -666,6 +666,37 @@ body{
     .menu-btn.open .menu-burger span:nth-child(1){top:5.5px;transform:rotate(45deg);}
     .menu-btn.open .menu-burger span:nth-child(2){opacity:0;transform:scaleX(0);}
     .menu-btn.open .menu-burger span:nth-child(3){top:5.5px;width:100%;transform:rotate(-45deg);}
+    .menu-btn.open {
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.75);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(203, 213, 225, 0.75);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    .menu-btn.open:hover {
+      border-color: #94A3B8;
+      background: rgba(255, 255, 255, 0.92);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.10);
+    }
+    [data-theme="dark"] .menu-btn.open {
+      background: rgba(22, 22, 22, 0.75);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    }
+    [data-theme="dark"] .menu-btn.open:hover {
+      background: rgba(30, 41, 59, 0.92);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    }
+    body.mobile-menu-open #mobileSearchBtn {
+      display: none !important;
+    }
 
     /* ---- FULL-SCREEN SLIDE-IN MOBILE NAVIGATION ---- */
     .mobile-menu-overlay {
@@ -733,29 +764,16 @@ body{
       .mobile-menu-overlay { display: none; }
     }
 
-    /* Top Bar - Matches header height and padding, close button aligned to right */
+    /* Top Bar - Hidden in Option 1: Persistent Header provides top bar and morphed close button */
     .mm-top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      height: 67px;
-      min-height: 67px;
-      max-height: 67px;
-      padding: 0 max(16px, calc((100% - 560px) / 2 + 16px));
-      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-      flex-shrink: 0;
-      background: #FFFFFF;
-      box-sizing: border-box;
-      width: 100%;
+      display: none !important;
     }
     @media (max-width: 400px) {
       .mm-top-bar {
-        height: 59px;
-        min-height: 59px;
-        max-height: 59px;
-        padding: 0 12px;
+        display: none !important;
       }
       .mm-content {
+        padding-top: calc(var(--header-h, 59px) + 14px);
         padding-left: 12px;
         padding-right: 12px;
       }
@@ -837,7 +855,7 @@ body{
       border-color: rgba(255, 255, 255, 0.25);
     }
 
-    /* Scrollable Content */
+    /* Scrollable Content: Clears persistent sticky header smoothly */
     .mm-content {
       flex: 1 1 auto;
       min-height: 0;
@@ -845,7 +863,7 @@ body{
       -webkit-overflow-scrolling: touch;
       overscroll-behavior: contain;
       touch-action: pan-y;
-      padding: 14px max(16px, calc((100% - 560px) / 2 + 16px)) max(32px, env(safe-area-inset-bottom, 32px));
+      padding: calc(var(--header-h, 67px) + 16px) max(16px, calc((100% - 560px) / 2 + 16px)) max(32px, env(safe-area-inset-bottom, 32px));
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -12841,8 +12859,8 @@ main {
     document.body.classList.add('mobile-menu-open');
     lockScroll();
     setTimeout(() => {
-      const closeBtn = document.getElementById('mobileMenuCloseBtn');
-      if(closeBtn) closeBtn.focus();
+      const btn = document.getElementById('menuBtn');
+      if(btn) btn.focus();
     }, 60);
   }
   function closeMobileMenu(){
