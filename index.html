@@ -9902,7 +9902,7 @@ main {
         padding-bottom: 160px !important;
       }
 
-      /* Edge-to-Edge Bottom Dock (Matching Screenshot) */
+      /* Edge-to-Edge Bottom Dock (Exact Color & Transparency Parity with Nav Header) */
       .app-native-dock {
         position: fixed !important;
         bottom: 0 !important;
@@ -9910,8 +9910,11 @@ main {
         right: 0 !important;
         height: calc(var(--app-dock-h) + var(--app-safe-b)) !important;
         padding-bottom: var(--app-safe-b) !important;
-        background: #0A0B0E !important;
+        background: rgba(15, 16, 16, 0.40) !important;
+        backdrop-filter: blur(28px) saturate(200%) !important;
+        -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
         border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+        box-shadow: 0 -4px 20px -2px rgba(0, 0, 0, 0.22) !important;
         z-index: 99995 !important;
         display: flex !important;
         align-items: center !important;
@@ -9921,8 +9924,11 @@ main {
         padding-right: 12px !important;
       }
       [data-theme="light"] .app-native-dock {
-        background: #FFFFFF !important;
-        border-top-color: rgba(226, 232, 240, 0.95) !important;
+        background: rgba(240, 239, 239, 0.40) !important;
+        backdrop-filter: blur(28px) saturate(200%) !important;
+        -webkit-backdrop-filter: blur(28px) saturate(200%) !important;
+        border-top: 1px solid rgba(15, 16, 16, 0.07) !important;
+        box-shadow: 0 -4px 20px -2px rgba(15, 23, 42, 0.04) !important;
       }
 
       .app-dock-btn {
@@ -10068,6 +10074,152 @@ main {
         color: #334155 !important;
       }
     }
+
+    /* ============================================================
+       APP PHONE VIEW REFINEMENTS (CLEAN & SIMPLE)
+       1. Header: Hide Search & Menu on phone view
+       2. Settings Drawer: Hide Home option
+       3. Search Drawer: Clean, Simple, No Pre-Options
+       ============================================================ */
+    @media (max-width: 860px) {
+      header.site .mobile-actions {
+        display: none !important;
+      }
+    }
+
+    #mmCardHome, #mmHomeSep {
+      display: none !important;
+    }
+
+    /* Clean Sticky Search Bar Header */
+    .app-search-sticky-header {
+      background: #F4F6F9;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      padding: 12px max(16px, calc((100% - 560px) / 2 + 16px));
+      flex-shrink: 0;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    [data-theme="dark"] .app-search-sticky-header {
+      background: #0C0D0F;
+      border-bottom-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .app-search-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--card, #FFFFFF);
+      border: 1.5px solid rgba(226, 232, 240, 0.95);
+      border-radius: 16px;
+      padding: 11px 15px;
+      color: var(--txt);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+    }
+    [data-theme="dark"] .app-search-box {
+      background: #141720;
+      border-color: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    }
+    .app-search-box:focus-within {
+      border-color: #2B72EE;
+      box-shadow: 0 0 0 3px rgba(43, 114, 238, 0.18);
+    }
+    .app-search-box input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--txt);
+      font-size: 14.5px;
+      font-family: var(--sans);
+      font-weight: 600;
+      min-width: 0;
+    }
+    .app-search-box input::placeholder {
+      color: var(--dim, #8E95A5);
+      font-weight: 500;
+    }
+    .app-search-clear-btn {
+      background: rgba(142, 149, 165, 0.15);
+      border: none;
+      color: var(--dim);
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      transition: background 0.18s ease, color 0.18s ease;
+      flex-shrink: 0;
+      padding: 0;
+    }
+    .app-search-clear-btn:hover {
+      background: rgba(142, 149, 165, 0.3);
+      color: var(--txt);
+    }
+
+    /* Scrollable Results Container with bottom clearance for dock */
+    .app-search-results-container {
+      padding-top: 12px !important;
+      padding-bottom: 120px !important;
+    }
+    #appSearchResultsList .gsr-item {
+      min-height: 46px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    #appSearchResultsList .gsr-item:active {
+      transform: scale(0.985);
+    }
+
+    /* Simple Clean Department Rows */
+    .app-dept-simple-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 16px;
+      background: var(--card, #FFFFFF);
+      border-radius: 14px;
+      border: 1px solid rgba(226, 232, 240, 0.85);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    [data-theme="dark"] .app-dept-simple-row {
+      background: #13151D;
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+    .app-dept-simple-row:hover, .app-dept-simple-row:active {
+      transform: scale(0.99);
+      background: rgba(43, 114, 238, 0.05);
+      border-color: #2B72EE;
+    }
+    [data-theme="dark"] .app-dept-simple-row:hover, [data-theme="dark"] .app-dept-simple-row:active {
+      background: rgba(43, 114, 238, 0.12);
+    }
+    .app-dept-simple-name {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--txt);
+      line-height: 1.25;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .app-dept-simple-arrow {
+      font-size: 16px;
+      line-height: 1;
+      color: var(--dim, #8E95A5);
+      opacity: 0.6;
+    }
 </style>
 </head>
 <body>
@@ -10137,21 +10289,7 @@ main {
 
       <!-- 2.1 Primary Navigation: 1 Single Card with Colored Icons (Milestone 242: Contact 3rd, FAQ 4th) -->
       <div class="mm-primary-nav-card">
-        <!-- 1. Home -->
-        <a href="#" class="mm-nav-row" id="mmCardHome" onclick="closeMobileMenu();showView('home');return false;">
-          <span class="mm-nav-ico-box mm-ico-home" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-              <polyline points="9 22 9 12 15 12 15 22"/>
-            </svg>
-          </span>
-          <div class="mm-nav-text-col">
-            <span class="mm-nav-title">Home</span>
-            <span class="mm-nav-sub">GPA &amp; Grade Calculator</span>
-          </div>
-          <span class="mm-nav-chevron" aria-hidden="true">&rsaquo;</span>
-        </a>
-        <div class="mm-nav-sep"></div>
+        
 
         <!-- 2. About -->
         <a href="#" class="mm-nav-row" id="mmCardAbout" onclick="closeMobileMenu();showView('about');return false;">
@@ -16425,6 +16563,45 @@ window.CustomSelect = { init: build, refresh };
   </div>
 
 
+  
+    <!-- ============================================================
+       DEDICATED APP SEARCH DRAWER (CLEAN & SIMPLE)
+       Opens via bottom dock Search button
+       ============================================================ -->
+  <div class="mobile-menu-overlay" id="appSearchOverlay" role="dialog" aria-modal="true" aria-label="Search Departments">
+    <div class="mobile-menu-panel" id="appSearchPanel" data-lenis-prevent>
+      <!-- 1. Header: Clean Title + Close Button -->
+      <div class="mm-top-bar" style="display:flex; align-items:center; justify-content:space-between;">
+        <h2 style="font-family:var(--disp); font-size:18px; font-weight:700; color:var(--txt); margin:0;">Search</h2>
+        <button type="button" class="icon-btn mm-close-btn" id="appSearchCloseBtn" onclick="closeAppSearch()" aria-label="Close search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 2. Sticky Search Box (Clean, No Pre-Option Chips) -->
+      <div class="app-search-sticky-header">
+        <div class="app-search-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0; color:var(--dim);">
+            <circle cx="11" cy="11" r="7.5"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input type="text" id="appSearchInput" placeholder="Search department or code (e.g. Physics, 2701)..." oninput="onAppSearchInput(this.value)" autocomplete="off" autocorrect="off" spellcheck="false">
+          <button type="button" class="app-search-clear-btn" id="appSearchClearBtn" onclick="clearAppSearch()" style="display:none;" aria-label="Clear search">✕</button>
+        </div>
+      </div>
+
+      <!-- 3. Scrollable Results List (Simple Clean Rows) -->
+      <div class="mm-content app-search-results-container" id="appSearchContent" data-lenis-prevent>
+        <div id="appSearchResultsList" style="display:flex; flex-direction:column; gap:8px;">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Mobile App Bottom Dock (Only appears on phone screen <= 860px) -->
   <nav class="app-native-dock" id="appNativeDock" aria-label="Mobile Navigation">
     <button type="button" class="app-dock-btn active" id="btnDockHome" onclick="handleMobileDock('home')">
@@ -16442,20 +16619,199 @@ window.CustomSelect = { init: build, refresh };
   </nav>
 
   <script>
+    // ============================================================
+    // DEDICATED APP SEARCH DRAWER LOGIC (CLEAN & SIMPLE)
+    // ============================================================
+    function openAppSearch() {
+      if (typeof closeMobileMenu === 'function') closeMobileMenu();
+      const overlay = document.getElementById('appSearchOverlay');
+      if (!overlay) return;
+      overlay.classList.add('open');
+      document.body.classList.add('mobile-menu-open');
+      if (typeof lockScroll === 'function') lockScroll();
+
+      const input = document.getElementById('appSearchInput');
+      if (input) {
+        input.value = '';
+        const clearBtn = document.getElementById('appSearchClearBtn');
+        if (clearBtn) clearBtn.style.display = 'none';
+        setTimeout(() => {
+          input.focus();
+        }, 150);
+      }
+      renderAppSearchList('');
+    }
+
+    function closeAppSearch() {
+      const overlay = document.getElementById('appSearchOverlay');
+      if (!overlay) return;
+      overlay.classList.remove('open');
+      document.body.classList.remove('mobile-menu-open');
+      if (typeof unlockScroll === 'function') unlockScroll();
+
+      // Reset active dock button to Home
+      document.querySelectorAll('.app-dock-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('btnDockHome')?.classList.add('active');
+    }
+
+    function clearAppSearch() {
+      const input = document.getElementById('appSearchInput');
+      if (input) {
+        input.value = '';
+        const clearBtn = document.getElementById('appSearchClearBtn');
+        if (clearBtn) clearBtn.style.display = 'none';
+        input.focus();
+        renderAppSearchList('');
+      }
+    }
+
+    function onAppSearchInput(val) {
+      const clearBtn = document.getElementById('appSearchClearBtn');
+      if (clearBtn) {
+        clearBtn.style.display = (val && val.trim().length > 0) ? 'flex' : 'none';
+      }
+      renderAppSearchList(val);
+    }
+
+    function renderAppSearchList(filterVal) {
+      const container = document.getElementById('appSearchResultsList');
+      if (!container) return;
+
+      const q = (filterVal || '').trim().toLowerCase();
+
+      // When search input is empty, show NOTHING (per user request)
+      if (!q) {
+        container.innerHTML = '';
+        return;
+      }
+
+      let matches = [];
+      const progList = (typeof PROGRAMS !== 'undefined' ? PROGRAMS : []).filter(p => p.active);
+      const deptSource = (typeof DEPTS !== 'undefined' ? DEPTS : {});
+
+      progList.forEach(p => {
+        const groups = deptSource[p.key] || {};
+        Object.entries(groups).forEach(([progName, list]) => {
+          list.forEach(d => {
+            if (d.includes('(Soon)')) return;
+            const dLower = d.toLowerCase();
+            const tag = (typeof SESSION_SHORT !== 'undefined' && SESSION_SHORT[p.key]) || p.tag || '';
+            const tagLower = tag.toLowerCase();
+
+            // Also match department code and subject code
+            const storeEntry = (window.GRADZZ_DEPT_STORE && window.GRADZZ_DEPT_STORE[p.key] && window.GRADZZ_DEPT_STORE[p.key][d]) || {};
+            const codeMatch = (storeEntry.deptCode || '').toString().toLowerCase().includes(q);
+            let subMatch = false;
+            const subs = storeEntry.subjects || {};
+            for (const yr in subs) {
+              if (Array.isArray(subs[yr])) {
+                for (const s of subs[yr]) {
+                  if (s && s.code && s.code.toString().toLowerCase().includes(q)) {
+                    subMatch = true;
+                    break;
+                  }
+                }
+              }
+              if (subMatch) break;
+            }
+
+            if (dLower.includes(q) || tagLower.includes(q) || codeMatch || subMatch) {
+              matches.push({ dept: d, program: p, progName: progName });
+            }
+          });
+        });
+      });
+
+      if (matches.length === 0) {
+        container.innerHTML = `
+          <div style="text-align:center; padding:36px 16px; color:var(--dim); font-size:13.5px; font-weight:500;">
+            No departments found
+          </div>
+        `;
+        return;
+      }
+
+      // Render exact .gsr-item structure matching user screenshot
+      container.innerHTML = matches.map(m => {
+        const pillCls = (typeof glassPillClassFor === 'function') ? glassPillClassFor(m.program.key) : 'ac-2024';
+        const tagText = (typeof SESSION_SHORT !== 'undefined' && SESSION_SHORT[m.program.key]) || m.program.tag || '2013-14';
+        const pillText = m.program.title.toUpperCase().replace('PRELIMINARY', 'PRE');
+        return `
+          <button type="button" class="gsr-item" onclick="selectAppDepartment('${m.dept.replace(/'/g, "\\'")}', '${m.program.key}')">
+            <span class="gsr-main">
+              <span class="gsr-name">${m.dept}</span>
+              <span class="gsr-tag">${tagText}</span>
+            </span>
+            <span class="gsr-pill ${pillCls}">${pillText}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectAppDepartment(deptName, progKey) {
+      closeAppSearch();
+      if (typeof jumpToDept === 'function') {
+        jumpToDept(progKey || activeSyllabus || '2013', deptName);
+      } else if (typeof openGrading === 'function') {
+        openGrading(deptName);
+      }
+      setTimeout(() => {
+        const el = document.getElementById('subjectPanel') || document.getElementById('view-grading');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 120);
+    }
+
+    // Bottom Dock Handler: Routes dock tabs
     function handleMobileDock(action) {
       document.querySelectorAll('.app-dock-btn').forEach(b => b.classList.remove('active'));
       const btn = document.getElementById(action === 'home' ? 'btnDockHome' : action === 'search' ? 'btnDockSearch' : 'btnDockSettings');
       if (btn) btn.classList.add('active');
 
       if (action === 'home') {
+        closeAppSearch();
+        if (typeof closeMobileMenu === 'function') closeMobileMenu();
         const el = document.getElementById('subjectPanel') || document.getElementById('view-grading');
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else if (action === 'search') {
-        if (typeof toggleMobileSearch === 'function') toggleMobileSearch();
+        openAppSearch();
       } else if (action === 'settings') {
-        if (typeof toggleMobileMenu === 'function') toggleMobileMenu();
+        closeAppSearch();
+        if (typeof openMobileMenu === 'function') openMobileMenu();
       }
     }
+
+    // Attach listener so closing Settings drawer resets dock active tab to Home
+    document.addEventListener('DOMContentLoaded', () => {
+      const origClose = window.closeMobileMenu;
+      if (typeof origClose === 'function') {
+        window.closeMobileMenu = function() {
+          origClose.apply(this, arguments);
+          document.querySelectorAll('.app-dock-btn').forEach(b => b.classList.remove('active'));
+          document.getElementById('btnDockHome')?.classList.add('active');
+        };
+      }
+      
+      // Close search drawer when clicking on overlay background
+      const searchOverlay = document.getElementById('appSearchOverlay');
+      if (searchOverlay) {
+        searchOverlay.addEventListener('click', (e) => {
+          if (e.target === searchOverlay) {
+            closeAppSearch();
+          }
+        });
+      }
+    });
+
+    // Support Escape key for app search overlay
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' || e.keyCode === 27) {
+        const searchOverlay = document.getElementById('appSearchOverlay');
+        if (searchOverlay && searchOverlay.classList.contains('open')) {
+          closeAppSearch();
+        }
+      }
+    });
   </script>
+
 </body>
 </html>
