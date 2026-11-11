@@ -2921,353 +2921,402 @@ body{
       .foot-col a { font-size: 12.5px; }
     }
 
-    .cgpa-ticket-wrap {
+    /* ============================================================
+       TRAJECTORY CARD — GRADZZ WING DECK (MILESTONE 318)
+       ============================================================ */
+    .cgpa-trajectory-wrap {
       width: 100%;
       margin-bottom: 36px;
-      filter: drop-shadow(0 8px 20px rgba(15, 23, 42, 0.08));
+      --traj-surface: rgba(255, 255, 255, 0.90);
+      --traj-surface-solid: #FFFFFF;
+      --traj-card: #FFFFFF;
+      --traj-border: rgba(15, 16, 16, 0.09);
+      --traj-border-hi: rgba(15, 16, 16, 0.18);
+      --traj-shadow: 0 8px 30px rgba(15, 16, 16, 0.06);
+      --traj-text: #0F1010;
+      --traj-muted: #5A626A;
+      --traj-dim: #8B95A0;
+      --traj-primary: #ED2024;
+      --traj-primary-glow: rgba(237, 32, 36, 0.22);
+      --traj-grad: linear-gradient(90deg, #BE123C 0%, #ED2024 100%);
+      --traj-emerald: #10B981;
+      --traj-grad-met: linear-gradient(90deg, #059669 0%, #10B981 100%);
+      --traj-pass-bg: rgba(16, 185, 129, 0.11);
+      --traj-pass-text: #059669;
+      --traj-pace-bg: rgba(237, 32, 36, 0.08);
+      --traj-warn-bg: rgba(245, 158, 11, 0.12);
+      --traj-warn-text: #D97706;
+      --traj-track-bg: #E5E7EB;
+      --traj-input-bg: #F8FAFC;
+      --traj-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --traj-ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
-    [data-theme="dark"] .cgpa-ticket-wrap {
-      filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.45));
-    }
-
-    .cgpa-ticket {
-      --sw: 168px;
-      --sh: 80px;
-      display: grid;
-      grid-template-columns: 1fr var(--sw);
-      background: #FFFFFF;
-      color: #0F172A;
-      border-radius: 22px;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.3s ease, color 0.3s ease;
-      -webkit-mask: radial-gradient(circle 14px at calc(100% - var(--sw)) 0, #0000 98%, #000), radial-gradient(circle 14px at calc(100% - var(--sw)) 100%, #0000 98%, #000);
-      -webkit-mask-composite: source-in;
-      mask: radial-gradient(circle 14px at calc(100% - var(--sw)) 0, #0000 98%, #000), radial-gradient(circle 14px at calc(100% - var(--sw)) 100%, #0000 98%, #000);
-      mask-composite: intersect;
-    }
-    [data-theme="dark"] .cgpa-ticket {
-      background: #171718;
-      color: #FFFFFF;
-    }
-
-    .tk-main {
-      position: relative;
-      padding: 22px 26px 20px;
-      min-width: 0;
-      overflow: hidden;
-    }
-    .tk-wm {
-      position: absolute;
-      right: 12px;
-      bottom: -14px;
-      font-family: var(--disp);
-      font-size: 72px;
-      font-weight: 900;
-      color: rgba(15, 23, 42, 0.04);
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
-      z-index: 0;
-    }
-    [data-theme="dark"] .tk-wm {
-      color: rgba(255, 255, 255, 0.035);
+    [data-theme="dark"] .cgpa-trajectory-wrap {
+      --traj-surface: rgba(22, 23, 25, 0.84);
+      --traj-surface-solid: #161719;
+      --traj-card: #161719;
+      --traj-border: rgba(255, 255, 255, 0.09);
+      --traj-border-hi: rgba(255, 255, 255, 0.20);
+      --traj-shadow: 0 24px 48px -18px rgba(0, 0, 0, 0.78);
+      --traj-text: #FFFFFF;
+      --traj-muted: #9F9F9F;
+      --traj-dim: #707070;
+      --traj-grad: linear-gradient(90deg, #ED2024 0%, #FF5A5F 100%);
+      --traj-grad-met: linear-gradient(90deg, #10B981 0%, #34D399 100%);
+      --traj-pass-bg: rgba(16, 185, 129, 0.15);
+      --traj-pass-text: #34D399;
+      --traj-pace-bg: rgba(237, 32, 36, 0.14);
+      --traj-warn-bg: rgba(245, 158, 11, 0.16);
+      --traj-warn-text: #FBBF24;
+      --traj-track-bg: #25272D;
+      --traj-input-bg: #101114;
     }
 
-    .tk-hd {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .traj-shell {
       position: relative;
-      z-index: 2;
-    }
-    .tk-hd-title {
-      font-family: var(--mono);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: #64748B;
-      text-transform: uppercase;
-    }
-    [data-theme="dark"] .tk-hd-title {
-      color: #8B93A1;
-    }
-
-    .tk-nums {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-top: 14px;
-      position: relative;
-      z-index: 2;
-    }
-    .tk-num-col {
-      display: flex;
-      flex-direction: column;
-    }
-    .tk-num-col-goal {
-      text-align: right;
-      align-items: flex-end;
-    }
-    .tk-lab {
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: #64748B;
-      text-transform: uppercase;
-      margin-bottom: 2px;
-    }
-    [data-theme="dark"] .tk-lab {
-      color: #8B93A1;
-    }
-    .tk-num {
-      font-family: var(--disp);
-      font-size: 44px;
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      color: #0F172A;
-      font-variant-numeric: tabular-nums;
-    }
-    [data-theme="dark"] .tk-num {
-      color: #FFFFFF;
-    }
-    .tk-num-goal {
-      color: #059669;
-    }
-    [data-theme="dark"] .tk-num-goal {
-      color: #22C58B;
-    }
-
-    .tk-path {
-      position: relative;
-      height: 26px;
-      margin-top: 14px;
-      z-index: 2;
-    }
-    .tk-dots {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 12px;
-      border-top: 2px dotted #C3CFDC;
       z-index: 1;
+      width: 100%;
+      background: var(--traj-surface);
+      border: 1px solid var(--traj-border);
+      border-radius: 22px;
+      box-shadow: var(--traj-shadow);
+      backdrop-filter: blur(28px) saturate(175%);
+      -webkit-backdrop-filter: blur(28px) saturate(175%);
+      padding: 18px 20px;
+      font-family: var(--traj-sans);
+      color: var(--traj-text);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "current target"
+        "head    pace"
+        "track   track";
+      row-gap: 13px;
+      column-gap: 14px;
+      align-items: end;
+      transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    [data-theme="dark"] .tk-dots {
-      border-top-color: #3B3D42;
-    }
-    .tk-fill {
-      position: absolute;
-      left: 0;
-      top: 11px;
-      height: 4px;
-      border-radius: 2px;
-      background: var(--primary, #ED2024);
-      transition: width 0.45s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
-      z-index: 2;
-    }
-    .tk-plane-wrap {
-      position: absolute;
-      top: 2px;
-      color: var(--primary, #ED2024);
-      transition: left 0.45s cubic-bezier(0.4, 0, 0.2, 1), transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      z-index: 4;
-      line-height: 1;
-    }
-    .tk-plane {
-      width: 20px;
-      height: 20px;
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
-    }
-    .tk-goal-marker {
-      position: absolute;
-      top: 5px;
-      width: 3px;
-      height: 16px;
-      border-radius: 2px;
-      background: #059669;
-      transform: translateX(-50%);
-      z-index: 3;
-      box-shadow: 0 0 6px rgba(5, 150, 105, 0.4);
-      transition: left 0.35s ease;
-    }
-    [data-theme="dark"] .tk-goal-marker {
-      background: #22C58B;
-      box-shadow: 0 0 8px rgba(34, 197, 139, 0.5);
+    [data-theme="dark"] .traj-shell {
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), var(--traj-shadow);
     }
 
-    .tk-scale {
-      display: flex;
-      justify-content: space-between;
-      font-family: var(--mono);
-      font-size: 10.5px;
-      font-weight: 700;
-      color: #94A3B8;
-      margin-top: 3px;
-      position: relative;
-      z-index: 2;
-    }
-    [data-theme="dark"] .tk-scale {
-      color: #8B93A1;
-    }
-
-    .tk-req {
-      margin-top: 14px;
-      font-family: var(--sans);
-      font-size: 13.5px;
-      color: #64748B;
-      display: flex;
+    .traj-lbl {
+      display: inline-flex;
       align-items: center;
       gap: 6px;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 2;
-    }
-    [data-theme="dark"] .tk-req {
-      color: #8B93A1;
-    }
-    .tk-req-val,
-    .rp-target-output-val {
-      font-family: var(--disp);
-      font-size: 15px;
+      font-size: 11px;
       font-weight: 700;
-      color: #059669;
-      transition: color 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--traj-muted);
+      white-space: nowrap;
     }
-    .tk-req-val.tp-challenging,
-    .rp-target-output-val.tp-challenging { color: #D97706; }
-    .tk-req-val.tp-impossible,
-    .rp-target-output-val.tp-impossible { color: #ED2024; }
-    [data-theme="dark"] .tk-req-val,
-    [data-theme="dark"] .rp-target-output-val { color: #22C58B; }
-    [data-theme="dark"] .tk-req-val.tp-challenging,
-    [data-theme="dark"] .rp-target-output-val.tp-challenging { color: #FBBF24; }
-    [data-theme="dark"] .tk-req-val.tp-impossible,
-    [data-theme="dark"] .rp-target-output-val.tp-impossible { color: #FF6B8A; }
+    .traj-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--traj-primary);
+      box-shadow: 0 0 8px var(--traj-primary-glow);
+      transition: background 0.25s ease, box-shadow 0.25s ease;
+      flex-shrink: 0;
+    }
+    .traj-status-dot.met {
+      background: var(--traj-emerald);
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.45);
+    }
 
-    /* Stub Section (Interactive Target CGPA Control - Milestone 312: Unified Soft Blue Palette Sync) */
-    .tk-stub {
+    .traj-mod-head {
+      grid-area: head;
+      justify-self: start;
+      align-self: center;
+      margin-top: 5px;
+      margin-bottom: -2px;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      min-width: 0;
+    }
+    .traj-cap-txt {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--traj-dim);
+      white-space: nowrap;
+    }
+
+    .traj-mod-track {
+      grid-area: track;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
       gap: 10px;
-      padding: 18px 14px;
-      background: rgba(37, 99, 235, 0.08);
-      border-left: 2px dashed rgba(37, 99, 235, 0.22);
+      user-select: none;
+      touch-action: none;
+    }
+    .traj-track {
       position: relative;
-      transition: background 0.3s ease, border-color 0.3s ease;
-      z-index: 2;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--traj-track-bg);
+      cursor: pointer;
+      touch-action: none;
+      outline: none;
     }
-    [data-theme="dark"] .tk-stub {
-      background: rgba(59, 130, 246, 0.08);
-      border-left-color: rgba(96, 165, 250, 0.22);
+    .traj-track::before {
+      content: "";
+      position: absolute;
+      inset: -11px 0;
     }
-    .tk-stub-tag {
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: #1D4ED8;
-      text-transform: uppercase;
+    .traj-track-fill {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      border-radius: 999px;
+      background: var(--traj-grad);
+      transition: width 0.42s var(--traj-ease), background 0.25s ease;
+      pointer-events: none;
+    }
+    .traj-track-fill.met {
+      background: var(--traj-grad-met);
+    }
+    .traj-target-pin {
+      position: absolute;
+      top: 50%;
+      left: 81.25%;
+      width: 26px;
+      height: 26px;
+      transform: translate(-50%, -50%);
       display: flex;
       align-items: center;
+      justify-content: center;
+      cursor: ew-resize;
+      z-index: 4;
+      touch-action: none;
+      outline: none;
+      transition: left 0.42s var(--traj-ease);
+    }
+    .traj-pin-orb {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #34D399 0%, #10B981 100%);
+      box-shadow: 0 0 0 2.5px var(--traj-surface-solid), 0 2px 8px rgba(16, 185, 129, 0.32);
+      transition: transform 0.18s var(--traj-ease), box-shadow 0.18s var(--traj-ease);
+    }
+    .traj-target-pin:hover .traj-pin-orb,
+    .traj-target-pin:focus-visible .traj-pin-orb,
+    .traj-shell.is-dragging .traj-target-pin .traj-pin-orb {
+      transform: scale(1.22);
+      box-shadow: 0 0 0 2.5px var(--traj-surface-solid), 0 0 0 6px rgba(16, 185, 129, 0.22);
+    }
+    .traj-scale-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10.5px;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      color: var(--traj-dim);
+      line-height: 1;
+    }
+    .traj-q-tick {
+      display: none;
+    }
+
+    .traj-mod-current {
+      grid-area: current;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       gap: 5px;
     }
-    [data-theme="dark"] .tk-stub-tag {
-      color: #93C5FD;
+    .traj-current-val {
+      font-family: inherit;
+      color: var(--traj-text);
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -1.5px;
+      font-variant-numeric: tabular-nums;
+      user-select: none;
     }
-    .tk-fld {
+
+    .traj-mod-pace {
+      grid-area: pace;
+      justify-self: end;
+      align-self: center;
+      margin-top: 5px;
+      margin-bottom: -2px;
+    }
+    .traj-pace-pill {
+      height: 28px;
+      background: var(--traj-pace-bg);
+      color: var(--traj-primary);
+      border-radius: 999px;
+      padding: 0 11px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
-      padding: 6px 12px;
-      background: #FFFFFF;
-      border: 1px solid rgba(37, 99, 235, 0.22);
-      border-radius: 12px;
-      transition: all 0.2s ease;
-      box-sizing: border-box;
-      cursor: text;
-    }
-    .tk-fld:focus-within {
-      border-color: #2563EB;
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-    }
-    [data-theme="dark"] .tk-fld {
-      background: rgba(15, 23, 42, 0.65);
-      border-color: rgba(96, 165, 250, 0.25);
-    }
-    [data-theme="dark"] .tk-fld:focus-within {
-      border-color: #60A5FA;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.28);
-    }
-    .tk-target-inp {
-      width: 4.4ch;
-      border: 0;
-      outline: 0;
-      background: transparent;
-      text-align: center;
-      color: #0F172A;
-      font-family: var(--disp);
-      font-weight: 800;
-      font-size: 24px;
-      padding: 0;
-      margin: 0;
-      appearance: textfield;
-      -moz-appearance: textfield;
-      font-variant-numeric: tabular-nums;
-    }
-    .tk-target-inp::-webkit-outer-spin-button,
-    .tk-target-inp::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-    [data-theme="dark"] .tk-target-inp {
-      color: #FFFFFF;
-    }
-    .tk-fld-max {
-      font-family: var(--mono);
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 700;
-      color: #3B82F6;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      transition: background 0.22s ease, color 0.22s ease;
     }
-    [data-theme="dark"] .tk-fld-max {
-      color: #93C5FD;
+    .traj-pace-pill.met {
+      background: var(--traj-pass-bg);
+      color: var(--traj-pass-text);
+    }
+    .traj-pace-pill.tp-challenging {
+      background: var(--traj-warn-bg);
+      color: var(--traj-warn-text);
+    }
+    .traj-pace-pill.tp-impossible {
+      background: var(--traj-pace-bg);
+      color: var(--traj-primary);
     }
 
-    @media (max-width: 600px) {
-      .cgpa-ticket {
-        grid-template-columns: 1fr;
-        -webkit-mask: radial-gradient(circle 14px at 0 calc(100% - var(--sh)), #0000 98%, #000), radial-gradient(circle 14px at 100% calc(100% - var(--sh)), #0000 98%, #000);
-        -webkit-mask-composite: source-in;
-        mask: radial-gradient(circle 14px at 0 calc(100% - var(--sh)), #0000 98%, #000), radial-gradient(circle 14px at 100% calc(100% - var(--sh)), #0000 98%, #000);
-        mask-composite: intersect;
+    .traj-mod-target {
+      grid-area: target;
+      justify-self: end;
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+    .traj-target-field {
+      width: fit-content;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid var(--traj-border);
+      background: var(--traj-input-bg);
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      cursor: text;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+    .traj-target-field:hover {
+      border-color: var(--traj-border-hi);
+    }
+    .traj-target-field:focus-within {
+      border-color: var(--traj-primary);
+      background: var(--traj-card);
+      box-shadow: 0 0 0 3px rgba(237, 32, 36, 0.12);
+    }
+    .traj-target-input {
+      width: 42px;
+      min-width: 0;
+      height: 100%;
+      border: none;
+      background: transparent;
+      padding: 0;
+      -webkit-appearance: none;
+      appearance: none;
+      font-family: inherit;
+      font-size: 15.5px;
+      font-weight: 800;
+      color: var(--traj-text);
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      outline: none;
+    }
+    .traj-target-max {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--traj-dim);
+      pointer-events: none;
+      line-height: 1;
+      margin-top: 1px;
+      white-space: nowrap;
+    }
+
+    .traj-shell.is-dragging .traj-track-fill,
+    .traj-shell.is-dragging .traj-target-pin {
+      transition: none;
+    }
+
+    @media (max-width: 359px) {
+      .traj-shell {
+        padding: 16px 16px;
       }
-      .tk-main {
-        padding: 20px 20px 18px;
+      .traj-cap-txt {
+        display: none;
       }
-      .tk-num {
-        font-size: 38px;
+      .traj-current-val {
+        font-size: 34px;
       }
-      .tk-stub {
-        height: var(--sh);
-        flex-direction: row;
-        justify-content: space-between;
-        border-left: 0;
-        border-top: 2px dashed rgba(37, 99, 235, 0.22);
-        padding: 0 24px;
+      .traj-pace-pill {
+        font-size: 11px;
+        padding: 0 9px;
       }
-      [data-theme="dark"] .tk-stub {
-        border-top-color: rgba(96, 165, 250, 0.22);
+    }
+
+    @media (min-width: 768px) {
+      .traj-shell {
+        border-radius: 22px;
+        padding: 20px 28px;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+          "current target"
+          "track   track"
+          "head    pace";
+        row-gap: 15px;
+        column-gap: 24px;
+        align-items: center;
+      }
+      .traj-mod-current {
+        justify-self: start;
+        align-self: end;
+        gap: 5px;
+      }
+      .traj-current-val {
+        font-size: 40px;
+      }
+      .traj-mod-target {
+        justify-self: end;
+        align-self: end;
+        gap: 6px;
+      }
+      .traj-target-field {
+        height: 34px;
+      }
+      .traj-target-input {
+        width: 37px;
+      }
+      .traj-mod-track {
+        gap: 10px;
+      }
+      .traj-track {
+        height: 9px;
+      }
+      .traj-pin-orb {
+        width: 14px;
+        height: 14px;
+      }
+      .traj-q-tick {
+        display: inline;
+      }
+      .traj-scale-row {
+        font-size: 11px;
+      }
+      .traj-mod-head {
+        margin-top: 0;
+        margin-bottom: 0;
+        gap: 10px;
+      }
+      .traj-mod-pace {
+        justify-self: end;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      .traj-pace-pill {
+        height: 29px;
+        font-size: 12px;
+        padding: 0 13px;
       }
     }
 
@@ -7537,35 +7586,31 @@ body{
       color: #10B981;
     }
 
-    /* Responsive Adaptation for Tablets & Mobile Screens */
+    /* Responsive Adaptation for Tablets & Mobile Screens (Single-Line Capsule) */
     @media (max-width: 640px) {
       .celebration-toast {
         max-width: calc(100vw - 24px);
         top: calc(var(--header-h, 66px) + 10px);
       }
       .toast-variant-minimal {
-        padding: 8px 14px;
-        gap: 4px 8px;
-        flex-wrap: wrap;
+        padding: 8px 16px;
+        gap: 7px;
+        flex-wrap: nowrap;
         justify-content: center;
         text-align: center;
-        border-radius: 20px;
+        border-radius: 999px;
       }
       .minimal-title {
         font-size: 12px;
         white-space: nowrap;
-        max-width: 100%;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
       .minimal-sep {
-        display: none;
+        display: inline;
+        font-size: 11.5px;
       }
       .minimal-sub {
-        font-size: 11.5px;
-        white-space: normal;
-        max-width: 100%;
-        word-break: break-word;
+        font-size: 12px;
+        white-space: nowrap;
       }
     }
 
@@ -7575,21 +7620,18 @@ body{
         top: calc(var(--header-h, 58px) + 8px);
       }
       .toast-variant-minimal {
-        padding: 6px 10px;
-        gap: 2px 6px;
-        border-radius: 16px;
+        padding: 6px 13px;
+        gap: 6px;
+        border-radius: 999px;
       }
       .minimal-title {
         font-size: 11px;
-        max-width: 100%;
-        overflow: hidden;
-        text-overflow: ellipsis;
+      }
+      .minimal-sep {
+        font-size: 10.5px;
       }
       .minimal-sub {
-        font-size: 10.5px;
-        white-space: normal;
-        max-width: 100%;
-        word-break: break-word;
+        font-size: 11px;
       }
     }
 
@@ -8111,21 +8153,17 @@ body{
        Guarantees crisp, clean flat borders with 0 drop shadow bleeding
        ============================================================ */
     .overall-master-card,
-    .overall-share-card,
+    .overall-share-card:not(.is-floating),
     .overall-share-strip-container,
-    .overall-share-card.is-floating,
     .overall-share-card.animating-merge,
     .overall-share-card.animating-detach,
     .overall-share-card.is-docked,
-    .overall-share-card.gliding,
     [data-theme="dark"] .overall-master-card,
-    [data-theme="dark"] .overall-share-card,
+    [data-theme="dark"] .overall-share-card:not(.is-floating),
     [data-theme="dark"] .overall-share-strip-container,
-    [data-theme="dark"] .overall-share-card.is-floating,
     [data-theme="dark"] .overall-share-card.animating-merge,
     [data-theme="dark"] .overall-share-card.animating-detach,
-    [data-theme="dark"] .overall-share-card.is-docked,
-    [data-theme="dark"] .overall-share-card.gliding {
+    [data-theme="dark"] .overall-share-card.is-docked {
       box-shadow: none;
     }
 
@@ -8372,20 +8410,22 @@ body{
       z-index: 92;
       padding: 8px 10px 8px 16px;
       border-radius: 22px;
-      box-shadow: none;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(226, 232, 240, 0.95);
+      background: rgba(240, 239, 239, 0.40);
+      backdrop-filter: blur(28px) saturate(200%);
+      -webkit-backdrop-filter: blur(28px) saturate(200%);
+      border: 1px solid rgba(15, 16, 16, 0.08);
+      box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.55);
       display: flex;
       flex-direction: column;
       justify-content: center;
       gap: 0;
     }
     [data-theme="dark"] .overall-share-card.is-floating {
-      background: rgba(18, 20, 28, 0.96);
+      background: rgba(15, 16, 16, 0.40);
+      backdrop-filter: blur(28px) saturate(200%);
+      -webkit-backdrop-filter: blur(28px) saturate(200%);
       border-color: rgba(255, 255, 255, 0.09);
-      box-shadow: none;
+      box-shadow: 0 8px 26px -4px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.07);
     }
     .overall-share-card.is-floating .rh-panes-body {
       flex: 1 1 auto;
@@ -8455,20 +8495,20 @@ body{
       color: #8E95A5;
     }
 
-    /* Elevated Overall Chip Box (Matching Reference Design!) */
+    /* Elevated Translucent Overall Chip Box (Matching Header Glass Pill) */
     .overall-share-card.is-floating .rp-stat.rp-stat-overall {
       flex: 0 0 auto;
       min-width: 74px;
       padding: 6px 14px;
       border-radius: 14px;
       margin-left: 6px;
-      background: #F1F5F9;
-      border: 1px solid rgba(203, 213, 225, 0.9) !important;
+      background: rgba(15, 23, 42, 0.06);
+      border: 1px solid rgba(15, 16, 16, 0.08) !important;
       box-sizing: border-box;
     }
     [data-theme="dark"] .overall-share-card.is-floating .rp-stat.rp-stat-overall {
-      background: #232733;
-      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.10) !important;
     }
     .overall-share-card.is-floating .rp-stat.rp-stat-overall .rp-stat-n {
       font-family: var(--sans);
@@ -8547,7 +8587,7 @@ body{
         }
       }
 
-      /* Floating Pill: Full width edge-to-edge matching master card exactly */
+      /* Floating Pill: Full width edge-to-edge matching master card & header glass */
       .overall-share-card.is-floating {
         position: fixed;
         bottom: 20px;
@@ -8555,16 +8595,8 @@ body{
         box-sizing: border-box;
         padding: 8px 8px 8px 14px;
         border-radius: 22px;
-        background: rgba(255, 255, 255, 0.98);
-        border: 1px solid rgba(226, 232, 240, 0.95);
-        box-shadow: none;
         z-index: 92;
         gap: 0;
-      }
-      [data-theme="dark"] .overall-share-card.is-floating {
-        background: rgba(18, 20, 28, 0.98);
-        border-color: rgba(255, 255, 255, 0.09);
-        box-shadow: none;
       }
 
       /* Display 5-column stats pane while floating on mobile */
@@ -8658,19 +8690,13 @@ body{
         color: #8E95A5;
       }
 
-      /* Elevated Overall Chip Box on mobile */
+      /* Elevated Overall Chip Box on mobile (inherits translucent glass pill surface) */
       .overall-share-card.is-floating .rp-stat.rp-stat-overall {
         flex: 0 0 auto;
         min-width: 74px;
         padding: 6px 14px;
         border-radius: 14px;
         margin-left: 6px;
-        background: #F1F5F9;
-        border: 1px solid rgba(203, 213, 225, 0.9) !important;
-      }
-      [data-theme="dark"] .overall-share-card.is-floating .rp-stat.rp-stat-overall {
-        background: #232733;
-        border: 1px solid rgba(255, 255, 255, 0.09) !important;
       }
       .overall-share-card.is-floating .rp-stat.rp-stat-overall .rp-stat-n {
         font-family: var(--sans);
@@ -10418,9 +10444,9 @@ main {
   <!-- Target CGPA Celebration Toast (Design 3: Clean Minimal Capsule, Auto 3s dismiss) -->
   <div id="celebrationToast" class="celebration-toast" role="alert" aria-live="polite" onclick="hideCelebrationToast()">
     <div class="toast-variant-minimal">
-      <span class="minimal-title" id="toastTitle">Target CGPA Achieved</span>
+      <span class="minimal-title" id="toastTitle">Final CGPA 3.25</span>
       <span class="minimal-sep" aria-hidden="true">·</span>
-      <span class="minimal-sub" id="toastSubtitle">Target 3.25 Reached</span>
+      <span class="minimal-sub" id="toastSubtitle">Target 3.25</span>
     </div>
   </div>
 
@@ -11393,63 +11419,58 @@ main {
   <!-- ================= GRADING VIEW ================= -->
   <section id="view-grading" class="hidden">
 
-    <!-- ================= CGPA TICKET (BOARDING PASS) ================= -->
-    <div class="cgpa-ticket-wrap">
-      <div class="cgpa-ticket" id="cgpaTicket">
-        <!-- Main Flight Section -->
-        <div class="tk-main">
-          <!-- Background Faint Watermark -->
-          <div class="tk-wm">CGPA</div>
-          
-          <!-- Top Header: Title & Class Badge -->
-          <div class="tk-hd">
-            <span class="tk-hd-title">Overall CGPA</span>
-            <span class="cls cls-fail" id="sealClass">Fail</span>
-          </div>
-          
-          <!-- Dual Numbers: Now (Current CGPA) vs Goal (Target CGPA) -->
-          <div class="tk-nums">
-            <div class="tk-num-col">
-              <span class="tk-lab">Now</span>
-              <div class="tk-num" id="sealCgpa">0.00</div>
-            </div>
-            <div class="tk-num-col tk-num-col-goal">
-              <span class="tk-lab">Goal</span>
-              <div class="tk-num tk-num-goal" id="tkGoalNum">3.25</div>
+    <!-- ================= TRAJECTORY DECK (GRADZZ WING DECK) ================= -->
+    <div class="cgpa-trajectory-wrap">
+      <div class="traj-shell" id="cgpaTicket">
+        <div class="traj-mod-head">
+          <span class="traj-lbl">Trajectory</span>
+          <span class="traj-cap-txt">4.00 Max</span>
+        </div>
+
+        <div class="traj-mod-track">
+          <div class="traj-track" id="trajTrack" role="progressbar" aria-label="Current CGPA progress" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0.00">
+            <div class="traj-track-fill" id="cfBarFill" style="width:0%"></div>
+            <div class="traj-target-pin" id="tkGoalMarker" role="slider" tabindex="0" aria-label="Target CGPA" aria-valuemin="0" aria-valuemax="4" aria-valuenow="3.25" style="left:81.25%">
+              <div class="traj-pin-orb"></div>
             </div>
           </div>
-          
-          <!-- Flight Path with Dotted Track, Fill, Airplane & Goal Marker -->
-          <div class="tk-path">
-            <div class="tk-dots"></div>
-            <div class="tk-fill" id="cfBarFill" style="width:0%"></div>
-            <div class="tk-plane-wrap" id="tkPlaneWrap" style="left:0%; transform:translateX(0%);">
-              <svg class="tk-plane" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" transform="rotate(90 12 12)"/>
-              </svg>
-            </div>
-            <div class="tk-goal-marker" id="tkGoalMarker" style="left:81.25%" title="Target Goal"></div>
-          </div>
-          
-          <!-- Scale Bar -->
-          <div class="tk-scale">
+
+          <div class="traj-scale-row" aria-hidden="true">
             <span>0.00</span>
+            <span class="traj-q-tick">1.00</span>
+            <span>2.00</span>
+            <span class="traj-q-tick">3.00</span>
             <span>4.00</span>
-          </div>
-          
-          <!-- Target Status / Requirement Text -->
-          <div class="tk-req">
-            <span id="tpReqLead">Required per year:</span>
-            <b id="tpReqVal" class="tk-req-val">3.25 GPA / yr</b>
           </div>
         </div>
 
-        <!-- Perforated Stub Section (Target CGPA Controller) -->
-        <div class="tk-stub">
-          <span class="tk-stub-tag">🎯 Target CGPA</span>
-          <label class="tk-fld" for="tpTargetInput">
-            <input type="number" step="0.01" min="0.00" max="4.00" value="3.25" id="tpTargetInput" oninput="recalcTargetPlanner()" onblur="handleTargetBlur(this)" placeholder="3.25" class="tk-target-inp" aria-label="Target CGPA">
-            <small class="tk-fld-max">/ 4.00</small>
+        <div class="traj-mod-current">
+          <span class="traj-lbl">
+            <span class="traj-status-dot" id="statusDot"></span>
+            Current
+          </span>
+          <div class="traj-current-val" id="sealCgpa" aria-live="polite">0.00</div>
+        </div>
+
+        <div class="traj-mod-pace">
+          <div class="traj-pace-pill" id="pacePill">
+            <span id="tpReqVal">Required: 3.25 / yr</span>
+          </div>
+        </div>
+
+        <div class="traj-mod-target">
+          <label for="tpTargetInput" class="traj-lbl">Target Goal</label>
+          <label class="traj-target-field" for="tpTargetInput">
+            <input
+              type="text"
+              inputmode="decimal"
+              size="4"
+              class="traj-target-input"
+              id="tpTargetInput"
+              value="3.25"
+              aria-label="Target CGPA"
+            >
+            <span class="traj-target-max">/ 4.0</span>
           </label>
         </div>
       </div>
@@ -15542,9 +15563,9 @@ let activeModalLocks = 0;
               card.style.transition = '';
               card.style.transform = '';
               card.style.transformOrigin = '';
-              card.classList.remove('animating-merge', 'gliding');
-              card.classList.add('is-docked');
-              masterCard.classList.add('is-docked');
+              card.classList.remove('animating-merge', 'animating-detach', 'gliding', 'is-docked');
+              card.classList.add('is-floating');
+              masterCard.classList.remove('animating-detach', 'is-docked');
               isBarTransitioning = false;
             }, 660);
           });
@@ -15619,36 +15640,28 @@ let activeModalLocks = 0;
 
     const cumulativeGpa = totalCreditsAll > 0 ? totalEarnedPoints / totalCreditsAll : 0;
 
-    document.getElementById('sealCgpa').textContent = cumulativeGpa.toFixed(2);
+    const sealCgpaEl = document.getElementById('sealCgpa');
+    if(sealCgpaEl) sealCgpaEl.textContent = cumulativeGpa.toFixed(2);
+
     let themeColor = 'var(--primary, #ED2024)';
-    let themeGlow = '0 0 10px rgba(237, 32, 36, 0.22)';
     if(totalCreditsAll === 0 || cumulativeGpa < 2.00) {
       themeColor = 'var(--primary, #ED2024)';
-      themeGlow = '0 0 10px rgba(237, 32, 36, 0.22)';
     } else if(cumulativeGpa >= 3.00) {
       themeColor = '#10B981';
-      themeGlow = '0 0 10px rgba(16, 185, 129, 0.25)';
     } else if(cumulativeGpa >= 2.25) {
       themeColor = '#F59E0B';
-      themeGlow = '0 0 10px rgba(245, 158, 11, 0.22)';
     } else {
       themeColor = '#64748B';
-      themeGlow = 'none';
     }
 
     const cfBar = document.getElementById('cfBarFill');
     if(cfBar) {
       cfBar.style.width = Math.min(100, (cumulativeGpa/4)*100) + '%';
-      cfBar.style.background = themeColor;
-      cfBar.style.boxShadow = themeGlow;
     }
 
-    const planeWrap = document.getElementById('tkPlaneWrap');
-    if(planeWrap) {
-      const p = Math.max(0, Math.min(100, (cumulativeGpa / 4) * 100));
-      planeWrap.style.left = p + '%';
-      planeWrap.style.transform = `translateX(-${p}%)`;
-      planeWrap.style.color = themeColor;
+    const trajTrack = document.getElementById('trajTrack');
+    if(trajTrack) {
+      trajTrack.setAttribute('aria-valuenow', cumulativeGpa.toFixed(2));
     }
 
     const statOverallEl = document.getElementById('statOverallCgpa');
@@ -15658,14 +15671,6 @@ let activeModalLocks = 0;
     }
     const statCreditsEl = document.getElementById('statCredits');
     if(statCreditsEl) statCreditsEl.textContent = totalCreditsAll;
-
-    const cls = document.getElementById('sealClass');
-    cls.className='cls';
-    if(totalCreditsAll===0){cls.classList.add('cls-fail');cls.textContent='Fail';}
-    else if(cumulativeGpa>=3.00){cls.classList.add('cls-first');cls.textContent='First Class';}
-    else if(cumulativeGpa>=2.25){cls.classList.add('cls-second');cls.textContent='Second Class';}
-    else if(cumulativeGpa>=2.00){cls.classList.add('cls-third');cls.textContent='Third Class';}
-    else{cls.classList.add('cls-fail');cls.textContent='Fail';}
 
     recalcTargetPlanner();
   }
@@ -15910,90 +15915,125 @@ let activeModalLocks = 0;
       var isFinalDegree = (highestEligibleYear === totalYears);
       if (isFinalDegree) {
         firePartyPoppers(['#ED2024', '#F59E0B', '#10B981', '#3B82F6', '#8B5CF6'], true);
-        showCelebrationToast('🎓 Degree Completed!', 'Final CGPA: ' + currentCgpa.toFixed(2) + ' · Target ' + targetStr + ' Achieved!');
-      } else if (highestEligibleYear === 1) {
-        firePartyPoppers();
-        showCelebrationToast('🎯 Year 1 Target Achieved!', 'CGPA: ' + currentCgpa.toFixed(2) + ' (Target: ' + targetStr + ')');
+        showCelebrationToast('Final CGPA ' + currentCgpa.toFixed(2), 'Target ' + targetStr);
       } else {
         firePartyPoppers();
-        showCelebrationToast('🚀 Year ' + highestEligibleYear + ' Target Maintained!', 'Cumulative CGPA: ' + currentCgpa.toFixed(2) + ' (Target: ' + targetStr + ')');
+        showCelebrationToast('Year ' + highestEligibleYear + ' CGPA ' + currentCgpa.toFixed(2), 'Target ' + targetStr);
       }
     }, 350);
   }
 
+  var lastValidTargetCgpa = 3.25;
+
+  function getTargetCgpaValue() {
+    const targetInput = document.getElementById('tpTargetInput');
+    if (!targetInput) return lastValidTargetCgpa;
+    const raw = parseFloat(String(targetInput.value).replace(/[^0-9.]/g, ''));
+    if (Number.isFinite(raw)) {
+      const clamped = Math.round(Math.max(0, Math.min(4, raw)) * 100) / 100;
+      lastValidTargetCgpa = clamped;
+      return clamped;
+    }
+    return lastValidTargetCgpa;
+  }
+
+  function setTargetCgpaValue(val, syncInput) {
+    const clamped = Math.round(Math.max(0, Math.min(4, val)) * 100) / 100;
+    lastValidTargetCgpa = clamped;
+    const targetInput = document.getElementById('tpTargetInput');
+    if (targetInput && syncInput) {
+      targetInput.value = clamped.toFixed(2);
+    }
+    recalcTargetPlanner();
+  }
+
   function handleTargetBlur(el) {
     if (!el) return;
-    let v = parseFloat(el.value);
-    if (!isNaN(v)) {
-      v = Math.max(0, Math.min(4, v));
-      el.value = v.toFixed(2);
-      recalcTargetPlanner();
-    }
+    const raw = parseFloat(String(el.value).replace(/[^0-9.]/g, ''));
+    const clamped = Number.isFinite(raw)
+      ? Math.round(Math.max(0, Math.min(4, raw)) * 100) / 100
+      : lastValidTargetCgpa;
+    lastValidTargetCgpa = clamped;
+    el.value = clamped.toFixed(2);
+    recalcTargetPlanner();
   }
 
   function recalcTargetPlanner() {
-    hasUserEverInteracted = true;
     const totalYears = PROGRAM_YEARS[activeSyllabus] || 1;
-    const targetInput = document.getElementById('tpTargetInput');
-    const targetCgpa = targetInput ? (parseFloat(targetInput.value) || 3.25) : 3.25;
+    const targetCgpa = getTargetCgpaValue();
 
-    const goalNumEl = document.getElementById('tkGoalNum');
-    if (goalNumEl) {
-      goalNumEl.textContent = targetCgpa.toFixed(2);
-    }
     const goalMarkerEl = document.getElementById('tkGoalMarker');
     if (goalMarkerEl) {
       const goalPercent = Math.max(0, Math.min(100, (targetCgpa / 4) * 100));
       goalMarkerEl.style.left = goalPercent + '%';
+      goalMarkerEl.setAttribute('aria-valuenow', targetCgpa.toFixed(2));
     }
 
-    const leadElem = document.getElementById('tpReqLead');
+    const statusDot = document.getElementById('statusDot');
+    const cfBar = document.getElementById('cfBarFill');
+    const pacePill = document.getElementById('pacePill');
     const valElem = document.getElementById('tpReqVal');
-
-    if (!valElem || !leadElem) return;
 
     let completedYears = 0;
     let totalEarnedPoints = 0;
     let totalCreditsAll = 0;
+    let livePoints = 0;
+    let liveCredits = 0;
 
     for (let y = 1; y <= totalYears; y++) {
-      if (isYearFullyGraded(currentDept, y)) {
-        const st = yearStats(currentDept, y);
-        if (st.credits > 0) {
+      const st = yearStats(currentDept, y);
+      if (st.credits > 0) {
+        const pts = st.points !== undefined ? st.points : st.credits * st.gpa;
+        livePoints += pts;
+        liveCredits += st.credits;
+        if (isYearFullyGraded(currentDept, y)) {
           completedYears++;
-          totalEarnedPoints += (st.points !== undefined ? st.points : st.credits * st.gpa);
+          totalEarnedPoints += pts;
           totalCreditsAll += st.credits;
         }
       }
     }
 
     const currentCgpa = totalCreditsAll > 0 ? totalEarnedPoints / totalCreditsAll : 0;
+    const liveCgpa = liveCredits > 0 ? livePoints / liveCredits : 0;
+    const barMet = liveCredits > 0 && liveCgpa >= targetCgpa;
+
+    if (statusDot) statusDot.classList.toggle('met', barMet);
+    if (cfBar) cfBar.classList.toggle('met', barMet);
+
     checkTargetCelebration(currentCgpa, targetCgpa, completedYears, totalYears);
+
+    if (!valElem || !pacePill) return;
+
     const remYears = Math.max(0, totalYears - completedYears);
+    const setPace = (text, tone) => {
+      valElem.textContent = text;
+      pacePill.className = 'traj-pace-pill' + (tone ? ' ' + tone : '');
+    };
 
     if (totalYears <= 1) {
-      leadElem.textContent = 'Single year target:';
-      valElem.textContent = `${targetCgpa.toFixed(2)} GPA`;
-      valElem.className = 'tk-req-val rp-target-output-val';
+      if (completedYears >= 1) {
+        if (currentCgpa >= targetCgpa) {
+          setPace(`Goal Met: ${currentCgpa.toFixed(2)}`, 'met');
+        } else {
+          setPace(`Final: ${currentCgpa.toFixed(2)} GPA`, 'tp-challenging');
+        }
+      } else {
+        setPace(`Target: ${targetCgpa.toFixed(2)} GPA`, '');
+      }
       return;
     }
 
     if (completedYears === 0) {
-      leadElem.textContent = 'Required per year:';
-      valElem.textContent = `${targetCgpa.toFixed(2)} GPA / yr`;
-      valElem.className = 'tk-req-val rp-target-output-val';
+      setPace(`Required: ${targetCgpa.toFixed(2)} / yr`, '');
       return;
     }
 
     if (remYears === 0) {
       if (currentCgpa >= targetCgpa) {
-        leadElem.textContent = '🎉 Goal Achieved:';
-        valElem.textContent = `${currentCgpa.toFixed(2)} CGPA`;
-        valElem.className = 'tk-req-val rp-target-output-val';
+        setPace(`Goal Met: ${currentCgpa.toFixed(2)}`, 'met');
       } else {
-        leadElem.textContent = 'Final Degree CGPA:';
-        valElem.textContent = `${currentCgpa.toFixed(2)} CGPA`;
-        valElem.className = 'tk-req-val rp-target-output-val tp-challenging';
+        setPace(`Final: ${currentCgpa.toFixed(2)} CGPA`, 'tp-challenging');
       }
       return;
     }
@@ -16001,28 +16041,100 @@ let activeModalLocks = 0;
     // Required GPA formula in remaining years
     const reqGpa = ((targetCgpa * totalYears) - (currentCgpa * completedYears)) / remYears;
 
-    if (remYears === 1) {
-      leadElem.textContent = 'Required in final year:';
-    } else {
-      leadElem.textContent = 'Required per year:';
-    }
-
     if (reqGpa > 4.00) {
       const maxPossible = ((currentCgpa * completedYears) + (4.00 * remYears)) / totalYears;
-      valElem.textContent = `Max: ${maxPossible.toFixed(2)} CGPA`;
-      valElem.className = 'tk-req-val rp-target-output-val tp-impossible';
+      setPace(`Max: ${maxPossible.toFixed(2)} CGPA`, 'tp-impossible');
+    } else if (currentCgpa >= targetCgpa) {
+      const holdGpa = Math.max(2.00, reqGpa);
+      setPace(`Hold: ${holdGpa.toFixed(2)} / yr`, 'met');
     } else if (reqGpa <= 2.00) {
-      // Current CGPA is higher than target: student only needs the minimum pass mark (2.00) in remaining years
-      valElem.textContent = `2.00 GPA / yr`;
-      valElem.className = 'tk-req-val rp-target-output-val';
+      setPace(`Required: 2.00 / yr`, '');
     } else if (reqGpa >= 3.50) {
-      valElem.textContent = `${reqGpa.toFixed(2)} GPA / yr`;
-      valElem.className = 'tk-req-val rp-target-output-val tp-challenging';
+      setPace(
+        remYears === 1 ? `Final Yr: ${reqGpa.toFixed(2)}` : `Required: ${reqGpa.toFixed(2)} / yr`,
+        'tp-challenging'
+      );
     } else {
-      valElem.textContent = `${reqGpa.toFixed(2)} GPA / yr`;
-      valElem.className = 'tk-req-val rp-target-output-val';
+      setPace(
+        remYears === 1 ? `Final Yr: ${reqGpa.toFixed(2)}` : `Required: ${reqGpa.toFixed(2)} / yr`,
+        ''
+      );
     }
   }
+
+  (function initTrajectoryControls() {
+    const shell = document.getElementById('cgpaTicket');
+    const targetInput = document.getElementById('tpTargetInput');
+    const track = document.getElementById('trajTrack');
+    const targetPin = document.getElementById('tkGoalMarker');
+    if (!shell || !targetInput || !track || !targetPin) return;
+
+    targetInput.addEventListener('focus', () => targetInput.select());
+    targetInput.addEventListener('input', () => {
+      hasUserEverInteracted = true;
+      const v = parseFloat(String(targetInput.value).replace(/[^0-9.]/g, ''));
+      if (!Number.isNaN(v) && v >= 0 && v <= 4) {
+        lastValidTargetCgpa = Math.round(v * 100) / 100;
+        recalcTargetPlanner();
+      }
+    });
+    targetInput.addEventListener('blur', () => handleTargetBlur(targetInput));
+    targetInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        handleTargetBlur(targetInput);
+        targetInput.blur();
+      }
+    });
+
+    let isDraggingTarget = false;
+    const valFromX = (x) => {
+      const r = track.getBoundingClientRect();
+      if (!r.width) return lastValidTargetCgpa;
+      return Math.round(Math.min(4, Math.max(0, ((x - r.left) / r.width) * 4)) * 100) / 100;
+    };
+
+    const startDrag = (el) => {
+      el.addEventListener('pointerdown', (e) => {
+        e.stopPropagation();
+        isDraggingTarget = true;
+        hasUserEverInteracted = true;
+        shell.classList.add('is-dragging');
+        if (el.setPointerCapture) {
+          try { el.setPointerCapture(e.pointerId); } catch (_) {}
+        }
+        setTargetCgpaValue(valFromX(e.clientX), true);
+      });
+    };
+
+    startDrag(targetPin);
+    startDrag(track);
+
+    window.addEventListener('pointermove', (e) => {
+      if (!isDraggingTarget) return;
+      setTargetCgpaValue(valFromX(e.clientX), true);
+    });
+
+    const stopDrag = () => {
+      if (!isDraggingTarget) return;
+      isDraggingTarget = false;
+      shell.classList.remove('is-dragging');
+    };
+    window.addEventListener('pointerup', stopDrag);
+    window.addEventListener('pointercancel', stopDrag);
+
+    targetPin.addEventListener('keydown', (e) => {
+      const step = e.shiftKey ? 0.01 : 0.05;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        hasUserEverInteracted = true;
+        setTargetCgpaValue(getTargetCgpaValue() + step, true);
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        hasUserEverInteracted = true;
+        setTargetCgpaValue(getTargetCgpaValue() - step, true);
+      }
+    });
+  })();
 
   function recalc(){
     enforceElectiveLocks();
