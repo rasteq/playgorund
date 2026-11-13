@@ -2270,8 +2270,16 @@ body{
     /* ============================================================
        REDESIGNED PROGRAM CARDS (ORIGINAL SCREEN ALIGNMENT & RESPONSIVE WRAPPING)
     ============================================================ */
-    .program-grid{display:grid;grid-template-columns:1fr;gap:16px;}
-    @media (min-width:768px){.program-grid{grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;}}
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+      gap: 18px;
+    }
+    @media (min-width: 1440px) {
+      .program-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
 
     .program-card{
       position:relative;display:flex;flex-direction:column;justify-content:space-between;
@@ -4798,6 +4806,7 @@ body{
     }
     @media (min-width: 1024px){
       .wrap{max-width:960px;}
+      .dept-card-grid{grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:16px;}
       .site-inner{display:flex; flex-wrap:nowrap; grid-template-columns:none; grid-template-rows:none; height:auto; min-height:unset; max-width:960px; padding:16px 24px;}
       nav.main-nav{display:flex;order:3;}
       nav.main-nav a{font-size:13.5px;}
@@ -4844,7 +4853,7 @@ body{
         width: auto;
       }
     }
-    @media (min-width: 1280px){ .wrap{max-width:1100px;} .site-inner{max-width:1100px;} .logo{font-size:28px;gap:12px;} .logo .dot{width:11px;height:11px;} }
+    @media (min-width: 1280px){ .wrap{max-width:1140px;} .site-inner{max-width:1140px;} .dept-card-grid{grid-template-columns:repeat(5, 1fr);gap:16px;} .logo{font-size:28px;gap:12px;} .logo .dot{width:11px;height:11px;} }
     @media (min-width: 1440px){ .wrap{max-width:1180px;} .site-inner{max-width:1180px;} .logo{font-size:30px;gap:13px;} .logo .dot{width:12px;height:12px;} }
     @media (min-width: 1920px){ .wrap{max-width:1320px;} .site-inner{max-width:1320px;} body{font-size:16.5px;} h1.hero-title{font-size:60px;} .logo{font-size:32px;gap:14px;} .logo .dot{width:13px;height:13px;} }
   
@@ -5107,7 +5116,7 @@ body{
     }
     [data-theme="dark"] .m-callout p{color:#CBD5E1;}
 
-    .soon-footer-action{position:relative;z-index:10;margin-top:20px;}
+    .soon-footer-action{position:relative;z-index:10;margin-top:20px;display:flex;justify-content:center;}
 
     @media (max-width:500px){.si-grid{grid-template-columns:1fr;}}
     .modal-card-slate .csel-trigger-form{
@@ -5174,10 +5183,10 @@ body{
 
     .m-footer-row{
       margin-top:20px;padding-top:16px;border-top:1px solid var(--border);
-      display:flex;align-items:center;
+      display:flex;align-items:center;justify-content:center;
     }
     .m-btn-primary{
-      width:100%;height:44px;border-radius:12px;border:none;
+      width:100%;max-width:200px;margin:0 auto;height:44px;border-radius:12px;border:none;
       background:#0F172A;color:#FFFFFF;font-family:inherit;font-size:13.5px;font-weight:700;
       display:inline-flex;align-items:center;justify-content:center;gap:8px;
       cursor:pointer;box-shadow:0 4px 14px rgba(15,23,42,0.14);transition:all .18s ease;
@@ -10062,6 +10071,8 @@ body{
     }
     .btn-modal-dl-png {
       width: 100%;
+      max-width: 240px;
+      margin: 0 auto;
       padding: 13px 20px;
       font-size: 14px;
       display: flex;
@@ -10071,6 +10082,8 @@ body{
     }
     #siDownloadBtn {
       width: 100%;
+      max-width: 240px;
+      margin: 0 auto;
       height: 46px;
       font-size: 14px;
       display: inline-flex;
