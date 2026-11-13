@@ -10778,12 +10778,12 @@ main {
       <div>
         <span class="about-section-tag">// by the numbers</span>
         <div class="about-grid-3">
-          <!-- Stat 1: 5 Programs -->
+          <!-- Stat 1: 4 Programs -->
           <div class="smooth-card about-stat-card">
             <span class="card-watermark">PROG</span>
             <div style="position:relative;z-index:10;">
-              <h3 class="about-card-title">5 programs</h3>
-              <p class="about-card-desc">Honours (BSc, BBA, BSS, BA), Degree Pass, Masters, In-Campus Masters, and Preliminary to Masters - all in one place.</p>
+              <h3 class="about-card-title">4 programs</h3>
+              <p class="about-card-desc">Honours (BSc, BBA, BSS, BA), Degree Pass, Masters, and Preliminary to Masters - all in one place.</p>
             </div>
           </div>
 
@@ -12106,21 +12106,17 @@ main {
 
   /* ---------------- data ---------------- */
   const GRADES = [
-    {g:'A+', pt:4.00, range:'80% and Above',   rangeIncampus:'90% and Above'},
-    {g:'A',  pt:3.75, range:'75% to 79%',  rangeIncampus:'85% to 89%'},
-    {g:'A-', pt:3.50, range:'70% to 74%',  rangeIncampus:'80% to 84%'},
-    {g:'B+', pt:3.25, range:'65% to 69%',  rangeIncampus:'75% to 79%'},
-    {g:'B',  pt:3.00, range:'60% to 64%',  rangeIncampus:'70% to 74%'},
-    {g:'B-', pt:2.75, range:'55% to 59%',  rangeIncampus:'65% to 69%'},
-    {g:'C+', pt:2.50, range:'50% to 54%',  rangeIncampus:'60% to 64%'},
-    {g:'C',  pt:2.25, range:'45% to 49%',  rangeIncampus:'55% to 59%'},
-    {g:'D',  pt:2.00, range:'40% to 44%',  rangeIncampus:'50% to 54%'},
-    {g:'F',  pt:0.00, range:'Below 40%',   rangeIncampus:'Below 50%'},
+    {g:'A+', pt:4.00, range:'80% and Above'},
+    {g:'A',  pt:3.75, range:'75% to 79%'},
+    {g:'A-', pt:3.50, range:'70% to 74%'},
+    {g:'B+', pt:3.25, range:'65% to 69%'},
+    {g:'B',  pt:3.00, range:'60% to 64%'},
+    {g:'B-', pt:2.75, range:'55% to 59%'},
+    {g:'C+', pt:2.50, range:'50% to 54%'},
+    {g:'C',  pt:2.25, range:'45% to 49%'},
+    {g:'D',  pt:2.00, range:'40% to 44%'},
+    {g:'F',  pt:0.00, range:'Below 40%'},
   ];
-  function gradeRangeFor(g){ return activeSyllabus === 'incampus2013' ? g.rangeIncampus : g.range; }
-  function creditCountsForEarned(grade){
-    return !(activeSyllabus === 'incampus2013' && grade.g === 'F');
-  }
 
   const CLASSES = [
     {range:'3.00 - 4.00', cls:'First Class'},
@@ -12156,9 +12152,6 @@ main {
       'MSS Masters':['Anthropology','Economics','Political Science','Social Work','Sociology'],
       'MA Masters':['Arabic','Bangla','English','History','Islamic History & Culture','Islamic Studies','Library and Information Science','Pali','Philosophy','Sanskrit'],
     },
-    'incampus2013':{
-      'In-Campus Masters':['Accounting','Bangla','Economics','English','Physics'],
-    },
     'prelim2013':{
       'Preliminary to Masters':['Accounting','Bangla','Botany','Economics','English','History','Mathematics','Physics','Sociology','Zoology'],
     }
@@ -12171,14 +12164,12 @@ main {
     {key:'pass2013', title:'Degree Pass', displayTitle:'Degree Pass Program', code:'DEG', tag:'2013-14 Syllabus', desc:'Explore Degree Pass programs and course structures using the old syllabus.', active:false},
     {key:'masters2013', title:'Masters', displayTitle:'Masters Program', code:'MAS', tag:'2013-14 Syllabus', desc:'Explore Masters programs and course structures using the current syllabus.', active:true},
     {key:'prelim2013', title:'Preliminary to Masters', displayTitle:'Preliminary to Masters', code:'PRE', tag:'2013-14 Syllabus', desc:'Explore Preliminary to Masters programs and course structures using the current syllabus.', active:false},
-    {key:'incampus2013', title:'In-Campus Masters', displayTitle:'In-Campus Masters', code:'ICM', tag:'2013-14 Syllabus', desc:'Explore In-Campus Masters programs and course structures using the current syllabus.', active:false},
   ];
 
   const PROGRAM_YEARS = {
     '2024':4, '2013':4,
     'pass2024':3, 'pass2013':3,
     'masters2013':1,
-    'incampus2013':3,
     'prelim2013':2,
   };
 
@@ -12305,13 +12296,6 @@ main {
       'Statistics': 'masters-2013/mas-13-stat.js',
       'Zoology': 'masters-2013/mas-13-zoo.js'
     },
-    'incampus2013': {
-      'Accounting': 'incampus-masters-2013/inc-13-acc.js',
-      'Bangla': 'incampus-masters-2013/inc-13-bangla.js',
-      'Economics': 'incampus-masters-2013/inc-13-econ.js',
-      'English': 'incampus-masters-2013/inc-13-eng.js',
-      'Physics': 'incampus-masters-2013/inc-13-phy.js'
-    },
     'prelim2013': {
       'Accounting': 'prelim-masters-2013/pre-13-acc.js',
       'Bangla': 'prelim-masters-2013/pre-13-bangla.js',
@@ -12389,12 +12373,11 @@ main {
     '2024':'Bachelor Degree (Honours)', '2013':'Bachelor Degree (Honours)',
     'pass2024':'Bachelor Degree (Pass)', 'pass2013':'Bachelor Degree (Pass)',
     'masters2013':"Master's",
-    'incampus2013':"Master's (In-Campus)",
     'prelim2013':"Preliminary to Master's",
   };
   const MASTERS_KEYS = ['masters2013'];
   const HONOURS_KEYS = ['2024','2013'];
-  const PROGRAM_UNIT_WORD = { 'incampus2013':'Semester' };
+  const PROGRAM_UNIT_WORD = {};
   function unitWord(key){ return PROGRAM_UNIT_WORD[key] || 'Year'; }
   const UNIT_ORDINAL_WORD = {1:'First', 2:'Second', 3:'Third', 4:'Fourth'};
   function unitFullLabel(key, n){ return `${UNIT_ORDINAL_WORD[n] || n+'th'} ${unitWord(key)}`; }
@@ -12402,7 +12385,6 @@ main {
   function getProgramTrackText(key){
     let name = 'Bachelor Degree Honours';
     if(key && key.startsWith('pass')) name = 'Bachelor Degree Pass';
-    else if(key === 'incampus2013') name = "Master's (In-Campus)";
     else if(key && key.startsWith('masters')) name = "Master's Degree";
     else if(key && key.startsWith('prelim')) name = "Preliminary to Master's";
     return name;
@@ -12564,38 +12546,6 @@ main {
       <p style="font-size:12.5px;font-weight:600;color:#64748B;margin:8px 0 0;line-height:1.6;">Standard 4.00 scale across ten grade bands. Minimum passing grade is D (40% / 2.00 GP). Below 40% is Fail (F).</p>`;
   }
 
-  function faqIncampusGradingScaleHtml(){
-    const half = Math.ceil(GRADES.length / 2);
-    const cols = [GRADES.slice(0, half), GRADES.slice(half)];
-    const tables = cols.map(list => {
-      const rows = list.map(g => `<tr style="border-bottom:1px solid var(--border);">
-        <td style="padding:9px 14px;font-weight:800;${g.g === 'F' ? 'color:#E11D48;' : 'color:var(--text);'}">${g.g}</td>
-        <td style="padding:9px 14px;font-family:var(--mono);font-weight:700;">${g.pt.toFixed(2)}</td>
-        <td style="padding:9px 14px;font-family:var(--mono);color:#64748B;text-align:right;">${g.rangeIncampus}</td>
-      </tr>`).join('');
-      return `<div class="faq-table" style="flex:1;min-width:0;border-radius:16px;border:1px solid var(--border);overflow:hidden;background:var(--card);">
-        <table style="width:100%;text-align:left;font-size:12.5px;border-collapse:collapse;">
-          <thead style="background:rgba(241,245,249,0.5);font-family:var(--mono);font-weight:700;font-size:10.5px;color:var(--muted);text-transform:uppercase;">
-            <tr><th style="padding:8px 14px;">Grade</th><th style="padding:8px 14px;">Point</th><th style="padding:8px 14px;text-align:right;">Marks</th></tr>
-          </thead>
-          <tbody>${rows}</tbody>
-        </table>
-      </div>`;
-    }).join('');
-
-    return `
-      <div style="margin-bottom:12px;">
-        <span class="faq-pill-blue">
-          <span class="faq-pill-dot"></span>
-          In-Campus Masters Only
-        </span>
-      </div>
-      <div class="faq-table-wrap" style="display:flex;gap:16px;margin:12px 0 16px;">
-        ${tables}
-      </div>
-      <p style="font-size:12.5px;font-weight:600;color:#64748B;margin:8px 0 0;line-height:1.6;">In-Campus Masters 4.00 scale. Requires 90%+ for A+, and minimum passing grade is D (50% / 2.00 GP). Below 50% is Fail (F).</p>`;
-  }
-
   function faqClassDeterminationHtml(){
     const rows = CLASSES.map(c => {
       const isFail = !!c.fail;
@@ -12649,11 +12599,10 @@ main {
   const FAQS = [
     ['How is my National University CGPA actually calculated?', () => faqCgpaFormulaHtml(), 'General'],
     ['What\'s the National University grading scale?', () => faqGradingScaleHtml(), 'General'],
-    ['What is the grading scale for In-Campus Masters?', () => faqIncampusGradingScaleHtml(), 'General'],
     ['How are degree classes (First Class, Second Class, Third Class) determined?', () => faqClassDeterminationHtml(), 'General'],
     ['Is Grad<span class="brand-zz">zz</span> free to use?', 'Completely - no accounts, no subscriptions, and no paywalls. It is an independent project built by students, for students.', 'General'],
     ['How accurate is this compared to my official result?', '100% mathematically exact to the official National University formula. If your input grades match your marksheet, your CGPA will match identically.', 'General'],
-    ['Which programs are covered?', 'Honours (BSc, BBA, BSS, BA), Degree Pass, Regular Masters, In-Campus Masters, and Preliminary to Masters across both 2024-2025 and 2013-2014 syllabi.', 'Departments & Coverage'],
+    ['Which programs are covered?', 'Honours (BSc, BBA, BSS, BA), Degree Pass, Regular Masters, and Preliminary to Masters across both 2024-2025 and 2013-2014 syllabi.', 'Departments & Coverage'],
     ['What if my department or subject isn\'t listed yet?', 'Head to our <a href="#" onclick="showView(\'contact\');return false;" class="legal-link">Contact page</a> and tell us what\'s missing - we add new syllabi regularly based on student requests.', 'Departments & Coverage'],
     ['Can I calculate my CGPA across all four years at once?', 'Yes - enter grades year by year and Grad<span class="brand-zz">zz</span> rolls them up into one unified running CGPA automatically.', 'Departments & Coverage'],
     ['Does this save my progress?', 'Yes, for as long as your browser tab stays open - grades save live in local session memory. Download your transcript before closing.', 'Data & Privacy'],
@@ -12718,8 +12667,8 @@ main {
     }).join('');
   }
 
-  const SESSION_LABELS = {'2024':'2024-25 Session','2013':'2013-14 Session','pass2024':'2024-25 Session','pass2013':'2013-14 Session','masters2013':'2013-14 Session','incampus2013':'2013-14 Session','prelim2013':'2013-14 Session'};
-  const SESSION_SHORT = {'2024':'2024-25','2013':'2013-14','pass2024':'2024-25','pass2013':'2013-14','masters2013':'2013-14','incampus2013':'2013-14','prelim2013':'2013-14'};
+  const SESSION_LABELS = {'2024':'2024-25 Session','2013':'2013-14 Session','pass2024':'2024-25 Session','pass2013':'2013-14 Session','masters2013':'2013-14 Session','prelim2013':'2013-14 Session'};
+  const SESSION_SHORT = {'2024':'2024-25','2013':'2013-14','pass2024':'2024-25','pass2013':'2013-14','masters2013':'2013-14','prelim2013':'2013-14'};
   function glassPillClassFor(key){
     if(key.includes('2024')||key.includes('2013')) return 'ac-2024';
     return 'ac-pass';
@@ -12912,7 +12861,6 @@ main {
     pass: [{key:'pass2024', label:'2024-25'}, {key:'pass2013', label:'2013-14'}],
     masters: [{key:'masters2013', label:'2013-14'}],
     prelim: [{key:'prelim2013', label:'2013-14'}],
-    incampus: [{key:'incampus2013', label:'2013-14'}],
   };
 
   const PROGRAM_GROUP_LABELS = {
@@ -12920,7 +12868,6 @@ main {
     pass: 'Degree (Pass Course)',
     masters: 'Masters',
     prelim: 'Preliminary to Masters',
-    incampus: 'In-Campus Masters'
   };
 
   function initQuickSearch(){
@@ -13699,22 +13646,9 @@ let activeModalLocks = 0;
       if(cgpaLbl) cgpaLbl.textContent = isMastersMode ? 'CGPA' : ('GPA (' + yearLabel + ')');
     }
 
-    const isIncampus = activeSyllabus === 'incampus2013';
-    const collegeWrap = document.getElementById('siCollegeWrap');
-    const collegeLabel = document.getElementById('siCollegeLabel');
     const collegeInput = document.getElementById('siCollege');
     const collegeClearBtn = document.getElementById('siCollegeClearBtn');
-    if(isIncampus){
-      if(collegeLabel) collegeLabel.textContent = 'Institution';
-      if(collegeInput){ collegeInput.value = 'National University'; collegeInput.readOnly = true; }
-      if(collegeWrap) collegeWrap.classList.add('readonly');
-      if(collegeClearBtn) collegeClearBtn.style.display = 'none';
-    } else {
-      if(collegeLabel) collegeLabel.textContent = 'College Name';
-      if(collegeInput && collegeInput.readOnly){ collegeInput.value = ''; collegeInput.readOnly = false; }
-      if(collegeWrap) collegeWrap.classList.remove('readonly');
-      if(collegeClearBtn) collegeClearBtn.style.display = (collegeInput && collegeInput.value.trim()) ? 'flex' : 'none';
-    }
+    if(collegeClearBtn) collegeClearBtn.style.display = (collegeInput && collegeInput.value.trim()) ? 'flex' : 'none';
     closeCollegeSuggestions();
 
     ['siRollWrap','siRegNoWrap','siYearWrap'].forEach(clearFieldError);
@@ -13803,10 +13737,7 @@ let activeModalLocks = 0;
     const session = get('siSession') || '-';
     const studentType = get('siStudentType') || '-';
     const examYear = get('siYear') || '-';
-    const isIncampus = activeSyllabus === 'incampus2013';
-    const collegeRowHTML = isIncampus
-      ? `<div class="rs2-record-item"><div class="rs2-field-label">Institution</div><div class="rs2-field-value">National University</div></div><div class="rs2-record-item"><div class="rs2-field-label">Program Type</div><div class="rs2-field-value">On-Campus</div></div>`
-      : `<div class="rs2-record-item rs2-full"><div class="rs2-field-label">College Name</div><div class="rs2-field-value">${college}</div></div>`;
+    const collegeRowHTML = `<div class="rs2-record-item rs2-full"><div class="rs2-field-label">College Name</div><div class="rs2-field-value">${college}</div></div>`;
 
     const prog = PROGRAMS.find(p=>p.key===activeSyllabus);
     const totalYears = PROGRAM_YEARS[activeSyllabus] || 1;
@@ -13835,7 +13766,7 @@ let activeModalLocks = 0;
       const gradeFail = grade && grade.g === 'F';
       if(grade){
         gradedCount++;
-        if(creditCountsForEarned(grade)) creditsEarned += s.credit;
+        creditsEarned += s.credit;
         points += s.credit*grade.pt;
         if(gradeFail) hasFail = true;
       }
@@ -13862,7 +13793,7 @@ let activeModalLocks = 0;
           const r = buildSubjectRow(s, i);
           rowsHtml += r.html;
           if(r.grade){
-            if(creditCountsForEarned(r.grade)) semCredits += r.credit;
+            semCredits += r.credit;
             semPoints += r.credit*r.grade.pt;
           }
         }
@@ -14057,10 +13988,7 @@ let activeModalLocks = 0;
     const session = get('siSession') || '-';
     const studentType = get('siStudentType') || '-';
     const examYear = get('siYear') || '-';
-    const isIncampus = activeSyllabus === 'incampus2013';
-    const collegeRowHTML = isIncampus
-      ? `<div class="rs2-record-item"><div class="rs2-field-label">Institution</div><div class="rs2-field-value">National University</div></div><div class="rs2-record-item"><div class="rs2-field-label">Program Type</div><div class="rs2-field-value">On-Campus</div></div>`
-      : `<div class="rs2-record-item rs2-full"><div class="rs2-field-label">College Name</div><div class="rs2-field-value">${college}</div></div>`;
+    const collegeRowHTML = `<div class="rs2-record-item rs2-full"><div class="rs2-field-label">College Name</div><div class="rs2-field-value">${college}</div></div>`;
 
     const prog = PROGRAMS.find(p=>p.key===activeSyllabus);
     const totalYears = PROGRAM_YEARS[activeSyllabus] || 1;
@@ -14092,7 +14020,7 @@ let activeModalLocks = 0;
         totalPossibleCredits += s.credit;
         if(grade){
           gradedCount++;
-          if(creditCountsForEarned(grade)) creditsEarned += s.credit;
+          creditsEarned += s.credit;
           points += s.credit*grade.pt;
           if(grade.g === 'F') hasFailAny = true;
         }
@@ -14137,7 +14065,7 @@ let activeModalLocks = 0;
             </tr>`;
             if(row.grade){
               const gr = GRADES.find(g=>g.g===row.grade);
-              if(gr){ if(creditCountsForEarned(gr)) semCr += row.credit; semPts += row.credit*gr.pt; }
+              if(gr){ semCr += row.credit; semPts += row.credit*gr.pt; }
             }
           }
           const semGpa = semCr ? semPts/semCr : 0;
@@ -14199,7 +14127,7 @@ let activeModalLocks = 0;
               rows.push(row);
               if(row.grade){
                 const gr = GRADES.find(g=>g.g===row.grade);
-                if(gr){ if(creditCountsForEarned(gr)) credits += row.credit; points += row.credit*gr.pt; }
+                if(gr){ credits += row.credit; points += row.credit*gr.pt; }
               }
             }
             return { rows, gpa: credits ? points/credits : 0 };
@@ -15738,7 +15666,7 @@ let activeModalLocks = 0;
       const grade = GRADES.find(x=>x.g===g);
       if(grade){
         gradedCount++;
-        if(creditCountsForEarned(grade)) creditsEarned += s.credit;
+        creditsEarned += s.credit;
         points += s.credit*grade.pt;
       }
     });
@@ -16274,9 +16202,9 @@ let activeModalLocks = 0;
       if(grade){
         yearGradedCount++;
         if(grade.g === 'F') yearHasFail = true;
-        if(creditCountsForEarned(grade)) creditsEarned+=credit;
+        creditsEarned+=credit;
         points+=credit*grade.pt;
-        if(m) m.textContent=gradeRangeFor(grade);
+        if(m) m.textContent=grade.range;
       } else {
         if(m) m.textContent='-';
       }
@@ -16330,7 +16258,7 @@ let activeModalLocks = 0;
         if(grade){
           semGradedCount++;
           if(grade.g === 'F') semHasFail = true;
-          if(creditCountsForEarned(grade)) semCreditsEarned+=credit;
+          semCreditsEarned+=credit;
           semPoints+=credit*grade.pt;
         }
       });
@@ -16387,7 +16315,7 @@ let activeModalLocks = 0;
     body.innerHTML = GRADES.map(g=>{
       const isFail = g.g === 'F';
       return `<tr>
-        <td style="font-family:var(--mono);font-weight:600;padding:10px 8px;">${gradeRangeFor(g)}</td>
+        <td style="font-family:var(--mono);font-weight:600;padding:10px 8px;">${g.range}</td>
         <td style="text-align:center;font-weight:800;padding:10px 8px;${isFail?'color:#E11D48;':''}">${g.g}</td>
         <td style="text-align:right;font-family:var(--mono);font-weight:700;padding:10px 8px;${isFail?'color:#E11D48;':''}">${g.pt.toFixed(2)}</td>
       </tr>`;
@@ -16897,7 +16825,7 @@ window.CustomSelect = { init: build, refresh };
       total += cr;
       const gCode = vals[i];
       const grade = GRADES.find(x => x.g === gCode);
-      if (grade && creditCountsForEarned(grade)) {
+      if (grade) {
         earned += cr;
       }
     });
