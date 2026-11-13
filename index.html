@@ -4697,24 +4697,6 @@ body{
         padding-right: max(22px, calc((100% - 600px) / 2 + 22px));
       }
     }
-    @media (min-width: 768px) and (max-width: 860px) {
-      .site-inner {
-        max-width: 720px;
-        padding: 0 24px;
-      }
-      .header-search {
-        left: 24px;
-        right: 24px;
-      }
-      .mm-top-bar {
-        padding-left: max(24px, calc((100% - 720px) / 2 + 24px));
-        padding-right: max(24px, calc((100% - 720px) / 2 + 24px));
-      }
-      .mm-content {
-        padding-left: max(24px, calc((100% - 720px) / 2 + 24px));
-        padding-right: max(24px, calc((100% - 720px) / 2 + 24px));
-      }
-    }
     /* ============================================================
        QUICK SEARCH RESPONSIVE GRID MODES
        < 480px: 2 Top Dropdowns (50%) + Full Dept (100%) + Full Actions (100%)
@@ -10420,30 +10402,29 @@ main {
        Container & card padding optimizations.
        Table view active for clean desktop/tablet parity (>= 861px).
     ============================================================ */
-    @media (min-width: 861px) and (max-width: 1023px) {
-      .wrap {
-        padding-left: 24px;
-        padding-right: 24px;
-        max-width: 960px;
-      }
+    /* ============================================================
+       UNIFIED 768px TO 1023px TABLET SPECTRUM (PORTRAIT & LANDSCAPE)
+       100% Pure Natural Fluid Container & 3-Column Department Grid
+       Zero artificial 860px/861px fragmentation; seamless scaling.
+    ============================================================ */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .wrap,
       .site-inner {
         max-width: 960px;
-        padding: 0 24px;
+        padding-left: clamp(24px, 5.5vw, 64px);
+        padding-right: clamp(24px, 5.5vw, 64px);
       }
       .header-search {
-        left: 24px;
-        right: 24px;
+        left: clamp(24px, 5.5vw, 64px);
+        right: clamp(24px, 5.5vw, 64px);
       }
-      .mm-top-bar {
-        padding-left: max(24px, calc((100% - 960px) / 2 + 24px));
-        padding-right: max(24px, calc((100% - 960px) / 2 + 24px));
-      }
+      .mm-top-bar,
       .mm-content {
-        padding-left: max(24px, calc((100% - 960px) / 2 + 24px));
-        padding-right: max(24px, calc((100% - 960px) / 2 + 24px));
+        padding-left: clamp(24px, 5.5vw, 64px);
+        padding-right: clamp(24px, 5.5vw, 64px);
       }
       .dept-card-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 16px;
       }
       .result-panel {
