@@ -721,7 +721,7 @@ body{
       color: #FFFFFF;
     }
     body.mobile-menu-open #mobileSearchBtn {
-      display: none !important;
+      display: none;
     }
 
     /* ---- PERSISTENT HEADER MOBILE NAVIGATION (SEAMLESS FLUSH ATTACHMENT) ---- */
@@ -795,12 +795,14 @@ body{
     }
 
     /* Top Bar - Hidden in Option 1: Persistent Header provides top bar and morphed close button */
+    .mobile-menu-overlay .mm-top-bar,
     .mm-top-bar {
-      display: none !important;
+      display: none;
     }
     @media (max-width: 400px) {
+      .mobile-menu-overlay .mm-top-bar,
       .mm-top-bar {
-        display: none !important;
+        display: none;
       }
       .mm-content {
         padding-top: 14px;
@@ -4523,30 +4525,33 @@ body{
         min-width: 34px;
         min-height: 34px;
       }
-      .header-search {
-        left: 12px !important;
-        right: 12px !important;
-        height: 38px !important;
+      .header-search,
+      .header-search.active {
+        left: 12px;
+        right: 12px;
+        height: 38px;
       }
-      .header-search .header-search-bar {
-        height: 38px !important;
+      .header-search .header-search-bar,
+      .header-search.active .header-search-bar {
+        height: 38px;
       }
-      .header-search input {
-        height: 38px !important;
-        font-size: 13.5px !important;
-        padding: 0 14px !important;
+      .header-search input,
+      .header-search.active input {
+        height: 38px;
+        font-size: 13.5px;
+        padding: 0 14px;
       }
-      .hs-close-btn,
-      .menu-btn.open,
+      header.site .hs-close-btn,
+      header.site .menu-btn.open,
       #studentInfoOverlay .m-close-btn,
       .share-sheet-sticky-bar .modal-close-icon-btn {
-        width: 34px !important;
-        height: 34px !important;
-        min-width: 34px !important;
-        min-height: 34px !important;
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        min-height: 34px;
       }
-      .hs-close-btn {
-        margin-left: 6px !important;
+      header.site .hs-close-btn {
+        margin-left: 6px;
       }
     }
     @media (max-width: 1023px) {
@@ -4836,10 +4841,11 @@ body{
       nav.main-nav{display:flex;order:3;}
       nav.main-nav a{font-size:13.5px;}
       .site-inner{flex-wrap:nowrap;}
+      header.site .header-search,
       .header-search{
         display:block;order:2;flex:1 1 42%;max-width:42%;margin:0 auto;
         position:relative;left:auto;right:auto;top:auto;bottom:auto;height:auto;
-        max-height:none;opacity:1 !important;visibility:visible !important;overflow:visible;transform:none !important;pointer-events:auto !important;transition:none;
+        max-height:none;opacity:1;visibility:visible;overflow:visible;transform:none;pointer-events:auto;transition:none;
       }
       .header-search .header-search-bar{position:relative;width:100%;display:flex;align-items:center;}
       .header-search input{width:100%;padding:10px 18px;border-radius:999px;border:1px solid rgba(203,213,225,0.9);background:#FFFFFF;color:#0F172A;font-size:13.5px;font-weight:600;outline:none;transition:all 0.2s cubic-bezier(0.2,0.8,0.25,1);box-shadow:0 1px 3px rgba(0,0,0,0.04);}
@@ -4848,7 +4854,8 @@ body{
       [data-theme="dark"] .header-search input{background:#161616;border-color:rgba(255,255,255,0.08);color:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,0.2);}
       [data-theme="dark"] .header-search input::placeholder{color:#64748B;}
       [data-theme="dark"] .header-search input:focus{border-color:#FFFFFF;box-shadow:0 0 0 3px rgba(255,255,255,0.1);}
-      .hs-close-btn{display:none !important;}
+      header.site .hs-close-btn,
+      .header-search .hs-close-btn{display:none;}
       .mobile-actions{display:none;}
       .logo{font-size:27px;gap:11px;}
       .logo .dot{width:10.2px;height:10.2px;}
@@ -5194,6 +5201,7 @@ body{
         pointer-events:none;
         z-index:50;
       }
+      #studentInfoOverlay #siDownloadBtn,
       #studentInfoOverlay .m-btn-primary{
         pointer-events:auto;
         width:auto;
@@ -5202,10 +5210,10 @@ body{
         height:46px;
         padding:0 26px;
         border-radius:999px; /* Floating Pill Shape */
-        background:linear-gradient(135deg, #059669, #047857) !important;
-        color:#FFFFFF !important;
-        box-shadow:0 10px 25px -4px rgba(5, 150, 105, 0.45), 0 3px 10px rgba(0, 0, 0, 0.12) !important;
-        border:1px solid rgba(255, 255, 255, 0.25) !important;
+        background:linear-gradient(135deg, #059669, #047857);
+        color:#FFFFFF;
+        box-shadow:0 10px 25px -4px rgba(5, 150, 105, 0.45), 0 3px 10px rgba(0, 0, 0, 0.12);
+        border:1px solid rgba(255, 255, 255, 0.25);
         font-size:14px;
         font-weight:700;
         display:inline-flex;
@@ -5214,26 +5222,32 @@ body{
         gap:8px;
         transition:transform 0.2s cubic-bezier(0.2,0.8,0.25,1), box-shadow 0.2s ease;
       }
+      #studentInfoOverlay #siDownloadBtn:hover,
       #studentInfoOverlay .m-btn-primary:hover{
-        background:linear-gradient(135deg, #047857, #064E3B) !important;
-        box-shadow:0 12px 28px -4px rgba(5, 150, 105, 0.55), 0 4px 12px rgba(0, 0, 0, 0.16) !important;
+        background:linear-gradient(135deg, #047857, #064E3B);
+        box-shadow:0 12px 28px -4px rgba(5, 150, 105, 0.55), 0 4px 12px rgba(0, 0, 0, 0.16);
       }
+      #studentInfoOverlay #siDownloadBtn:active,
       #studentInfoOverlay .m-btn-primary:active{
-        transform:scale(0.96) !important;
+        transform:scale(0.96);
       }
+      [data-theme="dark"] #studentInfoOverlay #siDownloadBtn,
       [data-theme="dark"] #studentInfoOverlay .m-btn-primary{
-        background:linear-gradient(135deg, #059669, #047857) !important;
-        color:#FFFFFF !important;
-        border:1px solid rgba(255, 255, 255, 0.25) !important;
-        box-shadow:0 10px 25px -4px rgba(5, 150, 105, 0.5), 0 3px 10px rgba(0, 0, 0, 0.3) !important;
+        background:linear-gradient(135deg, #059669, #047857);
+        color:#FFFFFF;
+        border:1px solid rgba(255, 255, 255, 0.25);
+        box-shadow:0 10px 25px -4px rgba(5, 150, 105, 0.5), 0 3px 10px rgba(0, 0, 0, 0.3);
       }
+      [data-theme="dark"] #studentInfoOverlay #siDownloadBtn:hover,
       [data-theme="dark"] #studentInfoOverlay .m-btn-primary:hover{
-        background:linear-gradient(135deg, #10B981, #059669) !important;
+        background:linear-gradient(135deg, #10B981, #059669);
       }
+      #studentInfoOverlay #siDownloadBtn svg,
+      #studentInfoOverlay #siDownloadBtn span,
       #studentInfoOverlay .m-btn-primary svg,
       #studentInfoOverlay .m-btn-primary span{
-        color:#FFFFFF !important;
-        stroke:#FFFFFF !important;
+        color:#FFFFFF;
+        stroke:#FFFFFF;
         fill:none;
       }
     }
@@ -5439,20 +5453,24 @@ body{
       cursor:not-allowed;border-color:var(--border);
     }
     .si-field-msg{font-size:10.5px;color:var(--dim);margin-top:3px;letter-spacing:0.01em;}
+    #studentInfoOverlay .si-field.field-error .si-input-new,
+    #studentInfoOverlay .si-field.field-error .si-input-new:focus,
     .si-field.field-error .si-input-new,
     .si-field.field-error .si-input-new:focus {
-      border-color: rgba(237, 32, 36, 0.42) !important;
-      box-shadow: 0 0 0 3px rgba(237, 32, 36, 0.08) !important;
+      border-color: rgba(237, 32, 36, 0.42);
+      box-shadow: 0 0 0 3px rgba(237, 32, 36, 0.08);
       animation: fieldSubtleShake 0.36s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
     }
     .si-field.field-error .si-field-msg {
       color: #ED2024;
       font-weight: 600;
     }
+    [data-theme="dark"] #studentInfoOverlay .si-field.field-error .si-input-new,
+    [data-theme="dark"] #studentInfoOverlay .si-field.field-error .si-input-new:focus,
     [data-theme="dark"] .si-field.field-error .si-input-new,
     [data-theme="dark"] .si-field.field-error .si-input-new:focus {
-      border-color: rgba(237, 32, 36, 0.52) !important;
-      box-shadow: 0 0 0 3px rgba(237, 32, 36, 0.12) !important;
+      border-color: rgba(237, 32, 36, 0.52);
+      box-shadow: 0 0 0 3px rgba(237, 32, 36, 0.12);
     }
 
     .m-footer-row{
@@ -6541,14 +6559,18 @@ body{
         transform: translateX(2.5px);
       }
     }
+    input.input-shake-error,
+    .csel-trigger.input-shake-error,
     .input-shake-error {
-      animation: fieldSubtleShake 0.36s cubic-bezier(0.36, 0.07, 0.19, 0.97) both !important;
-      border-color: rgba(237, 32, 36, 0.42) !important;
-      box-shadow: 0 0 0 3px rgba(237, 32, 36, 0.08) !important;
+      animation: fieldSubtleShake 0.36s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      border-color: rgba(237, 32, 36, 0.42);
+      box-shadow: 0 0 0 3px rgba(237, 32, 36, 0.08);
     }
+    [data-theme="dark"] input.input-shake-error,
+    [data-theme="dark"] .csel-trigger.input-shake-error,
     [data-theme="dark"] .input-shake-error {
-      border-color: rgba(237, 32, 36, 0.52) !important;
-      box-shadow: 0 0 0 3px rgba(237, 32, 36, 0.12) !important;
+      border-color: rgba(237, 32, 36, 0.52);
+      box-shadow: 0 0 0 3px rgba(237, 32, 36, 0.12);
     }
     .cf-input {
       width: 100%;
@@ -8740,17 +8762,17 @@ body{
       justify-content: center;
       gap: 2px;
       padding: 2px 4px;
-      border: none !important;
-      border-right: none !important;
+      border: none;
+      border-right: none;
       position: relative;
     }
     [data-theme="dark"] .overall-share-card.is-floating .rp-stat {
-      border: none !important;
-      border-right: none !important;
+      border: none;
+      border-right: none;
     }
     .overall-share-card.is-floating .rp-stat:last-child {
-      border: none !important;
-      border-right: none !important;
+      border: none;
+      border-right: none;
     }
 
     /* Floating Pill Year Numbers */
@@ -8788,12 +8810,12 @@ body{
       border-radius: 14px;
       margin-left: 6px;
       background: rgba(15, 23, 42, 0.06);
-      border: 1px solid rgba(15, 16, 16, 0.08) !important;
+      border: 1px solid rgba(15, 16, 16, 0.08);
       box-sizing: border-box;
     }
     [data-theme="dark"] .overall-share-card.is-floating .rp-stat.rp-stat-overall {
       background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.10) !important;
+      border: 1px solid rgba(255, 255, 255, 0.10);
     }
     .overall-share-card.is-floating .rp-stat.rp-stat-overall .rp-stat-n {
       font-family: var(--sans);
@@ -8935,17 +8957,17 @@ body{
         justify-content: center;
         gap: 2px;
         padding: 2px 4px;
-        border: none !important;
-        border-right: none !important;
+        border: none;
+        border-right: none;
         position: relative;
       }
       [data-theme="dark"] .overall-share-card.is-floating .rp-stat {
-        border: none !important;
-        border-right: none !important;
+        border: none;
+        border-right: none;
       }
       .overall-share-card.is-floating .rp-stat:last-child {
-        border: none !important;
-        border-right: none !important;
+        border: none;
+        border-right: none;
       }
 
       /* Numbers matching reference design */
@@ -9803,12 +9825,16 @@ body{
       }
 
       /* Cleanly reset mobile card pseudo-elements in table view */
+      table.marksheet tbody td.code::after,
+      table.marksheet tbody td.credit::after,
+      table.marksheet tbody td.grade::before,
+      table.marksheet tbody td.grade::after,
       table.marksheet td.code::after,
       table.marksheet td.credit::after,
       table.marksheet td.grade::before,
       table.marksheet td.grade::after {
-        display: none !important;
-        content: none !important;
+        display: none;
+        content: none;
       }
 
       /* Year / Semester Total Row */
@@ -10362,6 +10388,7 @@ body{
       }
 
       /* Controls & Input Pane - Stacked below card with smooth scrolling */
+      .share-card-modal-dialog .modal-controls-pane,
       .modal-controls-pane {
         padding: 16px 18px 8px;
         gap: 10px;
@@ -10371,9 +10398,9 @@ body{
         width: 100%;
         max-width: 320px;
         box-sizing: border-box;
-        height: auto !important;
-        min-height: auto !important;
-        justify-content: flex-start !important;
+        height: auto;
+        min-height: auto;
+        justify-content: flex-start;
       }
       .modal-controls-pane .m-pane-header {
         display: none;
@@ -10420,6 +10447,7 @@ body{
         pointer-events: none;
         z-index: 50;
       }
+      #shareCardModalOverlay #btnDownloadCardPng,
       .btn-modal-dl-png {
         pointer-events: auto;
         width: auto;
@@ -10428,10 +10456,10 @@ body{
         height: 44px;
         padding: 0 24px;
         border-radius: 999px; /* Floating Pill Shape */
-        background: linear-gradient(135deg, #059669, #047857) !important;
-        color: #FFFFFF !important;
-        box-shadow: 0 10px 25px -4px rgba(5, 150, 105, 0.45), 0 3px 10px rgba(0, 0, 0, 0.12) !important;
-        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        background: linear-gradient(135deg, #059669, #047857);
+        color: #FFFFFF;
+        box-shadow: 0 10px 25px -4px rgba(5, 150, 105, 0.45), 0 3px 10px rgba(0, 0, 0, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.25);
         font-family: var(--disp, sans-serif);
         font-size: 13.5px;
         font-weight: 700;
@@ -10442,26 +10470,32 @@ body{
         transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.25, 1), box-shadow 0.2s ease;
         -webkit-tap-highlight-color: transparent;
       }
+      #shareCardModalOverlay #btnDownloadCardPng:hover,
       .btn-modal-dl-png:hover {
-        background: linear-gradient(135deg, #047857, #064E3B) !important;
-        box-shadow: 0 12px 28px -4px rgba(5, 150, 105, 0.55), 0 4px 12px rgba(0, 0, 0, 0.16) !important;
+        background: linear-gradient(135deg, #047857, #064E3B);
+        box-shadow: 0 12px 28px -4px rgba(5, 150, 105, 0.55), 0 4px 12px rgba(0, 0, 0, 0.16);
       }
+      #shareCardModalOverlay #btnDownloadCardPng:active,
       .btn-modal-dl-png:active {
-        transform: scale(0.96) !important;
+        transform: scale(0.96);
       }
+      [data-theme="dark"] #shareCardModalOverlay #btnDownloadCardPng,
       [data-theme="dark"] .btn-modal-dl-png {
-        background: linear-gradient(135deg, #059669, #047857) !important;
-        color: #FFFFFF !important;
-        border: 1px solid rgba(255, 255, 255, 0.25) !important;
-        box-shadow: 0 10px 25px -4px rgba(5, 150, 105, 0.5), 0 3px 10px rgba(0, 0, 0, 0.3) !important;
+        background: linear-gradient(135deg, #059669, #047857);
+        color: #FFFFFF;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 0 10px 25px -4px rgba(5, 150, 105, 0.5), 0 3px 10px rgba(0, 0, 0, 0.3);
       }
+      [data-theme="dark"] #shareCardModalOverlay #btnDownloadCardPng:hover,
       [data-theme="dark"] .btn-modal-dl-png:hover {
-        background: linear-gradient(135deg, #10B981, #059669) !important;
+        background: linear-gradient(135deg, #10B981, #059669);
       }
+      #shareCardModalOverlay #btnDownloadCardPng svg,
+      #shareCardModalOverlay #btnDownloadCardPng span,
       .btn-modal-dl-png svg,
       .btn-modal-dl-png span {
-        color: #FFFFFF !important;
-        stroke: #FFFFFF !important;
+        color: #FFFFFF;
+        stroke: #FFFFFF;
         fill: none;
       }
     }
