@@ -374,6 +374,7 @@
 
     html{
       overflow-y: scroll;
+      scrollbar-gutter: stable;
     }
     html{
       -webkit-font-smoothing:antialiased;
@@ -4969,12 +4970,19 @@ body{
       backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
       display:flex;align-items:flex-start;justify-content:center;
       padding:calc(env(safe-area-inset-top, 24px) + 28px) 16px max(36px, calc(env(safe-area-inset-bottom, 24px) + 20px));
-      overflow-y:auto;overscroll-behavior:contain;
+      overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none;
+      overscroll-behavior:contain;
       -webkit-overflow-scrolling:touch;touch-action:pan-y;
       opacity:0;pointer-events:none;transition:opacity .22s ease;
-      scrollbar-width:none;-ms-overflow-style:none;
     }
     .modal-overlay::-webkit-scrollbar{display:none;}
+    @media (max-width:600px){
+      .modal-overlay{
+        overflow-y:auto;
+        scrollbar-width:none;-ms-overflow-style:none;
+      }
+      .modal-overlay::-webkit-scrollbar{display:none;}
+    }
     [data-theme="dark"] .modal-overlay{background:rgba(0,0,0,0.65);}
     .modal-overlay.open{opacity:1;pointer-events:auto;}
 
@@ -9849,15 +9857,24 @@ body{
       pointer-events: none;
       transition: opacity 0.22s ease;
       overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
       overscroll-behavior: contain;
       -webkit-overflow-scrolling: touch;
       touch-action: pan-y;
       box-sizing: border-box;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
     }
     .share-card-modal-overlay::-webkit-scrollbar {
       display: none;
+    }
+    @media (max-width: 768px) {
+      .share-card-modal-overlay {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .share-card-modal-overlay::-webkit-scrollbar {
+        display: none;
+      }
     }
     [data-theme="dark"] .share-card-modal-overlay {
       background: rgba(0, 0, 0, 0.7);
@@ -12160,8 +12177,8 @@ main {
 
 <!-- ================= SOON-DEPARTMENT POPUP ================= -->
 <!-- ================= SOON-DEPARTMENT POPUP ================= -->
-<div class="modal-overlay" id="soonModalOverlay" data-lenis-prevent onclick="if(event.target===this) closeSoonModal()">
-  <div class="modal-card-slate compact soon-modal-card">
+<div class="modal-overlay" id="soonModalOverlay" onclick="if(event.target===this) closeSoonModal()">
+  <div class="modal-card-slate compact soon-modal-card" data-lenis-prevent>
     <!-- Faint Corner Watermark -->
     <span class="modal-watermark" id="soonDeptWatermark">ENG</span>
 
@@ -12205,8 +12222,8 @@ main {
 </div>
 
 <!-- ================= STUDENT INFORMATION / DOWNLOAD POPUP MODAL ================= -->
-<div class="modal-overlay" id="studentInfoOverlay" data-lenis-prevent onclick="if(event.target===this) closeStudentInfoModal()">
-  <div class="modal-card-slate">
+<div class="modal-overlay" id="studentInfoOverlay" onclick="if(event.target===this) closeStudentInfoModal()">
+  <div class="modal-card-slate" data-lenis-prevent>
     <!-- Drag Bar for Mobile Bottom Sheet -->
     <div class="sheet-drag-bar" onclick="closeStudentInfoModal()" aria-hidden="true"></div>
 
@@ -13880,25 +13897,25 @@ main {
 let activeModalLocks = 0;
   function lockScroll(){
     activeModalLocks++;
-    if(activeModalLocks === 1){
-      if(window.lenis && typeof window.lenis.stop === 'function') lenis.stop();
-    }
   }
 
   function unlockScroll(){
     activeModalLocks = Math.max(0, activeModalLocks - 1);
-    if(activeModalLocks === 0){
-      if(window.lenis && typeof window.lenis.start === 'function') lenis.start();
-    }
   }
 
-  // Universal layer popup: wheel on backdrop does not scroll background page
-  document.addEventListener('wheel', function(e){
+  // Natural scroll: when mouse is on card, scroll does nothing; when outside, original page scroll continues!
+  window.addEventListener('wheel', function(e){
     if(activeModalLocks > 0){
-      const target = e.target;
-      if(target && (target.id === 'soonModalOverlay' || target.id === 'studentInfoOverlay' || target.classList.contains('modal-overlay'))){
+      const card = e.target && e.target.closest && e.target.closest('.modal-card-slate, .soon-modal-card');
+      if(card){
+        const scrollable = e.target.closest('.modal-body, .share-sheet-scroll-body, .si-body-scroll, .help-support-body, .drawer-body');
+        if(scrollable && scrollable.scrollHeight > scrollable.clientHeight){
+          return; // Allow internal container scrolling if scrollable
+        }
+        // Hovering over card: scroll does nothing
         e.preventDefault();
       }
+      // Hovering outside card: original scroll continues naturally!
     }
   }, { passive: false });
 
@@ -13909,6 +13926,8 @@ let activeModalLocks = 0;
       if(soon && soon.classList.contains('open')) closeSoonModal();
       const si = document.getElementById('studentInfoOverlay');
       if(si && si.classList.contains('open')) closeStudentInfoModal();
+      const sc = document.getElementById('shareCardModalOverlay');
+      if(sc && sc.classList.contains('open')) closeShareCardModal();
     }
   });
 
@@ -14348,21 +14367,36 @@ let activeModalLocks = 0;
     let creditsEarned = 0, points = 0, gradedCount = 0, hasFail = false;
     function buildSubjectRow(s, i){
       const gCode = vals[i];
-      const grade = GRADES.find(g=>g.g===gCode);
-      const gradeFail = grade && grade.g === 'F';
-      if(grade){
-        gradedCount++;
-        creditsEarned += s.credit;
-        points += s.credit*grade.pt;
-        if(gradeFail) hasFail = true;
+      const isPassFailSubject = (s.credit === 0 || s.code === '221109');
+      let displayGrade = '-';
+      let gradeFail = false;
+      if(isPassFailSubject){
+        if(gCode === 'Pass'){
+          gradedCount++;
+          displayGrade = 'Pass';
+        } else if(gCode === 'Fail'){
+          gradedCount++;
+          displayGrade = 'Fail';
+          gradeFail = true;
+          hasFail = true;
+        }
+      } else {
+        const grade = GRADES.find(g=>g.g===gCode);
+        if(grade){
+          gradedCount++;
+          creditsEarned += s.credit;
+          points += s.credit*grade.pt;
+          if(grade.g === 'F'){ gradeFail = true; hasFail = true; }
+          displayGrade = grade.g;
+        }
       }
       return {
-        grade, credit: s.credit,
+        grade: { g: displayGrade }, credit: s.credit,
         html: `<tr>
         <td class="rs2-code">${s.code}</td>
         <td class="rs2-ttl">${formatRomanNumerals(s.name).toUpperCase()}</td>
         <td class="rs2-credit">${s.credit}</td>
-        <td><span class="rs2-grade-badge${gradeFail?' rs2-fail':''}">${grade ? grade.g : '-'}</span></td>
+        <td><span class="rs2-grade-badge${gradeFail?' rs2-fail':''}">${displayGrade}</span></td>
       </tr>`
       };
     }
@@ -14602,15 +14636,26 @@ let activeModalLocks = 0;
       const rows = subjects.map((s)=>{
         const originalIdx = rawSubjects.indexOf(s);
         const gCode = vals[originalIdx];
-        const grade = GRADES.find(g=>g.g===gCode);
+        const isPassFailSubject = (s.credit === 0 || s.code === '221109');
+        let displayGrade = null;
         totalPossibleCredits += s.credit;
-        if(grade){
-          gradedCount++;
-          creditsEarned += s.credit;
-          points += s.credit*grade.pt;
-          if(grade.g === 'F') hasFailAny = true;
+        if(isPassFailSubject){
+          if(gCode === 'Pass' || gCode === 'Fail'){
+            gradedCount++;
+            displayGrade = gCode;
+            if(gCode === 'Fail') hasFailAny = true;
+          }
+        } else {
+          const grade = GRADES.find(g=>g.g===gCode);
+          if(grade){
+            gradedCount++;
+            creditsEarned += s.credit;
+            points += s.credit*grade.pt;
+            if(grade.g === 'F') hasFailAny = true;
+            displayGrade = grade.g;
+          }
         }
-        return { origIdx: originalIdx, code:s.code, name:s.name, credit:s.credit, grade: grade ? grade.g : null };
+        return { origIdx: originalIdx, code:s.code, name:s.name, credit:s.credit, grade: displayGrade };
       });
 
       const yGpa = creditsEarned ? points/creditsEarned : 0;
@@ -15746,7 +15791,9 @@ let activeModalLocks = 0;
               <td class="credit">${s.credit}</td>
               <td class="grade"><select class="grade-select" data-idx="${i}" data-group-id="${s.groupId || ''}" aria-label="Grade for ${s.name || s.code}" onchange="recalc()">
                 <option value="">-</option>
-                ${GRADES.map(g=>`<option value="${g.g}">${g.g} (${g.pt.toFixed(2)})</option>`).join('')}
+                ${(s.credit === 0 || s.code === '221109') 
+                  ? '<option value="Pass">Pass</option><option value="Fail">Fail</option>' 
+                  : GRADES.map(g=>`<option value="${g.g}">${g.g} (${g.pt.toFixed(2)})</option>`).join('')}
               </select></td>
               <td class="marks" id="marks-${i}">-</td>
             </tr>`);
@@ -15806,7 +15853,9 @@ let activeModalLocks = 0;
             <td class="credit">${s.credit}</td>
             <td class="grade"><select class="grade-select" data-idx="${i}" data-group-id="${s.groupId || ''}" aria-label="Grade for ${s.name || s.code}" onchange="recalc()">
               <option value="">-</option>
-              ${GRADES.map(g=>`<option value="${g.g}">${g.g} (${g.pt.toFixed(2)})</option>`).join('')}
+              ${(s.credit === 0 || s.code === '221109') 
+                ? '<option value="Pass">Pass</option><option value="Fail">Fail</option>' 
+                : GRADES.map(g=>`<option value="${g.g}">${g.g} (${g.pt.toFixed(2)})</option>`).join('')}
             </select></td>
             <td class="marks" id="marks-${i}">-</td>
           </tr>`;
@@ -16293,11 +16342,18 @@ let activeModalLocks = 0;
     subjects.forEach((s,i)=>{
       if(!s) return;
       const g = vals[i];
-      const grade = GRADES.find(x=>x.g===g);
-      if(grade){
-        gradedCount++;
-        creditsEarned += (s.credit || 0);
-        points += (s.credit || 0)*grade.pt;
+      const isPassFail = (s.credit === 0 || s.code === '221109');
+      if(isPassFail){
+        if(g === 'Pass' || g === 'Fail'){
+          gradedCount++;
+        }
+      } else {
+        const grade = GRADES.find(x=>x.g===g);
+        if(grade){
+          gradedCount++;
+          creditsEarned += (s.credit || 0);
+          points += (s.credit || 0)*grade.pt;
+        }
       }
     });
     const totalPossibleCredits = getYearTotalPossibleCredits(dept, year);
@@ -16827,16 +16883,31 @@ let activeModalLocks = 0;
       const i=+sel.dataset.idx;
       const subj = subjects[i];
       const credit = subj ? subj.credit : 0;
-      const grade = GRADES.find(g=>g.g===sel.value);
+      const isPassFail = (credit === 0 || (subj && subj.code === '221109'));
       const m = document.getElementById('marks-'+i);
-      if(grade){
-        yearGradedCount++;
-        if(grade.g === 'F') yearHasFail = true;
-        creditsEarned+=credit;
-        points+=credit*grade.pt;
-        if(m) m.textContent=grade.range;
+
+      if(isPassFail){
+        if(sel.value === 'Pass'){
+          yearGradedCount++;
+          if(m) m.textContent = 'Pass (≥33%)';
+        } else if(sel.value === 'Fail'){
+          yearGradedCount++;
+          yearHasFail = true;
+          if(m) m.textContent = 'Fail (<33%)';
+        } else {
+          if(m) m.textContent = '-';
+        }
       } else {
-        if(m) m.textContent='-';
+        const grade = GRADES.find(g=>g.g===sel.value);
+        if(grade){
+          yearGradedCount++;
+          if(grade.g === 'F') yearHasFail = true;
+          creditsEarned+=credit;
+          points+=credit*grade.pt;
+          if(m) m.textContent=grade.range;
+        } else {
+          if(m) m.textContent='-';
+        }
       }
     });
     const yearTotalPossibleCredits = getYearTotalPossibleCredits(currentDept, currentYear);
@@ -17487,7 +17558,6 @@ window.CustomSelect = { init: build, refresh };
       overlay.classList.add('open');
     }
     if(typeof lockScroll === 'function') lockScroll();
-    else document.body.style.overflow = 'hidden';
     setShareCardScope(scopeKey);
   }
 
@@ -17499,7 +17569,6 @@ window.CustomSelect = { init: build, refresh };
       if(scBody) scBody.scrollTop = 0;
     }
     if(typeof unlockScroll === 'function') unlockScroll();
-    else document.body.style.overflow = '';
   }
 
   window.addEventListener('keydown', function(e) {
@@ -17636,8 +17705,8 @@ window.CustomSelect = { init: build, refresh };
 
 
   <!-- Share Card Modal Dialog (Clean Cloud Theme Only, Responsive Phone to PC) -->
-  <div id="shareCardModalOverlay" class="modal-overlay share-card-modal-overlay" data-lenis-prevent onclick="if(event.target===this) closeShareCardModal()">
-    <div class="modal-card-slate share-card-modal-dialog">
+  <div id="shareCardModalOverlay" class="modal-overlay share-card-modal-overlay" onclick="if(event.target===this) closeShareCardModal()">
+    <div class="modal-card-slate share-card-modal-dialog" data-lenis-prevent>
       <!-- Drag Bar for Mobile Bottom Sheet -->
       <div class="sheet-drag-bar" onclick="closeShareCardModal()" aria-hidden="true"></div>
 
