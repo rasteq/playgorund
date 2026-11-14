@@ -1952,24 +1952,6 @@ body{
     .social-btn:hover{transform:translateY(-3px) scale(1.05);box-shadow:var(--shadow);}
 
     /* ===== Contact & Feedback form (themed to match the rest of the site) ===== */
-    .cf-card{
-      border-radius:26px;border:1px solid rgba(203,213,225,0.9);
-      background:#FFFFFF;padding:28px 24px;
-      box-shadow:0 12px 30px -5px rgba(0,0,0,0.08);
-      transition:transform 0.32s cubic-bezier(0.2,0.8,0.25,1), box-shadow 0.32s cubic-bezier(0.2,0.8,0.25,1), border-color 0.32s ease;
-      will-change:transform;
-    }
-    .cf-card:hover{
-      transform:translateY(-4px);border-color:#94A3B8;
-      box-shadow:0 16px 32px -6px rgba(15,23,42,0.12), 0 4px 12px -2px rgba(15,23,42,0.05);
-    }
-    [data-theme="dark"] .cf-card{
-      background:#161616;border-color:rgba(255,255,255,0.08);
-      box-shadow:0 14px 35px -5px rgba(0,0,0,0.45);
-    }
-    [data-theme="dark"] .cf-card:hover{
-      border-color:#475569;box-shadow:0 18px 36px -6px rgba(0,0,0,0.6), 0 4px 12px -2px rgba(0,0,0,0.35);
-    }
 
     .contact-grid{display:grid;grid-template-columns:minmax(260px,320px) 1fr;gap:24px;align-items:start;}
     @media (max-width:860px){ .contact-grid{grid-template-columns:1fr;} }
@@ -12556,9 +12538,17 @@ main {
     padding:6px 4px; font-size:10px; font-weight:700; color:var(--rs2-ink-secondary); text-align:center;
   }
 </style>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script>
   const { jsPDF } = window.jspdf || {};
+
+  // Official National University (NU) Round Half-Up GPA Formatter
+  // Corrects IEEE-754 floating-point rounding bugs (e.g. 147/40 = 3.675 -> 3.68 instead of JS 3.67)
+  function formatGpa(val) {
+    const num = Number(val);
+    if (!Number.isFinite(num) || num <= 0) return '0.00';
+    return (Math.round((num + 1e-8) * 100) / 100).toFixed(2);
+  }
+  window.formatGpa = formatGpa;
 
   (function(){
     const header = document.querySelector('header.site');
@@ -12581,6 +12571,7 @@ main {
         duration: 1.1,
         smoothWheel: true,
       });
+      window.lenis = lenis;
       function lenisRaf(time){
         lenis.raf(time);
         requestAnimationFrame(lenisRaf);
@@ -12589,6 +12580,7 @@ main {
     } catch (e) {
       console.warn('Lenis failed to initialize, falling back to native scroll.', e);
       lenis = null;
+      window.lenis = null;
     }
   } else {
     console.warn('Lenis library did not load - using native scroll.');
@@ -12596,6 +12588,7 @@ main {
   if (!lenis) {
     lenis = { stop(){}, start(){}, raf(){} };
   }
+  window.lenis = lenis;
 
   function scrollToTop(immediate){
     if(lenis && typeof lenis.scrollTo === 'function'){
@@ -14222,7 +14215,7 @@ let activeModalLocks = 0;
       if(titleEl) titleEl.textContent = `Download ${yearLabel} Result`;
       if(btnText) btnText.textContent = 'Download File';
       const yStats = yearStats(currentDept, currentYear);
-      const gpaStr = yStats.gpa.toFixed(2);
+      const gpaStr = formatGpa(yStats.gpa);
       const cgpaInput = document.getElementById('siCgpa');
       if(cgpaInput) cgpaInput.value = gpaStr;
       const cgpaLbl = document.getElementById('siCgpaLabel');
@@ -14394,7 +14387,7 @@ let activeModalLocks = 0;
         return `
         <tr class="rs2-sem-head-row"><td colspan="4">${grp.label}</td></tr>
         ${rowsHtml}
-        <tr class="rs2-sem-total-row"><td colspan="2" class="rs2-total-title">Semester Total</td><td>${semCredits}</td><td class="rs2-gpa-val">GPA ${semGpa.toFixed(2)}</td></tr>`;
+        <tr class="rs2-sem-total-row"><td colspan="2" class="rs2-total-title">Semester Total</td><td>${semCredits}</td><td class="rs2-gpa-val">GPA ${formatGpa(semGpa)}</td></tr>`;
       }).join('');
     } else {
       courseRows = rawSubjects.map((s,i)=>{
@@ -14459,14 +14452,14 @@ let activeModalLocks = 0;
             <div class="rs2-record-item"><div class="rs2-field-label">Student Type</div><div class="rs2-field-value">${studentType}</div></div>
             <div class="rs2-record-item rs2-full"><div class="rs2-field-label">Subject</div><div class="rs2-field-value">${subjectLine}</div></div>
             <div class="rs2-record-item${isFail?' rs2-fail':''}"><div class="rs2-field-label">Result Status</div><div class="rs2-field-value">${statusPillText}</div></div>
-            <div class="rs2-record-item rs2-highlight"><div class="rs2-field-label">${gpaFieldLabel}</div><div class="rs2-field-value">${yGpa.toFixed(2)} <small>/ 4.00</small></div></div>
+            <div class="rs2-record-item rs2-highlight"><div class="rs2-field-label">${gpaFieldLabel}</div><div class="rs2-field-value">${formatGpa(yGpa)} <small>/ 4.00</small></div></div>
           </div>
         </section>
 
         <div class="rs2-metric-ribbon">
           <div class="rs2-metric-card"><span class="rs2-val">${String(subjects.length).padStart(2,'0')}</span><span class="rs2-lbl">Courses Evaluated</span></div>
           <div class="rs2-metric-card"><span class="rs2-val">${creditsEarned}</span><span class="rs2-lbl">Earned Credits</span></div>
-          <div class="rs2-metric-card"><span class="rs2-val">${yGpa.toFixed(2)}</span><span class="rs2-lbl">${isMastersProg ? 'Cumulative GPA' : 'Grade Point Avg'}</span></div>
+          <div class="rs2-metric-card"><span class="rs2-val">${formatGpa(yGpa)}</span><span class="rs2-lbl">${isMastersProg ? 'Cumulative GPA' : 'Grade Point Avg'}</span></div>
         </div>
 
         <div class="rs2-table-shell">
@@ -14485,7 +14478,7 @@ let activeModalLocks = 0;
               <tr>
                 <td colspan="2" class="rs2-total-title">Total Result Summary</td>
                 <td><strong>${creditsEarned}</strong></td>
-                <td class="rs2-gpa-val">GPA ${yGpa.toFixed(2)}</td>
+                <td class="rs2-gpa-val">GPA ${formatGpa(yGpa)}</td>
               </tr>
             </tfoot>
           </table>
@@ -14662,7 +14655,7 @@ let activeModalLocks = 0;
             }
           }
           const semGpa = semCr ? semPts/semCr : 0;
-          return `<tr class="rs2-sem-head-row"><td colspan="4">${grp.label}</td></tr>${rowsHtml}<tr class="rs2-sem-total-row"><td colspan="2" class="rs2-total-title">Semester Total</td><td>${semCr}</td><td class="rs2-gpa-val">GPA ${semGpa.toFixed(2)}</td></tr>`;
+          return `<tr class="rs2-sem-head-row"><td colspan="4">${grp.label}</td></tr>${rowsHtml}<tr class="rs2-sem-total-row"><td colspan="2" class="rs2-total-title">Semester Total</td><td>${semCr}</td><td class="rs2-gpa-val">GPA ${formatGpa(semGpa)}</td></tr>`;
         }).join('');
       } else {
         courseRows = mRows.map(row=>{
@@ -14691,7 +14684,7 @@ let activeModalLocks = 0;
               <tr>
                 <td colspan="2" class="rs2-total-title">Total Result Summary</td>
                 <td><strong>${totalCreditsAll}</strong></td>
-                <td class="rs2-gpa-val">GPA ${cumulativeGpa.toFixed(2)}</td>
+                <td class="rs2-gpa-val">GPA ${formatGpa(cumulativeGpa)}</td>
               </tr>
             </tfoot>
           </table>`;
@@ -14702,7 +14695,7 @@ let activeModalLocks = 0;
 
       const yearRowHTML = yearsData.map((yd, idx)=>`<th colspan="2"${idx===yearsData.length-1?'':' class="rs2-year-sep"'}>${yd.label}</th>`).join('');
       const subColRowHTML = yearsData.map((yd, idx)=>`<th style="width:${codeWidthPct}%;">Course Code(credit)</th><th style="width:${lgWidthPct}%;"${idx===yearsData.length-1?'':' class="rs2-year-sep"'}>LG</th>`).join('');
-      const footRowHTML = yearsData.map((yd, idx)=>`<td colspan="2"${idx===yearsData.length-1?'':' class="rs2-year-sep"'}>GPA: ${yd.gpa.toFixed(2)}</td>`).join('');
+      const footRowHTML = yearsData.map((yd, idx)=>`<td colspan="2"${idx===yearsData.length-1?'':' class="rs2-year-sep"'}>GPA: ${formatGpa(yd.gpa)}</td>`).join('');
 
       const yearSemGroups = yearsData.map(yd => semesterGroupsFor(yd.yr));
       const useSemesterSplit = yearSemGroups.every(g => g);
@@ -14743,7 +14736,7 @@ let activeModalLocks = 0;
           }
           rowsHtml += '<tr class="rs2-sem-total-row">' + perYear.map((p, idx)=>{
             const sep = idx === yearsData.length-1 ? '' : ' rs2-year-sep';
-            return `<td colspan="2" class="${sep.trim()}">GPA: ${p.gpa.toFixed(2)}</td>`;
+            return `<td colspan="2" class="${sep.trim()}">GPA: ${formatGpa(p.gpa)}</td>`;
           }).join('') + '</tr>';
           return rowsHtml;
         }).join('');
@@ -14821,7 +14814,7 @@ let activeModalLocks = 0;
             <div class="rs2-record-item"><div class="rs2-field-label">Student Type</div><div class="rs2-field-value">${studentType}</div></div>
             <div class="rs2-record-item rs2-full"><div class="rs2-field-label">Subject</div><div class="rs2-field-value">${subjectLine}</div></div>
             <div class="rs2-record-item"><div class="rs2-field-label">Credit <span class="rs2-sub-label">(Earned/Total)</span></div><div class="rs2-field-value">${totalCreditsAll} / ${totalPossibleCredits}</div></div>
-            <div class="rs2-record-item rs2-highlight"><div class="rs2-field-label">CGPA</div><div class="rs2-field-value">${cumulativeGpa.toFixed(2)} <small>/ 4.00</small></div></div>
+            <div class="rs2-record-item rs2-highlight"><div class="rs2-field-label">CGPA</div><div class="rs2-field-value">${formatGpa(cumulativeGpa)} <small>/ 4.00</small></div></div>
           </div>
         </section>
 
@@ -15963,7 +15956,7 @@ let activeModalLocks = 0;
     const st = yearStats(currentDept, currentYear);
     const rhYearGpaVal = document.getElementById('rhYearGpaVal');
     if (rhYearGpaVal && st) {
-      rhYearGpaVal.textContent = (st.gpa ? st.gpa.toFixed(2) : '0.00');
+      rhYearGpaVal.textContent = formatGpa(st.gpa);
       if (st.credits === 0 || st.gpa < 2.00) {
         rhYearGpaVal.style.color = 'var(--primary, #ED2024)';
       } else if (st.gpa >= 3.00) {
@@ -16249,42 +16242,88 @@ let activeModalLocks = 0;
     });
   }
 
+  function getYearTotalPossibleCredits(dept = currentDept, year = currentYear, syllabus = activeSyllabus) {
+    const subjects = getSubjectsFor(syllabus, dept, year);
+    if (!subjects || subjects.length === 0) return 0;
+    let vals = {};
+    try { vals = JSON.parse(sessionStorage.getItem(gradeStorageKey(dept, year, syllabus))) || {}; } catch(e) { vals = {}; }
+
+    let compulsoryCredits = 0;
+    const electives = [];
+    subjects.forEach((s, i) => {
+      if (!s) return;
+      if (s.type === 'elective') {
+        electives.push({ s, i });
+      } else {
+        compulsoryCredits += (s.credit || 0);
+      }
+    });
+
+    if (electives.length === 0) return compulsoryCredits;
+
+    let selectedElectiveCredits = 0;
+    electives.forEach(item => {
+      if (vals[item.i]) selectedElectiveCredits += (item.s.credit || 0);
+    });
+
+    if (selectedElectiveCredits > 0) {
+      return compulsoryCredits + selectedElectiveCredits;
+    }
+
+    const grpMap = {};
+    electives.forEach(item => {
+      const gid = item.s.groupId || '__default';
+      if (!grpMap[gid]) grpMap[gid] = { reqSets: item.s.maxSets || item.s.maxSelect || 1, items: [] };
+      grpMap[gid].items.push(item.s);
+    });
+    let estimatedElectiveCredits = 0;
+    for (const gid in grpMap) {
+      const g = grpMap[gid];
+      const credits = g.items.slice(0, g.reqSets).reduce((sum, s) => sum + (s.credit || 4), 0);
+      estimatedElectiveCredits += credits;
+    }
+    return compulsoryCredits + estimatedElectiveCredits;
+  }
+
   function yearStats(dept, year){
     const subjects = getSubjectsFor(activeSyllabus, dept, year);
     let vals = {};
     try{ vals = JSON.parse(sessionStorage.getItem(gradeStorageKey(dept, year))) || {}; }catch(e){ vals = {}; }
     let creditsEarned=0, points=0, gradedCount=0;
     subjects.forEach((s,i)=>{
+      if(!s) return;
       const g = vals[i];
       const grade = GRADES.find(x=>x.g===g);
       if(grade){
         gradedCount++;
-        creditsEarned += s.credit;
-        points += s.credit*grade.pt;
+        creditsEarned += (s.credit || 0);
+        points += (s.credit || 0)*grade.pt;
       }
     });
-    return { credits: creditsEarned, points: points, gpa: creditsEarned ? points/creditsEarned : 0, gradedCount: gradedCount };
+    const totalPossibleCredits = getYearTotalPossibleCredits(dept, year);
+    const liveGpa = totalPossibleCredits > 0 ? (points / totalPossibleCredits) : 0;
+    return { credits: creditsEarned, totalCredits: totalPossibleCredits, points: points, gpa: liveGpa, gradedCount: gradedCount };
   }
 
   function updateSummaryCard(){
     let totalEarnedPoints = 0;
     let totalCreditsAll = 0;
+    let totalPossibleCreditsAll = 0;
 
     const totalYears = PROGRAM_YEARS[activeSyllabus] || 1;
     for(let y=1; y<=totalYears; y++){
       const st = yearStats(currentDept, y);
       const tile = document.getElementById('statY'+y);
-      if(tile) tile.textContent = st.gpa.toFixed(2);
-      if(st.credits > 0){
-        totalEarnedPoints += (st.points !== undefined ? st.points : st.credits * st.gpa);
-        totalCreditsAll += st.credits;
-      }
+      if(tile) tile.textContent = formatGpa(st.gpa);
+      totalEarnedPoints += (st.points !== undefined ? st.points : 0);
+      totalCreditsAll += st.credits;
+      totalPossibleCreditsAll += (st.totalCredits || 0);
     }
 
-    const cumulativeGpa = totalCreditsAll > 0 ? totalEarnedPoints / totalCreditsAll : 0;
+    const cumulativeGpa = totalPossibleCreditsAll > 0 ? totalEarnedPoints / totalPossibleCreditsAll : 0;
 
     const sealCgpaEl = document.getElementById('sealCgpa');
-    if(sealCgpaEl) sealCgpaEl.textContent = cumulativeGpa.toFixed(2);
+    if(sealCgpaEl) sealCgpaEl.textContent = formatGpa(cumulativeGpa);
 
     let themeColor = 'var(--primary, #ED2024)';
     if(totalCreditsAll === 0 || cumulativeGpa < 2.00) {
@@ -16304,16 +16343,14 @@ let activeModalLocks = 0;
 
     const trajTrack = document.getElementById('trajTrack');
     if(trajTrack) {
-      trajTrack.setAttribute('aria-valuenow', cumulativeGpa.toFixed(2));
+      trajTrack.setAttribute('aria-valuenow', formatGpa(cumulativeGpa));
     }
 
     const statOverallEl = document.getElementById('statOverallCgpa');
     if(statOverallEl) {
-      statOverallEl.textContent = cumulativeGpa.toFixed(2);
+      statOverallEl.textContent = formatGpa(cumulativeGpa);
       statOverallEl.style.color = themeColor;
     }
-    const statCreditsEl = document.getElementById('statCredits');
-    if(statCreditsEl) statCreditsEl.textContent = totalCreditsAll;
 
     recalcTargetPlanner();
   }
@@ -16530,7 +16567,7 @@ let activeModalLocks = 0;
   function checkTargetCelebration(currentCgpa, targetCgpa, completedYears, totalYears) {
     if (!hasUserEverInteracted) return;
 
-    var targetStr = targetCgpa.toFixed(2);
+    var targetStr = formatGpa(targetCgpa);
     if (lastCelebrationTargetVal !== targetStr) {
       celebratedMilestones = {};
       lastCelebrationTargetVal = targetStr;
@@ -16558,10 +16595,10 @@ let activeModalLocks = 0;
       var isFinalDegree = (highestEligibleYear === totalYears);
       if (isFinalDegree) {
         firePartyPoppers(['#ED2024', '#F59E0B', '#10B981', '#3B82F6', '#8B5CF6'], true);
-        showCelebrationToast('Final CGPA ' + currentCgpa.toFixed(2), 'Target ' + targetStr);
+        showCelebrationToast('Final CGPA ' + formatGpa(currentCgpa), 'Target ' + targetStr);
       } else {
         firePartyPoppers();
-        showCelebrationToast('Year ' + highestEligibleYear + ' CGPA ' + currentCgpa.toFixed(2), 'Target ' + targetStr);
+        showCelebrationToast('Year ' + highestEligibleYear + ' CGPA ' + formatGpa(currentCgpa), 'Target ' + targetStr);
       }
     }, 350);
   }
@@ -16609,7 +16646,7 @@ let activeModalLocks = 0;
     if (goalMarkerEl) {
       const goalPercent = Math.max(0, Math.min(100, (targetCgpa / 4) * 100));
       goalMarkerEl.style.left = goalPercent + '%';
-      goalMarkerEl.setAttribute('aria-valuenow', targetCgpa.toFixed(2));
+      goalMarkerEl.setAttribute('aria-valuenow', formatGpa(targetCgpa));
     }
 
     const statusDot = document.getElementById('statusDot');
@@ -16623,23 +16660,23 @@ let activeModalLocks = 0;
     let livePoints = 0;
     let liveCredits = 0;
 
+    let totalPossibleAll = 0;
     for (let y = 1; y <= totalYears; y++) {
       const st = yearStats(currentDept, y);
-      if (st.credits > 0) {
-        const pts = st.points !== undefined ? st.points : st.credits * st.gpa;
-        livePoints += pts;
-        liveCredits += st.credits;
-        if (isYearFullyGraded(currentDept, y)) {
-          completedYears++;
-          totalEarnedPoints += pts;
-          totalCreditsAll += st.credits;
-        }
+      const pts = st.points !== undefined ? st.points : 0;
+      livePoints += pts;
+      liveCredits += st.credits;
+      totalPossibleAll += (st.totalCredits || 0);
+      if (isYearFullyGraded(currentDept, y)) {
+        completedYears++;
+        totalEarnedPoints += pts;
+        totalCreditsAll += st.credits;
       }
     }
 
-    const currentCgpa = totalCreditsAll > 0 ? totalEarnedPoints / totalCreditsAll : 0;
-    const liveCgpa = liveCredits > 0 ? livePoints / liveCredits : 0;
-    const barMet = liveCredits > 0 && liveCgpa >= targetCgpa;
+    const currentCgpa = totalPossibleAll > 0 ? totalEarnedPoints / totalPossibleAll : 0;
+    const liveCgpa = totalPossibleAll > 0 ? livePoints / totalPossibleAll : 0;
+    const barMet = totalPossibleAll > 0 && liveCgpa >= targetCgpa;
 
     if (statusDot) statusDot.classList.toggle('met', barMet);
     if (cfBar) cfBar.classList.toggle('met', barMet);
@@ -16657,26 +16694,26 @@ let activeModalLocks = 0;
     if (totalYears <= 1) {
       if (completedYears >= 1) {
         if (currentCgpa >= targetCgpa) {
-          setPace(`Goal Met: ${currentCgpa.toFixed(2)}`, 'met');
+          setPace(`Goal Met: ${formatGpa(currentCgpa)}`, 'met');
         } else {
-          setPace(`Final: ${currentCgpa.toFixed(2)} GPA`, 'tp-challenging');
+          setPace(`Final: ${formatGpa(currentCgpa)} GPA`, 'tp-challenging');
         }
       } else {
-        setPace(`Target: ${targetCgpa.toFixed(2)} GPA`, '');
+        setPace(`Target: ${formatGpa(targetCgpa)} GPA`, '');
       }
       return;
     }
 
     if (completedYears === 0) {
-      setPace(`Required: ${targetCgpa.toFixed(2)} / yr`, '');
+      setPace(`Required: ${formatGpa(targetCgpa)} / yr`, '');
       return;
     }
 
     if (remYears === 0) {
       if (currentCgpa >= targetCgpa) {
-        setPace(`Goal Met: ${currentCgpa.toFixed(2)}`, 'met');
+        setPace(`Goal Met: ${formatGpa(currentCgpa)}`, 'met');
       } else {
-        setPace(`Final: ${currentCgpa.toFixed(2)} CGPA`, 'tp-challenging');
+        setPace(`Final: ${formatGpa(currentCgpa)} CGPA`, 'tp-challenging');
       }
       return;
     }
@@ -16686,15 +16723,15 @@ let activeModalLocks = 0;
 
     if (reqGpa > 4.00) {
       const maxPossible = ((currentCgpa * completedYears) + (4.00 * remYears)) / totalYears;
-      setPace(`Max: ${maxPossible.toFixed(2)} CGPA`, 'tp-impossible');
+      setPace(`Max: ${formatGpa(maxPossible)} CGPA`, 'tp-impossible');
     } else if (currentCgpa >= targetCgpa) {
       const holdGpa = Math.max(2.00, reqGpa);
-      setPace(`Hold: ${holdGpa.toFixed(2)} / yr`, 'met');
+      setPace(`Hold: ${formatGpa(holdGpa)} / yr`, 'met');
     } else if (reqGpa <= 2.00) {
       setPace(`Required: 2.00 / yr`, '');
     } else if (reqGpa >= 3.50) {
       setPace(
-        remYears === 1 ? `Final Yr: ${reqGpa.toFixed(2)}` : `Required: ${reqGpa.toFixed(2)} / yr`,
+        remYears === 1 ? `Final Yr: ${formatGpa(reqGpa)}` : `Required: ${formatGpa(reqGpa)} / yr`,
         'tp-challenging'
       );
     } else {
@@ -16802,11 +16839,12 @@ let activeModalLocks = 0;
         if(m) m.textContent='-';
       }
     });
-    const gpa = creditsEarned ? points/creditsEarned : 0;
+    const yearTotalPossibleCredits = getYearTotalPossibleCredits(currentDept, currentYear);
+    const gpa = yearTotalPossibleCredits > 0 ? points / yearTotalPossibleCredits : 0;
     const tc = document.getElementById('totalCredits');
     const tg = document.getElementById('totalGpa');
     if(tc) tc.textContent = creditsEarned;
-    if(tg) tg.textContent = gpa.toFixed(2);
+    if(tg) tg.textContent = formatGpa(gpa);
 
     // Determine dynamic state for overall Year
     let yearState = 'state-default';
@@ -16843,10 +16881,12 @@ let activeModalLocks = 0;
       let semGradedCount = 0;
       let semHasFail = false;
 
+      let semTotalPossibleCredits = 0;
       block.querySelectorAll('select.grade-select').forEach(sel=>{
         const i=+sel.dataset.idx;
         const subj = subjects[i];
         const credit = subj ? subj.credit : 0;
+        semTotalPossibleCredits += credit;
         const grade = GRADES.find(g=>g.g===sel.value);
         if(grade){
           semGradedCount++;
@@ -16855,11 +16895,11 @@ let activeModalLocks = 0;
           semPoints+=credit*grade.pt;
         }
       });
-      const semGpa = semCreditsEarned ? semPoints/semCreditsEarned : 0;
+      const semGpa = semTotalPossibleCredits > 0 ? semPoints/semTotalPossibleCredits : 0;
       const stc = document.getElementById('semTotalCredits-'+idx);
       const stg = document.getElementById('semTotalGpa-'+idx);
       if(stc) stc.textContent = semCreditsEarned;
-      if(stg) stg.textContent = semGpa.toFixed(2);
+      if(stg) stg.textContent = formatGpa(semGpa);
 
       let semState = 'state-default';
       if(semGradedCount > 0){
@@ -17343,21 +17383,27 @@ window.CustomSelect = { init: build, refresh };
 </script>
 
 <script>
-  // Service Worker Deactivation & Cache Purge
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then(registrations => {
-      for (const registration of registrations) {
-        registration.unregister();
-      }
-    }).catch(() => {});
-    if (window.caches) {
-      caches.keys().then(names => {
-        for (const name of names) {
-          caches.delete(name);
+  // Service Worker Deactivation & Cache Purge (Guarded to run once per session)
+  (function(){
+    try {
+      if (sessionStorage.getItem('gradzz:sw_cleared')) return;
+      sessionStorage.setItem('gradzz:sw_cleared', '1');
+    } catch(e){}
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(registrations => {
+        for (const registration of registrations) {
+          registration.unregister();
         }
       }).catch(() => {});
+      if (window.caches) {
+        caches.keys().then(names => {
+          for (const name of names) {
+            caches.delete(name);
+          }
+        }).catch(() => {});
+      }
     }
-  }
+  })();
 
 
   // ============================================================
@@ -17486,15 +17532,13 @@ window.CustomSelect = { init: build, refresh };
       for(let y = 1; y <= totalYears; y++) {
         const cd = getYearCreditDetails(currentDept, y);
         const st = yearStats(currentDept, y);
-        if(st.credits > 0) {
-          totalEarnedPoints += st.credits * st.gpa;
-          totalCreditsAll += st.credits;
-        }
-        totalPossibleAll += cd.total;
+        totalEarnedPoints += (st.points !== undefined ? st.points : 0);
+        totalCreditsAll += st.credits;
+        totalPossibleAll += (st.totalCredits || cd.total);
       }
-      gpaVal = totalCreditsAll > 0 ? (totalEarnedPoints / totalCreditsAll) : 0;
+      gpaVal = totalPossibleAll > 0 ? (totalEarnedPoints / totalPossibleAll) : 0;
       const gpaEl = document.getElementById('scCardGpa');
-      if(gpaEl) gpaEl.textContent = gpaVal.toFixed(2);
+      if(gpaEl) gpaEl.textContent = formatGpa(gpaVal);
       const crEl = document.getElementById('scCardCredits');
       if(crEl) crEl.textContent = totalCreditsAll + '/' + totalPossibleAll + ' Credits';
     } else {
@@ -17513,7 +17557,7 @@ window.CustomSelect = { init: build, refresh };
       const st = yearStats(currentDept, yNum);
       const cd = getYearCreditDetails(currentDept, yNum);
       const gpaEl = document.getElementById('scCardGpa');
-      if(gpaEl) gpaEl.textContent = (st.gpa || 0).toFixed(2);
+      if(gpaEl) gpaEl.textContent = formatGpa(st.gpa);
       const crEl = document.getElementById('scCardCredits');
       if(crEl) crEl.textContent = cd.earned + '/' + cd.total + ' Credits';
     }
