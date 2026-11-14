@@ -663,22 +663,46 @@ body{
     .menu-burger span:nth-child(1){top:0;}
     .menu-burger span:nth-child(2){top:5.5px;}
     .menu-burger span:nth-child(3){top:11px;width:75%;}
-    .menu-btn.open .menu-burger span:nth-child(1){top:5.5px;transform:rotate(45deg);}
-    .menu-btn.open .menu-burger span:nth-child(2){opacity:0;transform:scaleX(0);}
-    .menu-btn.open .menu-burger span:nth-child(3){top:5.5px;width:100%;transform:rotate(-45deg);}
+    .menu-btn .menu-close-x{
+      display:none;
+      opacity:0.75;
+      transition:opacity 0.2s ease;
+    }
     .menu-btn.open {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      min-height: 36px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.75);
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(203, 213, 225, 0.75);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      color: #0F172A;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .menu-btn.open .menu-burger {
+      display: none;
+    }
+    .menu-btn.open .menu-close-x {
+      display: block;
     }
     .menu-btn.open:hover {
       border-color: #94A3B8;
       background: rgba(255, 255, 255, 0.92);
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(15, 23, 42, 0.10);
+      color: #0F172A;
+    }
+    .menu-btn.open:hover .menu-close-x {
+      opacity: 1;
+    }
+    .menu-btn.open:active {
+      transform: scale(0.94);
     }
     [data-theme="dark"] .menu-btn.open {
       background: rgba(22, 22, 22, 0.75);
@@ -693,6 +717,7 @@ body{
       border-color: rgba(255, 255, 255, 0.25);
       transform: translateY(-1px);
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+      color: #FFFFFF;
     }
     body.mobile-menu-open #mobileSearchBtn {
       display: none !important;
@@ -4528,11 +4553,16 @@ body{
         font-size: 13.5px !important;
         padding: 0 14px !important;
       }
-      .hs-close-btn {
+      .hs-close-btn,
+      .menu-btn.open,
+      #studentInfoOverlay .m-close-btn,
+      .share-sheet-sticky-bar .modal-close-icon-btn {
         width: 34px !important;
         height: 34px !important;
         min-width: 34px !important;
         min-height: 34px !important;
+      }
+      .hs-close-btn {
         margin-left: 6px !important;
       }
     }
@@ -4977,76 +5007,185 @@ body{
         padding:22px 16px;border-radius:22px;
       }
 
-      /* Native Mobile Bottom Sheet for Student Info / Download Modal */
+      /* Full Mobile Drawer attached flush under header with Floating Pill Download Button */
       #studentInfoOverlay{
-        align-items:flex-end;
+        position:fixed;
+        inset:0;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        width:100%;
+        height:100%;
         padding:0;
-        overflow-y:hidden;
+        align-items:flex-start;
+        justify-content:stretch;
+        background:#F4F6F9;
+        overflow:hidden;
+        z-index:10001;
+      }
+      [data-theme="dark"] #studentInfoOverlay{
+        background:#0C0D0F;
       }
       #studentInfoOverlay .modal-card-slate{
-        margin:0;
         width:100%;
         max-width:100%;
-        max-height:88dvh;
-        border-radius:24px 24px 0 0;
-        border-bottom:none;
-        border-left:none;
-        border-right:none;
+        height:100%;
+        max-height:100%;
+        margin:0;
+        border-radius:0;
+        border:none;
+        background:transparent;
+        box-shadow:none;
         padding:0;
         display:flex;
         flex-direction:column;
         overflow:hidden;
-        transform:translateY(24px);
-        transition:transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+        transform:none;
       }
       #studentInfoOverlay.open .modal-card-slate{
-        transform:translateY(0);
+        transform:none;
       }
+
+      /* Top Bar: Matches header.site height, placement & icon-btn close button */
       #studentInfoOverlay .m-header{
+        height:var(--header-h, 64px);
+        min-height:var(--header-h, 64px);
+        max-height:var(--header-h, 64px);
+        padding:0 16px;
+        margin:0;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        background:#FFFFFF;
+        border-bottom:1px solid rgba(15, 16, 16, 0.07);
+        box-shadow:0 1px 3px rgba(0,0,0,0.03);
+        flex-shrink:0;
         position:sticky;
         top:0;
         z-index:30;
-        background:var(--card, #FFFFFF);
-        padding:16px 20px 14px;
-        margin-bottom:0;
-        border-bottom:1px solid var(--border);
-        flex-shrink:0;
       }
       [data-theme="dark"] #studentInfoOverlay .m-header{
-        background:#161718;
-        border-bottom-color:rgba(255,255,255,0.08);
+        background:#161616;
+        border-bottom:1px solid rgba(255,255,255,0.08);
+        box-shadow:0 1px 3px rgba(0,0,0,0.2);
       }
+      #studentInfoOverlay .m-title{
+        font-size:17px;
+        font-weight:700;
+        color:var(--text);
+      }
+      #studentInfoOverlay .m-close-btn{
+        width:36px;
+        height:36px;
+        min-width:36px;
+        min-height:36px;
+        border-radius:50%;
+        border:1px solid rgba(203, 213, 225, 0.75);
+        background:rgba(255, 255, 255, 0.75);
+        -webkit-backdrop-filter:blur(10px);
+        backdrop-filter:blur(10px);
+        color:#0F172A;
+        box-shadow:0 2px 8px rgba(0, 0, 0, 0.05);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        cursor:pointer;
+        padding:0;
+        flex-shrink:0;
+        transition:all 0.2s cubic-bezier(0.2, 0.8, 0.25, 1);
+        -webkit-tap-highlight-color:transparent;
+      }
+      #studentInfoOverlay .m-close-btn svg{
+        opacity:0.75;
+        transition:opacity 0.2s ease;
+      }
+      #studentInfoOverlay .m-close-btn:hover{
+        border-color:#94A3B8;
+        background:rgba(255, 255, 255, 0.92);
+        transform:translateY(-1px);
+        box-shadow:0 4px 12px rgba(15, 23, 42, 0.10);
+        color:#0F172A;
+      }
+      #studentInfoOverlay .m-close-btn:hover svg{
+        opacity:1;
+      }
+      #studentInfoOverlay .m-close-btn:active{
+        transform:scale(0.94);
+      }
+      [data-theme="dark"] #studentInfoOverlay .m-close-btn{
+        background:rgba(22, 22, 22, 0.75);
+        -webkit-backdrop-filter:blur(10px);
+        backdrop-filter:blur(10px);
+        border-color:rgba(255, 255, 255, 0.15);
+        color:#FFFFFF;
+        box-shadow:0 2px 8px rgba(0, 0, 0, 0.35);
+      }
+      [data-theme="dark"] #studentInfoOverlay .m-close-btn:hover{
+        background:rgba(30, 41, 59, 0.92);
+        border-color:rgba(255, 255, 255, 0.25);
+        transform:translateY(-1px);
+        box-shadow:0 4px 14px rgba(0, 0, 0, 0.5);
+        color:#FFFFFF;
+      }
+
+      /* Scrollable Form Body */
       #studentInfoOverlay .si-body-scroll{
         flex:1 1 auto;
         overflow-y:auto;
         -webkit-overflow-scrolling:touch;
-        padding:18px 20px 14px;
+        padding:20px 16px 110px 16px; /* Clearance for floating pill */
         scrollbar-width:none;
       }
       #studentInfoOverlay .si-body-scroll::-webkit-scrollbar{
         display:none;
       }
+
+      /* Floating Pill Action Button at the Bottom */
       #studentInfoOverlay .m-footer-row{
-        position:sticky;
-        bottom:0;
-        z-index:30;
-        background:var(--card, #FFFFFF);
-        padding:12px 20px calc(14px + env(safe-area-inset-bottom, 0px));
-        margin-top:0;
-        border-top:1px solid var(--border);
-        flex-shrink:0;
-        box-shadow:0 -4px 16px rgba(0,0,0,0.04);
-      }
-      [data-theme="dark"] #studentInfoOverlay .m-footer-row{
-        background:#161718;
-        border-top-color:rgba(255,255,255,0.08);
-        box-shadow:0 -4px 20px rgba(0,0,0,0.4);
+        position:fixed;
+        bottom:max(20px, calc(env(safe-area-inset-bottom, 16px) + 12px));
+        left:0;
+        right:0;
+        margin:0;
+        padding:0;
+        border:none;
+        background:transparent;
+        box-shadow:none;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        pointer-events:none;
+        z-index:50;
       }
       #studentInfoOverlay .m-btn-primary{
-        max-width:100%;
-        width:100%;
-        height:46px;
+        pointer-events:auto;
+        width:auto;
+        min-width:180px;
+        max-width:280px;
+        height:48px;
+        padding:0 28px;
+        border-radius:999px; /* Floating Pill Shape */
+        background:#0F172A;
+        color:#FFFFFF;
+        box-shadow:0 12px 30px -4px rgba(15, 23, 42, 0.35), 0 4px 12px rgba(0, 0, 0, 0.08);
+        border:1px solid rgba(255, 255, 255, 0.12);
         font-size:14px;
+        font-weight:700;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap:8px;
+        transition:transform 0.2s cubic-bezier(0.2,0.8,0.25,1), box-shadow 0.2s ease;
+      }
+      #studentInfoOverlay .m-btn-primary:active{
+        transform:scale(0.96);
+      }
+      [data-theme="dark"] #studentInfoOverlay .m-btn-primary{
+        background:#FFFFFF;
+        color:#0F172A;
+        border:none;
+        box-shadow:0 12px 30px -4px rgba(0, 0, 0, 0.7);
       }
     }
 
@@ -9952,61 +10091,133 @@ body{
       }
     }
 
-    /* Native Mobile Bottom Sheet for Result Share Card (<= 768px) */
+    /* Menu-Style Full Mobile Drawer with Floating Pill Download Button (<= 768px) */
     @media (max-width: 768px) {
       .share-card-modal-overlay {
-        align-items: flex-end;
+        position: fixed;
+        inset: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
         padding: 0;
-        overflow-y: hidden;
+        align-items: flex-start;
+        justify-content: stretch;
+        background: #F4F6F9;
+        overflow: hidden;
+        z-index: 10001;
+      }
+      [data-theme="dark"] .share-card-modal-overlay {
+        background: #0C0D0F;
       }
       .share-card-modal-dialog {
         grid-template-columns: 1fr;
         max-width: 100%;
         width: 100%;
-        max-height: 88dvh;
+        height: 100%;
+        max-height: 100%;
         margin: 0;
-        border-radius: 24px 24px 0 0;
-        border-bottom: none;
-        border-left: none;
-        border-right: none;
+        border-radius: 0;
+        border: none;
+        background: transparent;
+        box-shadow: none;
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        transform: translateY(24px);
-        transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+        transform: none;
       }
       .share-card-modal-overlay.open .share-card-modal-dialog {
-        transform: translateY(0);
+        transform: none;
       }
+
+      /* Top Bar: Matches header.site height, placement & icon-btn close button */
       .share-sheet-sticky-bar {
+        height: var(--header-h, 64px);
+        min-height: var(--header-h, 64px);
+        max-height: var(--header-h, 64px);
+        padding: 0 16px;
+        margin: 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 14px 20px 12px;
-        background: var(--card, #FFFFFF);
-        border-bottom: 1px solid var(--border);
+        background: #FFFFFF;
+        border-bottom: 1px solid rgba(15, 16, 16, 0.07);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+        flex-shrink: 0;
         position: sticky;
         top: 0;
-        z-index: 50;
-        flex-shrink: 0;
+        z-index: 30;
       }
       [data-theme="dark"] .share-sheet-sticky-bar {
-        background: #14171F;
-        border-bottom-color: rgba(255, 255, 255, 0.08);
+        background: #161616;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       }
       .share-sheet-title-mob {
         display: block;
         font-family: var(--disp);
-        font-size: 16.5px;
+        font-size: 17px;
         font-weight: 700;
         color: var(--text);
       }
       .share-sheet-sticky-bar .modal-close-icon-btn {
         position: static;
-        width: 34px;
-        height: 34px;
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        min-height: 36px;
+        border-radius: 50%;
+        border: 1px solid rgba(203, 213, 225, 0.75);
+        background: rgba(255, 255, 255, 0.75);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        color: #0F172A;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 0;
         flex-shrink: 0;
+        transition: all 0.2s cubic-bezier(0.2, 0.8, 0.25, 1);
+        -webkit-tap-highlight-color: transparent;
       }
+      .share-sheet-sticky-bar .modal-close-icon-btn svg {
+        opacity: 0.75;
+        transition: opacity 0.2s ease;
+      }
+      .share-sheet-sticky-bar .modal-close-icon-btn:hover {
+        border-color: #94A3B8;
+        background: rgba(255, 255, 255, 0.92);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.10);
+        color: #0F172A;
+      }
+      .share-sheet-sticky-bar .modal-close-icon-btn:hover svg {
+        opacity: 1;
+      }
+      .share-sheet-sticky-bar .modal-close-icon-btn:active {
+        transform: scale(0.94);
+      }
+      [data-theme="dark"] .share-sheet-sticky-bar .modal-close-icon-btn {
+        background: rgba(22, 22, 22, 0.75);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        border-color: rgba(255, 255, 255, 0.15);
+        color: #FFFFFF;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+      }
+      [data-theme="dark"] .share-sheet-sticky-bar .modal-close-icon-btn:hover {
+        background: rgba(30, 41, 59, 0.92);
+        border-color: rgba(255, 255, 255, 0.25);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+        color: #FFFFFF;
+      }
+
+      /* Scrollable Sheet Content */
       .share-sheet-scroll-body {
         flex: 1 1 auto;
         overflow-y: auto;
@@ -10014,49 +10225,79 @@ body{
         scrollbar-width: none;
         display: flex;
         flex-direction: column;
+        padding-bottom: 110px; /* Clearance for floating pill button */
       }
       .share-sheet-scroll-body::-webkit-scrollbar {
         display: none;
       }
       .card-preview-wrapper {
-        padding: 20px 12px 16px;
+        padding: 24px 16px 20px;
+        background: transparent;
         border-right: none;
         border-bottom: 1px solid var(--border);
-        border-radius: 0;
         flex-shrink: 0;
       }
       .share-card-container {
         width: 100%;
-        max-width: 290px;
+        max-width: 310px;
+        box-shadow: 0 16px 45px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
       }
       .modal-controls-pane {
-        padding: 18px 20px;
+        padding: 20px 16px;
         gap: 16px;
+        background: transparent;
         border-radius: 0;
         flex-shrink: 0;
       }
       .modal-controls-pane .m-pane-header {
         display: none;
       }
+
+      /* Floating Pill Action Button at the Bottom */
       .modal-actions-block {
-        position: sticky;
-        bottom: 0;
-        z-index: 30;
-        background: var(--card, #FFFFFF);
-        padding: 12px 20px calc(14px + env(safe-area-inset-bottom, 0px));
-        margin: 0 -20px -18px -20px;
-        border-top: 1px solid var(--border);
-        box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.04);
-      }
-      [data-theme="dark"] .modal-actions-block {
-        background: #14171F;
-        border-top-color: rgba(255, 255, 255, 0.08);
-        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+        position: fixed;
+        bottom: max(20px, calc(env(safe-area-inset-bottom, 16px) + 12px));
+        left: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: transparent;
+        box-shadow: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        z-index: 50;
       }
       .btn-modal-dl-png {
-        width: 100%;
-        max-width: 100%;
-        height: 46px;
+        pointer-events: auto;
+        width: auto;
+        min-width: 180px;
+        max-width: 280px;
+        height: 48px;
+        padding: 0 28px;
+        border-radius: 999px; /* Floating Pill Shape */
+        background: #0F172A;
+        color: #FFFFFF;
+        box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.35), 0 4px 12px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        font-size: 14px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.25, 1), box-shadow 0.2s ease;
+      }
+      .btn-modal-dl-png:active {
+        transform: scale(0.96);
+      }
+      [data-theme="dark"] .btn-modal-dl-png {
+        background: #FFFFFF;
+        color: #0F172A;
+        border: none;
+        box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.7);
       }
     }
 
@@ -10670,6 +10911,10 @@ main {
       </button>
       <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" onclick="toggleMobileMenu()">
         <span class="menu-burger"><span></span><span></span><span></span></span>
+        <svg class="menu-close-x" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
       </button>
     </div>
     <div class="theme-toggle-capsule theme-toggle-standalone">
@@ -11818,8 +12063,9 @@ main {
     <div class="m-header">
       <h2 class="m-title" id="siModalTitle">Download Transcript</h2>
       <button onclick="closeStudentInfoModal()" type="button" class="m-close-btn" aria-label="Close">
-        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 18L18 6M6 6l12 12" />
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
     </div>
@@ -17167,8 +17413,9 @@ window.CustomSelect = { init: build, refresh };
       <div class="share-sheet-sticky-bar">
         <span class="share-sheet-title-mob">Result Share Card</span>
         <button type="button" class="m-close-btn modal-close-icon-btn" onclick="closeShareCardModal()" aria-label="Close" title="Close">
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 18L18 6M6 6l12 12" />
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </button>
       </div>
