@@ -2323,9 +2323,21 @@ body{
     .pc-badge{ display:inline-flex;align-items:center;gap:7px;background:transparent;border:none;box-shadow:none;padding:0;line-height:1.35;color:#475569; }
     .pc-badge::before{ content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:#0F172A;opacity:0.8;flex-shrink:0; }
     .program-card:not(.soon) .pc-badge::before{ background:#10B981;box-shadow:0 0 0 2px rgba(16,185,129,0.2); }
+    .program-card.soon .pc-badge::before{
+      width:6px;height:6px;border-radius:50%;background:#F43F5E;
+      box-shadow:0 0 6px rgba(244,63,94,0.4), 0 0 0 2px rgba(244,63,94,0.2);
+      animation:soonDotPulse 2s ease-in-out infinite;
+      opacity:1;
+    }
     [data-theme="dark"] .pc-badge{ background:transparent;border:none;box-shadow:none;color:#94A3B8; }
     [data-theme="dark"] .pc-badge::before{ background:#CBD5E1; }
     [data-theme="dark"] .program-card:not(.soon) .pc-badge::before{ background:#10B981;box-shadow:0 0 0 2px rgba(16,185,129,0.25); }
+    [data-theme="dark"] .program-card.soon .pc-badge::before{
+      background:#F43F5E;
+      box-shadow:0 0 6px rgba(244,63,94,0.5), 0 0 0 2px rgba(244,63,94,0.25);
+      animation:soonDotPulse 2s ease-in-out infinite;
+      opacity:1;
+    }
 
     .pc-year{ font-family:var(--mono);font-size:clamp(12.5px, 0.9vw + 9.5px, 13.5px);font-weight:700;letter-spacing:0.02em;color:#0F172A; }
     [data-theme="dark"] .pc-year{ color:#F1F5F9; }
@@ -4963,6 +4975,78 @@ body{
       .modal-card-slate{
         margin-top:10px;margin-bottom:28px;
         padding:22px 16px;border-radius:22px;
+      }
+
+      /* Native Mobile Bottom Sheet for Student Info / Download Modal */
+      #studentInfoOverlay{
+        align-items:flex-end;
+        padding:0;
+        overflow-y:hidden;
+      }
+      #studentInfoOverlay .modal-card-slate{
+        margin:0;
+        width:100%;
+        max-width:100%;
+        max-height:88dvh;
+        border-radius:24px 24px 0 0;
+        border-bottom:none;
+        border-left:none;
+        border-right:none;
+        padding:0;
+        display:flex;
+        flex-direction:column;
+        overflow:hidden;
+        transform:translateY(24px);
+        transition:transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      #studentInfoOverlay.open .modal-card-slate{
+        transform:translateY(0);
+      }
+      #studentInfoOverlay .m-header{
+        position:sticky;
+        top:0;
+        z-index:30;
+        background:var(--card, #FFFFFF);
+        padding:16px 20px 14px;
+        margin-bottom:0;
+        border-bottom:1px solid var(--border);
+        flex-shrink:0;
+      }
+      [data-theme="dark"] #studentInfoOverlay .m-header{
+        background:#161718;
+        border-bottom-color:rgba(255,255,255,0.08);
+      }
+      #studentInfoOverlay .si-body-scroll{
+        flex:1 1 auto;
+        overflow-y:auto;
+        -webkit-overflow-scrolling:touch;
+        padding:18px 20px 14px;
+        scrollbar-width:none;
+      }
+      #studentInfoOverlay .si-body-scroll::-webkit-scrollbar{
+        display:none;
+      }
+      #studentInfoOverlay .m-footer-row{
+        position:sticky;
+        bottom:0;
+        z-index:30;
+        background:var(--card, #FFFFFF);
+        padding:12px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+        margin-top:0;
+        border-top:1px solid var(--border);
+        flex-shrink:0;
+        box-shadow:0 -4px 16px rgba(0,0,0,0.04);
+      }
+      [data-theme="dark"] #studentInfoOverlay .m-footer-row{
+        background:#161718;
+        border-top-color:rgba(255,255,255,0.08);
+        box-shadow:0 -4px 20px rgba(0,0,0,0.4);
+      }
+      #studentInfoOverlay .m-btn-primary{
+        max-width:100%;
+        width:100%;
+        height:46px;
+        font-size:14px;
       }
     }
 
@@ -9855,37 +9939,124 @@ body{
       margin-top: 4px;
     }
 
-        /* Mobile / Small Screen Modal Scrolling Solution (<= 768px) */
+    /* Desktop Behavior for Share Card Header & Scroll Body */
+    @media (min-width: 769px) {
+      .share-sheet-sticky-bar {
+        display: contents;
+      }
+      .share-sheet-title-mob {
+        display: none;
+      }
+      .share-sheet-scroll-body {
+        display: contents;
+      }
+    }
+
+    /* Native Mobile Bottom Sheet for Result Share Card (<= 768px) */
     @media (max-width: 768px) {
       .share-card-modal-overlay {
-        align-items: flex-start;
-        padding-top: max(48px, calc(env(safe-area-inset-top, 20px) + 38px));
-        padding-bottom: max(36px, calc(env(safe-area-inset-bottom, 20px) + 24px));
-        padding-left: 14px;
-        padding-right: 14px;
+        align-items: flex-end;
+        padding: 0;
+        overflow-y: hidden;
       }
       .share-card-modal-dialog {
         grid-template-columns: 1fr;
-        max-width: 440px;
-        margin: 10px auto 28px;
-        border-radius: 22px;
-        overflow: hidden;
+        max-width: 100%;
         width: 100%;
+        max-height: 88dvh;
+        margin: 0;
+        border-radius: 24px 24px 0 0;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        transform: translateY(24px);
+        transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .share-card-modal-overlay.open .share-card-modal-dialog {
+        transform: translateY(0);
+      }
+      .share-sheet-sticky-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 20px 12px;
+        background: var(--card, #FFFFFF);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        flex-shrink: 0;
+      }
+      [data-theme="dark"] .share-sheet-sticky-bar {
+        background: #14171F;
+        border-bottom-color: rgba(255, 255, 255, 0.08);
+      }
+      .share-sheet-title-mob {
+        display: block;
+        font-family: var(--disp);
+        font-size: 16.5px;
+        font-weight: 700;
+        color: var(--text);
+      }
+      .share-sheet-sticky-bar .modal-close-icon-btn {
+        position: static;
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+      }
+      .share-sheet-scroll-body {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        display: flex;
+        flex-direction: column;
+      }
+      .share-sheet-scroll-body::-webkit-scrollbar {
+        display: none;
       }
       .card-preview-wrapper {
-        padding: 38px 14px 18px;
+        padding: 20px 12px 16px;
         border-right: none;
         border-bottom: 1px solid var(--border);
         border-radius: 0;
+        flex-shrink: 0;
+      }
+      .share-card-container {
+        width: 100%;
+        max-width: 290px;
       }
       .modal-controls-pane {
-        padding: 22px 18px 24px;
-        gap: 18px;
+        padding: 18px 20px;
+        gap: 16px;
         border-radius: 0;
+        flex-shrink: 0;
       }
-      .modal-close-icon-btn {
-        top: 12px;
-        right: 12px;
+      .modal-controls-pane .m-pane-header {
+        display: none;
+      }
+      .modal-actions-block {
+        position: sticky;
+        bottom: 0;
+        z-index: 30;
+        background: var(--card, #FFFFFF);
+        padding: 12px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+        margin: 0 -20px -18px -20px;
+        border-top: 1px solid var(--border);
+        box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.04);
+      }
+      [data-theme="dark"] .modal-actions-block {
+        background: #14171F;
+        border-top-color: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+      }
+      .btn-modal-dl-png {
+        width: 100%;
+        max-width: 100%;
+        height: 46px;
       }
     }
 
@@ -10704,7 +10875,7 @@ main {
           <label for="qsProgram">Program <span class="req">*</span></label>
           <select id="qsProgram" onchange="qsProgramChange()">
             <option value="">Select Program</option>
-            <option value="honours">Honours</option>
+            <option value="honours">Bachelor Honours</option>
           </select>
         </div>
         <div class="qs-field">
@@ -11654,7 +11825,7 @@ main {
     </div>
 
     <!-- Form Body -->
-    <div style="position:relative;z-index:10;">
+    <div class="si-body-scroll" style="position:relative;z-index:10;">
       <div class="si-grid">
         <!-- 1. Student Name -->
         <div class="si-field" style="grid-column:1/-1;">
@@ -12152,11 +12323,11 @@ main {
   };
 
   const PROGRAMS = [
-    {key:'2024', title:'Honours', displayTitle:'Honours Program', code:'HON', tag:'2024-25 Syllabus', desc:'Explore Honours programs and course structures using the updated syllabus.', active:true},
-    {key:'2013', title:'Honours', displayTitle:'Honours Program', code:'HON', tag:'2013-14 Syllabus', desc:'Explore Honours programs and course structures using the old syllabus.', active:true},
-    {key:'pass2024', title:'Degree Pass', displayTitle:'Degree Pass Program', code:'DEG', tag:'2024-25 Syllabus', desc:'Explore Degree Pass programs and course structures using the updated syllabus.', active:false},
-    {key:'pass2013', title:'Degree Pass', displayTitle:'Degree Pass Program', code:'DEG', tag:'2013-14 Syllabus', desc:'Explore Degree Pass programs and course structures using the old syllabus.', active:false},
-    {key:'masters2013', title:'Masters', displayTitle:'Masters Program', code:'MAS', tag:'2013-14 Syllabus', desc:'Explore Masters programs and course structures using the current syllabus.', active:true},
+    {key:'2024', title:'Honours', displayTitle:'Bachelor Honours', code:'HON', tag:'2024-25 Syllabus', desc:'Explore Honours programs and course structures using the updated syllabus.', active:true},
+    {key:'2013', title:'Honours', displayTitle:'Bachelor Honours', code:'HON', tag:'2013-14 Syllabus', desc:'Explore Honours programs and course structures using the old syllabus.', active:true},
+    {key:'pass2024', title:'Degree Pass', displayTitle:'Degree Pass', code:'DEG', tag:'2024-25 Syllabus', desc:'Explore Degree Pass programs and course structures using the updated syllabus.', active:false},
+    {key:'pass2013', title:'Degree Pass', displayTitle:'Degree Pass', code:'DEG', tag:'2013-14 Syllabus', desc:'Explore Degree Pass programs and course structures using the old syllabus.', active:false},
+    {key:'masters2013', title:'Masters', displayTitle:'Masters Final', code:'MAS', tag:'2013-14 Syllabus', desc:'Explore Masters programs and course structures using the current syllabus.', active:true},
     {key:'prelim2013', title:'Preliminary to Masters', displayTitle:'Preliminary to Masters', code:'PRE', tag:'2013-14 Syllabus', desc:'Explore Preliminary to Masters programs and course structures using the current syllabus.', active:false},
   ];
 
@@ -12615,7 +12786,7 @@ main {
       const labelPart = yearMatch ? yearMatch[2] : '';
       const badgeHtml = `<span class="pc-badge"><span class="pc-year">${yearPart}</span>${labelPart ? ` <span class="pc-tag-text">${labelPart}</span>` : ''}</span>`;
       if(!p.active){
-        const modalTitle = (p.displayTitle || (p.title + ' Program')) + ' (' + p.tag.replace(' Syllabus','') + ')';
+        const modalTitle = (p.displayTitle || p.title) + ' (' + p.tag.replace(' Syllabus','') + ')';
         const cleanTitle = modalTitle.replace(/'/g, "\\'");
         return `
       <div class="program-card soon" role="button" tabindex="0"
@@ -12625,10 +12796,9 @@ main {
         <div>
           <div class="pc-top">
             ${badgeHtml}
-            <span class="m-soon-pill"><span class="m-soon-dot"></span>Coming Soon</span>
           </div>
           <div class="pc-body">
-            <h2>${p.displayTitle || (p.title + ' Program')}</h2>
+            <h2>${p.displayTitle || p.title}</h2>
           </div>
         </div>
         <div class="pc-footer">
@@ -12648,7 +12818,7 @@ main {
             ${badgeHtml}
           </div>
           <div class="pc-body">
-            <h2>${p.displayTitle || (p.title + ' Program')}</h2>
+            <h2>${p.displayTitle || p.title}</h2>
           </div>
         </div>
         <div class="pc-footer">
@@ -12806,7 +12976,7 @@ main {
   function openProgram(key){
     const prog = PROGRAMS.find(p=>p.key===key);
     if(prog && !prog.active){
-      const modalTitle = (prog.displayTitle || (prog.title + ' Program')) + ' (' + prog.tag.replace(' Syllabus','') + ')';
+      const modalTitle = (prog.displayTitle || prog.title) + ' (' + prog.tag.replace(' Syllabus','') + ')';
       openSoonModal(modalTitle, prog.code || '');
       return;
     }
@@ -12858,9 +13028,9 @@ main {
   };
 
   const PROGRAM_GROUP_LABELS = {
-    honours: 'Honours',
-    pass: 'Degree (Pass Course)',
-    masters: 'Masters',
+    honours: 'Bachelor Honours',
+    pass: 'Degree Pass',
+    masters: 'Masters Final',
     prelim: 'Preliminary to Masters',
   };
 
@@ -13350,7 +13520,11 @@ let activeModalLocks = 0;
   function openSoonModal(name, code){
     const abbrev = deptAbbrev(name);
     const codeBadge = (code || '').replace('-', ' · ');
-    document.getElementById('soonDeptName').textContent = name;
+    const safeTitle = (name || '').replace(/(\d{4})[--](\d{2})/g, '$1\u2011$2');
+    const titleEl = document.getElementById('soonDeptName');
+    if(titleEl){
+      titleEl.innerHTML = safeTitle.replace(/(\(\d{4}\u2011\d{2}\))/g, '<span style="white-space:nowrap;">$1</span>');
+    }
     document.getElementById('soonDeptCode').textContent = codeBadge || abbrev;
     const wm = document.getElementById('soonDeptWatermark');
     if(wm) wm.textContent = abbrev;
@@ -16989,14 +17163,20 @@ window.CustomSelect = { init: build, refresh };
   <!-- Share Card Modal Dialog (Clean Cloud Theme Only, Responsive Phone to PC) -->
   <div id="shareCardModalOverlay" class="modal-overlay share-card-modal-overlay" data-lenis-prevent onclick="if(event.target===this) closeShareCardModal()">
     <div class="modal-card-slate share-card-modal-dialog">
-      <button type="button" class="m-close-btn modal-close-icon-btn" onclick="closeShareCardModal()" aria-label="Close" title="Close">
-        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
+      <!-- Sticky Header Bar for Mobile (Contents on Desktop) -->
+      <div class="share-sheet-sticky-bar">
+        <span class="share-sheet-title-mob">Result Share Card</span>
+        <button type="button" class="m-close-btn modal-close-icon-btn" onclick="closeShareCardModal()" aria-label="Close" title="Close">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
 
-      <!-- Left Column: The Rendered HD Card -->
-      <div class="card-preview-wrapper">
+      <!-- Scrollable Container on Mobile (Contents on Desktop) -->
+      <div class="share-sheet-scroll-body">
+        <!-- Left Column: The Rendered HD Card -->
+        <div class="card-preview-wrapper">
         <div id="exportableShareCard" class="share-card-container">
           <div class="card-blob-1"></div>
           <div class="card-blob-2"></div>
@@ -17107,6 +17287,7 @@ window.CustomSelect = { init: build, refresh };
         </div>
       </div>
       </div>
+    </div>
   </div>
 
 </body>
