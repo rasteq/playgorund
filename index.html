@@ -4983,7 +4983,7 @@ body{
        REDESIGNED MODALS (SLATE THEME) - NO INNER SCROLLBARS
     ============================================================ */
     .modal-overlay{
-      position:fixed;inset:0;z-index:1000;background:rgba(15,23,42,0.45);
+      position:fixed;inset:0;z-index:20000;background:rgba(15,23,42,0.45);
       backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
       display:flex;align-items:flex-start;justify-content:center;
       padding:calc(env(safe-area-inset-top, 24px) + 28px) 16px max(36px, calc(env(safe-area-inset-bottom, 24px) + 20px));
@@ -5007,7 +5007,7 @@ body{
         padding:22px 16px;border-radius:22px;
       }
 
-      /* Full Mobile Drawer attached flush under header with Floating Pill Download Button */
+      /* Native Mobile Bottom Sheet (Help & Support Style) for Download Modal */
       #studentInfoOverlay{
         position:fixed;
         inset:0;
@@ -5018,57 +5018,102 @@ body{
         width:100%;
         height:100%;
         padding:0;
-        align-items:flex-start;
-        justify-content:stretch;
-        background:#F4F6F9;
-        overflow:hidden;
-        z-index:10001;
+        margin:0;
+        display:flex;
+        flex-direction:column;
+        justify-content:flex-end;
+        align-items:center;
+        background:rgba(0, 0, 0, 0.55);
+        backdrop-filter:blur(4px);
+        -webkit-backdrop-filter:blur(4px);
+        z-index:20000;
+        opacity:0;
+        pointer-events:none;
+        visibility:hidden;
+        transition:opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.32s;
+        touch-action:none;
       }
-      [data-theme="dark"] #studentInfoOverlay{
-        background:#0C0D0F;
+      [data-theme="light"] #studentInfoOverlay{
+        background:rgba(15, 23, 42, 0.38);
+      }
+      #studentInfoOverlay.open{
+        opacity:1;
+        pointer-events:auto;
+        visibility:visible;
       }
       #studentInfoOverlay .modal-card-slate{
+        position:fixed;
+        bottom:0;
+        left:0;
+        right:0;
         width:100%;
-        max-width:100%;
-        height:100%;
-        max-height:100%;
-        margin:0;
-        border-radius:0;
+        max-width:560px;
+        margin:0 auto;
+        top:max(32px, calc(env(safe-area-inset-top, 0px) + 26px));
+        max-height:calc(100dvh - max(32px, calc(env(safe-area-inset-top, 0px) + 26px)));
+        height:auto;
+        background:#FFFFFF;
+        border-radius:26px 26px 0 0;
         border:none;
-        background:transparent;
-        box-shadow:none;
+        border-top:1px solid rgba(203, 213, 225, 0.95);
+        box-shadow:0 -12px 40px rgba(15, 23, 42, 0.16);
         padding:0;
         display:flex;
         flex-direction:column;
         overflow:hidden;
-        transform:none;
+        box-sizing:border-box;
+        transform:translateY(105%);
+        transition:transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+        touch-action:pan-y;
+        pointer-events:auto;
+      }
+      [data-theme="dark"] #studentInfoOverlay .modal-card-slate{
+        background:#141517;
+        border-top:1px solid rgba(255, 255, 255, 0.12);
+        box-shadow:0 -16px 48px rgba(0, 0, 0, 0.7);
       }
       #studentInfoOverlay.open .modal-card-slate{
-        transform:none;
+        transform:translateY(0);
+      }
+      #studentInfoOverlay .sheet-drag-bar{
+        display:block;
+        width:38px;
+        height:4.5px;
+        border-radius:999px;
+        background:rgba(0, 0, 0, 0.15);
+        margin:10px auto 6px auto;
+        cursor:pointer;
+        flex-shrink:0;
+        transition:background 0.2s ease;
+      }
+      #studentInfoOverlay .sheet-drag-bar:hover{
+        background:rgba(0, 0, 0, 0.3);
+      }
+      [data-theme="dark"] #studentInfoOverlay .sheet-drag-bar{
+        background:rgba(255, 255, 255, 0.2);
+      }
+      [data-theme="dark"] #studentInfoOverlay .sheet-drag-bar:hover{
+        background:rgba(255, 255, 255, 0.35);
       }
 
-      /* Top Bar: Matches header.site height, placement & icon-btn close button */
+      /* Top Bar */
       #studentInfoOverlay .m-header{
-        height:var(--header-h, 64px);
-        min-height:var(--header-h, 64px);
-        max-height:var(--header-h, 64px);
-        padding:0 16px;
+        height:50px;
+        min-height:50px;
+        max-height:50px;
+        padding:0 18px 6px 18px;
         margin:0;
         display:flex;
         align-items:center;
         justify-content:space-between;
-        background:#FFFFFF;
-        border-bottom:1px solid rgba(15, 16, 16, 0.07);
-        box-shadow:0 1px 3px rgba(0,0,0,0.03);
+        background:transparent;
+        border-bottom:1px solid rgba(15, 16, 16, 0.06);
+        box-shadow:none;
         flex-shrink:0;
-        position:sticky;
-        top:0;
-        z-index:30;
       }
       [data-theme="dark"] #studentInfoOverlay .m-header{
-        background:#161616;
-        border-bottom:1px solid rgba(255,255,255,0.08);
-        box-shadow:0 1px 3px rgba(0,0,0,0.2);
+        border-bottom:1px solid rgba(255, 255, 255, 0.07);
+        box-shadow:none;
       }
       #studentInfoOverlay .m-title{
         font-size:17px;
@@ -5134,7 +5179,8 @@ body{
         flex:1 1 auto;
         overflow-y:auto;
         -webkit-overflow-scrolling:touch;
-        padding:20px 16px 110px 16px; /* Clearance for floating pill */
+        overscroll-behavior:contain;
+        padding:16px 18px 85px 18px; /* Clearance for floating pill */
         scrollbar-width:none;
       }
       #studentInfoOverlay .si-body-scroll::-webkit-scrollbar{
@@ -5144,7 +5190,7 @@ body{
       /* Floating Pill Action Button at the Bottom */
       #studentInfoOverlay .m-footer-row{
         position:fixed;
-        bottom:max(20px, calc(env(safe-area-inset-bottom, 16px) + 12px));
+        bottom:max(16px, calc(env(safe-area-inset-bottom, 16px) + 8px));
         left:0;
         right:0;
         margin:0;
@@ -5161,15 +5207,15 @@ body{
       #studentInfoOverlay .m-btn-primary{
         pointer-events:auto;
         width:auto;
-        min-width:180px;
-        max-width:280px;
-        height:48px;
-        padding:0 28px;
+        min-width:170px;
+        max-width:270px;
+        height:46px;
+        padding:0 26px;
         border-radius:999px; /* Floating Pill Shape */
-        background:#0F172A;
-        color:#FFFFFF;
-        box-shadow:0 12px 30px -4px rgba(15, 23, 42, 0.35), 0 4px 12px rgba(0, 0, 0, 0.08);
-        border:1px solid rgba(255, 255, 255, 0.12);
+        background:linear-gradient(135deg, #059669, #047857) !important;
+        color:#FFFFFF !important;
+        box-shadow:0 10px 25px -4px rgba(5, 150, 105, 0.45), 0 3px 10px rgba(0, 0, 0, 0.12) !important;
+        border:1px solid rgba(255, 255, 255, 0.25) !important;
         font-size:14px;
         font-weight:700;
         display:inline-flex;
@@ -5178,16 +5224,31 @@ body{
         gap:8px;
         transition:transform 0.2s cubic-bezier(0.2,0.8,0.25,1), box-shadow 0.2s ease;
       }
+      #studentInfoOverlay .m-btn-primary:hover{
+        background:linear-gradient(135deg, #047857, #064E3B) !important;
+        box-shadow:0 12px 28px -4px rgba(5, 150, 105, 0.55), 0 4px 12px rgba(0, 0, 0, 0.16) !important;
+      }
       #studentInfoOverlay .m-btn-primary:active{
-        transform:scale(0.96);
+        transform:scale(0.96) !important;
       }
       [data-theme="dark"] #studentInfoOverlay .m-btn-primary{
-        background:#FFFFFF;
-        color:#0F172A;
-        border:none;
-        box-shadow:0 12px 30px -4px rgba(0, 0, 0, 0.7);
+        background:linear-gradient(135deg, #059669, #047857) !important;
+        color:#FFFFFF !important;
+        border:1px solid rgba(255, 255, 255, 0.25) !important;
+        box-shadow:0 10px 25px -4px rgba(5, 150, 105, 0.5), 0 3px 10px rgba(0, 0, 0, 0.3) !important;
+      }
+      [data-theme="dark"] #studentInfoOverlay .m-btn-primary:hover{
+        background:linear-gradient(135deg, #10B981, #059669) !important;
+      }
+      #studentInfoOverlay .m-btn-primary svg,
+      #studentInfoOverlay .m-btn-primary span{
+        color:#FFFFFF !important;
+        stroke:#FFFFFF !important;
+        fill:none;
       }
     }
+
+    .sheet-drag-bar{display:none;}
 
     .modal-card-slate{
       position:relative;overflow:hidden;border-radius:22px;
@@ -9794,7 +9855,7 @@ body{
     .share-card-modal-overlay {
       position: fixed;
       inset: 0;
-      z-index: 1000;
+      z-index: 20000;
       background: rgba(15, 23, 42, 0.45);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
@@ -10091,7 +10152,7 @@ body{
       }
     }
 
-    /* Menu-Style Full Mobile Drawer with Floating Pill Download Button (<= 768px) */
+    /* Native Mobile Bottom Sheet (Help & Support Style) for Share Card (<= 768px) */
     @media (max-width: 768px) {
       .share-card-modal-overlay {
         position: fixed;
@@ -10103,62 +10164,109 @@ body{
         width: 100%;
         height: 100%;
         padding: 0;
-        align-items: flex-start;
-        justify-content: stretch;
-        background: #F4F6F9;
-        overflow: hidden;
-        z-index: 10001;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.55);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        z-index: 20000;
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+        transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.32s;
+        touch-action: none;
       }
-      [data-theme="dark"] .share-card-modal-overlay {
-        background: #0C0D0F;
+      [data-theme="light"] .share-card-modal-overlay {
+        background: rgba(15, 23, 42, 0.38);
+      }
+      .share-card-modal-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
       }
       .share-card-modal-dialog {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
         grid-template-columns: 1fr;
-        max-width: 100%;
         width: 100%;
-        height: 100%;
-        max-height: 100%;
-        margin: 0;
-        border-radius: 0;
+        max-width: 560px;
+        margin: 0 auto;
+        top: max(32px, calc(env(safe-area-inset-top, 0px) + 26px));
+        max-height: calc(100dvh - max(32px, calc(env(safe-area-inset-top, 0px) + 26px)));
+        height: auto;
+        background: #FFFFFF;
+        border-radius: 26px 26px 0 0;
         border: none;
-        background: transparent;
-        box-shadow: none;
+        border-top: 1px solid rgba(203, 213, 225, 0.95);
+        box-shadow: 0 -12px 40px rgba(15, 23, 42, 0.16);
+        padding: 0;
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        transform: none;
+        box-sizing: border-box;
+        transform: translateY(105%);
+        transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+        touch-action: pan-y;
+        pointer-events: auto;
+      }
+      [data-theme="dark"] .share-card-modal-dialog {
+        background: #141517;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 -16px 48px rgba(0, 0, 0, 0.7);
       }
       .share-card-modal-overlay.open .share-card-modal-dialog {
-        transform: none;
+        transform: translateY(0);
       }
 
-      /* Top Bar: Matches header.site height, placement & icon-btn close button */
+      .share-card-modal-dialog .sheet-drag-bar {
+        display: block;
+        width: 38px;
+        height: 4.5px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.15);
+        margin: 10px auto 6px auto;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: background 0.2s ease;
+      }
+      .share-card-modal-dialog .sheet-drag-bar:hover {
+        background: rgba(0, 0, 0, 0.3);
+      }
+      [data-theme="dark"] .share-card-modal-dialog .sheet-drag-bar {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      [data-theme="dark"] .share-card-modal-dialog .sheet-drag-bar:hover {
+        background: rgba(255, 255, 255, 0.35);
+      }
+
+      /* Top Bar */
       .share-sheet-sticky-bar {
-        height: var(--header-h, 64px);
-        min-height: var(--header-h, 64px);
-        max-height: var(--header-h, 64px);
-        padding: 0 16px;
+        height: 50px;
+        min-height: 50px;
+        max-height: 50px;
+        padding: 0 18px 6px 18px;
         margin: 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background: #FFFFFF;
-        border-bottom: 1px solid rgba(15, 16, 16, 0.07);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+        background: transparent;
+        border-bottom: 1px solid rgba(15, 16, 16, 0.06);
+        box-shadow: none;
         flex-shrink: 0;
-        position: sticky;
-        top: 0;
-        z-index: 30;
       }
       [data-theme="dark"] .share-sheet-sticky-bar {
-        background: #161616;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        box-shadow: none;
       }
       .share-sheet-title-mob {
         display: block;
         font-family: var(--disp);
-        font-size: 17px;
+        font-size: 16px;
         font-weight: 700;
         color: var(--text);
       }
@@ -10217,46 +10325,89 @@ body{
         color: #FFFFFF;
       }
 
-      /* Scrollable Sheet Content */
+      /* Scrollable Sheet Content - Natural Scroll with Full Ratio Card */
       .share-sheet-scroll-body {
         flex: 1 1 auto;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
         scrollbar-width: none;
         display: flex;
         flex-direction: column;
-        padding-bottom: 110px; /* Clearance for floating pill button */
+        align-items: center;
+        padding-bottom: 100px; /* Clearance for floating pill button */
+        width: 100%;
+        box-sizing: border-box;
       }
       .share-sheet-scroll-body::-webkit-scrollbar {
         display: none;
       }
       .card-preview-wrapper {
-        padding: 24px 16px 20px;
+        padding: 20px 16px 16px;
         background: transparent;
         border-right: none;
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid rgba(15, 16, 16, 0.06);
         flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      [data-theme="dark"] .card-preview-wrapper {
+        border-bottom-color: rgba(255, 255, 255, 0.08);
       }
       .share-card-container {
         width: 100%;
         max-width: 310px;
         box-shadow: 0 16px 45px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.04);
       }
+
+      /* Controls & Input Pane - Stacked below card with smooth scrolling */
       .modal-controls-pane {
-        padding: 20px 16px;
-        gap: 16px;
+        padding: 16px 18px 8px;
+        gap: 10px;
         background: transparent;
         border-radius: 0;
         flex-shrink: 0;
+        width: 100%;
+        max-width: 320px;
+        box-sizing: border-box;
+        height: auto !important;
+        min-height: auto !important;
+        justify-content: flex-start !important;
       }
       .modal-controls-pane .m-pane-header {
         display: none;
+      }
+      .modal-controls-pane .m-pane-field-block {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .modal-controls-pane .m-pane-field-label-row {
+        margin-bottom: 2px;
+      }
+      .modal-controls-pane .m-pane-field-label {
+        font-size: 12.5px;
+        font-weight: 700;
+      }
+      .modal-controls-pane .sc-student-input {
+        height: 40px;
+        font-size: 13.5px;
+        padding: 0 14px;
+        border-radius: 10px;
+      }
+      .modal-controls-pane .m-pane-field-hint {
+        font-size: 11px;
+        margin-top: 3px;
+        color: #94A3B8;
+        line-height: 1.35;
       }
 
       /* Floating Pill Action Button at the Bottom */
       .modal-actions-block {
         position: fixed;
-        bottom: max(20px, calc(env(safe-area-inset-bottom, 16px) + 12px));
+        bottom: max(16px, calc(env(safe-area-inset-bottom, 16px) + 8px));
         left: 0;
         right: 0;
         margin: 0;
@@ -10273,31 +10424,46 @@ body{
       .btn-modal-dl-png {
         pointer-events: auto;
         width: auto;
-        min-width: 180px;
-        max-width: 280px;
-        height: 48px;
-        padding: 0 28px;
+        min-width: 170px;
+        max-width: 260px;
+        height: 44px;
+        padding: 0 24px;
         border-radius: 999px; /* Floating Pill Shape */
-        background: #0F172A;
-        color: #FFFFFF;
-        box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.35), 0 4px 12px rgba(0, 0, 0, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        font-size: 14px;
+        background: linear-gradient(135deg, #059669, #047857) !important;
+        color: #FFFFFF !important;
+        box-shadow: 0 10px 25px -4px rgba(5, 150, 105, 0.45), 0 3px 10px rgba(0, 0, 0, 0.12) !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        font-family: var(--disp, sans-serif);
+        font-size: 13.5px;
         font-weight: 700;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
         transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.25, 1), box-shadow 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .btn-modal-dl-png:hover {
+        background: linear-gradient(135deg, #047857, #064E3B) !important;
+        box-shadow: 0 12px 28px -4px rgba(5, 150, 105, 0.55), 0 4px 12px rgba(0, 0, 0, 0.16) !important;
       }
       .btn-modal-dl-png:active {
-        transform: scale(0.96);
+        transform: scale(0.96) !important;
       }
       [data-theme="dark"] .btn-modal-dl-png {
-        background: #FFFFFF;
-        color: #0F172A;
-        border: none;
-        box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.7);
+        background: linear-gradient(135deg, #059669, #047857) !important;
+        color: #FFFFFF !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        box-shadow: 0 10px 25px -4px rgba(5, 150, 105, 0.5), 0 3px 10px rgba(0, 0, 0, 0.3) !important;
+      }
+      [data-theme="dark"] .btn-modal-dl-png:hover {
+        background: linear-gradient(135deg, #10B981, #059669) !important;
+      }
+      .btn-modal-dl-png svg,
+      .btn-modal-dl-png span {
+        color: #FFFFFF !important;
+        stroke: #FFFFFF !important;
+        fill: none;
       }
     }
 
@@ -12059,6 +12225,9 @@ main {
 <!-- ================= STUDENT INFORMATION / DOWNLOAD POPUP MODAL ================= -->
 <div class="modal-overlay" id="studentInfoOverlay" data-lenis-prevent onclick="if(event.target===this) closeStudentInfoModal()">
   <div class="modal-card-slate">
+    <!-- Drag Bar for Mobile Bottom Sheet -->
+    <div class="sheet-drag-bar" onclick="closeStudentInfoModal()" aria-hidden="true"></div>
+
     <!-- Header -->
     <div class="m-header">
       <h2 class="m-title" id="siModalTitle">Download Transcript</h2>
@@ -14067,12 +14236,22 @@ let activeModalLocks = 0;
 
     ['siRollWrap','siRegNoWrap','siYearWrap'].forEach(clearFieldError);
     const siOv = document.getElementById('studentInfoOverlay');
-    if(siOv){ siOv.scrollTop = 0; siOv.classList.add('open'); }
+    if(siOv){
+      siOv.scrollTop = 0;
+      const siScroll = siOv.querySelector('.si-body-scroll');
+      if(siScroll) siScroll.scrollTop = 0;
+      siOv.classList.add('open');
+    }
     lockScroll();
   }
   function closeStudentInfoModal(){
     closeCollegeSuggestions();
-    document.getElementById('studentInfoOverlay').classList.remove('open');
+    const siOv = document.getElementById('studentInfoOverlay');
+    if(siOv){
+      siOv.classList.remove('open');
+      const siScroll = siOv.querySelector('.si-body-scroll');
+      if(siScroll) siScroll.scrollTop = 0;
+    }
     unlockScroll();
   }
   let isGeneratingPdf = false;
@@ -17256,8 +17435,10 @@ window.CustomSelect = { init: build, refresh };
     activeShareScope = scopeKey;
     const overlay = document.getElementById('shareCardModalOverlay');
     if(overlay) {
-      overlay.classList.add('open');
       overlay.scrollTop = 0;
+      const scBody = overlay.querySelector('.share-sheet-scroll-body');
+      if(scBody) scBody.scrollTop = 0;
+      overlay.classList.add('open');
     }
     if(typeof lockScroll === 'function') lockScroll();
     else document.body.style.overflow = 'hidden';
@@ -17266,7 +17447,11 @@ window.CustomSelect = { init: build, refresh };
 
   function closeShareCardModal() {
     const overlay = document.getElementById('shareCardModalOverlay');
-    if(overlay) overlay.classList.remove('open');
+    if(overlay) {
+      overlay.classList.remove('open');
+      const scBody = overlay.querySelector('.share-sheet-scroll-body');
+      if(scBody) scBody.scrollTop = 0;
+    }
     if(typeof unlockScroll === 'function') unlockScroll();
     else document.body.style.overflow = '';
   }
@@ -17409,6 +17594,9 @@ window.CustomSelect = { init: build, refresh };
   <!-- Share Card Modal Dialog (Clean Cloud Theme Only, Responsive Phone to PC) -->
   <div id="shareCardModalOverlay" class="modal-overlay share-card-modal-overlay" data-lenis-prevent onclick="if(event.target===this) closeShareCardModal()">
     <div class="modal-card-slate share-card-modal-dialog">
+      <!-- Drag Bar for Mobile Bottom Sheet -->
+      <div class="sheet-drag-bar" onclick="closeShareCardModal()" aria-hidden="true"></div>
+
       <!-- Sticky Header Bar for Mobile (Contents on Desktop) -->
       <div class="share-sheet-sticky-bar">
         <span class="share-sheet-title-mob">Result Share Card</span>
