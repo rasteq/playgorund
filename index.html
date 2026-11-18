@@ -11128,7 +11128,74 @@ main {
       }
     }
 
-</style>
+
+  /* Compulsory English Fail Warnings & Print Fallbacks */
+  .eng-fail-warning-banner {
+    display: none;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 16px 0 8px 0;
+    padding: 14px 18px;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    border-radius: 12px;
+    color: #DC2626;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  [data-theme="dark"] .eng-fail-warning-banner {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.45);
+    color: #FCA5A5;
+  }
+  .efw-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .efw-content {
+    flex: 1;
+  }
+  .efw-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+  .efw-desc {
+    font-size: 13px;
+    opacity: 0.92;
+  }
+  .si-eng-fail-banner {
+    display: none;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 12px 0;
+    padding: 12px 14px;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 10px;
+    color: #DC2626;
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+  [data-theme="dark"] .si-eng-fail-banner {
+    background: rgba(239, 68, 68, 0.14);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #FCA5A5;
+  }
+  .rs2-alert-note {
+    margin: 10px 0;
+    padding: 8px 12px;
+    background: #FEF2F2;
+    border: 1px solid #FCA5A5;
+    border-radius: 6px;
+    color: #B91C1C;
+    font-size: 10px;
+    line-height: 1.4;
+    font-weight: 500;
+    text-align: left;
+  }
+
+  </style>
 </head>
 <body>
   <!-- Target CGPA Celebration Toast (Design 3: Clean Minimal Capsule, Auto 3s dismiss) -->
@@ -12284,7 +12351,7 @@ main {
     <!-- 1. Header: Department Code Badge & Coming Soon Pill -->
     <div class="m-badge-row soon-top-bar">
       <div class="soon-badges-group">
-        <span class="m-code-badge" id="soonDeptCode">ENG · 76</span>
+        
         <span class="m-soon-pill">
           <span class="m-soon-dot"></span>
           Next up
@@ -12416,6 +12483,19 @@ main {
 
     <!-- Hidden sub label for JS compatibility -->
     <span id="siModalSub" style="display:none;"></span>
+
+    <!-- English Compulsory Fail Warning in Modal -->
+    <div id="siEngFailBanner" class="si-eng-fail-banner" role="alert">
+      <svg class="efw-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+        <line x1="12" y1="9" x2="12" y2="13"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+      <div class="efw-content">
+        <div class="efw-title">Compulsory English (221109) Not Cleared</div>
+        <div class="efw-desc">National University requires passing English (Compulsory) before official degree award and graduation.</div>
+      </div>
+    </div>
 
     <!-- Footer Actions -->
     <div class="m-footer-row">
@@ -14058,7 +14138,7 @@ let activeModalLocks = 0;
     if(titleEl){
       titleEl.innerHTML = safeTitle.replace(/(\(\d{4}-\d{2}\))/g, '<span class="soon-year-range">$1</span>');
     }
-    document.getElementById('soonDeptCode').textContent = codeBadge || abbrev;
+    const sdc = document.getElementById('soonDeptCode'); if(sdc) sdc.textContent = codeBadge || abbrev;
     const wm = document.getElementById('soonDeptWatermark');
     if(wm) wm.textContent = abbrev;
     const snOv = document.getElementById('soonModalOverlay'); if(snOv){ snOv.scrollTop = 0; snOv.classList.add('open'); }
@@ -14317,6 +14397,43 @@ let activeModalLocks = 0;
   })();
 
   let siMode = 'year';
+  
+  function getEnglishCompulsoryStatus(){
+    let vals = {};
+    try{ vals = JSON.parse(sessionStorage.getItem(gradeStorageKey(currentDept, 2))) || {}; }catch(e){ vals = {}; }
+    const y2Subjects = getSubjectsFor(activeSyllabus, currentDept, 2);
+    let status = null;
+    y2Subjects.forEach((s, idx) => {
+      if(s && (s.code === '221109' || (s.credit === 0 && s.name && s.name.toLowerCase().includes('english')))){
+        status = vals[idx] || null;
+      }
+    });
+    return status;
+  }
+
+  function printFallbackDocument(htmlContent, title){
+    const printWin = window.open('', '_blank');
+    if(!printWin){
+      alert('Pop-up blocked. Please allow pop-ups to print or download your result document.');
+      return;
+    }
+    printWin.document.open();
+    printWin.document.write('<!DOCTYPE html>' +
+      '<html><head><meta charset="utf-8">' +
+      '<title>' + (title || 'Gradzz Result Document') + '</title>' +
+      '<style>' +
+      '  @page { size: A4 portrait; margin: 0.4in; }' +
+      '  body { margin: 0; padding: 0.2in; font-family: Inter, system-ui, -apple-system, sans-serif; color: #0F172A; background: #fff; }' +
+      '  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }' +
+      '</style></head>' +
+      '<body>' + htmlContent + '</body></html>');
+    printWin.document.close();
+    printWin.focus();
+    setTimeout(() => {
+      try { printWin.print(); } catch(e){}
+    }, 400);
+  }
+
   function openStudentInfoModal(mode){
     siMode = mode;
     const titleEl = document.getElementById('siModalTitle');
@@ -14345,6 +14462,16 @@ let activeModalLocks = 0;
       if(cgpaInput) cgpaInput.value = gpaStr;
       const cgpaLbl = document.getElementById('siCgpaLabel');
       if(cgpaLbl) cgpaLbl.textContent = isMastersMode ? 'CGPA' : ('GPA (' + yearLabel + ')');
+    }
+
+    const siEngNotice = document.getElementById('siEngFailBanner');
+    if(siEngNotice){
+      const engStatus = getEnglishCompulsoryStatus();
+      if(engStatus === 'Fail'){
+        siEngNotice.style.display = 'flex';
+      } else {
+        siEngNotice.style.display = 'none';
+      }
     }
 
     const collegeInput = document.getElementById('siCollege');
@@ -14437,7 +14564,12 @@ let activeModalLocks = 0;
 
   async function generateResultSheetPDF(){
     const PDFLib = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF || (typeof jsPDF !== 'undefined' ? jsPDF : null);
-    if(!PDFLib || !window.html2canvas){ alert('PDF library failed to load. Please check your internet connection and try again.'); return; }
+    const hasCanvas = typeof window.html2canvas === 'function';
+    if(!hasCanvas && !PDFLib){
+      // Full offline fallback: Native browser print dialog
+      printFallbackDocument(document.getElementById('grdSheetHost')?.innerHTML || '', 'Result_Sheet_' + currentDept);
+      return;
+    }
 
     const get = id => (document.getElementById(id)?.value || '').trim();
 
@@ -14470,7 +14602,7 @@ let activeModalLocks = 0;
     });
     const applicableSubjects = subjects;
 
-    let creditsEarned = 0, points = 0, gradedCount = 0, hasFail = false;
+    let creditsEarned = 0, creditsAttempted = 0, points = 0, gradedCount = 0, hasFail = false, hasEnglishFail = false;
     function buildSubjectRow(s, i){
       const gCode = vals[i];
       const isPassFailSubject = (s.credit === 0 || s.code === '221109');
@@ -14485,14 +14617,20 @@ let activeModalLocks = 0;
           displayGrade = 'Fail';
           gradeFail = true;
           hasFail = true;
+          if(s.code === '221109') hasEnglishFail = true;
         }
       } else {
         const grade = GRADES.find(g=>g.g===gCode);
         if(grade){
           gradedCount++;
-          creditsEarned += s.credit;
+          creditsAttempted += s.credit;
+          if(grade.g !== 'F'){
+            creditsEarned += s.credit;
+          } else {
+            gradeFail = true;
+            hasFail = true;
+          }
           points += s.credit*grade.pt;
-          if(grade.g === 'F'){ gradeFail = true; hasFail = true; }
           displayGrade = grade.g;
         }
       }
@@ -14536,7 +14674,7 @@ let activeModalLocks = 0;
       }).filter(Boolean).join('');
     }
 
-    const yGpa = creditsEarned ? points/creditsEarned : 0;
+    const yGpa = creditsAttempted ? points/creditsAttempted : 0;
 
     let resultStatus = 'In Progress';
     if(applicableSubjects.length > 0 && gradedCount === applicableSubjects.length){
@@ -14625,6 +14763,8 @@ let activeModalLocks = 0;
         </div>
       </div>
 
+      ${hasEnglishFail ? '<div class="rs2-alert-note"><strong>Academic Requirement Notice:</strong> English (Compulsory) [221109] status is <strong>FAILED (&lt;33%)</strong>. Under National University regulations, this qualifying paper must be cleared to be eligible for degree conferral.</div>' : ''}
+      ${englishFailedOverall ? '<div class="rs2-alert-note"><strong>Academic Requirement Notice:</strong> English (Compulsory) [221109] is marked as <strong>FAILED (&lt;33%)</strong>. Under National University regulations, passing this qualifying course is mandatory for graduation.</div>' : ''}
       <footer class="rs2-footer">
         <div class="rs2-verification-info">
           Result Published Date:<br />
@@ -14680,6 +14820,7 @@ let activeModalLocks = 0;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      showCelebrationToast('📄 High-Res Document Saved', 'PDF engine offline - downloaded as print-ready PNG image.');
       return;
     }
 
@@ -14703,7 +14844,12 @@ let activeModalLocks = 0;
 
   async function generateTranscriptPDF(){
     const PDFLib = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF || (typeof jsPDF !== 'undefined' ? jsPDF : null);
-    if(!PDFLib || !window.html2canvas){ alert('PDF library failed to load. Please check your internet connection and try again.'); return; }
+    const hasCanvas = typeof window.html2canvas === 'function';
+    if(!hasCanvas && !PDFLib){
+      // Full offline fallback: Native browser print dialog
+      printFallbackDocument(document.getElementById('grdSheetHost')?.innerHTML || '', 'Academic_Transcript_' + currentDept);
+      return;
+    }
 
     const get = id => (document.getElementById(id)?.value || '').trim();
 
@@ -14723,8 +14869,8 @@ let activeModalLocks = 0;
     const sectionTitle = `${prog ? displayProgramTitle(prog.title) : ''} Course wise ${isMasters ? 'Grade' : 'Letter Grade'}`.trim();
 
     const yearsData = [];
-    let totalEarnedPoints = 0, totalCreditsAll = 0, totalPossibleCredits = 0;
-    let allGraded = true, hasFailAny = false;
+    let totalEarnedPoints = 0, totalCreditsAttemptedAll = 0, totalCreditsEarnedAll = 0, totalPossibleCredits = 0;
+    let allGraded = true, hasFailAny = false, englishFailedOverall = false;
 
     for(let yr=1; yr<=totalYears; yr++){
       const rawSubjects = SUBJECTS_BY_YEAR[yr] || [];
@@ -14738,7 +14884,7 @@ let activeModalLocks = 0;
         return true;
       });
 
-      let creditsEarned = 0, points = 0, gradedCount = 0;
+      let creditsEarned = 0, creditsAttempted = 0, points = 0, gradedCount = 0;
       const rows = subjects.map((s)=>{
         const originalIdx = rawSubjects.indexOf(s);
         const gCode = vals[originalIdx];
@@ -14749,29 +14895,40 @@ let activeModalLocks = 0;
           if(gCode === 'Pass' || gCode === 'Fail'){
             gradedCount++;
             displayGrade = gCode;
-            if(gCode === 'Fail') hasFailAny = true;
+            if(gCode === 'Fail'){
+              hasFailAny = true;
+              if(s.code === '221109') englishFailedOverall = true;
+            }
           }
         } else {
           const grade = GRADES.find(g=>g.g===gCode);
           if(grade){
             gradedCount++;
-            creditsEarned += s.credit;
+            creditsAttempted += s.credit;
+            if(grade.g !== 'F'){
+              creditsEarned += s.credit;
+            } else {
+              hasFailAny = true;
+            }
             points += s.credit*grade.pt;
-            if(grade.g === 'F') hasFailAny = true;
             displayGrade = grade.g;
           }
         }
         return { origIdx: originalIdx, code:s.code, name:s.name, credit:s.credit, grade: displayGrade };
       });
 
-      const yGpa = creditsEarned ? points/creditsEarned : 0;
-      if(creditsEarned > 0){ totalEarnedPoints += creditsEarned*yGpa; totalCreditsAll += creditsEarned; }
+      const yGpa = creditsAttempted ? points/creditsAttempted : 0;
+      if(creditsAttempted > 0){
+        totalEarnedPoints += points;
+        totalCreditsAttemptedAll += creditsAttempted;
+      }
+      totalCreditsEarnedAll += creditsEarned;
       if(subjects.length === 0 || gradedCount !== subjects.length) allGraded = false;
 
       yearsData.push({ yr, label: unitFullLabel(activeSyllabus, yr), rows, gpa: yGpa });
     }
 
-    const cumulativeGpa = totalCreditsAll > 0 ? totalEarnedPoints / totalCreditsAll : 0;
+    const cumulativeGpa = totalCreditsAttemptedAll > 0 ? totalEarnedPoints / totalCreditsAttemptedAll : 0;
 
     let resultStatus = 'In Progress';
     if(totalPossibleCredits > 0 && allGraded){
@@ -14834,7 +14991,7 @@ let activeModalLocks = 0;
             <tfoot>
               <tr>
                 <td colspan="2" class="rs2-total-title">Total Result Summary</td>
-                <td><strong>${totalCreditsAll}</strong></td>
+                <td><strong>${totalCreditsEarnedAll}</strong></td>
                 <td class="rs2-gpa-val">GPA ${formatGpa(cumulativeGpa)}</td>
               </tr>
             </tfoot>
@@ -14964,7 +15121,7 @@ let activeModalLocks = 0;
             <div class="rs2-record-item"><div class="rs2-field-label">Session</div><div class="rs2-field-value">${session}</div></div>
             <div class="rs2-record-item"><div class="rs2-field-label">Student Type</div><div class="rs2-field-value">${studentType}</div></div>
             <div class="rs2-record-item rs2-full"><div class="rs2-field-label">Subject</div><div class="rs2-field-value">${subjectLine}</div></div>
-            <div class="rs2-record-item"><div class="rs2-field-label">Credit <span class="rs2-sub-label">(Earned/Total)</span></div><div class="rs2-field-value">${totalCreditsAll} / ${totalPossibleCredits}</div></div>
+            <div class="rs2-record-item"><div class="rs2-field-label">Credit <span class="rs2-sub-label">(Earned/Total)</span></div><div class="rs2-field-value">${totalCreditsEarnedAll} / ${totalPossibleCredits}</div></div>
             <div class="rs2-record-item rs2-highlight"><div class="rs2-field-label">CGPA</div><div class="rs2-field-value">${formatGpa(cumulativeGpa)} <small>/ 4.00</small></div></div>
           </div>
         </section>
@@ -15930,7 +16087,19 @@ let activeModalLocks = 0;
             </div>
           </div>`;
 
-      panel.innerHTML = headHTML + enrolledBarHtml + blocks + yearTotalBlock;
+      const engFailBannerHtml = `
+          <div id="engFailWarningBanner" class="eng-fail-warning-banner" role="alert">
+            <svg class="efw-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            <div class="efw-content">
+              <div class="efw-title">Compulsory English (221109) Status: FAILED (&lt;33%)</div>
+              <div class="efw-desc">Under National University academic regulations, English (Compulsory) is a mandatory non-credit qualifying paper. Even with a passing GPA, your final degree and certificate will be withheld until this course is passed (&ge;33%).</div>
+            </div>
+          </div>`;
+      panel.innerHTML = headHTML + enrolledBarHtml + blocks + yearTotalBlock + engFailBannerHtml;
     } else {
       let lastElectiveGroupKey = null;
       const rowsHtml = subjects.length ? subjects.map((s,i)=>{
@@ -15980,7 +16149,7 @@ let activeModalLocks = 0;
             <thead><tr><th class="code">Code</th><th class="paper">Paper title</th><th class="credit">Credit</th><th class="grade">Grade</th><th class="marks">Range</th></tr></thead>
             <tbody id="subjectRows">${rowsHtml}<tr class="total state-default"><td></td><td class="paper">${MASTERS_KEYS.includes(activeSyllabus) ? 'Masters Final' : unitWord(activeSyllabus)} Total</td><td class="credit" id="totalCredits">0</td><td colspan="2" id="totalGpa">0.00</td></tr></tbody>
           </table>
-        </div>`;
+        </div>` + engFailBannerHtml;
     }
 
     const scContainer = document.getElementById('yearShareStripContainer');
@@ -16457,7 +16626,7 @@ let activeModalLocks = 0;
         const grade = GRADES.find(x=>x.g===g);
         if(grade){
           gradedCount++;
-          creditsEarned += (s.credit || 0);
+          if(grade.g !== 'F') creditsEarned += (s.credit || 0);
           points += (s.credit || 0)*grade.pt;
         }
       }
@@ -16985,6 +17154,7 @@ let activeModalLocks = 0;
     let yearGradedCount = 0;
     let yearHasFail = false;
 
+    let englishCompulsoryFailed = false;
     document.querySelectorAll('#subjectPanel select.grade-select').forEach(sel=>{
       const i=+sel.dataset.idx;
       const subj = subjects[i];
@@ -16999,6 +17169,7 @@ let activeModalLocks = 0;
         } else if(sel.value === 'Fail'){
           yearGradedCount++;
           yearHasFail = true;
+          if(subj && subj.code === '221109') englishCompulsoryFailed = true;
           if(m) m.textContent = 'Fail (<33%)';
         } else {
           if(m) m.textContent = '-';
@@ -17007,8 +17178,11 @@ let activeModalLocks = 0;
         const grade = GRADES.find(g=>g.g===sel.value);
         if(grade){
           yearGradedCount++;
-          if(grade.g === 'F') yearHasFail = true;
-          creditsEarned+=credit;
+          if(grade.g === 'F'){
+            yearHasFail = true;
+          } else {
+            creditsEarned+=credit;
+          }
           points+=credit*grade.pt;
           if(m) m.textContent=grade.range;
         } else {
@@ -17016,6 +17190,15 @@ let activeModalLocks = 0;
         }
       }
     });
+
+    const efBanner = document.getElementById('engFailWarningBanner');
+    if(efBanner){
+      if(englishCompulsoryFailed && currentYear === 2){
+        efBanner.style.display = 'flex';
+      } else {
+        efBanner.style.display = 'none';
+      }
+    }
     const yearTotalPossibleCredits = getYearTotalPossibleCredits(currentDept, currentYear);
     const gpa = yearTotalPossibleCredits > 0 ? points / yearTotalPossibleCredits : 0;
     const tc = document.getElementById('totalCredits');
