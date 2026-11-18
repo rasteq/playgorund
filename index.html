@@ -11234,13 +11234,13 @@ main {
       <div id="globalSearchResults" class="global-search-results"></div>
     </div>
     <div class="mobile-actions">
-      <button class="icon-btn" id="mobileSearchBtn" aria-label="Search" aria-expanded="false" onclick="toggleMobileSearch()">
+      <button type="button" class="icon-btn" id="mobileSearchBtn" aria-label="Search" aria-expanded="false" onclick="toggleMobileSearch()">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.2"/>
           <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
         </svg>
       </button>
-      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" onclick="toggleMobileMenu()">
+      <button type="button" class="icon-btn menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" onclick="toggleMobileMenu()">
         <span class="menu-burger"><span></span><span></span><span></span></span>
         <svg class="menu-close-x" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -11439,7 +11439,7 @@ main {
       <span class="term-chip"><span class="i18n-swap" data-en="// 2024-2025 syllabus included" data-bn="// ২০২৪-২০২৫ সিলেবাস সংযোজিত">// 2024-2025 syllabus included</span> <span class="cursor"></span></span>
       <h1 class="hero-title"><span class="i18n-swap" data-en="Stop guessing your CGPA." data-bn="CGPA হিসাব নিয়ে স্ট্রেস?">Stop guessing your CGPA.</span><br><span class="g i18n-swap" style="font-size:0.7em;" data-en="We've already done the hard part." data-bn="চিল! হিসাবটা আমরা সামলে নিয়েছি।">We've already done the hard part.</span></h1>
       <p class="hero-sub i18n-swap" data-en="<span class=&quot;hero-sub-line&quot;>The CGPA calculator National University students actually deserve.</span><span class=&quot;hero-sub-line&quot;>Accurate math, grade-weighted calculations, auto‑save,</span><span class=&quot;hero-sub-line&quot;>all in one place. Fast, easy, zero hassle.</span>" data-bn="জাতীয় বিশ্ববিদ্যালয়ের শিক্ষার্থীদের জন্য তৈরি স্মার্ট CGPA Calculator - নির্ভুল হিসাব, গ্রেড-ওয়েটেড ক্যালকুলেশন ও অটো‑সেভ সুবিধা, সব এক জায়গায়। দ্রুত,সহজ, একদম ঝামেলাহীন।"><span class="hero-sub-line">The CGPA calculator National University students actually deserve.</span><span class="hero-sub-line">Accurate math, grade-weighted calculations, auto‑save,</span><span class="hero-sub-line">all in one place. Fast, easy, zero hassle.</span></p>
-      <button class="btn btn-ghost btn-icon hero-cta" onclick="goSection('departments')"><span class="i18n-swap" data-en="Browse programs" data-bn="প্রোগ্রাম দেখুন">Browse programs</span><span class="ico-bubble"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0l-4-4m4 4l4-4"/></svg></span></button>
+      <button type="button" class="btn btn-ghost btn-icon hero-cta" onclick="goSection('departments')"><span class="i18n-swap" data-en="Browse programs" data-bn="প্রোগ্রাম দেখুন">Browse programs</span><span class="ico-bubble"><svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12m0 0l-4-4m4 4l4-4"/></svg></span></button>
     </div>
 
     <div class="departments" id="departments">
@@ -11467,8 +11467,8 @@ main {
           </select>
         </div>
         <div class="qs-actions">
-          <button class="btn btn-grad" onclick="qsGo()">Go</button>
-          <button class="btn btn-ghost btn-icon" onclick="qsReset()"><span class="ico-bubble"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg></span><span>Reset</span></button>
+          <button type="button" class="btn btn-grad" onclick="qsGo()">Go</button>
+          <button type="button" class="btn btn-ghost btn-icon" onclick="qsReset()"><span class="ico-bubble"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg></span><span>Reset</span></button>
         </div>
       </div>
 
@@ -14042,7 +14042,7 @@ main {
     });
     if(!matches.length){ results.innerHTML = `<div class="gsr-empty">no matches - try a different name</div>`; results.classList.add('show'); return; }
     results.innerHTML = matches.slice(0,8).map(m=>`
-      <button class="gsr-item" onclick="jumpToDept('${m.program.key}','${m.dept.replace(/'/g,"\\'")}')">
+      <button type="button" class="gsr-item" onclick="jumpToDept('${m.program.key}','${m.dept.replace(/'/g,"\\'")}')">
         <span class="gsr-main">
           <span class="gsr-name">${m.dept}</span>
           <span class="gsr-tag">${SESSION_SHORT[m.program.key] || m.program.tag}</span>
@@ -14138,7 +14138,6 @@ let activeModalLocks = 0;
     if(titleEl){
       titleEl.innerHTML = safeTitle.replace(/(\(\d{4}-\d{2}\))/g, '<span class="soon-year-range">$1</span>');
     }
-    const sdc = document.getElementById('soonDeptCode'); if(sdc) sdc.textContent = codeBadge || abbrev;
     const wm = document.getElementById('soonDeptWatermark');
     if(wm) wm.textContent = abbrev;
     const snOv = document.getElementById('soonModalOverlay'); if(snOv){ snOv.scrollTop = 0; snOv.classList.add('open'); }
@@ -14417,17 +14416,18 @@ let activeModalLocks = 0;
       alert('Pop-up blocked. Please allow pop-ups to print or download your result document.');
       return;
     }
-    printWin.document.open();
-    printWin.document.write('<!DOCTYPE html>' +
-      '<html><head><meta charset="utf-8">' +
-      '<title>' + (title || 'Gradzz Result Document') + '</title>' +
-      '<style>' +
-      '  @page { size: A4 portrait; margin: 0.4in; }' +
-      '  body { margin: 0; padding: 0.2in; font-family: Inter, system-ui, -apple-system, sans-serif; color: #0F172A; background: #fff; }' +
-      '  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }' +
-      '</style></head>' +
-      '<body>' + htmlContent + '</body></html>');
-    printWin.document.close();
+    const doc = printWin.document;
+    doc.title = title || 'Gradzz Result Document';
+
+    const style = doc.createElement('style');
+    style.textContent = `
+      @page { size: A4 portrait; margin: 0.4in; }
+      body { margin: 0; padding: 0.2in; font-family: Inter, system-ui, -apple-system, sans-serif; color: #0F172A; background: #fff; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+    `;
+    doc.head.appendChild(style);
+    doc.body.innerHTML = htmlContent;
+
     printWin.focus();
     setTimeout(() => {
       try { printWin.print(); } catch(e){}
@@ -15734,7 +15734,7 @@ let activeModalLocks = 0;
     wrap.style.setProperty('--pc', totalYears);
     let html = '<span class="year-indicator" id="yearIndicator" aria-hidden="true"></span>';
     for(let y=1; y<=totalYears; y++){
-      html += `<button class="year-pill${y===currentYear?' active':''}" onclick="setYear(${y})">${YEAR_NUM_LABEL[y]||y+'th'} ${unitWord(activeSyllabus)}</button>`;
+      html += `<button type="button" class="year-pill${y===currentYear?' active':''}" onclick="setYear(${y})">${YEAR_NUM_LABEL[y]||y+'th'} ${unitWord(activeSyllabus)}</button>`;
     }
     wrap.innerHTML = html;
     requestAnimationFrame(updateYearIndicator);
@@ -16001,7 +16001,7 @@ let activeModalLocks = 0;
           </svg>
           ${curriculumTitle}
         </span>
-        <button class="reset-btn" onclick="resetGrades()"><span class="ico-bubble"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg></span><span>Reset</span></button>
+        <button type="button" class="reset-btn" onclick="resetGrades()"><span class="ico-bubble"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg></span><span>Reset</span></button>
       </div>`;
 
     const hasElectives = subjects.some(s => s && s.type === 'elective');
@@ -16020,6 +16020,19 @@ let activeModalLocks = 0;
             </button>
           </div>
         </div>` : '';
+
+    const engFailBannerHtml = `
+      <div id="engFailWarningBanner" class="eng-fail-warning-banner" role="alert">
+        <svg class="efw-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <div class="efw-content">
+          <div class="efw-title">Compulsory English (221109) Status: FAILED (&lt;33%)</div>
+          <div class="efw-desc">Under National University academic regulations, English (Compulsory) is a mandatory non-credit qualifying paper. Even with a passing GPA, your final degree and certificate will be withheld until this course is passed (&ge;33%).</div>
+        </div>
+      </div>`;
 
     if(groups){
       const blocks = groups.map((grp,gi)=>{
@@ -16087,18 +16100,6 @@ let activeModalLocks = 0;
             </div>
           </div>`;
 
-      const engFailBannerHtml = `
-          <div id="engFailWarningBanner" class="eng-fail-warning-banner" role="alert">
-            <svg class="efw-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-              <line x1="12" y1="9" x2="12" y2="13"/>
-              <line x1="12" y1="17" x2="12.01" y2="17"/>
-            </svg>
-            <div class="efw-content">
-              <div class="efw-title">Compulsory English (221109) Status: FAILED (&lt;33%)</div>
-              <div class="efw-desc">Under National University academic regulations, English (Compulsory) is a mandatory non-credit qualifying paper. Even with a passing GPA, your final degree and certificate will be withheld until this course is passed (&ge;33%).</div>
-            </div>
-          </div>`;
       panel.innerHTML = headHTML + enrolledBarHtml + blocks + yearTotalBlock + engFailBannerHtml;
     } else {
       let lastElectiveGroupKey = null;
